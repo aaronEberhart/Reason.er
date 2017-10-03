@@ -27,7 +27,7 @@ public class ReasonEr {
     	TBox tbox = new TBox(new ArrayList<>());
     	
     	tbox.addManually(new Expression(new QuantifiedRole(false,1,'o','n',"N","A","N"))
-    			.and(new Concept(true,'o',"B")).superClass(new Concept(false,'o',"C")));
+    			.and(new Concept(true,'o',"B")).negate().superClass(new Concept(false,'o',"C")));
     	
     	KnowledgeBase kb = new KnowledgeBase(abox,tbox);
     	

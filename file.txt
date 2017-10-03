@@ -2,4 +2,4 @@ K = ( ABox, TBox )
 
 ABox = { NULL }
 
-TBox = { ( C(o) c ( --B(o) ^ EXISTS N(o,n).A(n) ) ) }
+TBox = { --( --B(o) ^ EXISTS N(o,n).A(n) ) }

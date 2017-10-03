@@ -9,7 +9,6 @@ public class Expression<T extends Predicate> extends Concept{
 	private class ExpressionNode extends Expression{
 		
 		protected char operator;
-		private boolean negated;
 		protected Predicate leaf;
 		protected Expression[] children;
 				
@@ -62,7 +61,6 @@ public class Expression<T extends Predicate> extends Concept{
 	}
 		
 	protected ExpressionNode root;
-	private Term<T> scope;
 	private boolean complete;
 	private int size;
 	
