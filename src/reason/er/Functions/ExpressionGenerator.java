@@ -34,6 +34,10 @@ public abstract class ExpressionGenerator<T extends Expression<T>> {
 		}
 	}
 
+	public void addManually(Expression<T> e) {
+		expressions.add(e);
+	}
+	
 	protected String makeVariable(long count) {
     	String s = "";
     	
@@ -74,4 +78,5 @@ public abstract class ExpressionGenerator<T extends Expression<T>> {
     	}
     	return s + " }";
     }
+
 }

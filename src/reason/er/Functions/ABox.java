@@ -1,5 +1,6 @@
 package reason.er.Functions;
 
+import java.util.ArrayList;
 import java.util.Random;
 import reason.er.Objects.*;
 
@@ -31,6 +32,13 @@ public class ABox<T extends Expression<T>> extends ExpressionGenerator<T> {
 		scope = makeVariable(counters[3] + 1);
 		
 		makeBox(size);
+	}
+	
+	public ABox(ArrayList<Expression<T>> e) {
+		universe = uppers.length / 2;
+		variables = lowers.length / 2;
+		
+		expressions = e;
 	}
 	
 	protected void transform(int randInt, Expression<T> expression) {

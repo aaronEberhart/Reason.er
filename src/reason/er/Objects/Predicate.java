@@ -21,11 +21,12 @@ public abstract class Predicate<T> {
     	return negated;
     }
     
-    public void negate() {
+    public Predicate<T> negate() {
     	if(negated)
     		negated = false;
     	else
     		negated = true;
+    	return this;
     }
     
     public Term<T> getScope() {

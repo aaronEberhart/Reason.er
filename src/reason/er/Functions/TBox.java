@@ -1,5 +1,6 @@
 package reason.er.Functions;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import reason.er.Objects.*;
@@ -7,8 +8,6 @@ import reason.er.Objects.*;
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class TBox<T extends Expression<T>>  extends ExpressionGenerator<T>{
 
-	
-	
 	public TBox(int size) {
 
 		universe = uppers.length / 2;
@@ -22,6 +21,13 @@ public class TBox<T extends Expression<T>>  extends ExpressionGenerator<T>{
 		scope = Character.toString(lowers[variables + 1]);
 
 		makeBox(size);
+	}
+	
+	public TBox(ArrayList<Expression<T>> e) {
+		universe = uppers.length / 2;
+		variables = lowers.length / 2;
+		
+		expressions = e;
 	}
 	
 	@Override

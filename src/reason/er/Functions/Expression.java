@@ -77,7 +77,7 @@ public class Expression<T extends Predicate> extends Concept{
 		size = 1;
 	}
 	
-	public void and(Predicate<T> p) {
+	public Expression<T> and(Predicate<T> p) {
 		if(canJoin(p)) {
 			root = new ExpressionNode('^', new ExpressionNode(p), root);
 			size++;
@@ -88,9 +88,9 @@ public class Expression<T extends Predicate> extends Concept{
 				System.out.println(e + p.toString() + " ^ " + root.toString());
 			}
 		}
-		
+		return this;
 	}
-	public void or(Predicate<T> p) {
+	public Expression<T> or(Predicate<T> p) {
 		if(canJoin(p)) {
 			root = new ExpressionNode('v', new ExpressionNode(p), root);
 			size++;
@@ -101,8 +101,9 @@ public class Expression<T extends Predicate> extends Concept{
 				System.out.println(e + p.toString() + " v " + root.toString());
 			}
 		}
+		return this;
 	}
-	public void superClass(Predicate<T> p) {
+	public Expression<T> superClass(Predicate<T> p) {
 		if(!p.isNegated() && canJoin(p)) {
 			root = new ExpressionNode('c', new ExpressionNode(p), root);
 			complete = true;
@@ -113,8 +114,9 @@ public class Expression<T extends Predicate> extends Concept{
 				System.out.println(e + p.toString() + " c " + root.toString());
 			}
 		}
+		return this;
 	}
-	public void subClass(Predicate<T> p) {
+	public Expression<T> subClass(Predicate<T> p) {
 		if(!root.isCompound() && canJoin(p)) {
 			root = new ExpressionNode('c', root, new ExpressionNode(p));
 			complete = true;
@@ -126,8 +128,9 @@ public class Expression<T extends Predicate> extends Concept{
 				System.out.println(e + root.toString() + " c " + p.toString());
 			}
 		}
+		return this;
 	}
-	public void equivalent(Predicate<T> p) {
+	public Expression<T> equivalent(Predicate<T> p) {
 		if(!p.isNegated() && canJoin(p)) {
 			boolean sub = root.isNegated();
 			root = new ExpressionNode('=', new ExpressionNode(p), root);
@@ -141,15 +144,17 @@ public class Expression<T extends Predicate> extends Concept{
 				System.out.println(e + p.toString() + " = " + root.toString());
 			}
 		}
+		return this;
 	}
-	public void dot(Quantifier q, Role r, String name) {		
+	public Expression<T> dot(Quantifier q, Role r, String name) {		
 		if(QuantifiedRole.canQuantify(q, r, null, this)) {
 			root = new ExpressionNode(new QuantifiedRole(q,r,this,name), root);
-			size++;;
+			size++;
 		}
+		return this;
 	}
 	
-	public void negate() {
+	public Expression<T> negate() {
 		if(complete)
 			try {
 				throw ReasonEr.expression;
@@ -160,6 +165,8 @@ public class Expression<T extends Predicate> extends Concept{
 			root.negated = false;
 		else
 			root.negated = true;
+		
+		return this;
 	}
 	
 	public boolean canJoin(Predicate<T> p) {

@@ -6,8 +6,10 @@ package reason.er;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.ArrayList;
 
 import reason.er.Functions.*;
+import reason.er.Objects.*;
 /**
  *
  * @author aaron
@@ -18,10 +20,16 @@ public class ReasonEr {
 	public static final Exception expression = new Exception("Invalid expression: ");
 	
 	
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void main(String[] args) {
     	
-    	KnowledgeBase kb = new KnowledgeBase(99,99);
+    	ABox abox = new ABox(new ArrayList<>());
+    	TBox tbox = new TBox(new ArrayList<>());
+    	
+    	tbox.addManually(new Expression(new QuantifiedRole(false,1,'o','n',"N","A","N"))
+    			.and(new Concept(true,'o',"B")).superClass(new Concept(false,'o',"C")));
+    	
+    	KnowledgeBase kb = new KnowledgeBase(abox,tbox);
     	
     	System.out.println(kb.toString());
     	toFile("file.txt",kb.toString());

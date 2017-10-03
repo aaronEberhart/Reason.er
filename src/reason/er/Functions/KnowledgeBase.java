@@ -11,6 +11,11 @@ public class KnowledgeBase<T extends Expression<T>, U extends Expression<U>> {
 		abox = new ABox<T>(aboxSize);
 	}
 	
+	public KnowledgeBase(ABox<T> a, TBox<U> t) {
+		tbox = t;
+		abox = a;
+	}
+	
 	@Override
 	public String toString() {
 		return "K = ( ABox, TBox )\n\n" + abox.toString() + "\n\n" + tbox.toString() + "\n";
