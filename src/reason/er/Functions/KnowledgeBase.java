@@ -13,6 +13,6 @@ public class KnowledgeBase<T extends Expression<T>, U extends Expression<U>> {
 	
 	@Override
 	public String toString() {
-		return "K = ( ABox, TBox )\n" + abox.toString() + "\n" + tbox.toString() + "\n";
+		return "K = ( ABox, TBox )\n\n" + abox.toString() + "\n\n" + tbox.toString() + "\n";
 	}
 }

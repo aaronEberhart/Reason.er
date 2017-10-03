@@ -30,7 +30,7 @@ public abstract class ExpressionGenerator<T extends Expression<T>> {
 				e.printStackTrace();
 			}
 			rand.setSeed(System.currentTimeMillis());
-			counters[0] = (counters[0] + 1) % universe;
+			
 		}
 	}
 

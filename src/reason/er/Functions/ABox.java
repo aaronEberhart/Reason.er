@@ -97,6 +97,12 @@ public class ABox<T extends Expression<T>> extends ExpressionGenerator<T> {
 		this.counters[2] = (rand.nextInt(universe) + universe) % universe;
 		this.counters[3] = variables + 1;
 		
+		try {
+			Thread.sleep(31);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 		constants = weightedBool(rand);
 		if(constants)
 			complete = weightedBool(rand);

@@ -34,6 +34,7 @@ public class TBox<T extends Expression<T>>  extends ExpressionGenerator<T>{
 			transform(rand.nextInt(11), expression);
 		}
 		scope = Character.toString(lowers[variables + 1]);
+		counters[0] = (counters[0] + 1) % universe;
 		counters[1] = variables + 1;
 		return expression;
 	}

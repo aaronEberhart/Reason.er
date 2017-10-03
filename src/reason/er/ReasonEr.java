@@ -21,7 +21,7 @@ public class ReasonEr {
     @SuppressWarnings({ "rawtypes" })
 	public static void main(String[] args) {
     	
-    	KnowledgeBase kb = new KnowledgeBase(998,0);
+    	KnowledgeBase kb = new KnowledgeBase(99,99);
     	
     	System.out.println(kb.toString());
     	toFile("file.txt",kb.toString());
