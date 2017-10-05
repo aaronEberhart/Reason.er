@@ -7,7 +7,9 @@ import reason.er.Objects.*;
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class ABox<T extends Expression<T>> extends ExpressionGenerator<T> {
 
-	private boolean constants,complete;
+	
+	
+	private boolean constants,complete, oneMoreTime;
 	
 	public ABox(int size) {
 		
@@ -44,21 +46,21 @@ public class ABox<T extends Expression<T>> extends ExpressionGenerator<T> {
 	protected void transform(int randInt, Expression<T> expression) {
 
 		constants = constants?true:weightedBool(rand);
-		if(constants)
+		if(constants && !oneMoreTime) {
 			complete = complete?true:weightedBool(rand);
-		else
-			complete = false;		
+			randInt = (randInt % 2) + 5;
+		}
+		else {
+			complete = false;
+			randInt = randInt % 5;
+		}
 		
 		if(scope.equals("z")) {
 			complete = true;
 			constants = true;
 			randInt = (randInt % 2) + 4;
 		}
-			
-		if(constants)
-			randInt = (randInt % 2) + 5;
-		else
-			randInt = randInt % 5;
+		
 		
 		int size = expression.getSize();
 		
@@ -83,7 +85,7 @@ public class ABox<T extends Expression<T>> extends ExpressionGenerator<T> {
 			
 			
 		}
-		if(randInt > 3 && randInt < 6 && expression.getSize() > size) {
+		if(randInt > 4 && expression.getSize() > size) {
 			scope = makeVariable(constants?counters[1]:counters[3]);
 			expression.setScope(new Term(scope));
 		}		
@@ -100,13 +102,23 @@ public class ABox<T extends Expression<T>> extends ExpressionGenerator<T> {
 			constants = true;
 			complete = false;
 		}
+		else if(constants && randInt ==  0) {
+			oneMoreTime = rand.nextBoolean();
+		}
 			
 		Expression<T> expression = new Expression<T>(newPredicate(randInt));
+		scope = expression.getScope().toString();
 		
 		complete = randInt==2?true:complete;
 		
-		while(!complete && !constants)
+		while(!complete && !constants) {
 			transform(rand.nextInt(7),expression);
+			if(oneMoreTime) {
+				transform(rand.nextInt(5),expression);
+				oneMoreTime = rand.nextBoolean();
+				complete = true;
+			}
+		}
 		
 		
 		this.counters[0] = rand.nextInt(universe) % universe;
@@ -126,6 +138,8 @@ public class ABox<T extends Expression<T>> extends ExpressionGenerator<T> {
 		else
 			complete = false;
 		
+		oneMoreTime = rand.nextBoolean();
+		
 		return expression;
 	}
 	
@@ -135,11 +149,11 @@ public class ABox<T extends Expression<T>> extends ExpressionGenerator<T> {
 		Predicate p;
 		
 		if(randInt == 0) {
-			p = new Concept(negated,makeVariable(constants?counters[1]:counters[3]),makeLabel(counters[0]));
+			p = new Concept(negated,makeVariable(constants||oneMoreTime?counters[1]:counters[3]),makeLabel(counters[0]));
 			counters[0] = (counters[0] + 1) % universe;
 		}
 		else if(randInt == 1) {
-			p = new QuantifiedRole(negated,rand.nextInt(2) + 1,makeVariable(constants?counters[1]:counters[3]),makeVariable(constants?counters[3]:counters[3]-1),makeLabel(counters[2] + universe),makeLabel(counters[0]),makeLabel(counters[0]));
+			p = new QuantifiedRole(negated,rand.nextInt(2) + 1,makeVariable(constants||oneMoreTime?counters[1]:counters[3]),makeVariable(constants||oneMoreTime?counters[3]:counters[3]-1),makeLabel(counters[2] + universe),makeLabel(counters[0]),makeLabel(counters[0]));
 			counters[0] = (counters[0] + 1) % universe;
 			counters[2] = (counters[2] + 1) % universe;
 		}
@@ -153,7 +167,7 @@ public class ABox<T extends Expression<T>> extends ExpressionGenerator<T> {
 			}
 		}
 		else {
-			p = new Role(false,makeVariable(counters[1]),makeVariable((counters[1] + 1)%variables),makeLabel(counters[2] + universe));
+			p = new Role(false,makeVariable(counters[1]),makeVariable(rand.nextInt(10000) % variables),makeLabel(counters[2] + universe));
 		}
 				
 		return p;
