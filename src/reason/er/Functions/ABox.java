@@ -29,7 +29,7 @@ public class ABox<T extends Expression<T>> extends ExpressionGenerator<T> {
 		this.counters[2] = (rand.nextInt(universe) + universe) % universe;
 		this.counters[3] = variables + 1;
 		
-		scope = makeVariable(counters[3] + 1);
+		scope = makeVariable(counters[3]);
 		
 		makeBox(size);
 	}
@@ -75,10 +75,10 @@ public class ABox<T extends Expression<T>> extends ExpressionGenerator<T> {
 				expression.negate();
 				break;
 			case 5:
-				expression.dot(new Quantifier(1), (Role)newPredicate(randInt), makeLabel(counters[2] + universe));
+				expression.dot(new Quantifier(1), (Role)newPredicate(2), makeLabel(counters[2] + universe));
 				break;
 			default:
-				expression.dot(new Quantifier(2), (Role)newPredicate(randInt), makeLabel(counters[2] + universe));
+				expression.dot(new Quantifier(2), (Role)newPredicate(2), makeLabel(counters[2] + universe));
 				break;
 			
 			
@@ -94,7 +94,16 @@ public class ABox<T extends Expression<T>> extends ExpressionGenerator<T> {
 	protected Expression<T> makeExpression() {
 		rand = new Random(System.currentTimeMillis());
 		
-		Expression<T> expression = new Expression<T>(newPredicate(rand.nextInt(2)));
+		int randInt = rand.nextInt(3);
+		if (randInt == 2) {
+			randInt++;
+			constants = true;
+			complete = false;
+		}
+			
+		Expression<T> expression = new Expression<T>(newPredicate(randInt));
+		
+		complete = randInt==2?true:complete;
 		
 		while(!complete && !constants)
 			transform(rand.nextInt(7),expression);
@@ -134,7 +143,7 @@ public class ABox<T extends Expression<T>> extends ExpressionGenerator<T> {
 			counters[0] = (counters[0] + 1) % universe;
 			counters[2] = (counters[2] + 1) % universe;
 		}
-		else {
+		else if(randInt == 2) {
 			p = new Role(false,makeVariable(constants?counters[1]:counters[3]+1),makeVariable(counters[3]),makeLabel(counters[2] + universe));
 			counters[2] = (counters[2] + 1) % universe;
 			if(!constants) {
@@ -143,8 +152,10 @@ public class ABox<T extends Expression<T>> extends ExpressionGenerator<T> {
 					counters[3]+=variables;
 			}
 		}
-			
-		
+		else {
+			p = new Role(false,makeVariable(counters[1]),makeVariable((counters[1] + 1)%variables),makeLabel(counters[2] + universe));
+		}
+				
 		return p;
 	}
 	

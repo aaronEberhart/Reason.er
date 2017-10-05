@@ -29,7 +29,7 @@ public class ReasonEr {
 //    	tbox.addManually(new Expression(new QuantifiedRole(false,1,'o','n',"N","A","N"))
 //    			.and(new Concept(true,'o',"B")).negate().superClass(new Concept(false,'o',"C")));
 //    	
-    	KnowledgeBase kb = new KnowledgeBase(9,9);
+    	KnowledgeBase kb = new KnowledgeBase(99,0);
     	
     	System.out.println(kb.toString());
     	toFile("knowledgeBase.txt",kb.toString());
