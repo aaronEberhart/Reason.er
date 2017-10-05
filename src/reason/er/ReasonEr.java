@@ -23,13 +23,13 @@ public class ReasonEr {
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void main(String[] args) {
     	
-    	ABox abox = new ABox(new ArrayList<>());
-    	TBox tbox = new TBox(new ArrayList<>());
-    	
-    	tbox.addManually(new Expression(new QuantifiedRole(false,1,'o','n',"N","A","N"))
-    			.and(new Concept(true,'o',"B")).negate().superClass(new Concept(false,'o',"C")));
-    	
-    	KnowledgeBase kb = new KnowledgeBase(abox,tbox);
+//    	ABox abox = new ABox(new ArrayList<>());
+//    	TBox tbox = new TBox(new ArrayList<>());
+//    	
+//    	tbox.addManually(new Expression(new QuantifiedRole(false,1,'o','n',"N","A","N"))
+//    			.and(new Concept(true,'o',"B")).negate().superClass(new Concept(false,'o',"C")));
+//    	
+    	KnowledgeBase kb = new KnowledgeBase(99,99);
     	
     	System.out.println(kb.toString());
     	toFile("file.txt",kb.toString());
