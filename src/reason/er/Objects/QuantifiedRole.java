@@ -25,6 +25,9 @@ public class QuantifiedRole<T,U> extends Role {
 		this.label = name3;
     	this.scope = r.getScope();
     	this.negated = hasSign;
+    	this.size = s.size + 1;
+    	if(negated)
+    		size++;
 	}
 	
 	public QuantifiedRole(Quantifier q, Role<T,U> r, Expression c, String name) {
@@ -38,6 +41,9 @@ public class QuantifiedRole<T,U> extends Role {
 			this.label = name;
 			this.scope = r.getScope();
 			this.negated = r.isNegated();
+			this.size = c.getSize() + 1;
+			if(negated)
+	    		size++;
 		}
 	}
 
@@ -55,6 +61,9 @@ public class QuantifiedRole<T,U> extends Role {
 			this.label = name3;
 			this.scope = r.getScope();
 			this.negated = r.isNegated();
+			this.size = c.size + 1;
+			if(negated)
+	    		size++;
 		}
 	}
 	
@@ -85,7 +94,10 @@ public class QuantifiedRole<T,U> extends Role {
 	}
 
 	public String toString() {
-		return this.terms.get(2).toString() + " "  + this.terms.get(0).toString() + "." + this.terms.get(1).toString();
+		String s = "";
+    	if(negated)
+    		s += "--";
+		return s + this.terms.get(2).toString() + " "  + this.terms.get(0).toString() + "." + this.terms.get(1).toString();
 	}
 
 	public Role getRole() {

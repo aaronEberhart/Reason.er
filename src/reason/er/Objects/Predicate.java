@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public abstract class Predicate<T> {
 
-	
+	protected int size;
 	protected ArrayList<Term<T>> terms;
     protected Term<T> scope;
     protected String label;
@@ -22,10 +22,12 @@ public abstract class Predicate<T> {
     }
     
     public Predicate<T> negate() {
-    	if(negated)
-    		negated = false;
-    	else
-    		negated = true;
+    	if(negated) {
+    		negated = false;size--;
+    	}
+    	else {
+    		negated = true;size++;
+    	}
     	return this;
     }
     
@@ -44,4 +46,8 @@ public abstract class Predicate<T> {
     public boolean isRole() {
 		return false;
 	}
+    
+    public int getSize() {
+    	return size;
+    }
 }

@@ -45,6 +45,7 @@ public class ABox<T extends Expression<T>> extends ExpressionGenerator<T> {
 	
 	protected void transform(int randInt, Expression<T> expression) {
 
+		//juggle the booleans
 		constants = constants?true:weightedBool(rand);
 		if(constants && !oneMoreTime) {
 			complete = complete?true:weightedBool(rand);
@@ -55,15 +56,17 @@ public class ABox<T extends Expression<T>> extends ExpressionGenerator<T> {
 			randInt = randInt % 5;
 		}
 		
+		//just in case
 		if(scope.equals("z")) {
 			complete = true;
 			constants = true;
-			randInt = (randInt % 2) + 4;
+			randInt = (randInt % 2) + 5;
 		}
 		
-		
+		//I'll need this to see if it grew
 		int size = expression.getSize();
 		
+		//pick what to do
 		switch(randInt) {
 			case 0:
 			case 1:
@@ -94,23 +97,25 @@ public class ABox<T extends Expression<T>> extends ExpressionGenerator<T> {
 	
 	@Override
 	protected Expression<T> makeExpression() {
+		
+		//initialize rand
 		rand = new Random(System.currentTimeMillis());
 		
 		int randInt = rand.nextInt(3);
-		if (randInt == 2) {
+		if (randInt == 2) {//if it decided to make a Role
 			randInt++;
 			constants = true;
 			complete = false;
 		}
-		else if(constants && randInt ==  0) {
+		else if(constants) {
 			oneMoreTime = rand.nextBoolean();
 		}
 			
+		//make the first term
 		Expression<T> expression = new Expression<T>(newPredicate(randInt));
 		scope = expression.getScope().toString();
 		
-		complete = randInt==2?true:complete;
-		
+		//loop until ground and complete
 		while(!complete && !constants) {
 			transform(rand.nextInt(7),expression);
 			if(oneMoreTime) {
@@ -120,18 +125,12 @@ public class ABox<T extends Expression<T>> extends ExpressionGenerator<T> {
 			}
 		}
 		
-		
+		//reset variable stuff
 		this.counters[0] = rand.nextInt(universe) % universe;
 		this.counters[1] = rand.nextInt(10000) % variables;
 		this.counters[2] = (rand.nextInt(universe) + universe) % universe;
 		this.counters[3] = variables + 1;
-		
-		try {
-			Thread.sleep(31);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
+				
 		constants = weightedBool(rand);
 		if(constants)
 			complete = weightedBool(rand);
@@ -168,6 +167,7 @@ public class ABox<T extends Expression<T>> extends ExpressionGenerator<T> {
 		}
 		else {
 			p = new Role(false,makeVariable(counters[1]),makeVariable(rand.nextInt(10000) % variables),makeLabel(counters[2] + universe));
+			complete = true;
 		}
 				
 		return p;

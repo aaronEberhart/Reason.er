@@ -24,6 +24,9 @@ public class Role<T,U> extends Predicate {
     	this.label = name;
     	this.scope = s;
     	this.negated = hasSign;
+    	this.size = 1;
+    	if(negated)
+    		size++;
     }
 	
 	@Override

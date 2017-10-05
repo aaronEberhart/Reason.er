@@ -72,13 +72,13 @@ public class Expression<T extends Predicate> extends Concept{
 		root = new ExpressionNode(p);
 		negated = p.isNegated();
 		complete = false;
-		size = 1;
+		size = p.getSize();
 	}
 	
 	public Expression<T> and(Predicate<T> p) {
 		if(canJoin(p)) {
 			root = new ExpressionNode('^', new ExpressionNode(p), root);
-			size++;
+			size= this.getSize() + p.getSize() + 1;
 		}else {
 			try {
 				throw ReasonEr.expression;
@@ -91,7 +91,7 @@ public class Expression<T extends Predicate> extends Concept{
 	public Expression<T> or(Predicate<T> p) {
 		if(canJoin(p)) {
 			root = new ExpressionNode('v', new ExpressionNode(p), root);
-			size++;
+			size= this.getSize() + p.getSize() + 1;
 		}else {
 			try {
 				throw ReasonEr.expression;
@@ -105,6 +105,7 @@ public class Expression<T extends Predicate> extends Concept{
 		if(!p.isNegated() && canJoin(p)) {
 			root = new ExpressionNode('c', new ExpressionNode(p), root);
 			complete = true;
+			size= this.getSize() + p.getSize() + 1;
 		}else {
 			try {
 				throw ReasonEr.expression;
@@ -118,7 +119,7 @@ public class Expression<T extends Predicate> extends Concept{
 		if(!root.isCompound() && canJoin(p)) {
 			root = new ExpressionNode('c', root, new ExpressionNode(p));
 			complete = true;
-			size++;
+			size= this.getSize() + p.getSize() + 1;
 		}else {
 			try {
 				throw ReasonEr.expression;
@@ -130,11 +131,9 @@ public class Expression<T extends Predicate> extends Concept{
 	}
 	public Expression<T> equivalent(Predicate<T> p) {
 		if(!p.isNegated() && canJoin(p)) {
-			boolean sub = root.isNegated();
 			root = new ExpressionNode('=', new ExpressionNode(p), root);
-			negated = p.isNegated();
-			root.children[1].negated = sub;
 			complete = true;
+			size= this.getSize() + p.getSize() + 1;
 		}else {
 			try {
 				throw ReasonEr.expression;
@@ -146,8 +145,15 @@ public class Expression<T extends Predicate> extends Concept{
 	}
 	public Expression<T> dot(Quantifier q, Role r, String name) {		
 		if(QuantifiedRole.canQuantify(q, r, null, this)) {
+			size += 1;
 			root = new ExpressionNode(new QuantifiedRole(q,r,this,name), root);
-			size++;
+		}
+		else {
+			try {
+				throw ReasonEr.expression;
+			} catch (Exception e) {
+				System.out.println(e + q.toString() + " " + r.toString() + "." +  root.toString());
+			}
 		}
 		return this;
 	}
@@ -159,17 +165,17 @@ public class Expression<T extends Predicate> extends Concept{
 			} catch (Exception e) {
 				System.out.println(e + "--" +  root.toString());
 			}
-		else if(root.negated) 
+		else if(root.negated) {
 			root.negated = false;
-		else
-			root.negated = true;
+			size = size - 1;
+		}else {
+			root.negated = true;size+=1;
+		}
 		
 		return this;
 	}
 	
 	public boolean canJoin(Predicate<T> p) {
-//		System.out.println(scope);
-//		System.out.println(p.getScope());
 		return !p.isRole() && !complete && p.getScope().toString().equals(scope.toString());
 	}
 	
@@ -187,7 +193,7 @@ public class Expression<T extends Predicate> extends Concept{
 	}
 	
 	public String toString() {
-		return root.toString();
+		return root.toString();// + " Size: " + this.getSize();
 	}
 
 	
