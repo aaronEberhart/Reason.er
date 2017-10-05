@@ -10,3 +10,6 @@ local.properties
 .loadpath
 .recommenders
 .project
+.classpath
+.gitignore
+.gitattributes
