@@ -5,7 +5,7 @@ import java.util.Random;
 
 import reason.er.Objects.*;
 
-public abstract class ExpressionGenerator<T extends Expression<T>> {
+public abstract class Box<T extends Expression<T>> {
 	
 	protected static final char[] uppers = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 	protected static final char[] lowers = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
@@ -19,6 +19,11 @@ public abstract class ExpressionGenerator<T extends Expression<T>> {
 
 	protected abstract Expression<T> makeExpression();
 	protected abstract Predicate<T> newPredicate(int randInt);
+	public abstract ArrayList<Expression<T>> normalize();
+	
+	protected void normaizeExpression(Expression<T> expression, Box<T> box, ArrayList<Expression<T>> normals) {
+		//TODO
+	}
 	
 	protected void makeBox(int size) {
 		expressions = new ArrayList<Expression<T>>();

@@ -6,7 +6,7 @@ import java.util.Random;
 import reason.er.Objects.*;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
-public class TBox<T extends Expression<T>>  extends ExpressionGenerator<T>{
+public class TBox<T extends Expression<T>>  extends Box<T>{
 
 	public TBox(int size) {
 
@@ -21,6 +21,8 @@ public class TBox<T extends Expression<T>>  extends ExpressionGenerator<T>{
 		scope = Character.toString(lowers[variables + 1]);
 
 		makeBox(size);
+		
+		rand = null;
 	}
 	
 	public TBox(ArrayList<Expression<T>> e) {
@@ -111,6 +113,12 @@ public class TBox<T extends Expression<T>>  extends ExpressionGenerator<T>{
 	@Override
 	public String toString() {
 		return "TBox = " + super.toString();
+	}
+
+	@Override
+	public ArrayList<Expression<T>> normalize() {
+		//TODO  Auto-generated method stub
+		return null;
 	}
 	
 }

@@ -41,7 +41,6 @@ public class Term<T> {
 
 	public void setValue(String makeVariable) {
 		this.term = (T) makeVariable;
-		
 	}
 
 }

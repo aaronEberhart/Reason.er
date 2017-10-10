@@ -14,22 +14,14 @@ import reason.er.Objects.*;
  *
  * @author aaron
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class ReasonEr {
-
 	
 	public static final Exception expression = new Exception("Invalid expression: ");
 	
-	
-    @SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void main(String[] args) {
-    	
-    	ABox abox = new ABox(new ArrayList<>());
-    	TBox tbox = new TBox(new ArrayList<>());
-    	
-    	tbox.addManually(new Expression(new QuantifiedRole(false,1,'o','n',"N","A","N"))
-    			.and(new Concept(true,'o',"B")).negate().equivalent(new Concept(false,'o',"C")));
-    	
-    	KnowledgeBase kb = new KnowledgeBase(9,9);
+		
+    	KnowledgeBase kb = makeTestKnowledgeBase();
     	
     	System.out.println(kb.toString());
     	toFile("knowledgeBase.txt",kb.toString());
@@ -47,4 +39,17 @@ public class ReasonEr {
     	}
     }
         
+    public static <T extends Expression<T>,U extends Expression <U>> KnowledgeBase<T,U> makeTestKnowledgeBase() {
+    	
+    	ABox<T> abox = new ABox(new ArrayList<T>());
+    	
+    	abox.addManually(new Expression(new Role(false,'a','b',"R")));
+    	
+		TBox<U> tbox = new TBox(new ArrayList<U>());
+    	
+    	tbox.addManually(new Expression(new QuantifiedRole(false,1,'x','y',"S","A","S")).dot(new Quantifier(2),new Role(false,'z','x',"R"),"D")
+    			.and(new Concept(false,'z',"B")).equivalent(new Concept(false,'z',"C")));
+    	
+    	return new KnowledgeBase(abox,tbox);
+    }
 }

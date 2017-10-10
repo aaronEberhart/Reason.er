@@ -24,12 +24,14 @@ public class Expression<T extends Predicate> extends Concept{
 			leaf = p;
 			children = null;
 			negated = p.isNegated();
+			size = p.getSize();
 		}
 		
 		private ExpressionNode(QuantifiedRole qr, ExpressionNode subTree) {
 			leaf = qr;
 			children = new Expression[1];
 			children[0] = subTree;
+			size = subTree.getSize();
 		}
 		
 		private ExpressionNode(char o, ExpressionNode n1, ExpressionNode n2) {
@@ -37,10 +39,11 @@ public class Expression<T extends Predicate> extends Concept{
 			children = new Expression[2];
 			children[0] = n1;
 			children[1] = n2;
+			size = n1.getSize() + n2.getSize() + 1;
 		}
 
-		private boolean isCompound() {
-			if(children != null)
+		private boolean isLeaf() {
+			if(children == null)
 				return true;
 			else
 				return false;
@@ -50,7 +53,10 @@ public class Expression<T extends Predicate> extends Concept{
 			if(children == null) {
 				return leaf.toString();
 			}else if(children.length == 1){
-				return ((QuantifiedRole)leaf).getQuantifier().toString() + " " + ((QuantifiedRole)leaf).getRole().toString() + "." + children[0].toString();
+				String s = ((QuantifiedRole)leaf).getQuantifier().toString() + " " + ((QuantifiedRole)leaf).getRole().toString() + "." + children[0].toString();
+				if(negated)
+					s = "--" + s;
+				return s;
 			}else {
 				String s = "( " + children[0].toString() + " " + operator + " " + children[1].toString() + " )";
 				if(negated)
@@ -62,7 +68,6 @@ public class Expression<T extends Predicate> extends Concept{
 		
 	protected ExpressionNode root;
 	private boolean complete;
-	private int size;
 	
 	public Expression() {
 	}
@@ -116,7 +121,7 @@ public class Expression<T extends Predicate> extends Concept{
 		return this;
 	}
 	public Expression<T> subClass(Predicate<T> p) {
-		if(!root.isCompound() && canJoin(p)) {
+		if(root.isLeaf() && canJoin(p)) {
 			root = new ExpressionNode('c', root, new ExpressionNode(p));
 			complete = true;
 			size= this.getSize() + p.getSize() + 1;
@@ -147,6 +152,7 @@ public class Expression<T extends Predicate> extends Concept{
 		if(QuantifiedRole.canQuantify(q, r, null, this)) {
 			size += 1;
 			root = new ExpressionNode(new QuantifiedRole(q,r,this,name), root);
+			scope = r.getScope();
 		}
 		else {
 			try {
@@ -167,9 +173,14 @@ public class Expression<T extends Predicate> extends Concept{
 			}
 		else if(root.negated) {
 			root.negated = false;
+			if(root.isLeaf())
+				root.leaf.negate();
 			size = size - 1;
 		}else {
-			root.negated = true;size+=1;
+			root.negated = true;
+			if(root.isLeaf())
+				root.leaf.negate();
+			size+=1;
 		}
 		
 		return this;
@@ -196,9 +207,6 @@ public class Expression<T extends Predicate> extends Concept{
 		return root.toString();// + " Size: " + this.getSize();
 	}
 
-	
-	public int getSize() {
-		return size;
-	}
+
 
 }

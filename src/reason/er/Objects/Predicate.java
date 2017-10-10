@@ -50,4 +50,8 @@ public abstract class Predicate<T> {
     public int getSize() {
     	return size;
     }
+    
+    public void setSize(int i) {
+    	size = i;
+    }
 }
