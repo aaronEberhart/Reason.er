@@ -8,6 +8,7 @@ package reason.er.Objects;
  *
  * @author aaron
  */
+@SuppressWarnings({"unchecked","unused"})
 public class Term<T> {
     
 	protected T term;
