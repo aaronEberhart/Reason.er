@@ -30,7 +30,7 @@ public abstract class Box<T extends Expression<T>> {
 		while(expressions.size() < size) {
 			expressions.add(makeExpression());
 			try {
-				Thread.sleep(90);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

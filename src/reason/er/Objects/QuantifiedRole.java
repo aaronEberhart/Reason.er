@@ -35,7 +35,7 @@ public class QuantifiedRole<T,U> extends Role {
 		if(canQuantify(q,r,null,c)) {
 			this.terms = new ArrayList();
 			this.terms.add(r);
-			this.terms.add(c);
+			this.terms.add(null);
 			this.terms.add(q);
 			
 			this.label = name;

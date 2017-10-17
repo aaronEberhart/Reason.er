@@ -10,14 +10,14 @@ package reason.er.Objects;
  */
 public class Quantifier {
     
-	private enum Quant { 
+	public enum Quant { 
 		NONE, EXISTS, FORALL; 
 		public String toString() {
 			return name().charAt(0) + name().substring(1).toLowerCase();
 		}
 	};
 	
-	private Quant quantifier;
+	private static Quant quantifier;
 	
 	public Quantifier(int i) {
 		setQuantifier(i);
@@ -25,12 +25,16 @@ public class Quantifier {
 	
 	public void setQuantifier(int i) {
 		if(i == 1) {
-			this.quantifier = Quant.EXISTS;
+			Quantifier.quantifier = Quant.EXISTS;
 		}else if(i == 2) {
-			this.quantifier = Quant.FORALL;
+			Quantifier.quantifier = Quant.FORALL;
 		}else {
-			this.quantifier = Quant.NONE;
+			Quantifier.quantifier = Quant.NONE;
 		}
+	}
+	
+	public static Quant getQuantifier() {
+		return quantifier;
 	}
 
 	public String toString() {

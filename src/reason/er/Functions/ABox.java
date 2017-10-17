@@ -166,7 +166,7 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 			}
 		}
 		else {
-			p = new Role(false,counters[1],(long)(rand.nextInt(10000) % variables),counters[2] + universe);
+			p = new Role(negated,counters[1],(long)(rand.nextInt(10000) % variables),counters[2] + universe);
 			complete = true;
 		}
 				
