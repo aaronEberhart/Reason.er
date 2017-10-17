@@ -20,16 +20,16 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		else
 			complete = false;
 		
-		universe = uppers.length / 2;
-		variables = lowers.length / 2;
+		universe = Predicate.uppers.length / 2;
+		variables = Term.lowers.length / 2;
 		
-		this.counters = new int[4];
+		this.counters = new long[4];
 		this.counters[0] = rand.nextInt(universe) % universe;
 		this.counters[1] = rand.nextInt(10000) % variables ;
 		this.counters[2] = (rand.nextInt(universe) + universe) % universe;
 		this.counters[3] = variables + 1;
 		
-		scope = makeVariable(counters[3]);
+		scope = counters[3];
 		
 		makeBox(size);
 		
@@ -37,8 +37,8 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 	}
 	
 	public ABox(ArrayList<Expression<T>> e) {
-		universe = uppers.length / 2;
-		variables = lowers.length / 2;
+		universe = Predicate.uppers.length / 2;
+		variables = Term.lowers.length / 2;
 		
 		expressions = e;
 	}
@@ -57,7 +57,7 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		}
 		
 		//just in case
-		if(scope.equals("z")) {
+		if(scope == 25) {
 			complete = true;
 			constants = true;
 			randInt = (randInt % 2) + 5;
@@ -80,17 +80,17 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 				expression.negate();
 				break;
 			case 5:
-				expression.dot(new Quantifier(1), (Role)newPredicate(2), makeLabel(counters[2] + universe));
+				expression.dot(new Quantifier(1), (Role)newPredicate(2), counters[2] + universe);
 				break;
 			default:
-				expression.dot(new Quantifier(2), (Role)newPredicate(2), makeLabel(counters[2] + universe));
+				expression.dot(new Quantifier(2), (Role)newPredicate(2), counters[2] + universe);
 				break;
 			
 			
 		}
 		if(randInt > 4 && expression.getSize() > size) {
-			scope = makeVariable(constants?counters[1]:counters[3]);
-			expression.setScope(new Term(scope));
+			scope = constants?counters[1]:counters[3];
+			expression.setScope(scope);
 		}		
 		
 	}
@@ -113,7 +113,7 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 			
 		//make the first term
 		Expression<T> expression = new Expression<T>(newPredicate(randInt));
-		scope = expression.getScope().toString();
+		scope = expression.getScope();
 		
 		//loop until ground and complete
 		while(!complete && !constants) {
@@ -148,25 +148,25 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		Predicate p;
 		
 		if(randInt == 0) {
-			p = new Concept(negated,makeVariable(constants||oneMoreTime?counters[1]:counters[3]),makeLabel(counters[0]));
+			p = new Concept(negated,constants||oneMoreTime?counters[1]:counters[3],counters[0]);
 			counters[0] = (counters[0] + 1) % universe;
 		}
 		else if(randInt == 1) {
-			p = new QuantifiedRole(negated,rand.nextInt(2) + 1,makeVariable(constants||oneMoreTime?counters[1]:counters[3]),makeVariable(constants||oneMoreTime?counters[3]:counters[3]-1),makeLabel(counters[2] + universe),makeLabel(counters[0]),makeLabel(counters[0]));
+			p = new QuantifiedRole(negated,rand.nextInt(2) + 1,constants||oneMoreTime?counters[1]:counters[3],constants||oneMoreTime?counters[3]:counters[3]-1,counters[2] + universe,counters[0],counters[0]);
 			counters[0] = (counters[0] + 1) % universe;
 			counters[2] = (counters[2] + 1) % universe;
 		}
 		else if(randInt == 2) {
-			p = new Role(false,makeVariable(constants?counters[1]:counters[3]+1),makeVariable(counters[3]),makeLabel(counters[2] + universe));
+			p = new Role(false,constants?counters[1]:counters[3]+1,counters[3],counters[2] + universe);
 			counters[2] = (counters[2] + 1) % universe;
 			if(!constants) {
-				counters[3] = (counters[3] + 1) % lowers.length;
+				counters[3] = (counters[3] + 1) % Term.lowers.length;
 				if(counters[3]<variables)
 					counters[3]+=variables;
 			}
 		}
 		else {
-			p = new Role(false,makeVariable(counters[1]),makeVariable(rand.nextInt(10000) % variables),makeLabel(counters[2] + universe));
+			p = new Role(false,counters[1],(long)(rand.nextInt(10000) % variables),counters[2] + universe);
 			complete = true;
 		}
 				

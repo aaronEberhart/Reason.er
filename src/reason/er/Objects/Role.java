@@ -15,14 +15,14 @@ public class Role<T,U> extends Predicate {
 	public Role() {
 	}
 	
-	public Role(boolean hasSign, T t, U u, String name){
+	public Role(boolean hasSign, T t, U u, long name){
     	Term<T> s = new Term<T>(t);
     	Term<U> r = new Term<U>(u);    	
     	this.terms = new ArrayList();
     	this.terms.add(s);
     	this.terms.add(r);
     	this.label = name;
-    	this.scope = s;
+    	this.scope = (long)s.getValue();
     	this.negated = hasSign;
     	this.size = 1;
     	if(negated)
@@ -35,7 +35,7 @@ public class Role<T,U> extends Predicate {
 	}
 	
 	public String toString() {	
-		String s = this.label + "(" + this.terms.get(0) + "," + this.terms.get(1) + ")";
+		String s = makeLabel(this.label) + "(" + this.terms.get(0).toString() + "," + this.terms.get(1).toString() + ")";
     	if(negated)
     		s = "--" + s;
     	return s;

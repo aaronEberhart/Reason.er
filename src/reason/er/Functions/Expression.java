@@ -148,7 +148,7 @@ public class Expression<T extends Predicate> extends Concept{
 		}
 		return this;
 	}
-	public Expression<T> dot(Quantifier q, Role r, String name) {		
+	public Expression<T> dot(Quantifier q, Role r, long name) {		
 		if(QuantifiedRole.canQuantify(q, r, null, this)) {
 			size += 1;
 			root = new ExpressionNode(new QuantifiedRole(q,r,this,name), root);
@@ -187,19 +187,14 @@ public class Expression<T extends Predicate> extends Concept{
 	}
 	
 	public boolean canJoin(Predicate<T> p) {
-		return !p.isRole() && !complete && p.getScope().toString().equals(scope.toString());
+		return !p.isRole() && !complete && p.getScope() == scope;
 	}
 	
 	public boolean isComplete() {
 		return complete;
 	}
-	
-	@Override
-	public Term<T> getScope() {
-    	return this.scope;
-    }
     
-	public void setScope(Term<T> t) {
+	public void setScope(long t) {
 		scope = t;
 	}
 	

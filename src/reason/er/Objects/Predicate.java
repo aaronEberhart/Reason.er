@@ -11,10 +11,11 @@ import java.util.ArrayList;
  */
 public abstract class Predicate<T> {
 
+	public static final char[] uppers = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 	protected int size;
 	protected ArrayList<Term<T>> terms;
-    protected Term<T> scope;
-    protected String label;
+    protected long scope;
+    protected long label;
     protected boolean negated;
     
     public boolean isNegated() {
@@ -31,15 +32,11 @@ public abstract class Predicate<T> {
     	return this;
     }
     
-    public Term<T> getScope() {
-    	return this.scope;
-    }
-    
     public Term<T> getTerm(int i) {
     	return terms.get(i);
     }
 
-    protected void setLabel(String s) {
+    protected void setLabel(long s) {
     	label = s;
     }
 
@@ -47,11 +44,26 @@ public abstract class Predicate<T> {
 		return false;
 	}
     
+    public long getScope() {
+    	return scope;
+    }
+	
     public int getSize() {
     	return size;
     }
     
     public void setSize(int i) {
     	size = i;
+    }
+    
+    protected String makeLabel(long count) {
+    	String s = "";
+    	
+    	do{
+    		s = Character.toString(uppers[(int)(count % uppers.length)]) + s;
+    		count = count / uppers.length;
+    	}while(count-- > 0);
+    	
+    	return s;
     }
 }

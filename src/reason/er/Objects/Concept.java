@@ -15,14 +15,14 @@ public class Concept<T> extends Predicate {
     
 	public Concept() {}
 	
-	public Concept(boolean hasSign, T t, String name){
+	public Concept(boolean hasSign, T t, long name){
 		
 		this.terms = new ArrayList();
 		Term<T> s = new Term<T>(t);
     	this.terms.add(s);
     	
     	this.label = name;
-    	this.scope = s;
+    	this.scope = (long)s.getValue();
     	this.negated = hasSign;
     	this.size = 1;
     	if(negated)
@@ -38,6 +38,6 @@ public class Concept<T> extends Predicate {
     	String s = "";
     	if(negated)
     		s += "--";
-    	return s + this.label + "(" + this.getTerm().toString() + ")";
+    	return s + makeLabel(this.label) + "(" + this.getTerm().toString() + ")";
     }
 }

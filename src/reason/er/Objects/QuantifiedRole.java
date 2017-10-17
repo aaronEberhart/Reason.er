@@ -10,7 +10,7 @@ public class QuantifiedRole<T,U> extends Role {
 
 	public QuantifiedRole() {}
 	
-	public QuantifiedRole(boolean hasSign, int i, T t, U u, String name1, String name2, String name3) {
+	public QuantifiedRole(boolean hasSign, int i, T t, U u, long name1, long name2, long name3) {
 		
 		this.terms = new ArrayList();
 		
@@ -30,7 +30,7 @@ public class QuantifiedRole<T,U> extends Role {
     		size++;
 	}
 	
-	public QuantifiedRole(Quantifier q, Role<T,U> r, Expression c, String name) {
+	public QuantifiedRole(Quantifier q, Role<T,U> r, Expression c, long name) {
 		
 		if(canQuantify(q,r,null,c)) {
 			this.terms = new ArrayList();
@@ -47,7 +47,7 @@ public class QuantifiedRole<T,U> extends Role {
 		}
 	}
 
-	public QuantifiedRole(Quantifier q, Role<T,U> r, Concept<U> c, String name1, String name2, String name3) {
+	public QuantifiedRole(Quantifier q, Role<T,U> r, Concept<U> c, long name1, long name2, long name3) {
 		
 		if(canQuantify(q,r,c,null)){
 			this.terms = new ArrayList();
@@ -68,7 +68,7 @@ public class QuantifiedRole<T,U> extends Role {
 	}
 	
 	public static boolean canQuantify(Quantifier q, Role r,  Concept c, Expression d) {
-		if(d == null && (!r.getTerm(1).getValue().equals(c.getScope().getValue()) || (r.isNegated() || c.isNegated()))) {
+		if(d == null && (!r.getTerm(1).getValue().equals(c.getScope()) || (r.isNegated() || c.isNegated()))) {
 			try {
 				throw ReasonEr.expression;
 			} catch (Exception e) {
@@ -76,7 +76,7 @@ public class QuantifiedRole<T,U> extends Role {
 				return false;
 			}
 		}
-		else if(c == null && !r.getTerm(1).getValue().equals(d.getScope().getValue()) && !d.isComplete() && !r.isNegated() && !d.isNegated()){
+		else if(c == null && !r.getTerm(1).getValue().equals(d.getScope()) && !d.isComplete() && !r.isNegated() && !d.isNegated()){
 			try {
 				throw ReasonEr.expression;
 			} catch (Exception e) {

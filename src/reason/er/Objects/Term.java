@@ -11,6 +11,7 @@ package reason.er.Objects;
 @SuppressWarnings({"unchecked","unused"})
 public class Term<T> {
     
+	public static final char[] lowers = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 	protected T term;
 	
 	public Term(T t) {
@@ -28,7 +29,12 @@ public class Term<T> {
 	public String toString() {
 		if(isString(term))
 			return (String)term;
-		return this.term.toString();
+		else if(isInt(term))
+			return makeVariable(Integer.toUnsignedLong((int)term));
+		else if(isLong(term))
+			return makeVariable((long)term);
+		else
+			return this.term.toString();
 	}
 	
 	private boolean isString(T t) {
@@ -40,8 +46,36 @@ public class Term<T> {
 		}
 	}
 
+	private boolean isLong(T t) {
+		try {
+			long s = (long)t;
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
+	private boolean isInt(T t) {
+		try {
+			int s = (int)t;
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
 	public void setValue(String makeVariable) {
 		this.term = (T) makeVariable;
 	}
-
+	
+	public static String makeVariable(long count) {
+    	String s = "";
+    	
+    	do{
+    		s = Character.toString(lowers[(((int)count + lowers.length) % lowers.length)]) + s;
+    		count = count / lowers.length;
+    	}while(count-- > 0);
+    	
+    	return s;
+    }
 }
