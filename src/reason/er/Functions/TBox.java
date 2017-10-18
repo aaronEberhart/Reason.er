@@ -111,14 +111,25 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 	}
 	
 	@Override
+	public void normalizeExpressions(){
+		normals = new ArrayList<Expression<T>>();
+		
+		for(Expression<T> ex : expressions) {
+			if(ex.getOperator() == 'c')
+				normals.add(ex.normalize());
+			else {
+				Expression ex1 = new Expression(ex.root.children[0]);
+				Expression ex2 = new Expression(ex.root.children[1]);
+				normals.add((new Expression(ex.root.children[0]).subClass(new Expression(ex.root.children[1]))).normalize());
+				normals.add((new Expression(ex.root.children[0]).superClass(new Expression(ex.root.children[1]))).normalize());
+			}
+		}
+	}
+	
+	@Override
 	public String toString() {
 		return "TBox = " + super.toString();
 	}
 
-	@Override
-	public ArrayList<Expression<T>> normalize() {
-		//TODO  Auto-generated method stub
-		return null;
-	}
 	
 }

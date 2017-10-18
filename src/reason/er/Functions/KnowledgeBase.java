@@ -16,6 +16,11 @@ public class KnowledgeBase<T extends Expression<T>, U extends Expression<U>> {
 		abox = a;
 	}
 	
+	public void normalize() {
+		tbox.normalizeExpressions();
+		abox.normalizeExpressions();
+	}
+	
 	@Override
 	public String toString() {
 		return "K = ( ABox, TBox )\n\n" + abox.toString() + "\n\n" + tbox.toString() + "\n";

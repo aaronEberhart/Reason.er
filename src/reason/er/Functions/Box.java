@@ -7,22 +7,23 @@ import reason.er.Objects.*;
 
 public abstract class Box<T extends Expression<T>> {
 	
-	//protected static final char[] uppers = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
-	//protected static final char[] lowers = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-	
 	protected long scope;
 	protected int universe, variables;
 	protected long counters[];
 	protected Random rand;
 	
 	protected ArrayList<Expression<T>> expressions;
+	protected ArrayList<Expression<T>> normals;
 
 	protected abstract Expression<T> makeExpression();
 	protected abstract Predicate<T> newPredicate(int randInt);
-	public abstract ArrayList<Expression<T>> normalize();
 	
-	protected void normaizeExpression(Expression<T> expression, Box<T> box, ArrayList<Expression<T>> normals) {
-		//TODO
+	public void normalizeExpressions() {
+		normals = new ArrayList<Expression<T>>();
+		
+		for(Expression<T> ex : expressions) {
+			normals.add(ex.normalize());
+		}
 	}
 	
 	protected void makeBox(int size) {
@@ -53,11 +54,19 @@ public abstract class Box<T extends Expression<T>> {
     	if(expressions.size() == 0) {
     		s = s + "NULL";
     	}else {
-	    	for(int i = 0; i < expressions.size(); i++) {
-	    		s = s + expressions.get(i).toString();
-	    		if( i < expressions.size() - 1)
-	    			s = s + ", \n";
-	    	}
+    		if(normals != null) {
+		    	for(int i = 0; i < normals.size(); i++) {
+		    		s = s + normals.get(i).toString();
+		    		if( i < normals.size() - 1)
+		    			s = s + ", \n";
+		    	}
+    		}else {
+    			for(int i = 0; i < expressions.size(); i++) {
+		    		s = s + expressions.get(i).toString();
+		    		if( i < expressions.size() - 1)
+		    			s = s + ", \n";
+		    	}
+    		}
     	}
     	return s + " }";
     }

@@ -1,0 +1,6 @@
+K = ( ABox, TBox )
+
+ABox = { R(a,b) }
+
+TBox = { ( C(y) c --( B(y) ^ FORALL S(y,x).--FORALL T(x,w).A(w) ) ), 
+C(y) }

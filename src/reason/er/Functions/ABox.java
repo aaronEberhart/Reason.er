@@ -182,10 +182,5 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		return "ABox = " + super.toString();
 	}
 
-	@Override
-	public ArrayList<Expression<T>> normalize() {
-		// TODO Auto-generated method stub
-		return null;
-	}	
 
 }

@@ -26,6 +26,11 @@ public class ReasonEr {
     	System.out.println(kb.toString());
     	toFile("knowledgeBase.txt",kb.toString());
     	
+    	kb.normalize();
+    	
+    	System.out.println(kb.toString());
+    	toFile("normalizedKnowledgeBase.txt",kb.toString());
+    	
     	System.out.println("DONE");
     }
     
@@ -47,8 +52,8 @@ public class ReasonEr {
     	
 		TBox<U> tbox = new TBox(new ArrayList<U>());
     	
-    	tbox.addManually(new Expression(new QuantifiedRole(false,1,(long)23,(long)22,(long)19,(long)0,(long)19)).dot(new Quantifier(2),new Role(false,(long)24,(long)23,(long)18),(long)3)
-    			.and(new Concept(false,(long)24,(long)1)).negate().deMorgan().equivalent(new Concept(false,(long)24,(long)2)));
+    	tbox.addManually(new Expression(new QuantifiedRole(false,1,(long)23,(long)22,(long)19,(long)0,(long)19)).negate().dot(new Quantifier(2),new Role(false,(long)24,(long)23,(long)18),(long)3)
+    			.and(new Concept(false,(long)24,(long)1)).negate().equivalent(new Concept(false,(long)24,(long)2)));
     	
     	return new KnowledgeBase(abox,tbox);
     }

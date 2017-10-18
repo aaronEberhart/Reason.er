@@ -3,10 +3,10 @@ package reason.er.Functions;
 import reason.er.ReasonEr;
 import reason.er.Objects.*;
 
-@SuppressWarnings({"rawtypes", "unchecked"})
+@SuppressWarnings({"rawtypes", "unchecked","unlikely-arg-type"})
 public class Expression<T extends Predicate> extends Concept{
 	
-	private class ExpressionNode extends Expression{
+	protected class ExpressionNode extends Expression{
 		
 		protected char operator;
 		protected Predicate leaf;
@@ -78,6 +78,15 @@ public class Expression<T extends Predicate> extends Concept{
 		negated = p.isNegated();
 		complete = false;
 		size = p.getSize();
+	}
+	
+	public Expression(ExpressionNode e) {
+		if(e.isLeaf())
+		scope = e.getScope();
+		root = (ExpressionNode)e;
+		negated = e.isNegated();
+		complete = true;
+		size = e.getSize();
 	}
 	
 	public Expression<T> and(Predicate<T> p) {
@@ -202,33 +211,45 @@ public class Expression<T extends Predicate> extends Concept{
 	}
 	
 	public Expression<T> deMorgan(){
-		if(root.operator == 'v' && root.negated) {
+		if(root.operator == 'v') {
 			root = new ExpressionNode('^',new ExpressionNode(root.children[0].negate()),new ExpressionNode(root.children[1].negate()));
 			return this;
 		}
-		else if(root.operator == '^' && root.negated) {
+		else if(root.operator == '^') {
 			root = new ExpressionNode('v',new ExpressionNode((Expression)root.children[0].negate()),new ExpressionNode((Expression)root.children[1].negate()));
 			return this;
 		}else
 			return this;
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
 	public Expression<T> negateQuantifier(){
-		if(root.negated && root.isLeaf() && root.isRole()) {
-			if(((QuantifiedRole)root.leaf).getQuantifier().equals(Quantifier.getQuantifier().EXISTS)) {
-				root = new ExpressionNode(new QuantifiedRole(new Quantifier(2),((QuantifiedRole)root.leaf).getRole(),root.children[0],((QuantifiedRole)root.leaf).getScope()), new ExpressionNode(root.children[0].negate()));
-			}
-			else if(((QuantifiedRole)root.leaf).getQuantifier().equals(Quantifier.getQuantifier().FORALL)) {
-				root = new ExpressionNode(new QuantifiedRole(new Quantifier(1),((QuantifiedRole)root.leaf).getRole(),root.children[0],((QuantifiedRole)root.leaf).getScope()), new ExpressionNode(root.children[0].negate()));
-			}
-			return this;
+		if(((QuantifiedRole)root.leaf).getQuantifier().equals(Quantifier.getQuantifier().EXISTS)) {
+			root = new ExpressionNode(new QuantifiedRole(new Quantifier(2),((QuantifiedRole)root.leaf).getRole(),root.children[0],((QuantifiedRole)root.leaf).getScope()), new ExpressionNode(root.children[0].negate()));
+		}			
+		else if(((QuantifiedRole)root.leaf).getQuantifier().equals(Quantifier.getQuantifier().FORALL)) {
+			root = new ExpressionNode(new QuantifiedRole(new Quantifier(1),((QuantifiedRole)root.leaf).getRole(),root.children[0],((QuantifiedRole)root.leaf).getScope()), new ExpressionNode(root.children[0].negate()));
 		}
-		else	
-			return this;
+		return this;
 	}
 
-
+	public Expression<T> normalize(){
+		if(this.size == 1 || this.size == 2)
+			return this;
+		else if((root.operator == 'v' || root.operator == '^') && root.negated) {
+			this.deMorgan();
+			this.root.children[0].normalize();
+			this.root.children[1].normalize();
+			return this;
+		}
+		else if(root.negated && root.isLeaf() && root.isRole()) {
+			this.negateQuantifier();
+			this.root.children[0].normalize();
+			return this;
+		}
+		else
+			return this;
+	}
+	
 	public boolean canJoin(Predicate<T> p) {
 		return !p.isRole() && !complete && p.getScope() == scope;
 	}
@@ -237,6 +258,12 @@ public class Expression<T extends Predicate> extends Concept{
 		return complete;
 	}
     
+	public char getOperator() {
+		if(complete)
+			return root.operator;
+		else return 0;
+	}
+	
 	public void setScope(long t) {
 		scope = t;
 	}
