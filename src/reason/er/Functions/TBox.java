@@ -3,6 +3,8 @@ package reason.er.Functions;
 import java.util.ArrayList;
 import java.util.Random;
 
+import reason.er.Functions.*;
+import reason.er.Functions.Expression.ExpressionNode;
 import reason.er.Objects.*;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
@@ -111,17 +113,18 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 	}
 	
 	@Override
-	public void normalizeExpressions(){
+	public void normalizeExpressions() {
 		normals = new ArrayList<Expression<T>>();
 		
 		for(Expression<T> ex : expressions) {
 			if(ex.getOperator() == 'c')
-				normals.add(ex.normalize());
+				normals.add((new Expression(new Expression((ExpressionNode)ex.root.children[0]))
+						.negate().or(new Expression((ExpressionNode)ex.root.children[1]))).normalize());
 			else {
-				Expression ex1 = new Expression(ex.root.children[0]);
-				Expression ex2 = new Expression(ex.root.children[1]);
-				normals.add((new Expression(ex.root.children[0]).subClass(new Expression(ex.root.children[1]))).normalize());
-				normals.add((new Expression(ex.root.children[0]).superClass(new Expression(ex.root.children[1]))).normalize());
+				normals.add((new Expression(new Expression((ExpressionNode)ex.root.children[0]))
+						.negate().or(new Expression((ExpressionNode)ex.root.children[1]))).normalize());
+				normals.add((new Expression(new Expression((ExpressionNode)ex.root.children[0]))
+						.or((new Expression(new Expression((ExpressionNode)ex.root.children[1]))).negate())).normalize());
 			}
 		}
 	}

@@ -1,23 +1,19 @@
 package reason.er.Functions;
 
 import reason.er.ReasonEr;
+import reason.er.Functions.Expression.ExpressionNode;
 import reason.er.Objects.*;
 
 @SuppressWarnings({"rawtypes", "unchecked","unlikely-arg-type"})
 public class Expression<T extends Predicate> extends Concept{
 	
-	protected class ExpressionNode extends Expression{
+	public class ExpressionNode extends Expression{
 		
 		protected char operator;
 		protected Predicate leaf;
 		protected Expression[] children;
 				
 		private ExpressionNode() {
-			try {
-				throw ReasonEr.expression;
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 	
 		private ExpressionNode(Predicate p) {
@@ -64,6 +60,7 @@ public class Expression<T extends Predicate> extends Concept{
 				return s;
 			}
 		}
+
 	}
 		
 	protected ExpressionNode root;
@@ -80,13 +77,28 @@ public class Expression<T extends Predicate> extends Concept{
 		size = p.getSize();
 	}
 	
-	public Expression(ExpressionNode e) {
-		if(e.isLeaf())
-		scope = e.getScope();
-		root = (ExpressionNode)e;
+	public Expression(ExpressionNode e){
+		if(e.isLeaf()) 
+			scope = e.getScope();
+		root = deepCopy(e);
 		negated = e.isNegated();
-		complete = true;
+		complete = false;
 		size = e.getSize();
+	}
+	
+	public ExpressionNode deepCopy(ExpressionNode e) {
+		
+		try{
+			if(e.isLeaf())
+				return new ExpressionNode((Predicate)e.leaf.clone(e));
+			else if(e.children.length == 1)
+				return new ExpressionNode((QuantifiedRole)e.leaf.clone(e),deepCopy((ExpressionNode)e.children[0]));
+			else
+				return new ExpressionNode(e.operator,deepCopy((ExpressionNode)e.children[0]),deepCopy((ExpressionNode)e.children[1]));
+		}catch(Exception e1) {
+			e1.printStackTrace();
+			return null;
+		}
 	}
 	
 	public Expression<T> and(Predicate<T> p) {
@@ -272,6 +284,8 @@ public class Expression<T extends Predicate> extends Concept{
 		return root.toString();// + " Size: " + this.getSize();
 	}
 
-
+	public Expression getChild(int i){
+		return root.children[i];
+	}
 
 }

@@ -6,6 +6,8 @@ package reason.er.Objects;
 
 import java.util.ArrayList;
 
+import reason.er.Functions.*;
+
 /**
  *
  * @author aaron
@@ -40,4 +42,9 @@ public class Concept<T> extends Predicate {
     		s += "--";
     	return s + makeLabel(this.label) + "(" + this.getTerm().toString() + ")";
     }
+
+	@Override
+	public Predicate clone(Expression e) {
+		return new Concept(negated, this.getTerm().getValue(), label);
+	}
 }

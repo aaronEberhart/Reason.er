@@ -35,7 +35,7 @@ public class QuantifiedRole<T,U> extends Role {
 		if(canQuantify(q,r,null,c)) {
 			this.terms = new ArrayList();
 			this.terms.add(r);
-			this.terms.add(null);
+			this.terms.add(c);
 			this.terms.add(q);
 			
 			this.label = name;
@@ -100,6 +100,12 @@ public class QuantifiedRole<T,U> extends Role {
 		return s + this.terms.get(2).toString() + " "  + this.terms.get(0).toString() + "." + this.terms.get(1).toString();
 	}
 
+	public boolean isExpression() {
+		if(this.terms.get(1) == null)
+			return true;
+		return false;
+	}
+	
 	public Role getRole() {
 		return (Role)this.terms.get(0);
 	}
@@ -112,4 +118,12 @@ public class QuantifiedRole<T,U> extends Role {
 		return (Quantifier)this.terms.get(2);
 	}
 
+	
+	public Predicate clone(Expression e) {
+		if(this.isExpression()) {
+			return new QuantifiedRole(getQuantifier(),(Role)terms.get(0),e.getChild(0),label);
+		}
+		return new QuantifiedRole(negated,Quantifier.getQuantifier().ordinal(),(T)((Role)terms.get(0)).getTerm(0).getValue(),(U)((Role)terms.get(0)).getTerm(1).getValue(),
+				((Role)terms.get(0)).label,((Concept)terms.get(1)).label,label);
+	}
 }

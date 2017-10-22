@@ -5,6 +5,8 @@ package reason.er.Objects;
 
 import java.util.ArrayList;
 
+import reason.er.Functions.*;
+
 /**
  *
  * @author aaron
@@ -40,5 +42,11 @@ public class Role<T,U> extends Predicate {
     		s = "--" + s;
     	return s;
     }
+
+	@Override
+	public Predicate clone(Expression e) {
+		return new Role(negated,((Term)terms.get(0)).getValue(),((Term)terms.get(1)).getValue(),label);
+	}
+	
 	
 }

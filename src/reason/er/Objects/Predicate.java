@@ -5,6 +5,8 @@ package reason.er.Objects;
 
 import java.util.ArrayList;
 
+import reason.er.Functions.*;
+
 /**
  *
  * @author Aaron
@@ -18,7 +20,10 @@ public abstract class Predicate<T> {
     protected long label;
     protected boolean negated;
     
+    public abstract Predicate<T> clone(Expression e);
+    
     public boolean isNegated() {
+
     	return negated;
     }
     
