@@ -92,6 +92,11 @@ public class Expression<T extends Predicate> extends Concept{
 		size = e.getSize();
 	}
 
+	public Expression(Expression e) {
+		root = (ExpressionNode)e;
+		complete = true;
+	}
+	
 	public ExpressionNode recursiveDeepCopy(ExpressionNode e) {
 		try{
 			if(e.isLeaf())
@@ -138,6 +143,7 @@ public class Expression<T extends Predicate> extends Concept{
 		return this;
 	}
 	public Expression<T> or(Predicate<T> p) {
+		
 		if(canJoin(p) && !((ExpressionNode)this).isLeaf() && !((ExpressionNode)p).isLeaf()) {
 			root = new ExpressionNode('v', root, new ExpressionNode(p));
 			root.leaf = null;
@@ -146,10 +152,14 @@ public class Expression<T extends Predicate> extends Concept{
 		else if(canJoin(p) && ((ExpressionNode)this).isLeaf()) {
 			root = null;
 			
-			((ExpressionNode)this).children = new Expression[2];
-			((ExpressionNode)this).children[0] = new Expression(((ExpressionNode)this).leaf);
-			((ExpressionNode)this).children[1] = (Expression)p;
+			Expression[] c = new Expression[2];
+			ExpressionNode d = (ExpressionNode)this;
 			
+			c[0] = recursiveDeepCopy(d);
+			if(((ExpressionNode)this).leaf.isNegated())
+				((ExpressionNode)c[0]).leaf.negate();
+			c[1] = (Expression)p;
+			((ExpressionNode)this).children = c;
 
 			((ExpressionNode)this).operator = 'v';
 			((ExpressionNode)this).leaf = null;
@@ -176,8 +186,6 @@ public class Expression<T extends Predicate> extends Concept{
 		}
 		return this;
 	}
-	
-	
 	public Expression<T> superClass(Predicate<T> p) {
 		if(!p.isNegated() && canJoin(p)) {
 			root = new ExpressionNode('c', new ExpressionNode(p), root);
@@ -235,7 +243,6 @@ public class Expression<T extends Predicate> extends Concept{
 		}
 		return this;
 	}
-	
 	public Expression<T> negate() {
 		if(complete)
 			try {

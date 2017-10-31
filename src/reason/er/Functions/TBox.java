@@ -124,7 +124,7 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 			final ExpressionNode left = (ExpressionNode)ex.root.children[0];
 			
 			if(ex.getOperator() == 'c'){
-				normals.add(normalizeSubset(left,right));
+				normals.add(new Expression(normalizeSubset(left,right)));
 			}
 			else {
 				Expression ex2 = e.deepCopy(e);
@@ -132,8 +132,8 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 				final ExpressionNode up = (ExpressionNode)ex2.root.children[1];
 				final ExpressionNode down = (ExpressionNode)ex2.root.children[0];
 				
-				normals.add(normalizeSubset(left,right));
-				normals.add(normalizeSubset(up,down));
+				normals.add(new Expression(normalizeSubset(left,right)));
+				normals.add(new Expression(normalizeSubset(up,down)));
 				
 			}
 			
@@ -142,7 +142,7 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 	
 	public Expression normalizeSubset(ExpressionNode left, ExpressionNode right) {
 		left.negate();
-		return new Expression(left.or(right));
+		return left.or(right);
 	}
 	
 	@Override
