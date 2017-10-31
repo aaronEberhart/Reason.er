@@ -21,7 +21,7 @@ public class ReasonEr {
 	
 	public static void main(String[] args) {
 		
-    	KnowledgeBase kb = makeTestKnowledgeBase();
+    	KnowledgeBase kb = KnowledgeBase.makeTestKnowledgeBase();
     	
     	System.out.println(kb.toString());
     	toFile("knowledgeBase.txt",kb.toString());
@@ -44,17 +44,5 @@ public class ReasonEr {
     	}
     }
         
-    public static <T extends Expression<T>,U extends Expression <U>> KnowledgeBase<T,U> makeTestKnowledgeBase() {
-    	
-    	ABox<T> abox = new ABox(new ArrayList<T>());
-    	
-    	abox.addManually(new Expression(new Role(false,(long)0,(long)1,(long)17)));
-    	
-		TBox<U> tbox = new TBox(new ArrayList<U>());
-    	
-    	tbox.addManually(new Expression(new QuantifiedRole(false,1,(long)23,(long)22,(long)19,(long)0,(long)19)).negate().dot(new Quantifier(2),new Role(false,(long)24,(long)23,(long)18),(long)3)
-    			.and(new Concept(false,(long)24,(long)1)).negate().equivalent(new Concept(false,(long)24,(long)2)));
-    	
-    	return new KnowledgeBase(abox,tbox);
-    }
+    
 }

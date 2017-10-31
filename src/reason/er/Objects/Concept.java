@@ -45,6 +45,6 @@ public class Concept<T> extends Predicate {
 
 	@Override
 	public Predicate clone(Expression e) {
-		return new Concept(negated, this.getTerm().getValue(), label);
+		return new Concept(e.negated, this.getTerm().getValue(), label);
 	}
 }

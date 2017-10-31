@@ -116,17 +116,33 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 	public void normalizeExpressions() {
 		normals = new ArrayList<Expression<T>>();
 		
-		for(Expression<T> ex : expressions) {
-			if(ex.getOperator() == 'c')
-				normals.add((new Expression(new Expression((ExpressionNode)ex.root.children[0]))
-						.negate().or(new Expression((ExpressionNode)ex.root.children[1]))).normalize());
-			else {
-				normals.add((new Expression(new Expression((ExpressionNode)ex.root.children[0]))
-						.negate().or(new Expression((ExpressionNode)ex.root.children[1]))).normalize());
-				normals.add((new Expression(new Expression((ExpressionNode)ex.root.children[0]))
-						.or((new Expression(new Expression((ExpressionNode)ex.root.children[1]))).negate())).normalize());
+		for(Expression<T> e : expressions) {
+
+			Expression ex = e.deepCopy(e);
+			
+			final ExpressionNode right = (ExpressionNode)ex.root.children[1];
+			final ExpressionNode left = (ExpressionNode)ex.root.children[0];
+			
+			if(ex.getOperator() == 'c'){
+				normals.add(normalizeSubset(left,right));
 			}
+			else {
+				Expression ex2 = e.deepCopy(e);
+				
+				final ExpressionNode up = (ExpressionNode)ex2.root.children[1];
+				final ExpressionNode down = (ExpressionNode)ex2.root.children[0];
+				
+				normals.add(normalizeSubset(left,right));
+				normals.add(normalizeSubset(up,down));
+				
+			}
+			
 		}
+	}
+	
+	public Expression normalizeSubset(ExpressionNode left, ExpressionNode right) {
+		left.negate();
+		return new Expression(left.or(right));
 	}
 	
 	@Override

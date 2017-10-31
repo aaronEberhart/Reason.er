@@ -45,7 +45,7 @@ public class Role<T,U> extends Predicate {
 
 	@Override
 	public Predicate clone(Expression e) {
-		return new Role(negated,((Term)terms.get(0)).getValue(),((Term)terms.get(1)).getValue(),label);
+		return new Role(e.negated,((Term)terms.get(0)).getValue(),((Term)terms.get(1)).getValue(),label);
 	}
 	
 	
