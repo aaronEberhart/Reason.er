@@ -2,10 +2,7 @@ package reason.er.Functions;
 
 import java.util.ArrayList;
 
-import reason.er.Objects.Concept;
-import reason.er.Objects.QuantifiedRole;
-import reason.er.Objects.Quantifier;
-import reason.er.Objects.Role;
+import reason.er.Objects.*;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class KnowledgeBase<T extends Expression<T>, U extends Expression<U>> {
@@ -42,10 +39,21 @@ public class KnowledgeBase<T extends Expression<T>, U extends Expression<U>> {
     	
 		TBox<U> tbox = new TBox(new ArrayList<U>());
     	
-    	tbox.addManually(new Expression(new QuantifiedRole(false,1,(long)23,(long)22,(long)19,(long)0,(long)19)).negate().dot(new Quantifier(2),new Role(false,(long)24,(long)23,(long)18),(long)3)
-    			.and(new Concept(false,(long)24,(long)1)).negate().equivalent(new Concept(false,(long)24,(long)2)));
-    	tbox.addManually(new Expression(new QuantifiedRole(false,1,(long)23,(long)22,(long)19,(long)0,(long)19)).negate().dot(new Quantifier(2),new Role(false,(long)24,(long)23,(long)18),(long)3)
-    			.and(new Concept(false,(long)24,(long)1)).negate().superClass(new Concept(false,(long)24,(long)2)));
+    	tbox.addManually(
+    			new Expression(new QuantifiedRole(false,1,Term.getVarIndex('x'),Term.getVarIndex('w'),Predicate.getLabelIndex('R'),Predicate.getLabelIndex('A'),Predicate.getLabelIndex('T')))
+    			.negate()
+    			.dot(new Quantifier(2),new Role(false,Term.getVarIndex('y'),Term.getVarIndex('x'),Predicate.getLabelIndex('S')),Predicate.getLabelIndex('S'))
+    			.and(new Concept(false,Term.getVarIndex('y'),Predicate.getLabelIndex('B')))
+    			.negate()
+    			.equivalent(new Concept(false,Term.getVarIndex('y'),Predicate.getLabelIndex('C'))));
+    	
+    	tbox.addManually(
+    			new Expression(new QuantifiedRole(false,2,Term.getVarIndex('x'),Term.getVarIndex('w'),Predicate.getLabelIndex('R'),Predicate.getLabelIndex('A'),Predicate.getLabelIndex('T')))
+    			.negate()
+    			.dot(new Quantifier(1),new Role(false,Term.getVarIndex('y'),Term.getVarIndex('x'),Predicate.getLabelIndex('S')),Predicate.getLabelIndex('S'))
+    			.and(new Concept(false,Term.getVarIndex('y'),Predicate.getLabelIndex('B')))
+    			.negate()
+    			.superClass(new Concept(false,Term.getVarIndex('y'),Predicate.getLabelIndex('C'))));
     	
     	return new KnowledgeBase(abox,tbox);
     }
