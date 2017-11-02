@@ -78,4 +78,14 @@ public class Term<T> {
     	
     	return s;
     }
+	
+	public static long getVarIndex(char c) {
+    	int i = 0;
+    	for(char x : lowers) {
+    		if(x == c)
+    			return (long)i;
+    		i++;
+    	}
+    	return -1;
+    }
 }

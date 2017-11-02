@@ -2,6 +2,6 @@ K = ( ABox, TBox )
 
 ABox = { R(a,b) }
 
-TBox = { ( --C(y) v --( B(y) ^ FORALL S(y,x).--FORALL T(x,w).A(w) ) ), 
-( C(y) v ( B(y) ^ FORALL S(y,x).--FORALL T(x,w).A(w) ) ), 
-( --C(y) v --( B(y) ^ FORALL S(y,x).--FORALL T(x,w).A(w) ) ) }
+TBox = { ( --C(y) v --( B(y) ^ FORALL S(y,x).--EXISTS R(x,w).A(w) ) ), 
+( C(y) v ( B(y) ^ FORALL S(y,x).--EXISTS R(x,w).A(w) ) ), 
+( --C(y) v --( B(y) ^ EXISTS S(y,x).--FORALL R(x,w).A(w) ) ) }

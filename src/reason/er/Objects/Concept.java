@@ -30,6 +30,19 @@ public class Concept<T> extends Predicate {
     	if(negated)
     		size++;
     }
+	
+	public Concept(boolean hasSign, Term t, long name){
+		
+		this.terms = new ArrayList();
+    	this.terms.add(t);
+    	
+    	this.label = name;
+    	this.scope = name;
+    	this.negated = hasSign;
+    	this.size = 1;
+    	if(negated)
+    		size++;
+    }
 
 	public Term<T> getTerm() {
 		return (Term<T>) this.terms.get(0);
