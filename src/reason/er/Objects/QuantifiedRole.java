@@ -41,9 +41,7 @@ public class QuantifiedRole<T,U> extends Role {
 			this.label = name;
 			this.scope = r.getScope();
 			this.negated = r.isNegated();
-			this.size = c.getSize() + 1;
-			if(negated)
-	    		size++;
+			this.size = 1;
 		}
 	}
 
@@ -63,7 +61,7 @@ public class QuantifiedRole<T,U> extends Role {
 			this.negated = r.isNegated();
 			this.size = c.size + 1;
 			if(negated)
-	    		size++;
+				size++;
 		}
 	}
 	
@@ -123,7 +121,9 @@ public class QuantifiedRole<T,U> extends Role {
 		if(this.isExpression()) {
 			return new ExpressionNode(new QuantifiedRole(new Quantifier(getQuantifier().getInteger()),(Role)terms.get(0),((ExpressionNode)e).getChild(0),label),(ExpressionNode)((ExpressionNode)e).getChild(0));
 		}
-		return new QuantifiedRole(negated,this.getQuantifier().getInteger(),(T)((Role)terms.get(0)).getTerm(0).getValue(),(U)((Role)terms.get(0)).getTerm(1).getValue(),
+		QuantifiedRole qr = new QuantifiedRole(negated,this.getQuantifier().getInteger(),(T)((Role)terms.get(0)).getTerm(0).getValue(),(U)((Role)terms.get(0)).getTerm(1).getValue(),
 				((Role)terms.get(0)).label,((Concept)terms.get(1)).label,label);
+		qr.setSize(this.getSize());
+		return qr;
 	}
 }

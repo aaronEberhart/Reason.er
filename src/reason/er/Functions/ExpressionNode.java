@@ -2,16 +2,15 @@ package reason.er.Functions;
 
 import reason.er.Objects.*;
 
-@SuppressWarnings({"rawtypes","unused"})
+@SuppressWarnings({"rawtypes","unused","unchecked"})
 public class ExpressionNode extends Expression{
 	
-	protected char operator;
-	
+	protected char operator;	
 	public Predicate leaf;
 	protected Expression[] children;
 			
 	
-	private ExpressionNode() {
+	public ExpressionNode() {
 	}
 
 	public ExpressionNode(Predicate p) {
@@ -26,7 +25,7 @@ public class ExpressionNode extends Expression{
 		negated = qr.isNegated();
 		children = new Expression[1];
 		children[0] = subTree;
-		size = subTree.getSize();
+		size = subTree.getSize() + 1;
 	}
 	
 	public ExpressionNode(char o, ExpressionNode n1, ExpressionNode n2) {
