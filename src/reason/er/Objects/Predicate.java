@@ -13,8 +13,7 @@ import reason.er.Functions.*;
  */
 public abstract class Predicate<T> {
 
-	public static final char[] uppers = {'A','B','C','D','E','F','G','H','I','J','K','L','M',
-										 'N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+	public static final char[] uppers = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 	protected int size;
 	protected ArrayList<Term<T>> terms;
     protected long scope;
@@ -71,15 +70,5 @@ public abstract class Predicate<T> {
     	}while(count-- > 0);
     	
     	return s;
-    }
-
-    public static long getLabelIndex(char c) {
-    	int i = 0;
-    	for(char x : uppers) {
-    		if(x == c)
-    			return (long)i;
-    		i++;
-    	}
-    	return -1;
     }
 }

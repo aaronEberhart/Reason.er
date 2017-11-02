@@ -3,7 +3,7 @@ package reason.er.Objects;
 import java.util.ArrayList;
 
 import reason.er.ReasonEr;
-import reason.er.Functions.*;;
+import reason.er.Functions.Expression;
 
 @SuppressWarnings({"rawtypes","unchecked"})
 public class QuantifiedRole<T,U> extends Role {
@@ -35,7 +35,7 @@ public class QuantifiedRole<T,U> extends Role {
 		if(canQuantify(q,r,null,c)) {
 			this.terms = new ArrayList();
 			this.terms.add(r);
-			this.terms.add(new Concept<U>(false,new Term(r.getTerm(1)), name));
+			this.terms.add(c);
 			this.terms.add(q);
 			
 			this.label = name;
@@ -115,15 +115,15 @@ public class QuantifiedRole<T,U> extends Role {
 	}
 
 	public Quantifier getQuantifier() {
-		return ((Quantifier)this.terms.get(2));
+		return (Quantifier)this.terms.get(2);
 	}
 
 	
 	public Predicate clone(Expression e) {
 		if(this.isExpression()) {
-			return new ExpressionNode(new QuantifiedRole(new Quantifier(getQuantifier().getInteger()),(Role)terms.get(0),((ExpressionNode)e).getChild(0),label),(ExpressionNode)((ExpressionNode)e).getChild(0));
+			return new QuantifiedRole(getQuantifier(),(Role)terms.get(0),e.getChild(0),label);
 		}
-		return new QuantifiedRole(negated,this.getQuantifier().getInteger(),(T)((Role)terms.get(0)).getTerm(0).getValue(),(U)((Role)terms.get(0)).getTerm(1).getValue(),
+		return new QuantifiedRole(negated,Quantifier.getQuantifier().ordinal(),(T)((Role)terms.get(0)).getTerm(0).getValue(),(U)((Role)terms.get(0)).getTerm(1).getValue(),
 				((Role)terms.get(0)).label,((Concept)terms.get(1)).label,label);
 	}
 }

@@ -10,28 +10,35 @@ package reason.er.Objects;
  */
 public class Quantifier {
     
-	private int quantifier;
+	public enum Quant { 
+		NONE, EXISTS, FORALL; 
+		public String toString() {
+			return name().charAt(0) + name().substring(1).toLowerCase();
+		}
+	};
+	
+	private static Quant quantifier;
 	
 	public Quantifier(int i) {
-		quantifier = i;
+		setQuantifier(i);
 	}
 	
 	public void setQuantifier(int i) {
-		quantifier = i;
+		if(i == 1) {
+			Quantifier.quantifier = Quant.EXISTS;
+		}else if(i == 2) {
+			Quantifier.quantifier = Quant.FORALL;
+		}else {
+			Quantifier.quantifier = Quant.NONE;
+		}
 	}
 	
-	public int getInteger() {
+	public static Quant getQuantifier() {
 		return quantifier;
 	}
 
 	public String toString() {
-		if(quantifier == 1) {
-			return "EXISTS";
-		}else if(quantifier == 2) {
-			return "FORALL";
-		}else {
-			return "NONE";
-		}
+		return quantifier.name();
 	}
 
 }
