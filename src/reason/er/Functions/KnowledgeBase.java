@@ -35,12 +35,12 @@ public class KnowledgeBase<T extends Expression<T>, U extends Expression<U>> {
     	
 		ABox<T> abox = new ABox(new ArrayList<T>());
     	
-    	abox.addManually(new Expression(new Role(false,(long)0,(long)1,(long)17)));
+    	abox.addManually(new ExpressionNode(new Role(false,(long)0,(long)1,(long)17)));
     	
 		TBox<U> tbox = new TBox(new ArrayList<U>());
     	
     	tbox.addManually(
-    			new Expression(new QuantifiedRole(false,1,Term.getVarIndex('x'),Term.getVarIndex('w'),Predicate.getLabelIndex('R'),Predicate.getLabelIndex('A'),Predicate.getLabelIndex('T')))
+    			(ExpressionNode)new ExpressionNode(new QuantifiedRole(false,true,1,Term.getVarIndex('x'),Term.getVarIndex('w'),Predicate.getLabelIndex('R'),Predicate.getLabelIndex('A'),Predicate.getLabelIndex('T')))
     			.negate()
     			.dot(new Quantifier(2),new Role(false,Term.getVarIndex('y'),Term.getVarIndex('x'),Predicate.getLabelIndex('S')),Predicate.getLabelIndex('S'))
     			.and(new Concept(false,Term.getVarIndex('y'),Predicate.getLabelIndex('B')))
@@ -48,11 +48,11 @@ public class KnowledgeBase<T extends Expression<T>, U extends Expression<U>> {
     			.equivalent(new Concept(false,Term.getVarIndex('y'),Predicate.getLabelIndex('C'))));
     	
     	tbox.addManually(
-    			new Expression(new QuantifiedRole(false,2,Term.getVarIndex('x'),Term.getVarIndex('w'),Predicate.getLabelIndex('R'),Predicate.getLabelIndex('A'),Predicate.getLabelIndex('T')))
+    			(ExpressionNode)new ExpressionNode(new QuantifiedRole(false,false,2,Term.getVarIndex('x'),Term.getVarIndex('w'),Predicate.getLabelIndex('R'),Predicate.getLabelIndex('A'),Predicate.getLabelIndex('T')))
     			.negate()
     			.dot(new Quantifier(1),new Role(false,Term.getVarIndex('y'),Term.getVarIndex('x'),Predicate.getLabelIndex('S')),Predicate.getLabelIndex('S'))
     			.and(new Concept(false,Term.getVarIndex('y'),Predicate.getLabelIndex('B')))
-    			.negate()
+    			//.negate()
     			.superClass(new Concept(false,Term.getVarIndex('y'),Predicate.getLabelIndex('C'))));
     	
     	return new KnowledgeBase(abox,tbox);

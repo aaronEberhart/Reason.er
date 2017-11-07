@@ -113,16 +113,20 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 			
 		//make the first term
 		Expression<T> expression = new Expression<T>(newPredicate(randInt));
+		ExpressionNode builder = expression.root;
 		scope = expression.getScope();
+		
 		
 		//loop until ground and complete
 		while(!complete && !constants) {
-			transform(rand.nextInt(7),expression);
+			transform(rand.nextInt(7),builder);
 			if(oneMoreTime) {
-				transform(rand.nextInt(5),expression);
+				transform(rand.nextInt(5),builder);
 				oneMoreTime = rand.nextBoolean();
-				complete = true;
+				builder.complete = true;
 			}
+			if(builder.complete)
+				expression.complete = true;
 		}
 		
 		//reset variable stuff
@@ -152,7 +156,7 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 			counters[0] = (counters[0] + 1) % universe;
 		}
 		else if(randInt == 1) {
-			p = new QuantifiedRole(negated,rand.nextInt(2) + 1,constants||oneMoreTime?counters[1]:counters[3],constants||oneMoreTime?counters[3]:counters[3]-1,counters[2] + universe,counters[0],counters[0]);
+			p = new QuantifiedRole(negated,rand.nextBoolean(),rand.nextInt(2) + 1,constants||oneMoreTime?counters[1]:counters[3],constants||oneMoreTime?counters[3]:counters[3]-1,counters[2] + universe,counters[0],counters[0]);
 			counters[0] = (counters[0] + 1) % universe;
 			counters[2] = (counters[2] + 1) % universe;
 		}

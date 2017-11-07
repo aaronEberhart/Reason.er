@@ -23,6 +23,15 @@ public class Quantifier {
 	public int getInteger() {
 		return quantifier;
 	}
+	
+	public void flipQuantifier() {
+		if(quantifier == 1) {
+			quantifier = 2;
+		}
+		else if(quantifier == 2){
+			quantifier = 1;
+		}
+	}
 
 	public String toString() {
 		if(quantifier == 1) {

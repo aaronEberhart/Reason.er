@@ -39,8 +39,13 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 		Expression<T> expression = new Expression<T>(newPredicate(rand.nextInt(2)));
 		scope = expression.getScope();
 		
+		ExpressionNode builder = expression.root;
+		
 		while(!expression.isComplete()) {
-			transform(rand.nextInt(11), expression);
+			builder = transform(rand.nextInt(11), builder);
+			expression.root = builder;
+			if(builder.complete)
+				expression.complete = true;
 		}
 		scope = variables + 1;
 		counters[0] = (counters[0] + 1) % universe;
@@ -48,7 +53,7 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 		return expression;
 	}
 
-	protected void transform(int randInt, Expression<T> expression) {
+	protected ExpressionNode transform(int randInt, ExpressionNode expression) {
 
 		if(scope == 25)
 			randInt = rand.nextInt(4) + 4;
@@ -57,34 +62,36 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 		switch(randInt) {
 			case 0:
 			case 1:
-				expression.and(newPredicate(randInt));
+				expression = (ExpressionNode)expression.and(newPredicate(randInt));
 				break;
 			case 2:
 			case 3:
-				expression.or(newPredicate(randInt % 2));
+				expression = (ExpressionNode)expression.or(newPredicate(randInt % 2));
 				break;
 			case 4:
 			case 5:
-				expression.superClass(new Concept(false,counters[1],counters[0]));
+				expression = (ExpressionNode)expression.superClass(new Concept(false,counters[1],counters[0]));
 				break;
 			case 6:
 			case 7:
-				expression.equivalent(new Concept(false,counters[1],counters[0]));
+				expression = (ExpressionNode)expression.equivalent(new Concept(false,counters[1],counters[0]));
 				break;
 			case 8:
-				expression.dot(new Quantifier(1), (Role)newPredicate(randInt), counters[2] + universe);
+				expression = (ExpressionNode)expression.dot(new Quantifier(1), (Role)newPredicate(randInt), counters[2] + universe);
 				break;
 			case 9:
-				expression.dot(new Quantifier(2), (Role)newPredicate(randInt), counters[2] + universe);
+				expression = (ExpressionNode)expression.dot(new Quantifier(2), (Role)newPredicate(randInt), counters[2] + universe);
 				break;
 			default:
-				expression.negate();
+				expression = (ExpressionNode)expression.negate();
 				break;
 		}
 		if(randInt > 3 && randInt < 10 && expression.getSize() > size) {
 			scope = counters[1];
 			expression.setScope(scope);
 		}
+		
+		return expression;
 	}
 	
 	@Override
@@ -96,7 +103,7 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 			counters[0] = (counters[0] + 1) % universe;
 		}
 		else if(randInt == 1) {
-			p = new QuantifiedRole(negated,rand.nextInt(2) + 1,counters[1],counters[1]-1,counters[2] + universe,counters[0],counters[0]);
+			p = new QuantifiedRole(negated,rand.nextBoolean(),rand.nextInt(2) + 1,counters[1],counters[1]-1,counters[2] + universe,counters[0],counters[0]);
 			counters[0] = (counters[0] + 1) % universe;
 			counters[2] = (counters[2] + 1) % universe;
 		}
@@ -113,7 +120,7 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 	
 	@Override
 	public void normalizeExpressions() {
-		normals = new ArrayList<Expression<T>>();
+		ArrayList normals = new ArrayList<Expression<T>>();
 		
 		for(Expression<T> e : expressions) {
 
@@ -123,7 +130,8 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 			final ExpressionNode left = (ExpressionNode)ex.root.children[0];
 			
 			if(ex.getOperator() == 'c'){
-				normals.add(new Expression(normalizeSubset(left,right)));
+				normals.add(
+						(new Expression(normalizeSubset(left,right))));
 			}
 			else {
 				Expression ex2 = e.deepCopy(e);
@@ -131,12 +139,15 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 				final ExpressionNode up = (ExpressionNode)ex2.root.children[1];
 				final ExpressionNode down = (ExpressionNode)ex2.root.children[0];
 				
-				normals.add(new Expression(normalizeSubset(left,right)));
-				normals.add(new Expression(normalizeSubset(up,down)));
+				normals.add(
+						(new Expression(normalizeSubset(left,right))));
+				normals.add(
+						(new Expression(normalizeSubset(up,down))));
 				
 			}
-			
 		}
+		
+		this.normalized = new Normals(normals);
 	}
 	
 	public Expression normalizeSubset(ExpressionNode left, ExpressionNode right) {

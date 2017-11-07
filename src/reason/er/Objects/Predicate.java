@@ -62,6 +62,10 @@ public abstract class Predicate<T> {
     	size = i;
     }
     
+    public long getLabel() {
+    	return label;
+    }
+    
     protected String makeLabel(long count) {
     	String s = "";
     	

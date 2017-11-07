@@ -10,13 +10,13 @@ public class QuantifiedRole<T,U> extends Role {
 
 	public QuantifiedRole() {}
 	
-	public QuantifiedRole(boolean hasSign, int i, T t, U u, long name1, long name2, long name3) {
+	public QuantifiedRole(boolean hasSign,boolean conceptNegated, int i, T t, U u, long name1, long name2, long name3) {
 		
 		this.terms = new ArrayList();
 		
 		Quantifier q = new Quantifier(i);
 		Role<T,U> r = new Role<T,U>(false,t,u, name1);
-		Concept<U> s = new Concept<U>(false,u, name2);
+		Concept<U> s = new Concept<U>(conceptNegated,u, name2);
     	
 		this.terms.add(r);
 		this.terms.add(s);
@@ -35,7 +35,7 @@ public class QuantifiedRole<T,U> extends Role {
 		if(canQuantify(q,r,null,c)) {
 			this.terms = new ArrayList();
 			this.terms.add(r);
-			this.terms.add(new Concept<U>(false,new Term(r.getTerm(1)), name));
+			this.terms.add(new Concept<U>(c.negated,new Term(r.getTerm(1)), name));
 			this.terms.add(q);
 			
 			this.label = name;
@@ -66,7 +66,7 @@ public class QuantifiedRole<T,U> extends Role {
 	}
 	
 	public static boolean canQuantify(Quantifier q, Role r,  Concept c, Expression d) {
-		if(d == null && (!r.getTerm(1).getValue().equals(c.getScope()) || (r.isNegated() || c.isNegated()))) {
+		if(d == null && (!r.getTerm(1).getValue().equals(c.getScope()) || r.isNegated() )){// || //c.isNegated()) {)) {
 			try {
 				throw ReasonEr.expression;
 			} catch (Exception e) {
@@ -86,11 +86,6 @@ public class QuantifiedRole<T,U> extends Role {
 		return true;
 	}
 	
-	@Override
-	public boolean isRole() {
-		return false;
-	}
-
 	public String toString() {
 		String s = "";
     	if(negated)
@@ -116,12 +111,16 @@ public class QuantifiedRole<T,U> extends Role {
 		return ((Quantifier)this.terms.get(2));
 	}
 
+	@Override
+	public boolean isRole() {
+		return false;
+	}
 	
 	public Predicate clone(Expression e) {
 		if(this.isExpression()) {
 			return new ExpressionNode(new QuantifiedRole(new Quantifier(getQuantifier().getInteger()),(Role)terms.get(0),((ExpressionNode)e).getChild(0),label),(ExpressionNode)((ExpressionNode)e).getChild(0));
 		}
-		QuantifiedRole qr = new QuantifiedRole(negated,this.getQuantifier().getInteger(),(T)((Role)terms.get(0)).getTerm(0).getValue(),(U)((Role)terms.get(0)).getTerm(1).getValue(),
+		QuantifiedRole qr = new QuantifiedRole(negated,getConcept().negated,this.getQuantifier().getInteger(),(T)((Role)terms.get(0)).getTerm(0).getValue(),(U)((Role)terms.get(0)).getTerm(1).getValue(),
 				((Role)terms.get(0)).label,((Concept)terms.get(1)).label,label);
 		qr.setSize(this.getSize());
 		return qr;

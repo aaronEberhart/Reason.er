@@ -21,10 +21,10 @@ public class ReasonEr {
 	
 	public static void main(String[] args) {
 		
-    	KnowledgeBase kb = KnowledgeBase.makeTestKnowledgeBase();
+    	KnowledgeBase kb = new KnowledgeBase(0,99);//KnowledgeBase.makeTestKnowledgeBase();//
     	
-    	System.out.println(kb.toString());
-    	toFile("knowledgeBase.txt",kb.toString());
+//    	System.out.println(kb.toString());
+//    	toFile("knowledgeBase.txt",kb.toString());
     	
     	kb.normalize();
     	

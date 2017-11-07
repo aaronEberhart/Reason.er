@@ -13,17 +13,13 @@ public abstract class Box<T extends Expression<T>> {
 	protected Random rand;
 	
 	protected ArrayList<Expression<T>> expressions;
-	protected ArrayList<Expression<T>> normals;
+	protected Normals<T> normalized;
 
 	protected abstract Expression<T> makeExpression();
 	protected abstract Predicate<T> newPredicate(int randInt);
 	
 	public void normalizeExpressions() {
-		normals = new ArrayList<Expression<T>>();
-		
-		for(Expression<T> ex : expressions) {
-			normals.add(ex.normalize());
-		}
+		normalized = new Normals<T>(expressions);
 	}
 	
 	protected void makeBox(int size) {
@@ -40,8 +36,8 @@ public abstract class Box<T extends Expression<T>> {
 		}
 	}
 
-	public void addManually(Expression<T> e) {
-		expressions.add(e);
+	public void addManually(ExpressionNode e) {
+		expressions.add(new Expression<T>(e));
 	}
 	
     public int getNumVars() {
@@ -53,19 +49,19 @@ public abstract class Box<T extends Expression<T>> {
     	String s = "{ ";
     	if(expressions.size() == 0) {
     		s = s + "NULL";
-    	}else {
-    		if(normals != null) {
-		    	for(int i = 0; i < normals.size(); i++) {
-		    		s = s + normals.get(i).toString();
-		    		if( i < normals.size() - 1)
-		    			s = s + ", \n";
-		    	}
-    		}else {
-    			for(int i = 0; i < expressions.size(); i++) {
-		    		s = s + expressions.get(i).toString();
-		    		if( i < expressions.size() - 1)
-		    			s = s + ", \n";
-		    	}
+    	}else {	
+    		int j = 0;;
+    		for(int i = 0; i < expressions.size(); i++) {    			
+		   		s = s + "Expression :" + expressions.get(i).toString() + ",";
+		   		if(normalized != null) {
+	    			s = s + "\nNormal: " + normalized.getFromExpressionIndex(j).toString() + ",";
+	    			if(expressions.get(i).root.operator == '=') {
+	    				j++;
+	    				s = s + "\nNormal: " + normalized.getFromExpressionIndex(j).toString() + ",";
+	    			}
+	    			j++;
+		   		}
+		   		s = s + "\n\n";
     		}
     	}
     	return s + " }";
