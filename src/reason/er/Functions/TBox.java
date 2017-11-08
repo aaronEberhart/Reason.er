@@ -62,28 +62,28 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 		switch(randInt) {
 			case 0:
 			case 1:
-				expression = (ExpressionNode)expression.and(newPredicate(randInt));
+				expression = expression.and(newPredicate(randInt));
 				break;
 			case 2:
 			case 3:
-				expression = (ExpressionNode)expression.or(newPredicate(randInt % 2));
+				expression = expression.or(newPredicate(randInt % 2));
 				break;
 			case 4:
 			case 5:
-				expression = (ExpressionNode)expression.superClass(new Concept(false,counters[1],counters[0]));
+				expression = expression.superClass(new Concept(false,counters[1],counters[0]));
 				break;
 			case 6:
 			case 7:
-				expression = (ExpressionNode)expression.equivalent(new Concept(false,counters[1],counters[0]));
+				expression = expression.equivalent(new Concept(false,counters[1],counters[0]));
 				break;
 			case 8:
-				expression = (ExpressionNode)expression.dot(new Quantifier(1), (Role)newPredicate(randInt), counters[2] + universe);
+				expression = expression.dot(new Quantifier(1), (Role)newPredicate(randInt), counters[2] + universe);
 				break;
 			case 9:
-				expression = (ExpressionNode)expression.dot(new Quantifier(2), (Role)newPredicate(randInt), counters[2] + universe);
+				expression = expression.dot(new Quantifier(2), (Role)newPredicate(randInt), counters[2] + universe);
 				break;
 			default:
-				expression = (ExpressionNode)expression.negate();
+				expression = expression.negate();
 				break;
 		}
 		if(randInt > 3 && randInt < 10 && expression.getSize() > size) {

@@ -42,13 +42,15 @@ public class Normals <T extends Expression<T>>{
 	}
 
 	public ExpressionNode negateQuantifier(ExpressionNode here){
-		System.out.println(here);
+		//TODO complex expressions
 		here.negate();
 		((QuantifiedRole)here.leaf).getQuantifier().flipQuantifier();
 		((QuantifiedRole)here.leaf).getConcept().negate();
+		if(here.numChildren() <= 1 && here.children[0].leaf != null) {
+			here.children[0].negate();
+		}
 		here.children[0] = normalizeTree(here.children[0]);
 		((QuantifiedRole)here.leaf).setSize(here.children[0].getSize() + 1);
-		System.out.println(here);
 		return here;
 	}
 
@@ -61,8 +63,19 @@ public class Normals <T extends Expression<T>>{
 	
 	public ExpressionNode normalizeTree(ExpressionNode here) {
 		
-		if(here.isLeaf() && here.leaf.getClass().equals(ExpressionNode.class)) {
-			return normalizeTree((ExpressionNode)here.leaf);
+		if(here.numChildren() == 1 && here.children[0].numChildren() == 2 && here.isNegated()) {
+			here.negate();
+			((QuantifiedRole)here.leaf).getQuantifier().flipQuantifier();
+			here.children[0].negate();
+			here.children[0] = normalizeTree(here.children[0]);
+			((QuantifiedRole)here.leaf).setSize(((QuantifiedRole)here.leaf).getConcept().getSize() + ((QuantifiedRole)here.leaf).getRole().getSize());
+			here.setSize(((QuantifiedRole)here.leaf).getSize());
+			return here;
+		}
+		else if(here.isLeaf() && here.leaf.getClass().equals(ExpressionNode.class)) {
+			here= (ExpressionNode)here.leaf;
+			here = normalizeTree(here);
+			return here;
 		}
 		else if (here.isLeaf() && !(here.leaf.getClass().equals(QuantifiedRole.class) && here.isNegated())) {
 			return here;

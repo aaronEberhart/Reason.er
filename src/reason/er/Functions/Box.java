@@ -51,9 +51,12 @@ public abstract class Box<T extends Expression<T>> {
     		s = s + "NULL";
     	}else {	
     		int j = 0;;
-    		for(int i = 0; i < expressions.size(); i++) {    			
-		   		s = s + "Expression :" + expressions.get(i).toString() + ",";
-		   		if(normalized != null) {
+    		for(int i = 0; i < expressions.size(); i++) {  
+    			if(normalized == null) {
+    				s = s + expressions.get(i).toString() + ",";
+    			}
+    			else {
+    				s = s + "Expression :" + expressions.get(i).toString() + ",";		   		
 	    			s = s + "\nNormal: " + normalized.getFromExpressionIndex(j).toString() + ",";
 	    			if(expressions.get(i).root.operator == '=') {
 	    				j++;

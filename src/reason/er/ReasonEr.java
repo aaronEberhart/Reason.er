@@ -21,17 +21,21 @@ public class ReasonEr {
 	
 	public static void main(String[] args) {
 		
-    	KnowledgeBase kb = new KnowledgeBase(0,99);//KnowledgeBase.makeTestKnowledgeBase();//
+		System.out.println("Making Things");
+		
+    	KnowledgeBase kb = new KnowledgeBase(999,0);//KnowledgeBase.makeTestKnowledgeBase();//
     	
 //    	System.out.println(kb.toString());
-//    	toFile("knowledgeBase.txt",kb.toString());
+    	toFile("knowledgeBase.txt",kb.toString());
     	
-    	kb.normalize();
+//    	System.out.println("Normalizing Things");
+//    	
+//    	kb.normalize();
+//    	
+//    	System.out.println(kb.toString());
+//    	toFile("normalizedKnowledgeBase.txt",kb.toString());
     	
-    	System.out.println(kb.toString());
-    	toFile("normalizedKnowledgeBase.txt",kb.toString());
-    	
-    	System.out.println("DONE");
+    	System.out.println("\nThings Are Done");
     }
     
     public static void toFile(String filename, String text) {

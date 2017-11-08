@@ -43,7 +43,7 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		expressions = e;
 	}
 	
-	protected void transform(int randInt, Expression<T> expression) {
+	protected void transform(int randInt, ExpressionNode expression) {
 
 		//juggle the booleans
 		constants = constants?true:weightedBool(rand);
