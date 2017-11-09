@@ -18,9 +18,7 @@ public abstract class Box<T extends Expression<T>> {
 	protected abstract Expression<T> makeExpression();
 	protected abstract Predicate<T> newPredicate(int randInt);
 	
-	public void normalizeExpressions() {
-		normalized = new Normals<T>(expressions);
-	}
+	public abstract void normalizeExpressions();
 	
 	protected void makeBox(int size) {
 		expressions = new ArrayList<Expression<T>>();

@@ -7,18 +7,14 @@ import reason.er.Objects.*;
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class ABox<T extends Expression<T>> extends Box<T> {
 
-	private boolean constants,complete, oneMoreTime;
+	private boolean constants,complete;
 	
 	public ABox(int size) {
 		
 		rand = new Random(System.currentTimeMillis());
 
 		constants = weightedBool(rand);
-		
-		if(constants)
-			complete = weightedBool(rand);
-		else
-			complete = false;
+		complete = false;
 		
 		universe = Predicate.uppers.length / 2;
 		variables = Term.lowers.length / 2;
@@ -43,17 +39,15 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		expressions = e;
 	}
 	
-	protected void transform(int randInt, ExpressionNode expression) {
+	protected ExpressionNode transform(int randInt, ExpressionNode expression) {
 
 		//juggle the booleans
-		constants = constants?true:weightedBool(rand);
-		if(constants && !oneMoreTime) {
-			complete = complete?true:weightedBool(rand);
+		if(constants && !complete && expression.getScope() <= variables) {
+			//complete = scope <= variables ? weightedBool(rand) : false;
 			randInt = (randInt % 2) + 5;
 		}
-		else {
-			complete = false;
-			randInt = randInt % 5;
+		else if(constants && !complete) {
+			expression.complete = weightedBool(rand);
 		}
 		
 		//just in case
@@ -70,20 +64,22 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		switch(randInt) {
 			case 0:
 			case 1:
-				expression.and(newPredicate(randInt));
+				expression = expression.and(newPredicate(randInt));
 				break;
 			case 2:
 			case 3:
-				expression.or(newPredicate(randInt % 2));
+				expression = expression.or(newPredicate(randInt % 2));
 				break;
 			case 4:
-				expression.negate();
+				expression = expression.negate();
 				break;
 			case 5:
-				expression.dot(new Quantifier(1), (Role)newPredicate(2), counters[2] + universe);
+				expression = expression.dot(new Quantifier(1), (Role)newPredicate(2), counters[2] + universe);
+				constants = true;
 				break;
 			default:
-				expression.dot(new Quantifier(2), (Role)newPredicate(2), counters[2] + universe);
+				expression = expression.dot(new Quantifier(2), (Role)newPredicate(2), counters[2] + universe);
+				constants = true;
 				break;
 			
 			
@@ -93,6 +89,7 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 			expression.setScope(scope);
 		}		
 		
+		return expression;
 	}
 	
 	@Override
@@ -100,15 +97,12 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		
 		//initialize rand
 		rand = new Random(System.currentTimeMillis());
-		
+				
 		int randInt = rand.nextInt(3);
 		if (randInt == 2) {//if it decided to make a Role
 			randInt++;
 			constants = true;
 			complete = false;
-		}
-		else if(constants) {
-			oneMoreTime = rand.nextBoolean();
 		}
 			
 		//make the first term
@@ -116,17 +110,16 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		ExpressionNode builder = expression.root;
 		scope = expression.getScope();
 		
-		
 		//loop until ground and complete
 		while(!complete && !constants) {
-			transform(rand.nextInt(7),builder);
-			if(oneMoreTime) {
-				transform(rand.nextInt(5),builder);
-				oneMoreTime = rand.nextBoolean();
-				builder.complete = true;
-			}
-			if(builder.complete)
+			
+			builder = transform(rand.nextInt(7),builder);
+			expression.root = builder;
+			
+			if(builder.complete) {
 				expression.complete = true;
+				complete = true;
+			}
 		}
 		
 		//reset variable stuff
@@ -136,12 +129,7 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		this.counters[3] = variables + 1;
 				
 		constants = weightedBool(rand);
-		if(constants)
-			complete = weightedBool(rand);
-		else
-			complete = false;
-		
-		oneMoreTime = rand.nextBoolean();
+		complete = false;
 		
 		return expression;
 	}
@@ -152,11 +140,11 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		Predicate p;
 		
 		if(randInt == 0) {
-			p = new Concept(negated,constants||oneMoreTime?counters[1]:counters[3],counters[0]);
+			p = new Concept(negated,constants?counters[1]:counters[3],counters[0]);
 			counters[0] = (counters[0] + 1) % universe;
 		}
 		else if(randInt == 1) {
-			p = new QuantifiedRole(negated,rand.nextBoolean(),rand.nextInt(2) + 1,constants||oneMoreTime?counters[1]:counters[3],constants||oneMoreTime?counters[3]:counters[3]-1,counters[2] + universe,counters[0],counters[0]);
+			p = new QuantifiedRole(negated,rand.nextBoolean(),rand.nextInt(2) + 1,constants?counters[1]:counters[3],constants?counters[3]:counters[3]-1,counters[2] + universe,counters[0],counters[0]);
 			counters[0] = (counters[0] + 1) % universe;
 			counters[2] = (counters[2] + 1) % universe;
 		}
@@ -171,7 +159,7 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		}
 		else {
 			p = new Role(negated,counters[1],(long)(rand.nextInt(10000) % variables),counters[2] + universe);
-			complete = true;
+			//complete = true;
 		}
 				
 		return p;
@@ -182,9 +170,22 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 	}
 	
 	@Override
+	public void normalizeExpressions() {
+		
+		ArrayList normals = new ArrayList<Expression<T>>();
+		
+		for(Expression<T> e : expressions) {
+			normals.add(e.deepCopy(e));			
+		}
+		
+		this.normalized = new Normals(normals);
+		
+	}
+	
+	@Override
 	public String toString() {
 		return "ABox = " + super.toString();
 	}
 
-
+	
 }

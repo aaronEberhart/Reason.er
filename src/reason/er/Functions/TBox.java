@@ -42,8 +42,10 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 		ExpressionNode builder = expression.root;
 		
 		while(!expression.isComplete()) {
+			
 			builder = transform(rand.nextInt(11), builder);
 			expression.root = builder;
+			
 			if(builder.complete)
 				expression.complete = true;
 		}

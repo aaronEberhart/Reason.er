@@ -1,302 +1,645 @@
 K = ( ABox, TBox )
 
-ABox = { Expression :--M(g),
-Normal: --M(g),
+ABox = { Expression :--A(h),
+Normal: --A(h),
 
-Expression :EXISTS Y(e,o).--I(o),
-Normal: EXISTS Y(e,o).--I(o),
+Expression :EXISTS O(h,o).L(o),
+Normal: EXISTS O(h,o).L(o),
 
-Expression :--T(k,g),
-Normal: --T(k,g),
+Expression :--R(j,j),
+Normal: --R(j,j),
 
-Expression :--W(d,d),
-Normal: --W(d,d),
+Expression :FORALL R(j,o).--I(o),
+Normal: FORALL R(j,o).--I(o),
 
-Expression :EXISTS Z(i,o).--H(o),
-Normal: EXISTS Z(i,o).--H(o),
+Expression :P(a,b),
+Normal: P(a,b),
 
-Expression :P(b,i),
-Normal: P(b,i),
+Expression :--I(e),
+Normal: --I(e),
 
-Expression :--K(l),
-Normal: --K(l),
+Expression :W(k,d),
+Normal: W(k,d),
 
-Expression :--L(k),
-Normal: --L(k),
+Expression :FORALL O(d,o).I(o),
+Normal: FORALL O(d,o).I(o),
 
-Expression :FORALL V(i,o).--F(o),
-Normal: FORALL V(i,o).--F(o),
+Expression :Y(e,i),
+Normal: Y(e,i),
 
-Expression :--J(b),
-Normal: --J(b),
+Expression :J(m),
+Normal: J(m),
 
-Expression :EXISTS R(l,o).--L(o),
-Normal: EXISTS R(l,o).--L(o),
+Expression :--FORALL Y(a,o).F(o),
+Normal: EXISTS Y(a,o).--F(o),
 
-Expression :--L(a),
-Normal: --L(a),
+Expression :--O(i,e),
+Normal: --O(i,e),
 
-Expression :K(l),
-Normal: K(l),
+Expression :X(m,b),
+Normal: X(m,b),
 
-Expression :EXISTS N(a,o).--I(o),
-Normal: EXISTS N(a,o).--I(o),
+Expression :--G(h),
+Normal: --G(h),
 
-Expression :G(g),
-Normal: G(g),
+Expression :--FORALL O(a,o).I(o),
+Normal: EXISTS O(a,o).--I(o),
 
-Expression :FORALL U(h,o).--J(o),
-Normal: FORALL U(h,o).--J(o),
+Expression :--M(l),
+Normal: --M(l),
 
-Expression :--B(l),
-Normal: --B(l),
+Expression :E(l),
+Normal: E(l),
 
-Expression :EXISTS V(h,o).K(o),
-Normal: EXISTS V(h,o).K(o),
+Expression :FORALL W(k,o).M(o),
+Normal: FORALL W(k,o).M(o),
 
-Expression :--R(d,c),
-Normal: --R(d,c),
+Expression :--EXISTS Q(m,o).H(o),
+Normal: FORALL Q(m,o).--H(o),
 
-Expression :--K(b),
-Normal: --K(b),
+Expression :--Y(g,b),
+Normal: --Y(g,b),
 
-Expression :FORALL Q(o,n).K(n),
-Normal: FORALL Q(o,n).K(n),
+Expression :FORALL Z(c,o).--I(o),
+Normal: FORALL Z(c,o).--I(o),
 
-Expression :--T(d,c),
-Normal: --T(d,c),
+Expression :--U(f,b),
+Normal: --U(f,b),
 
-Expression :X(d,h),
-Normal: X(d,h),
+Expression :--H(l),
+Normal: --H(l),
 
-Expression :FORALL U(f,o).--K(o),
-Normal: FORALL U(f,o).--K(o),
+Expression :--FORALL P(b,o).--A(o),
+Normal: EXISTS P(b,o).A(o),
 
-Expression :--S(l,m),
-Normal: --S(l,m),
+Expression :--N(d,b),
+Normal: --N(d,b),
 
-Expression :FORALL U(k,o).--M(o),
-Normal: FORALL U(k,o).--M(o),
-
-Expression :--S(b,l),
-Normal: --S(b,l),
-
-Expression :--M(m),
-Normal: --M(m),
-
-Expression :FORALL N(j,o).C(o),
-Normal: FORALL N(j,o).C(o),
-
-Expression :--L(e),
-Normal: --L(e),
-
-Expression :EXISTS Q(m,o).--K(o),
-Normal: EXISTS Q(m,o).--K(o),
-
-Expression :L(h),
-Normal: L(h),
-
-Expression :--K(b),
-Normal: --K(b),
-
-Expression :EXISTS X(g,o).L(o),
-Normal: EXISTS X(g,o).L(o),
-
-Expression :--H(j),
-Normal: --H(j),
-
-Expression :FORALL O(a,o).J(o),
-Normal: FORALL O(a,o).J(o),
-
-Expression :R(b,k),
-Normal: R(b,k),
-
-Expression :--K(f),
-Normal: --K(f),
-
-Expression :M(b),
-Normal: M(b),
-
-Expression :EXISTS O(d,o).L(o),
-Normal: EXISTS O(d,o).L(o),
-
-Expression :--D(c),
-Normal: --D(c),
-
-Expression :EXISTS X(k,o).--A(o),
-Normal: EXISTS X(k,o).--A(o),
-
-Expression :U(e,c),
-Normal: U(e,c),
-
-Expression :--X(b,l),
-Normal: --X(b,l),
-
-Expression :--A(f),
-Normal: --A(f),
+Expression :--Q(e,c),
+Normal: --Q(e,c),
 
 Expression :--A(a),
 Normal: --A(a),
 
-Expression :EXISTS N(a,o).M(o),
-Normal: EXISTS N(a,o).M(o),
+Expression :U(i,d),
+Normal: U(i,d),
 
-Expression :--F(m),
-Normal: --F(m),
+Expression :Z(d,a),
+Normal: Z(d,a),
 
-Expression :FORALL N(c,o).--B(o),
-Normal: FORALL N(c,o).--B(o),
+Expression :J(i),
+Normal: J(i),
 
-Expression :--S(j,f),
-Normal: --S(j,f),
+Expression :EXISTS U(b,o).--J(o),
+Normal: EXISTS U(b,o).--J(o),
 
-Expression :--I(f),
-Normal: --I(f),
+Expression :FORALL O(h,o).--E(o),
+Normal: FORALL O(h,o).--E(o),
 
-Expression :FORALL T(o,n).L(n),
-Normal: FORALL T(o,n).L(n),
+Expression :S(f,i),
+Normal: S(f,i),
 
-Expression :--Q(l,a),
-Normal: --Q(l,a),
+Expression :--FORALL W(k,o).H(o),
+Normal: EXISTS W(k,o).--H(o),
 
-Expression :A(m),
-Normal: A(m),
+Expression :--V(a,i),
+Normal: --V(a,i),
 
-Expression :FORALL O(b,o).K(o),
-Normal: FORALL O(b,o).K(o),
+Expression :EXISTS Y(m,o).K(o),
+Normal: EXISTS Y(m,o).K(o),
 
-Expression :--H(c),
-Normal: --H(c),
+Expression :--EXISTS R(j,o).C(o),
+Normal: FORALL R(j,o).--C(o),
 
-Expression :EXISTS Q(l,o).B(o),
-Normal: EXISTS Q(l,o).B(o),
+Expression :--U(c,e),
+Normal: --U(c,e),
 
-Expression :--T(m,f),
-Normal: --T(m,f),
+Expression :H(l),
+Normal: H(l),
 
-Expression :Q(b,k),
-Normal: Q(b,k),
+Expression :EXISTS X(d,o).--A(o),
+Normal: EXISTS X(d,o).--A(o),
 
-Expression :--M(f),
-Normal: --M(f),
+Expression :--Q(c,i),
+Normal: --Q(c,i),
 
-Expression :M(m),
-Normal: M(m),
+Expression :U(f,b),
+Normal: U(f,b),
 
-Expression :EXISTS R(j,o).M(o),
-Normal: EXISTS R(j,o).M(o),
+Expression :EXISTS O(f,o).--K(o),
+Normal: EXISTS O(f,o).--K(o),
 
-Expression :M(h),
-Normal: M(h),
+Expression :W(k,i),
+Normal: W(k,i),
 
-Expression :--B(o),
-Normal: --B(o),
+Expression :A(h),
+Normal: A(h),
 
-Expression :EXISTS P(d,o).G(o),
-Normal: EXISTS P(d,o).G(o),
+Expression :--P(a,e),
+Normal: --P(a,e),
 
-Expression :C(c),
-Normal: C(c),
+Expression :--P(m,f),
+Normal: --P(m,f),
 
-Expression :--Y(k,m),
-Normal: --Y(k,m),
+Expression :--K(l),
+Normal: --K(l),
 
-Expression :--B(h),
-Normal: --B(h),
+Expression :--EXISTS V(d,o).--F(o),
+Normal: FORALL V(d,o).F(o),
 
-Expression :FORALL S(b,o).B(o),
-Normal: FORALL S(b,o).B(o),
+Expression :FORALL O(p,o).--FORALL N(o,n).--D(n),
+Normal: FORALL O(p,o).EXISTS N(o,n).D(n),
 
-Expression :--R(l,l),
-Normal: --R(l,l),
+Expression :Z(h,e),
+Normal: Z(h,e),
 
-Expression :FORALL O(h,o).--M(o),
-Normal: FORALL O(h,o).--M(o),
+Expression :R(a,f),
+Normal: R(a,f),
 
-Expression :--S(k,j),
-Normal: --S(k,j),
+Expression :G(j),
+Normal: G(j),
 
-Expression :EXISTS N(j,o).--M(o),
-Normal: EXISTS N(j,o).--M(o),
+Expression :EXISTS Y(i,o).C(o),
+Normal: EXISTS Y(i,o).C(o),
 
-Expression :I(a),
-Normal: I(a),
+Expression :--X(g,b),
+Normal: --X(g,b),
 
-Expression :EXISTS X(e,o).A(o),
-Normal: EXISTS X(e,o).A(o),
+Expression :--J(m),
+Normal: --J(m),
 
-Expression :--F(d),
-Normal: --F(d),
+Expression :--K(f),
+Normal: --K(f),
 
-Expression :EXISTS Z(a,o).C(o),
-Normal: EXISTS Z(a,o).C(o),
+Expression :--FORALL U(l,o).G(o),
+Normal: EXISTS U(l,o).--G(o),
 
-Expression :--O(g,g),
-Normal: --O(g,g),
+Expression :G(b),
+Normal: G(b),
 
-Expression :FORALL Z(f,o).B(o),
-Normal: FORALL Z(f,o).B(o),
+Expression :FORALL S(p,o).( ( ( G(o) ^ ( ( FORALL O(o,n).--D(n) v --EXISTS P(o,n).E(n) ) v --F(o) ) ) v EXISTS Q(o,n).H(n) ) v --FORALL R(o,n).I(n) ),
+Normal: FORALL S(p,o).( ( ( G(o) ^ ( ( FORALL O(o,n).--D(n) v FORALL P(o,n).--E(n) ) v --F(o) ) ) v EXISTS Q(o,n).H(n) ) v EXISTS R(o,n).--I(n) ),
 
-Expression :FORALL N(i,o).G(o),
-Normal: FORALL N(i,o).G(o),
+Expression :V(m,h),
+Normal: V(m,h),
 
-Expression :U(i,c),
-Normal: U(i,c),
+Expression :Z(e,d),
+Normal: Z(e,d),
 
-Expression :C(c),
-Normal: C(c),
+Expression :EXISTS T(p,o).( --EXISTS S(o,n).M(n) ^ ( --L(o) ^ K(o) ) ),
+Normal: EXISTS T(p,o).( FORALL S(o,n).--M(n) ^ ( --L(o) ^ K(o) ) ),
 
-Expression :C(g),
-Normal: C(g),
+Expression :--J(b),
+Normal: --J(b),
 
-Expression :EXISTS P(g,o).C(o),
-Normal: EXISTS P(g,o).C(o),
+Expression :--EXISTS U(l,o).M(o),
+Normal: FORALL U(l,o).--M(o),
 
-Expression :W(d,f),
-Normal: W(d,f),
+Expression :E(e),
+Normal: E(e),
 
-Expression :--A(i),
-Normal: --A(i),
+Expression :--FORALL T(l,o).B(o),
+Normal: EXISTS T(l,o).--B(o),
 
-Expression :EXISTS W(d,o).C(o),
-Normal: EXISTS W(d,o).C(o),
+Expression :EXISTS R(k,o).--B(o),
+Normal: EXISTS R(k,o).--B(o),
 
-Expression :Q(d,f),
-Normal: Q(d,f),
+Expression :--U(g,g),
+Normal: --U(g,g),
 
-Expression :E(m),
-Normal: E(m),
+Expression :M(i),
+Normal: M(i),
 
-Expression :--R(b,j),
-Normal: --R(b,j),
+Expression :V(a,c),
+Normal: V(a,c),
 
-Expression :--L(c),
-Normal: --L(c),
+Expression :M(a),
+Normal: M(a),
 
-Expression :--Z(c,k),
-Normal: --Z(c,k),
+Expression :--FORALL N(l,o).--G(o),
+Normal: EXISTS N(l,o).G(o),
 
-Expression :B(d),
-Normal: B(d),
+Expression :R(e,e),
+Normal: R(e,e),
 
-Expression :FORALL V(o,n).--E(n),
-Normal: FORALL V(o,n).--E(n),
+Expression :EXISTS Z(a,o).K(o),
+Normal: EXISTS Z(a,o).K(o),
 
-Expression :X(c,m),
-Normal: X(c,m),
+Expression :--EXISTS Z(b,o).J(o),
+Normal: FORALL Z(b,o).--J(o),
 
-Expression :B(h),
-Normal: B(h),
+Expression :T(k,i),
+Normal: T(k,i),
 
-Expression :EXISTS Q(e,o).--C(o),
-Normal: EXISTS Q(e,o).--C(o),
+Expression :--Z(f,b),
+Normal: --Z(f,b),
 
-Expression :--Y(f,e),
-Normal: --Y(f,e),
+Expression :--EXISTS U(h,o).--M(o),
+Normal: FORALL U(h,o).M(o),
 
-Expression :F(i),
-Normal: F(i),
+Expression :--U(m,a),
+Normal: --U(m,a),
+
+Expression :M(j),
+Normal: M(j),
+
+Expression :Z(e,e),
+Normal: Z(e,e),
+
+Expression :--V(b,k),
+Normal: --V(b,k),
+
+Expression :FORALL T(p,o).( --EXISTS R(o,n).A(n) v --EXISTS S(o,n).--B(n) ),
+Normal: FORALL T(p,o).( FORALL R(o,n).--A(n) v FORALL S(o,n).B(n) ),
+
+Expression :--FORALL X(g,o).L(o),
+Normal: EXISTS X(g,o).--L(o),
+
+Expression :--Z(f,g),
+Normal: --Z(f,g),
+
+Expression :--FORALL X(j,o).--B(o),
+Normal: EXISTS X(j,o).B(o),
+
+Expression :--I(k),
+Normal: --I(k),
+
+Expression :--EXISTS Z(l,o).--J(o),
+Normal: FORALL Z(l,o).J(o),
+
+Expression :W(e,i),
+Normal: W(e,i),
+
+Expression :--EXISTS Q(m,o).E(o),
+Normal: FORALL Q(m,o).--E(o),
+
+Expression :X(a,j),
+Normal: X(a,j),
+
+Expression :--E(e),
+Normal: --E(e),
+
+Expression :S(h,h),
+Normal: S(h,h),
+
+Expression :D(b),
+Normal: D(b),
+
+Expression :--Q(h,c),
+Normal: --Q(h,c),
+
+Expression :--F(a),
+Normal: --F(a),
+
+Expression :EXISTS P(k,o).A(o),
+Normal: EXISTS P(k,o).A(o),
+
+Expression :--U(k,g),
+Normal: --U(k,g),
 
  }
 
-TBox = { NULL }
+TBox = { Expression :( C(o) c ( --B(o) ^ FORALL N(o,n).A(n) ) ),
+Normal: ( --C(o) v ( --B(o) ^ FORALL N(o,n).A(n) ) ),
+
+Expression :( E(p) c EXISTS P(p,o).--EXISTS O(o,n).D(n) ),
+Normal: ( --E(p) v EXISTS P(p,o).FORALL O(o,n).--D(n) ),
+
+Expression :( G(o) = --F(o) ),
+Normal: ( --G(o) v --F(o) ),
+Normal: ( F(o) v G(o) ),
+
+Expression :( J(o) c ( --EXISTS Q(o,n).I(n) ^ H(o) ) ),
+Normal: ( --J(o) v ( FORALL Q(o,n).--I(n) ^ H(o) ) ),
+
+Expression :( B(q) c EXISTS V(q,p).FORALL U(p,o).( --FORALL T(o,n).A(n) ^ ( --FORALL S(o,n).M(n) ^ ( K(o) v --FORALL R(o,n).L(n) ) ) ) ),
+Normal: ( --B(q) v EXISTS V(q,p).FORALL U(p,o).( EXISTS T(o,n).--A(n) ^ ( EXISTS S(o,n).--M(n) ^ ( K(o) v EXISTS R(o,n).--L(n) ) ) ) ),
+
+Expression :( E(o) = ( C(o) v FORALL W(o,n).D(n) ) ),
+Normal: ( --E(o) v ( C(o) v FORALL W(o,n).D(n) ) ),
+Normal: ( ( --C(o) ^ EXISTS W(o,n).--D(n) ) v E(o) ),
+
+Expression :( H(o) = ( --EXISTS Y(o,n).G(n) ^ --EXISTS X(o,n).--F(n) ) ),
+Normal: ( --H(o) v ( FORALL Y(o,n).--G(n) ^ FORALL X(o,n).F(n) ) ),
+Normal: ( ( EXISTS Y(o,n).G(n) v EXISTS X(o,n).--F(n) ) v H(o) ),
+
+Expression :( L(o) = --( ( J(o) ^ EXISTS Z(o,n).I(n) ) v K(o) ) ),
+Normal: ( --L(o) v ( ( --J(o) v FORALL Z(o,n).--I(n) ) ^ --K(o) ) ),
+Normal: ( ( ( J(o) ^ EXISTS Z(o,n).I(n) ) v K(o) ) v L(o) ),
+
+Expression :( A(o) = --EXISTS N(o,n).M(n) ),
+Normal: ( --A(o) v FORALL N(o,n).--M(n) ),
+Normal: ( EXISTS N(o,n).M(n) v A(o) ),
+
+Expression :( D(o) = ( C(o) ^ --EXISTS O(o,n).B(n) ) ),
+Normal: ( --D(o) v ( C(o) ^ FORALL O(o,n).--B(n) ) ),
+Normal: ( ( --C(o) v EXISTS O(o,n).B(n) ) v D(o) ),
+
+Expression :( G(q) c ( EXISTS R(q,p).EXISTS Q(p,o).FORALL P(o,n).E(n) v EXISTS S(q,p).--F(p) ) ),
+Normal: ( --G(q) v ( EXISTS R(q,p).EXISTS Q(p,o).FORALL P(o,n).E(n) v EXISTS S(q,p).--F(p) ) ),
+
+Expression :( J(o) c ( FORALL T(o,n).--H(n) v --I(o) ) ),
+Normal: ( --J(o) v ( FORALL T(o,n).--H(n) v --I(o) ) ),
+
+Expression :( L(o) c FORALL U(o,n).--K(n) ),
+Normal: ( --L(o) v FORALL U(o,n).--K(n) ),
+
+Expression :( A(o) c FORALL V(o,n).M(n) ),
+Normal: ( --A(o) v FORALL V(o,n).M(n) ),
+
+Expression :( C(o) c FORALL W(o,n).--B(n) ),
+Normal: ( --C(o) v FORALL W(o,n).--B(n) ),
+
+Expression :( F(q) = EXISTS Z(q,p).( E(p) ^ EXISTS Y(p,o).--FORALL X(o,n).D(n) ) ),
+Normal: ( --F(q) v EXISTS Z(q,p).( E(p) ^ EXISTS Y(p,o).EXISTS X(o,n).--D(n) ) ),
+Normal: ( FORALL Z(q,p).( --E(p) v FORALL Y(p,o).FORALL X(o,n).D(n) ) v F(q) ),
+
+Expression :( K(o) = ( ( --EXISTS P(o,n).I(n) ^ ( --FORALL N(o,n).--G(n) v --FORALL O(o,n).--H(n) ) ) v --J(o) ) ),
+Normal: ( --K(o) v ( ( FORALL P(o,n).--I(n) ^ ( EXISTS N(o,n).G(n) v EXISTS O(o,n).H(n) ) ) v --J(o) ) ),
+Normal: ( ( ( EXISTS P(o,n).I(n) v ( FORALL N(o,n).--G(n) ^ FORALL O(o,n).--H(n) ) ) ^ J(o) ) v K(o) ),
+
+Expression :( A(o) = ( --M(o) ^ EXISTS Q(o,n).L(n) ) ),
+Normal: ( --A(o) v ( --M(o) ^ EXISTS Q(o,n).L(n) ) ),
+Normal: ( ( M(o) v FORALL Q(o,n).--L(n) ) v A(o) ),
+
+Expression :( G(o) c ( --F(o) ^ ( ( ( --EXISTS R(o,n).B(n) v --C(o) ) v D(o) ) v --E(o) ) ) ),
+Normal: ( --G(o) v ( --F(o) ^ ( ( ( FORALL R(o,n).--B(n) v --C(o) ) v D(o) ) v --E(o) ) ) ),
+
+Expression :( I(o) = --EXISTS S(o,n).--H(n) ),
+Normal: ( --I(o) v FORALL S(o,n).H(n) ),
+Normal: ( EXISTS S(o,n).--H(n) v I(o) ),
+
+Expression :( L(o) = ( --EXISTS T(o,n).J(n) v K(o) ) ),
+Normal: ( --L(o) v ( FORALL T(o,n).--J(n) v K(o) ) ),
+Normal: ( ( EXISTS T(o,n).J(n) ^ --K(o) ) v L(o) ),
+
+Expression :( A(o) c --FORALL U(o,n).M(n) ),
+Normal: ( --A(o) v EXISTS U(o,n).--M(n) ),
+
+Expression :( C(o) = FORALL V(o,n).B(n) ),
+Normal: ( --C(o) v FORALL V(o,n).B(n) ),
+Normal: ( EXISTS V(o,n).--B(n) v C(o) ),
+
+Expression :( G(p) = ( F(p) ^ ( E(p) ^ EXISTS X(p,o).EXISTS W(o,n).D(n) ) ) ),
+Normal: ( --G(p) v ( F(p) ^ ( E(p) ^ EXISTS X(p,o).EXISTS W(o,n).D(n) ) ) ),
+Normal: ( ( --F(p) v ( --E(p) v FORALL X(p,o).FORALL W(o,n).--D(n) ) ) v G(p) ),
+
+Expression :( K(p) c ( --J(p) ^ ( EXISTS Z(p,o).EXISTS Y(o,n).H(n) v --I(p) ) ) ),
+Normal: ( --K(p) v ( --J(p) ^ ( EXISTS Z(p,o).EXISTS Y(o,n).H(n) v --I(p) ) ) ),
+
+Expression :( M(p) c EXISTS O(p,o).--EXISTS N(o,n).L(n) ),
+Normal: ( --M(p) v EXISTS O(p,o).FORALL N(o,n).--L(n) ),
+
+Expression :( B(q) c EXISTS R(q,p).FORALL Q(p,o).--FORALL P(o,n).A(n) ),
+Normal: ( --B(q) v EXISTS R(q,p).FORALL Q(p,o).EXISTS P(o,n).--A(n) ),
+
+Expression :( E(o) c ( --FORALL S(o,n).--C(n) v EXISTS T(o,n).D(n) ) ),
+Normal: ( --E(o) v ( EXISTS S(o,n).C(n) v EXISTS T(o,n).D(n) ) ),
+
+Expression :( G(o) = --EXISTS U(o,n).F(n) ),
+Normal: ( --G(o) v FORALL U(o,n).--F(n) ),
+Normal: ( EXISTS U(o,n).F(n) v G(o) ),
+
+Expression :( J(o) = ( I(o) ^ EXISTS V(o,n).H(n) ) ),
+Normal: ( --J(o) v ( I(o) ^ EXISTS V(o,n).H(n) ) ),
+Normal: ( ( --I(o) v FORALL V(o,n).--H(n) ) v J(o) ),
+
+Expression :( A(p) = ( M(p) ^ FORALL X(p,o).( L(o) ^ EXISTS W(o,n).--K(n) ) ) ),
+Normal: ( --A(p) v ( M(p) ^ FORALL X(p,o).( L(o) ^ EXISTS W(o,n).--K(n) ) ) ),
+Normal: ( ( --M(p) v EXISTS X(p,o).( --L(o) v FORALL W(o,n).K(n) ) ) v A(p) ),
+
+Expression :( J(p) c EXISTS P(p,o).( ( ( ( --EXISTS N(o,n).--F(n) ^ ( EXISTS Z(o,n).--E(n) ^ ( D(o) ^ --( EXISTS Y(o,n).--B(n) v C(o) ) ) ) ) v --G(o) ) v --FORALL O(o,n).--H(n) ) v --I(o) ) ),
+Normal: ( --J(p) v EXISTS P(p,o).( ( ( ( FORALL N(o,n).F(n) ^ ( EXISTS Z(o,n).--E(n) ^ ( D(o) ^ ( FORALL Y(o,n).B(n) ^ --C(o) ) ) ) ) v --G(o) ) v EXISTS O(o,n).H(n) ) v --I(o) ) ),
+
+Expression :( M(o) = ( FORALL R(o,n).L(n) ^ --FORALL Q(o,n).--K(n) ) ),
+Normal: ( --M(o) v ( FORALL R(o,n).L(n) ^ EXISTS Q(o,n).K(n) ) ),
+Normal: ( ( EXISTS R(o,n).--L(n) v FORALL Q(o,n).--K(n) ) v M(o) ),
+
+Expression :( C(o) c ( B(o) ^ A(o) ) ),
+Normal: ( --C(o) v ( B(o) ^ A(o) ) ),
+
+Expression :( F(o) = --( E(o) ^ D(o) ) ),
+Normal: ( --F(o) v ( --E(o) v --D(o) ) ),
+Normal: ( ( E(o) ^ D(o) ) v F(o) ),
+
+Expression :( H(o) c G(o) ),
+Normal: ( --H(o) v G(o) ),
+
+Expression :( J(o) c --I(o) ),
+Normal: ( --J(o) v --I(o) ),
+
+Expression :( L(o) c --K(o) ),
+Normal: ( --L(o) v --K(o) ),
+
+Expression :( C(o) = ( ( --M(o) v --FORALL S(o,n).--A(n) ) v EXISTS T(o,n).B(n) ) ),
+Normal: ( --C(o) v ( ( --M(o) v EXISTS S(o,n).A(n) ) v EXISTS T(o,n).B(n) ) ),
+Normal: ( ( ( M(o) ^ FORALL S(o,n).--A(n) ) ^ FORALL T(o,n).--B(n) ) v C(o) ),
+
+Expression :( I(p) c --( FORALL W(p,o).( ( --F(o) ^ ( --D(o) v --EXISTS U(o,n).--E(n) ) ) v FORALL V(o,n).G(n) ) v --H(p) ) ),
+Normal: ( --I(p) v ( EXISTS W(p,o).( ( F(o) v ( D(o) ^ EXISTS U(o,n).--E(n) ) ) ^ EXISTS V(o,n).--G(n) ) ^ H(p) ) ),
+
+Expression :( L(p) c EXISTS Y(p,o).( FORALL X(o,n).--K(n) ^ J(o) ) ),
+Normal: ( --L(p) v EXISTS Y(p,o).( FORALL X(o,n).--K(n) ^ J(o) ) ),
+
+Expression :( B(o) c ( EXISTS Z(o,n).--A(n) ^ M(o) ) ),
+Normal: ( --B(o) v ( EXISTS Z(o,n).--A(n) ^ M(o) ) ),
+
+Expression :( D(o) c C(o) ),
+Normal: ( --D(o) v C(o) ),
+
+Expression :( G(p) = EXISTS O(p,o).( E(o) v --FORALL N(o,n).F(n) ) ),
+Normal: ( --G(p) v EXISTS O(p,o).( E(o) v EXISTS N(o,n).--F(n) ) ),
+Normal: ( FORALL O(p,o).( --E(o) ^ FORALL N(o,n).F(n) ) v G(p) ),
+
+Expression :( L(r) = FORALL S(r,q).( K(q) ^ EXISTS R(q,p).( --J(p) ^ --( EXISTS P(p,o).H(o) v --FORALL Q(p,o).--I(o) ) ) ) ),
+Normal: ( --L(r) v FORALL S(r,q).( K(q) ^ EXISTS R(q,p).( --J(p) ^ ( FORALL P(p,o).--H(o) ^ FORALL Q(p,o).--I(o) ) ) ) ),
+Normal: ( EXISTS S(r,q).( --K(q) v FORALL R(q,p).( J(p) v ( EXISTS P(p,o).H(o) v EXISTS Q(p,o).I(o) ) ) ) v L(r) ),
+
+Expression :( A(o) c --M(o) ),
+Normal: ( --A(o) v --M(o) ),
+
+Expression :( C(o) = --B(o) ),
+Normal: ( --C(o) v --B(o) ),
+Normal: ( B(o) v C(o) ),
+
+Expression :( E(q) = EXISTS U(q,p).FORALL T(p,o).D(o) ),
+Normal: ( --E(q) v EXISTS U(q,p).FORALL T(p,o).D(o) ),
+Normal: ( FORALL U(q,p).EXISTS T(p,o).--D(o) v E(q) ),
+
+Expression :( G(o) = --EXISTS V(o,n).F(n) ),
+Normal: ( --G(o) v FORALL V(o,n).--F(n) ),
+Normal: ( EXISTS V(o,n).F(n) v G(o) ),
+
+Expression :( J(p) = FORALL Y(p,o).( --FORALL X(o,n).I(n) ^ EXISTS W(o,n).H(n) ) ),
+Normal: ( --J(p) v FORALL Y(p,o).( EXISTS X(o,n).--I(n) ^ EXISTS W(o,n).H(n) ) ),
+Normal: ( EXISTS Y(p,o).( FORALL X(o,n).I(n) v FORALL W(o,n).--H(n) ) v J(p) ),
+
+Expression :( L(o) = EXISTS Z(o,n).--K(n) ),
+Normal: ( --L(o) v EXISTS Z(o,n).--K(n) ),
+Normal: ( FORALL Z(o,n).K(n) v L(o) ),
+
+Expression :( A(p) c EXISTS O(p,o).--FORALL N(o,n).--M(n) ),
+Normal: ( --A(p) v EXISTS O(p,o).EXISTS N(o,n).M(n) ),
+
+Expression :( F(o) c ( ( EXISTS R(o,n).D(n) ^ ( --FORALL P(o,n).B(n) v --FORALL Q(o,n).C(n) ) ) v --E(o) ) ),
+Normal: ( --F(o) v ( ( EXISTS R(o,n).D(n) ^ ( EXISTS P(o,n).--B(n) v EXISTS Q(o,n).--C(n) ) ) v --E(o) ) ),
+
+Expression :( I(p) = ( --EXISTS U(p,o).--H(o) ^ EXISTS T(p,o).--EXISTS S(o,n).G(n) ) ),
+Normal: ( --I(p) v ( FORALL U(p,o).H(o) ^ EXISTS T(p,o).FORALL S(o,n).--G(n) ) ),
+Normal: ( ( EXISTS U(p,o).--H(o) v FORALL T(p,o).EXISTS S(o,n).G(n) ) v I(p) ),
+
+Expression :( K(o) c FORALL V(o,n).--J(n) ),
+Normal: ( --K(o) v FORALL V(o,n).--J(n) ),
+
+Expression :( B(o) = ( FORALL X(o,n).A(n) ^ ( M(o) ^ FORALL W(o,n).L(n) ) ) ),
+Normal: ( --B(o) v ( FORALL X(o,n).A(n) ^ ( M(o) ^ FORALL W(o,n).L(n) ) ) ),
+Normal: ( ( EXISTS X(o,n).--A(n) v ( --M(o) v EXISTS W(o,n).--L(n) ) ) v B(o) ),
+
+Expression :( D(o) c FORALL Y(o,n).C(n) ),
+Normal: ( --D(o) v FORALL Y(o,n).C(n) ),
+
+Expression :( I(p) = --( --EXISTS P(p,o).H(o) ^ --( ( FORALL N(p,o).--EXISTS Z(o,n).E(n) v --EXISTS O(p,o).--F(o) ) v --G(p) ) ) ),
+Normal: ( --I(p) v ( EXISTS P(p,o).H(o) v ( ( FORALL N(p,o).FORALL Z(o,n).--E(n) v FORALL O(p,o).F(o) ) v --G(p) ) ) ),
+Normal: ( ( FORALL P(p,o).--H(o) ^ ( ( EXISTS N(p,o).EXISTS Z(o,n).E(n) ^ EXISTS O(p,o).--F(o) ) ^ G(p) ) ) v I(p) ),
+
+Expression :( K(r) c FORALL T(r,q).EXISTS S(q,p).FORALL R(p,o).--EXISTS Q(o,n).--J(n) ),
+Normal: ( --K(r) v FORALL T(r,q).EXISTS S(q,p).FORALL R(p,o).FORALL Q(o,n).J(n) ),
+
+Expression :( C(o) = --( ( --EXISTS V(o,n).--A(n) ^ ( --M(o) ^ --EXISTS U(o,n).--L(n) ) ) v --B(o) ) ),
+Normal: ( --C(o) v ( ( EXISTS V(o,n).--A(n) v ( M(o) v EXISTS U(o,n).--L(n) ) ) ^ B(o) ) ),
+Normal: ( ( ( FORALL V(o,n).A(n) ^ ( --M(o) ^ FORALL U(o,n).L(n) ) ) v --B(o) ) v C(o) ),
+
+Expression :( E(o) = --EXISTS W(o,n).D(n) ),
+Normal: ( --E(o) v FORALL W(o,n).--D(n) ),
+Normal: ( EXISTS W(o,n).D(n) v E(o) ),
+
+Expression :( H(o) = ( --G(o) ^ --EXISTS X(o,n).--F(n) ) ),
+Normal: ( --H(o) v ( --G(o) ^ FORALL X(o,n).F(n) ) ),
+Normal: ( ( G(o) v EXISTS X(o,n).--F(n) ) v H(o) ),
+
+Expression :( J(o) c FORALL Y(o,n).I(n) ),
+Normal: ( --J(o) v FORALL Y(o,n).I(n) ),
+
+Expression :( L(o) = FORALL Z(o,n).--K(n) ),
+Normal: ( --L(o) v FORALL Z(o,n).--K(n) ),
+Normal: ( EXISTS Z(o,n).K(n) v L(o) ),
+
+Expression :( C(o) c ( ( EXISTS N(o,n).M(n) v --FORALL O(o,n).--A(n) ) v EXISTS P(o,n).--B(n) ) ),
+Normal: ( --C(o) v ( ( EXISTS N(o,n).M(n) v EXISTS O(o,n).A(n) ) v EXISTS P(o,n).--B(n) ) ),
+
+Expression :( E(o) c --EXISTS Q(o,n).--D(n) ),
+Normal: ( --E(o) v FORALL Q(o,n).D(n) ),
+
+Expression :( G(o) c FORALL R(o,n).--F(n) ),
+Normal: ( --G(o) v FORALL R(o,n).--F(n) ),
+
+Expression :( K(p) c ( --EXISTS V(p,o).--J(o) ^ ( EXISTS U(p,o).--I(o) ^ FORALL T(p,o).FORALL S(o,n).H(n) ) ) ),
+Normal: ( --K(p) v ( FORALL V(p,o).J(o) ^ ( EXISTS U(p,o).--I(o) ^ FORALL T(p,o).FORALL S(o,n).H(n) ) ) ),
+
+Expression :( B(p) c ( A(p) ^ ( --EXISTS X(p,o).FORALL W(o,n).L(n) v EXISTS Y(p,o).--M(o) ) ) ),
+Normal: ( --B(p) v ( A(p) ^ ( FORALL X(p,o).EXISTS W(o,n).--L(n) v EXISTS Y(p,o).--M(o) ) ) ),
+
+Expression :( D(o) c --EXISTS Z(o,n).C(n) ),
+Normal: ( --D(o) v FORALL Z(o,n).--C(n) ),
+
+Expression :( F(o) = --EXISTS N(o,n).--E(n) ),
+Normal: ( --F(o) v FORALL N(o,n).E(n) ),
+Normal: ( EXISTS N(o,n).--E(n) v F(o) ),
+
+Expression :( H(o) c --EXISTS O(o,n).G(n) ),
+Normal: ( --H(o) v FORALL O(o,n).--G(n) ),
+
+Expression :( J(o) c --EXISTS P(o,n).I(n) ),
+Normal: ( --J(o) v FORALL P(o,n).--I(n) ),
+
+Expression :( L(o) = EXISTS Q(o,n).K(n) ),
+Normal: ( --L(o) v EXISTS Q(o,n).K(n) ),
+Normal: ( FORALL Q(o,n).--K(n) v L(o) ),
+
+Expression :( A(o) c EXISTS R(o,n).--M(n) ),
+Normal: ( --A(o) v EXISTS R(o,n).--M(n) ),
+
+Expression :( C(o) = --EXISTS S(o,n).B(n) ),
+Normal: ( --C(o) v FORALL S(o,n).--B(n) ),
+Normal: ( EXISTS S(o,n).B(n) v C(o) ),
+
+Expression :( F(o) c ( FORALL T(o,n).D(n) v --E(o) ) ),
+Normal: ( --F(o) v ( FORALL T(o,n).D(n) v --E(o) ) ),
+
+Expression :( I(p) c FORALL W(p,o).( --EXISTS U(o,n).--G(n) v --EXISTS V(o,n).--H(n) ) ),
+Normal: ( --I(p) v FORALL W(p,o).( FORALL U(o,n).G(n) v FORALL V(o,n).H(n) ) ),
+
+Expression :( K(o) = EXISTS X(o,n).J(n) ),
+Normal: ( --K(o) v EXISTS X(o,n).J(n) ),
+Normal: ( FORALL X(o,n).--J(n) v K(o) ),
+
+Expression :( M(o) c FORALL Y(o,n).--L(n) ),
+Normal: ( --M(o) v FORALL Y(o,n).--L(n) ),
+
+Expression :( D(o) c ( ( FORALL N(o,n).--B(n) ^ EXISTS Z(o,n).--A(n) ) v --C(o) ) ),
+Normal: ( --D(o) v ( ( FORALL N(o,n).--B(n) ^ EXISTS Z(o,n).--A(n) ) v --C(o) ) ),
+
+Expression :( F(o) = --EXISTS O(o,n).E(n) ),
+Normal: ( --F(o) v FORALL O(o,n).--E(n) ),
+Normal: ( EXISTS O(o,n).E(n) v F(o) ),
+
+Expression :( H(p) c FORALL Q(p,o).EXISTS P(o,n).G(n) ),
+Normal: ( --H(p) v FORALL Q(p,o).EXISTS P(o,n).G(n) ),
+
+Expression :( J(o) = --EXISTS R(o,n).--I(n) ),
+Normal: ( --J(o) v FORALL R(o,n).I(n) ),
+Normal: ( EXISTS R(o,n).--I(n) v J(o) ),
+
+Expression :( L(o) c --FORALL S(o,n).K(n) ),
+Normal: ( --L(o) v EXISTS S(o,n).--K(n) ),
+
+Expression :( B(q) c ( --A(q) ^ EXISTS V(q,p).FORALL U(p,o).--FORALL T(o,n).M(n) ) ),
+Normal: ( --B(q) v ( --A(q) ^ EXISTS V(q,p).FORALL U(p,o).EXISTS T(o,n).--M(n) ) ),
+
+Expression :( E(o) c ( --EXISTS X(o,n).--D(n) ^ --EXISTS W(o,n).--C(n) ) ),
+Normal: ( --E(o) v ( FORALL X(o,n).D(n) ^ FORALL W(o,n).C(n) ) ),
+
+Expression :( G(o) = --EXISTS Y(o,n).--F(n) ),
+Normal: ( --G(o) v FORALL Y(o,n).F(n) ),
+Normal: ( EXISTS Y(o,n).--F(n) v G(o) ),
+
+Expression :( J(p) = ( FORALL O(p,o).--I(o) ^ EXISTS N(p,o).FORALL Z(o,n).--H(n) ) ),
+Normal: ( --J(p) v ( FORALL O(p,o).--I(o) ^ EXISTS N(p,o).FORALL Z(o,n).--H(n) ) ),
+Normal: ( ( EXISTS O(p,o).I(o) v FORALL N(p,o).EXISTS Z(o,n).H(n) ) v J(p) ),
+
+Expression :( L(o) c --K(o) ),
+Normal: ( --L(o) v --K(o) ),
+
+Expression :( A(p) c FORALL P(p,o).M(o) ),
+Normal: ( --A(p) v FORALL P(p,o).M(o) ),
+
+Expression :( D(r) c ( C(r) ^ FORALL S(r,q).EXISTS R(q,p).EXISTS Q(p,o).--B(o) ) ),
+Normal: ( --D(r) v ( C(r) ^ FORALL S(r,q).EXISTS R(q,p).EXISTS Q(p,o).--B(o) ) ),
+
+Expression :( G(p) c ( EXISTS T(p,o).--E(o) v --FORALL U(p,o).F(o) ) ),
+Normal: ( --G(p) v ( EXISTS T(p,o).--E(o) v EXISTS U(p,o).--F(o) ) ),
+
+Expression :( J(p) = ( FORALL V(p,o).H(o) v FORALL W(p,o).--I(o) ) ),
+Normal: ( --J(p) v ( FORALL V(p,o).H(o) v FORALL W(p,o).--I(o) ) ),
+Normal: ( ( EXISTS V(p,o).--H(o) ^ EXISTS W(p,o).I(o) ) v J(p) ),
+
+Expression :( L(o) = --K(o) ),
+Normal: ( --L(o) v --K(o) ),
+Normal: ( K(o) v L(o) ),
+
+Expression :( A(o) = --M(o) ),
+Normal: ( --A(o) v --M(o) ),
+Normal: ( M(o) v A(o) ),
+
+Expression :( D(o) c ( EXISTS X(o,n).C(n) ^ --B(o) ) ),
+Normal: ( --D(o) v ( EXISTS X(o,n).C(n) ^ --B(o) ) ),
+
+Expression :( G(o) = ( E(o) v F(o) ) ),
+Normal: ( --G(o) v ( E(o) v F(o) ) ),
+Normal: ( ( --E(o) ^ --F(o) ) v G(o) ),
+
+Expression :( I(o) = --H(o) ),
+Normal: ( --I(o) v --H(o) ),
+Normal: ( H(o) v I(o) ),
+
+ }

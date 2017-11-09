@@ -23,17 +23,17 @@ public class ReasonEr {
 		
 		System.out.println("Making Things");
 		
-    	KnowledgeBase kb = new KnowledgeBase(999,0);//KnowledgeBase.makeTestKnowledgeBase();//
+    	KnowledgeBase kb = new KnowledgeBase(99,99);//KnowledgeBase.makeTestKnowledgeBase();//
     	
 //    	System.out.println(kb.toString());
     	toFile("knowledgeBase.txt",kb.toString());
     	
-//    	System.out.println("Normalizing Things");
-//    	
-//    	kb.normalize();
-//    	
+    	System.out.println("Normalizing Things");
+    	
+    	kb.normalize();
+    	
 //    	System.out.println(kb.toString());
-//    	toFile("normalizedKnowledgeBase.txt",kb.toString());
+    	toFile("normalizedKnowledgeBase.txt",kb.toString());
     	
     	System.out.println("\nThings Are Done");
     }
