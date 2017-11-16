@@ -1,401 +1,205 @@
 K = ( ABox, TBox )
 
-ABox = { --A(h),
+ABox = { C(j) Size: 1,
 
-EXISTS O(h,o).L(o),
+--D(m) Size: 2,
 
---R(j,j),
+--EXISTS N(f,o).--K(o) Size: 4,
 
-FORALL R(j,o).--I(o),
+--G(j) Size: 2,
 
-P(a,b),
+--FORALL W(f,o).E(o) Size: 3,
 
---I(e),
+EXISTS X(l,o).J(o) Size: 2,
 
-W(k,d),
+FORALL S(k,o).--G(o) Size: 3,
 
-FORALL O(d,o).I(o),
+--E(h) Size: 2,
 
-Y(e,i),
+G(e) Size: 1,
 
-J(m),
+--FORALL T(l,o).--I(o) Size: 4,
 
---FORALL Y(a,o).F(o),
+EXISTS O(j,o).--C(o) Size: 3,
 
---O(i,e),
+Q(a,e) Size: 1,
 
-X(m,b),
+--FORALL O(a,o).H(o) Size: 3,
 
---G(h),
+EXISTS X(p,o).--( ( ( --EXISTS S(o,n).L(n) v H(o) ) v --EXISTS U(o,n).M(n) ) v --EXISTS W(o,n).--C(n) ) Size: 3,
 
---FORALL O(a,o).I(o),
+N(g,e) Size: 1,
 
---M(l),
+D(i) Size: 1,
 
-E(l),
+--D(f) Size: 2,
 
-FORALL W(k,o).M(o),
+W(m,i) Size: 1,
 
---EXISTS Q(m,o).H(o),
+K(j) Size: 1,
 
---Y(g,b),
+--M(l) Size: 2,
 
-FORALL Z(c,o).--I(o),
+--FORALL U(a,o).--J(o) Size: 4,
 
---U(f,b),
+--EXISTS Y(b,o).C(o) Size: 3,
 
---H(l),
+--K(l) Size: 2,
 
---FORALL P(b,o).--A(o),
+EXISTS N(e,o).--E(o) Size: 3,
 
---N(d,b),
+FORALL P(e,o).J(o) Size: 2,
 
---Q(e,c),
+Y(b,m) Size: 1,
 
---A(a),
+--F(d) Size: 2,
 
-U(i,d),
+--FORALL Z(d,o).J(o) Size: 3,
 
-Z(d,a),
+EXISTS Z(c,o).G(o) Size: 2,
 
-J(i),
+--V(h,a) Size: 2,
 
-EXISTS U(b,o).--J(o),
+--U(e,h) Size: 2,
 
-FORALL O(h,o).--E(o),
+EXISTS R(d,o).--E(o) Size: 3,
 
-S(f,i),
+--EXISTS Y(c,o).H(o) Size: 3,
 
---FORALL W(k,o).H(o),
+Z(b,b) Size: 1,
 
---V(a,i),
+I(c) Size: 1,
 
-EXISTS Y(m,o).K(o),
+FORALL U(d,o).B(o) Size: 2,
 
---EXISTS R(j,o).C(o),
+--X(b,l) Size: 2,
 
---U(c,e),
+--EXISTS W(i,o).I(o) Size: 3,
 
-H(l),
+--D(j) Size: 2,
 
-EXISTS X(d,o).--A(o),
+--FORALL T(l,o).I(o) Size: 3,
 
---Q(c,i),
+FORALL T(p,o).( ( FORALL W(o,n).--M(n) ^ --( E(o) ^ ( FORALL Y(o,n).--J(n) ^ --FORALL S(o,n).--D(n) ) ) ) v --FORALL O(o,n).--A(n) ) Size: 4,
 
-U(f,b),
+--U(i,g) Size: 2,
 
-EXISTS O(f,o).--K(o),
+--D(a) Size: 2,
 
-W(k,i),
+--EXISTS N(c,o).--I(o) Size: 4,
 
-A(h),
+--A(m) Size: 2,
 
---P(a,e),
+FORALL Q(g,o).--K(o) Size: 3,
 
---P(m,f),
+--O(a,b) Size: 2,
 
---K(l),
+A(e) Size: 1,
 
---EXISTS V(d,o).--F(o),
+G(i) Size: 1,
 
-FORALL O(p,o).--FORALL N(o,n).--D(n),
-
-Z(h,e),
-
-R(a,f),
-
-G(j),
-
-EXISTS Y(i,o).C(o),
-
---X(g,b),
-
---J(m),
-
---K(f),
-
---FORALL U(l,o).G(o),
-
-G(b),
-
-FORALL S(p,o).( ( ( G(o) ^ ( ( FORALL O(o,n).--D(n) v --EXISTS P(o,n).E(n) ) v --F(o) ) ) v EXISTS Q(o,n).H(n) ) v --FORALL R(o,n).I(n) ),
-
-V(m,h),
-
-Z(e,d),
-
-EXISTS T(p,o).( --EXISTS S(o,n).M(n) ^ ( --L(o) ^ K(o) ) ),
-
---J(b),
-
---EXISTS U(l,o).M(o),
-
-E(e),
-
---FORALL T(l,o).B(o),
-
-EXISTS R(k,o).--B(o),
-
---U(g,g),
-
-M(i),
-
-V(a,c),
-
-M(a),
-
---FORALL N(l,o).--G(o),
-
-R(e,e),
-
-EXISTS Z(a,o).K(o),
-
---EXISTS Z(b,o).J(o),
-
-T(k,i),
-
---Z(f,b),
-
---EXISTS U(h,o).--M(o),
-
---U(m,a),
-
-M(j),
-
-Z(e,e),
-
---V(b,k),
-
-FORALL T(p,o).( --EXISTS R(o,n).A(n) v --EXISTS S(o,n).--B(n) ),
-
---FORALL X(g,o).L(o),
-
---Z(f,g),
-
---FORALL X(j,o).--B(o),
-
---I(k),
-
---EXISTS Z(l,o).--J(o),
-
-W(e,i),
-
---EXISTS Q(m,o).E(o),
-
-X(a,j),
-
---E(e),
-
-S(h,h),
-
-D(b),
-
---Q(h,c),
-
---F(a),
-
-EXISTS P(k,o).A(o),
-
---U(k,g),
+EXISTS Y(l,o).--I(o) Size: 3,
 
  }
 
-TBox = { ( C(o) c ( --B(o) ^ FORALL N(o,n).A(n) ) ),
+TBox = { ( B(o) = ( ( G(o) ^ M(o) ) v --M(o) ) ) Size: 8,
 
-( E(p) c EXISTS P(p,o).--EXISTS O(o,n).D(n) ),
+( I(o) c ( EXISTS V(o,n).--C(n) ^ ( --H(o) v B(o) ) ) ) Size: 10,
 
-( G(o) = --F(o) ),
+( A(p) = ( --H(p) ^ ( FORALL Y(p,o).( FORALL Y(o,n).H(n) ^ L(o) ) v --G(p) ) ) ) Size: 13,
 
-( J(o) c ( --EXISTS Q(o,n).I(n) ^ H(o) ) ),
+( H(p) = EXISTS Q(p,o).B(o) ) Size: 4,
 
-( B(q) c EXISTS V(q,p).FORALL U(p,o).( --FORALL T(o,n).A(n) ^ ( --FORALL S(o,n).M(n) ^ ( K(o) v --FORALL R(o,n).L(n) ) ) ) ),
+( C(o) = K(o) ) Size: 3,
 
-( E(o) = ( C(o) v FORALL W(o,n).D(n) ) ),
+( F(r) = FORALL X(r,q).FORALL N(q,p).( --G(p) ^ FORALL X(p,o).( A(o) ^ K(o) ) ) ) Size: 11,
 
-( H(o) = ( --EXISTS Y(o,n).G(n) ^ --EXISTS X(o,n).--F(n) ) ),
+( C(o) = --M(o) ) Size: 4,
 
-( L(o) = --( ( J(o) ^ EXISTS Z(o,n).I(n) ) v K(o) ) ),
+( A(o) c --E(o) ) Size: 4,
 
-( A(o) = --EXISTS N(o,n).M(n) ),
+( D(p) = ( FORALL Q(p,o).--F(o) ^ EXISTS S(p,o).( A(o) v --F(o) ) ) ) Size: 11,
 
-( D(o) = ( C(o) ^ --EXISTS O(o,n).B(n) ) ),
+( D(o) c --K(o) ) Size: 4,
 
-( G(q) c ( EXISTS R(q,p).EXISTS Q(p,o).FORALL P(o,n).E(n) v EXISTS S(q,p).--F(p) ) ),
+( C(o) = --A(o) ) Size: 4,
 
-( J(o) c ( FORALL T(o,n).--H(n) v --I(o) ) ),
+( D(o) c --M(o) ) Size: 4,
 
-( L(o) c FORALL U(o,n).--K(n) ),
+( K(o) = EXISTS P(o,n).--F(n) ) Size: 5,
 
-( A(o) c FORALL V(o,n).M(n) ),
+( M(o) c ( --FORALL Z(o,n).--D(n) v J(o) ) ) Size: 8,
 
-( C(o) c FORALL W(o,n).--B(n) ),
+( H(o) c FORALL Q(o,n).--L(n) ) Size: 5,
 
-( F(q) = EXISTS Z(q,p).( E(p) ^ EXISTS Y(p,o).--FORALL X(o,n).D(n) ) ),
+( E(o) c --FORALL X(o,n).B(n) ) Size: 5,
 
-( K(o) = ( ( --EXISTS P(o,n).I(n) ^ ( --FORALL N(o,n).--G(n) v --FORALL O(o,n).--H(n) ) ) v --J(o) ) ),
+( M(o) = --EXISTS S(o,n).L(n) ) Size: 5,
 
-( A(o) = ( --M(o) ^ EXISTS Q(o,n).L(n) ) ),
+( M(q) = FORALL Q(q,p).--( EXISTS T(p,o).L(o) ^ --( ( --( EXISTS X(p,o).C(o) ^ ( FORALL P(p,o).--EXISTS N(o,n).--I(n) v L(p) ) ) v --FORALL S(p,o).D(o) ) v FORALL N(p,o).L(o) ) ) ) Size: 26,
 
-( G(o) c ( --F(o) ^ ( ( ( --EXISTS R(o,n).B(n) v --C(o) ) v D(o) ) v --E(o) ) ) ),
+( K(q) = ( --EXISTS O(q,p).--E(p) ^ FORALL Z(q,p).( EXISTS R(p,o).FORALL O(o,n).C(n) v --L(p) ) ) ) Size: 14,
 
-( I(o) = --EXISTS S(o,n).--H(n) ),
+( G(o) c --EXISTS S(o,n).--E(n) ) Size: 6,
 
-( L(o) = ( --EXISTS T(o,n).J(n) v K(o) ) ),
+( B(o) c FORALL R(o,n).F(n) ) Size: 4,
 
-( A(o) c --FORALL U(o,n).M(n) ),
+( J(o) c ( ( --FORALL T(o,n).K(n) v --I(o) ) v EXISTS Q(o,n).A(n) ) ) Size: 11,
 
-( C(o) = FORALL V(o,n).B(n) ),
+( H(r) c FORALL R(r,q).FORALL Q(q,p).( --M(p) ^ --( ( FORALL R(p,o).EXISTS N(o,n).--E(n) v FORALL P(p,o).--M(o) ) v --FORALL S(p,o).--G(o) ) ) ) Size: 21,
 
-( G(p) = ( F(p) ^ ( E(p) ^ EXISTS X(p,o).EXISTS W(o,n).D(n) ) ) ),
+( I(p) c --EXISTS U(p,o).( EXISTS O(o,n).--D(n) v --FORALL X(o,n).--H(n) ) ) Size: 12,
 
-( K(p) c ( --J(p) ^ ( EXISTS Z(p,o).EXISTS Y(o,n).H(n) v --I(p) ) ) ),
+( F(o) = ( --EXISTS O(o,n).C(n) v --FORALL X(o,n).K(n) ) ) Size: 9,
 
-( M(p) c EXISTS O(p,o).--EXISTS N(o,n).L(n) ),
+( A(o) = --FORALL S(o,n).G(n) ) Size: 5,
 
-( B(q) c EXISTS R(q,p).FORALL Q(p,o).--FORALL P(o,n).A(n) ),
+( G(o) c ( --K(o) v EXISTS W(o,n).M(n) ) ) Size: 7,
 
-( E(o) c ( --FORALL S(o,n).--C(n) v EXISTS T(o,n).D(n) ) ),
+( I(p) = ( FORALL Z(p,o).( ( ( L(o) v --EXISTS Z(o,n).--E(n) ) v FORALL N(o,n).F(n) ) v C(o) ) v --FORALL X(p,o).B(o) ) ) Size: 18,
 
-( G(o) = --EXISTS U(o,n).F(n) ),
+( D(o) c ( L(o) ^ C(o) ) ) Size: 5,
 
-( J(o) = ( I(o) ^ EXISTS V(o,n).H(n) ) ),
+( A(o) = H(o) ) Size: 3,
 
-( A(p) = ( M(p) ^ FORALL X(p,o).( L(o) ^ EXISTS W(o,n).--K(n) ) ) ),
+( B(o) c ( F(o) ^ ( C(o) v --EXISTS W(o,n).E(n) ) ) ) Size: 9,
 
-( J(p) c EXISTS P(p,o).( ( ( ( --EXISTS N(o,n).--F(n) ^ ( EXISTS Z(o,n).--E(n) ^ ( D(o) ^ --( EXISTS Y(o,n).--B(n) v C(o) ) ) ) ) v --G(o) ) v --FORALL O(o,n).--H(n) ) v --I(o) ) ),
+( J(q) c FORALL X(q,p).( FORALL O(p,o).I(o) ^ EXISTS W(p,o).M(o) ) ) Size: 8,
 
-( M(o) = ( FORALL R(o,n).L(n) ^ --FORALL Q(o,n).--K(n) ) ),
+( H(o) c --( EXISTS U(o,n).--I(n) ^ --G(o) ) ) Size: 9,
 
-( C(o) c ( B(o) ^ A(o) ) ),
+( E(q) = FORALL O(q,p).FORALL Z(p,o).--L(o) ) Size: 6,
 
-( F(o) = --( E(o) ^ D(o) ) ),
+( C(p) c FORALL N(p,o).--I(o) ) Size: 5,
 
-( H(o) c G(o) ),
+( F(o) = ( C(o) v EXISTS O(o,n).B(n) ) ) Size: 6,
 
-( J(o) c --I(o) ),
+( K(o) = ( --A(o) v --H(o) ) ) Size: 7,
 
-( L(o) c --K(o) ),
+( M(o) = --L(o) ) Size: 4,
 
-( C(o) = ( ( --M(o) v --FORALL S(o,n).--A(n) ) v EXISTS T(o,n).B(n) ) ),
+( B(p) c ( FORALL Q(p,o).--H(o) v --EXISTS Z(p,o).D(o) ) ) Size: 9,
 
-( I(p) c --( FORALL W(p,o).( ( --F(o) ^ ( --D(o) v --EXISTS U(o,n).--E(n) ) ) v FORALL V(o,n).G(n) ) v --H(p) ) ),
+( D(o) = --K(o) ) Size: 4,
 
-( L(p) c EXISTS Y(p,o).( FORALL X(o,n).--K(n) ^ J(o) ) ),
+( E(p) c EXISTS O(p,o).( EXISTS U(o,n).--K(n) v --EXISTS T(o,n).--L(n) ) ) Size: 11,
 
-( B(o) c ( EXISTS Z(o,n).--A(n) ^ M(o) ) ),
+( E(q) c FORALL T(q,p).EXISTS V(p,o).EXISTS N(o,n).A(n) ) Size: 6,
 
-( D(o) c C(o) ),
+( M(p) c EXISTS U(p,o).--EXISTS X(o,n).B(n) ) Size: 6,
 
-( G(p) = EXISTS O(p,o).( E(o) v --FORALL N(o,n).F(n) ) ),
+( K(o) c ( ( FORALL P(o,n).J(n) ^ ( ( --FORALL S(o,n).D(n) v J(o) ) v --EXISTS N(o,n).--H(n) ) ) v M(o) ) ) Size: 17,
 
-( L(r) = FORALL S(r,q).( K(q) ^ EXISTS R(q,p).( --J(p) ^ --( EXISTS P(p,o).H(o) v --FORALL Q(p,o).--I(o) ) ) ) ),
+( K(q) c ( --FORALL S(q,p).--M(p) ^ ( --( --( --EXISTS U(q,p).--B(p) ^ ( --EXISTS U(q,p).--F(p) ^ EXISTS U(q,p).--EXISTS O(p,o).( EXISTS T(o,n).D(n) v --B(o) ) ) ) v J(q) ) v --FORALL S(q,p).--D(p) ) ) ) Size: 34,
 
-( A(o) c --M(o) ),
+( I(p) = EXISTS P(p,o).EXISTS N(o,n).G(n) ) Size: 5,
 
-( C(o) = --B(o) ),
+( E(o) = --EXISTS T(o,n).H(n) ) Size: 5,
 
-( E(q) = EXISTS U(q,p).FORALL T(p,o).D(o) ),
+( I(o) c EXISTS Z(o,n).--M(n) ) Size: 5,
 
-( G(o) = --EXISTS V(o,n).F(n) ),
+( E(o) = EXISTS U(o,n).--A(n) ) Size: 5,
 
-( J(p) = FORALL Y(p,o).( --FORALL X(o,n).I(n) ^ EXISTS W(o,n).H(n) ) ),
-
-( L(o) = EXISTS Z(o,n).--K(n) ),
-
-( A(p) c EXISTS O(p,o).--FORALL N(o,n).--M(n) ),
-
-( F(o) c ( ( EXISTS R(o,n).D(n) ^ ( --FORALL P(o,n).B(n) v --FORALL Q(o,n).C(n) ) ) v --E(o) ) ),
-
-( I(p) = ( --EXISTS U(p,o).--H(o) ^ EXISTS T(p,o).--EXISTS S(o,n).G(n) ) ),
-
-( K(o) c FORALL V(o,n).--J(n) ),
-
-( B(o) = ( FORALL X(o,n).A(n) ^ ( M(o) ^ FORALL W(o,n).L(n) ) ) ),
-
-( D(o) c FORALL Y(o,n).C(n) ),
-
-( I(p) = --( --EXISTS P(p,o).H(o) ^ --( ( FORALL N(p,o).--EXISTS Z(o,n).E(n) v --EXISTS O(p,o).--F(o) ) v --G(p) ) ) ),
-
-( K(r) c FORALL T(r,q).EXISTS S(q,p).FORALL R(p,o).--EXISTS Q(o,n).--J(n) ),
-
-( C(o) = --( ( --EXISTS V(o,n).--A(n) ^ ( --M(o) ^ --EXISTS U(o,n).--L(n) ) ) v --B(o) ) ),
-
-( E(o) = --EXISTS W(o,n).D(n) ),
-
-( H(o) = ( --G(o) ^ --EXISTS X(o,n).--F(n) ) ),
-
-( J(o) c FORALL Y(o,n).I(n) ),
-
-( L(o) = FORALL Z(o,n).--K(n) ),
-
-( C(o) c ( ( EXISTS N(o,n).M(n) v --FORALL O(o,n).--A(n) ) v EXISTS P(o,n).--B(n) ) ),
-
-( E(o) c --EXISTS Q(o,n).--D(n) ),
-
-( G(o) c FORALL R(o,n).--F(n) ),
-
-( K(p) c ( --EXISTS V(p,o).--J(o) ^ ( EXISTS U(p,o).--I(o) ^ FORALL T(p,o).FORALL S(o,n).H(n) ) ) ),
-
-( B(p) c ( A(p) ^ ( --EXISTS X(p,o).FORALL W(o,n).L(n) v EXISTS Y(p,o).--M(o) ) ) ),
-
-( D(o) c --EXISTS Z(o,n).C(n) ),
-
-( F(o) = --EXISTS N(o,n).--E(n) ),
-
-( H(o) c --EXISTS O(o,n).G(n) ),
-
-( J(o) c --EXISTS P(o,n).I(n) ),
-
-( L(o) = EXISTS Q(o,n).K(n) ),
-
-( A(o) c EXISTS R(o,n).--M(n) ),
-
-( C(o) = --EXISTS S(o,n).B(n) ),
-
-( F(o) c ( FORALL T(o,n).D(n) v --E(o) ) ),
-
-( I(p) c FORALL W(p,o).( --EXISTS U(o,n).--G(n) v --EXISTS V(o,n).--H(n) ) ),
-
-( K(o) = EXISTS X(o,n).J(n) ),
-
-( M(o) c FORALL Y(o,n).--L(n) ),
-
-( D(o) c ( ( FORALL N(o,n).--B(n) ^ EXISTS Z(o,n).--A(n) ) v --C(o) ) ),
-
-( F(o) = --EXISTS O(o,n).E(n) ),
-
-( H(p) c FORALL Q(p,o).EXISTS P(o,n).G(n) ),
-
-( J(o) = --EXISTS R(o,n).--I(n) ),
-
-( L(o) c --FORALL S(o,n).K(n) ),
-
-( B(q) c ( --A(q) ^ EXISTS V(q,p).FORALL U(p,o).--FORALL T(o,n).M(n) ) ),
-
-( E(o) c ( --EXISTS X(o,n).--D(n) ^ --EXISTS W(o,n).--C(n) ) ),
-
-( G(o) = --EXISTS Y(o,n).--F(n) ),
-
-( J(p) = ( FORALL O(p,o).--I(o) ^ EXISTS N(p,o).FORALL Z(o,n).--H(n) ) ),
-
-( L(o) c --K(o) ),
-
-( A(p) c FORALL P(p,o).M(o) ),
-
-( D(r) c ( C(r) ^ FORALL S(r,q).EXISTS R(q,p).EXISTS Q(p,o).--B(o) ) ),
-
-( G(p) c ( EXISTS T(p,o).--E(o) v --FORALL U(p,o).F(o) ) ),
-
-( J(p) = ( FORALL V(p,o).H(o) v FORALL W(p,o).--I(o) ) ),
-
-( L(o) = --K(o) ),
-
-( A(o) = --M(o) ),
-
-( D(o) c ( EXISTS X(o,n).C(n) ^ --B(o) ) ),
-
-( G(o) = ( E(o) v F(o) ) ),
-
-( I(o) = --H(o) ),
+( C(o) = FORALL N(o,n).B(n) ) Size: 4,
 
  }

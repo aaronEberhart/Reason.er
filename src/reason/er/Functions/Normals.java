@@ -57,8 +57,12 @@ public class Normals <T extends Expression<T>>{
 	public Expression<T> normalize(Expression e){
 		if(e.getSize() <= 2)
 			return e;
-		else
-			return normalizeTree(e.root);
+		else {
+			Expression<T> ex = new Expression(normalizeTree(e.root));
+//			ex.setSize(ex.root.getSize());
+//			ex.setScope(ex.root.getScope());
+			return ex;
+		}
 	}
 	
 	public ExpressionNode normalizeTree(ExpressionNode here) {

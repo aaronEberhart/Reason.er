@@ -5,12 +5,15 @@ import java.util.Random;
 
 import reason.er.Objects.*;
 
-public abstract class Box<T extends Expression<T>> {
+public abstract class Box <T extends Expression<T>> {
+	
+	//TODO enable adding duplicate concept/role names to expressions (not the head)
 	
 	protected long scope;
 	protected int universe, variables;
 	protected long counters[];
 	protected Random rand;
+	
 	
 	protected ArrayList<Expression<T>> expressions;
 	protected Normals<T> normalized;
@@ -42,6 +45,12 @@ public abstract class Box<T extends Expression<T>> {
 		return universe;
 	}
 	
+    protected long makeName(Random rand) {
+    	return Math.abs(rand.nextLong()) % (universe);
+    }
+    
+    
+    
     @Override
     public String toString() {
     	String s = "{ ";

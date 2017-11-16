@@ -152,7 +152,7 @@ public class Expression<T extends Predicate> extends Concept{
 	
 	public String toString() {
 		//String s = root.toString();
-		return root.toString();// + " Size: " + this.getSize();
+		return root.toString() + " Size: " + this.getSize();
 	}
 
 	public Expression getChild(int i){

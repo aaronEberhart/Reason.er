@@ -9,8 +9,12 @@ import reason.er.Objects.*;
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class TBox<T extends Expression<T>>  extends Box<T>{
 
+	protected ArrayList<Long> names;
+	
 	public TBox(int size) {
 
+		names = new ArrayList<>();
+		
 		universe = Predicate.uppers.length / 2;
 		variables = Term.lowers.length / 2;
 		
@@ -49,6 +53,9 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 			if(builder.complete)
 				expression.complete = true;
 		}
+		expression.setSize(builder.getSize());
+		expression.setScope(builder.getScope());
+		names.clear();
 		scope = variables + 1;
 		counters[0] = (counters[0] + 1) % universe;
 		counters[1] = variables + 1;
@@ -72,11 +79,11 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 				break;
 			case 4:
 			case 5:
-				expression = expression.superClass(new Concept(false,counters[1],counters[0]));
+				expression = expression.superClass(new Concept(false,counters[1],endExpression(rand)));
 				break;
 			case 6:
 			case 7:
-				expression = expression.equivalent(new Concept(false,counters[1],counters[0]));
+				expression = expression.equivalent(new Concept(false,counters[1],endExpression(rand)));
 				break;
 			case 8:
 				expression = expression.dot(new Quantifier(1), (Role)newPredicate(randInt), counters[2] + universe);
@@ -100,17 +107,23 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 	protected Predicate newPredicate(int randInt) {
 		boolean negated = rand.nextBoolean();
 		Predicate p;
+		long one = makeName(rand);
+		long two = makeName(rand) + universe;
+		
 		if(randInt == 0) {
-			p = new Concept(negated,counters[1],counters[0]);
+			p = new Concept(negated,counters[1],one);
+			names.add(one);
 			counters[0] = (counters[0] + 1) % universe;
 		}
 		else if(randInt == 1) {
-			p = new QuantifiedRole(negated,rand.nextBoolean(),rand.nextInt(2) + 1,counters[1],counters[1]-1,counters[2] + universe,counters[0],counters[0]);
+			
+			p = new QuantifiedRole(negated,rand.nextBoolean(),rand.nextInt(2) + 1,counters[1],counters[1]-1,two,one,one);
+			names.add(one);
 			counters[0] = (counters[0] + 1) % universe;
 			counters[2] = (counters[2] + 1) % universe;
 		}
 		else {
-			p = new Role(false,counters[1] + 1,counters[1],counters[2] + universe);
+			p = new Role(false,counters[1] + 1,counters[1],two);
 			counters[2] = (counters[2] + 1) % universe;
 			counters[1] = (counters[1] + 1) % Term.lowers.length;
 			if(counters[1]<variables)
@@ -118,6 +131,28 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 		}
 		
 		return p;
+	}
+	
+	public boolean usedBefore(long i) {
+    	for(Long l : names) {
+    		if(l.longValue() == i)
+    			return true;
+    	}
+    	return false;
+    }
+	
+	public long endExpression(Random rand) {
+		long l = makeName(rand);
+		
+		if(names.size() >= universe) {
+			return l + (universe * 2);
+		}
+		
+		while(usedBefore(l)) {
+			l = makeName(rand);
+		}
+		
+		return l;
 	}
 	
 	@Override
