@@ -1,10 +1,10 @@
-package reason.er.Functions;
+package reason.er.compositeObjects;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import reason.er.Functions.*;
-import reason.er.Objects.*;
+import reason.er.compositeObjects.*;
+import reason.er.objects.*;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class TBox<T extends Expression<T>>  extends Box<T>{
@@ -163,8 +163,8 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 
 			Expression ex = e.deepCopy(e);
 			
-			final ExpressionNode right = (ExpressionNode)ex.root.children[1];
-			final ExpressionNode left = (ExpressionNode)ex.root.children[0];
+			final ExpressionNode right = (ExpressionNode)ex.root.getChildren()[1];
+			final ExpressionNode left = (ExpressionNode)ex.root.getChildren()[0];
 			
 			if(ex.getOperator() == 'c'){
 				normals.add(
@@ -173,8 +173,8 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 			else {
 				Expression ex2 = e.deepCopy(e);
 				
-				final ExpressionNode up = (ExpressionNode)ex2.root.children[1];
-				final ExpressionNode down = (ExpressionNode)ex2.root.children[0];
+				final ExpressionNode up = (ExpressionNode)ex2.root.getChildren()[1];
+				final ExpressionNode down = (ExpressionNode)ex2.root.getChildren()[0];
 				
 				normals.add(
 						(new Expression(normalizeSubset(left,right))));
@@ -184,7 +184,7 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 			}
 		}
 		
-		this.normalized = new Normals(normals);
+		this.normalized = new NormalizedBox(normals);
 	}
 	
 	public Expression normalizeSubset(ExpressionNode left, ExpressionNode right) {

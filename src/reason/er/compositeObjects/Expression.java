@@ -1,27 +1,26 @@
-package reason.er.Functions;
+package reason.er.compositeObjects;
 
 import reason.er.ReasonEr;
-import reason.er.Functions.*;
-import reason.er.Objects.*;
+import reason.er.objects.*;
 
-@SuppressWarnings({"rawtypes", "unchecked","unlikely-arg-type"})
-public class Expression<T extends Predicate> extends Concept{
+@SuppressWarnings({ "unchecked"})
+public class Expression<T extends Predicate<T>> extends Concept<T>{
 	
-	protected ExpressionNode root;
+	protected ExpressionNode<T> root;
 	protected boolean complete;
 	
 	public Expression() {
 	}
 	
-	public Expression(Predicate p) {
+	public Expression(Predicate<T> p) {
 		scope = p.getScope();
-		root = new ExpressionNode(p);
+		root = new ExpressionNode<T>(p);
 		negated = p.isNegated();
 		complete = false;
 		size = p.getSize();
 	}
 	
-	public Expression(ExpressionNode e){
+	public Expression(ExpressionNode<T> e){
 		scope = e.getScope();
 		
 		root = recursiveDeepCopy(e);	
@@ -30,26 +29,26 @@ public class Expression<T extends Predicate> extends Concept{
 		size = e.getSize();
 	}
 
-	public Expression(Expression e) {
-		root = (ExpressionNode)e;
+	public Expression(Expression<T> e) {
+		root = (ExpressionNode<T>)e;
 		scope = e.scope;
 		this.size = e.getSize();
 		complete = true;
 	}
 	
-	public ExpressionNode recursiveDeepCopy(ExpressionNode e) {
+	public ExpressionNode<T> recursiveDeepCopy(ExpressionNode<T> e) {
 		try{
-			ExpressionNode ex;
+			ExpressionNode<T> ex;
 			
 			if(e.isLeaf()) {
-				ex = new ExpressionNode((Predicate)e.leaf.clone(e));
+				ex = new ExpressionNode<T>((Predicate<T>)e.leaf.clone(e));
 				
 			}
-			else if(e.children.length == 1) {
-				ex = new ExpressionNode((QuantifiedRole)e.leaf.clone(e),recursiveDeepCopy((ExpressionNode)e.children[0]));
+			else if(e.getChildren().length == 1) {
+				ex = new ExpressionNode<T>((QuantifiedRole<T,T>)e.leaf.clone(e),recursiveDeepCopy((ExpressionNode<T>)e.getChildren()[0]));
 			}
 			else {
-				ex = new ExpressionNode(e.operator,recursiveDeepCopy((ExpressionNode)e.children[0]),recursiveDeepCopy((ExpressionNode)e.children[1]));
+				ex = new ExpressionNode<T>(e.operator,recursiveDeepCopy((ExpressionNode<T>)e.getChildren()[0]),recursiveDeepCopy((ExpressionNode<T>)e.getChildren()[1]));
 			}
 			
 			if(!ex.isLeaf() && e.negated) {
@@ -65,15 +64,15 @@ public class Expression<T extends Predicate> extends Concept{
 		}
 
 	}
-	public Expression deepCopy(Expression e) {
+	public Expression<T> deepCopy(Expression<T> e) {
 		if(root == null) {
 			try {
-				return (Expression)e.clone();
+				return (Expression<T>)e.clone();
 			} catch (CloneNotSupportedException e1) {
 				e1.printStackTrace();
 			}
 		}
-		Expression exp = new Expression(recursiveDeepCopy(e.root));
+		Expression<T> exp = new Expression<T>(recursiveDeepCopy(e.root));
 		exp.size = exp.root.size;
 		return exp;
 	}
@@ -86,23 +85,23 @@ public class Expression<T extends Predicate> extends Concept{
 				System.out.println(e + "--" +  this.toString());
 			}
 		}
-		else if(root == null && ((ExpressionNode)this).children == null) {
+		else if(root == null && ((ExpressionNode<T>)this).getChildren() == null) {
 			System.out.println(1);
 			if(this.negated)
 				size--;
 			else
 				size++;
-			((ExpressionNode)this).leaf.negate();
-			negated = ((ExpressionNode)this).leaf.isNegated();
+			((ExpressionNode<T>)this).leaf.negate();
+			negated = ((ExpressionNode<T>)this).leaf.isNegated();
 		}
-		else if(root == null && ((ExpressionNode)this).children.length == 1) {
+		else if(root == null && ((ExpressionNode<T>)this).getChildren().length == 1) {
 			System.out.println(2);
 			if(this.negated)
 				size--;
 			else
 				size++;
-			((ExpressionNode)this).leaf.negate();
-			(((ExpressionNode)this).children[0]).negate();
+			((ExpressionNode<T>)this).leaf.negate();
+			(((ExpressionNode<T>)this).getChildren()[0]).negate();
 			this.negated = this.negated?false:true;
 		}
 		else if(root != null && root.negated) {
@@ -146,6 +145,10 @@ public class Expression<T extends Predicate> extends Concept{
 		else return 0;
 	}
 	
+	public void setOperator(char c) {
+		root.operator = c;
+	}
+
 	public void setScope(long t) {
 		scope = t;
 	}
@@ -155,11 +158,11 @@ public class Expression<T extends Predicate> extends Concept{
 		return root.toString() + " Size: " + this.getSize();
 	}
 
-	public Expression getChild(int i){
-		return root.children[i];
+	public Expression<T> getChild(int i){
+		return root.getChildren()[i];
 	}
 	
-	public ExpressionNode getRoot() {
+	public ExpressionNode<T> getRoot() {
 		return this.root;
 	}
 

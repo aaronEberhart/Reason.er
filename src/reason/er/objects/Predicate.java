@@ -1,16 +1,17 @@
 /**
  * 
  */
-package reason.er.Objects;
+package reason.er.objects;
 
 import java.util.ArrayList;
 
-import reason.er.Functions.*;
+import reason.er.compositeObjects.*;
 
 /**
  *
  * @author Aaron
  */
+@SuppressWarnings("rawtypes")
 public abstract class Predicate<T> {
 
 	public static final char[] uppers = {'A','B','C','D','E','F','G','H','I','J','K','L','M',
@@ -21,7 +22,8 @@ public abstract class Predicate<T> {
     protected long label;
     protected boolean negated;
     
-    public abstract Predicate<T> clone(Expression e);
+    
+	public abstract Predicate<T> clone(Expression e);
     
     public boolean isNegated() {
 
@@ -41,7 +43,7 @@ public abstract class Predicate<T> {
     public Term<T> getTerm(int i) {
     	return terms.get(i);
     }
-
+    
     protected void setLabel(long s) {
     	label = s;
     }

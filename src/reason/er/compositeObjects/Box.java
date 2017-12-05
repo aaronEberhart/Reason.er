@@ -1,11 +1,11 @@
-package reason.er.Functions;
+package reason.er.compositeObjects;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import reason.er.Objects.*;
+import reason.er.objects.*;
 
-public abstract class Box <T extends Expression<T>> {
+public abstract class Box <T extends Predicate<T>> {
 	
 	//TODO enable adding duplicate concept/role names to expressions (not the head)
 	
@@ -16,7 +16,7 @@ public abstract class Box <T extends Expression<T>> {
 	
 	
 	protected ArrayList<Expression<T>> expressions;
-	protected Normals<T> normalized;
+	protected NormalizedBox<T> normalized;
 
 	protected abstract Expression<T> makeExpression();
 	protected abstract Predicate<T> newPredicate(int randInt);
@@ -37,7 +37,7 @@ public abstract class Box <T extends Expression<T>> {
 		}
 	}
 
-	public void addManually(ExpressionNode e) {
+	public void addManually(ExpressionNode<T> e) {
 		expressions.add(new Expression<T>(e));
 	}
 	
@@ -49,25 +49,27 @@ public abstract class Box <T extends Expression<T>> {
     	return Math.abs(rand.nextLong()) % (universe);
     }
     
-    
+    public ArrayList<Expression<T>> getNormals(){
+		return normalized.getNormals();
+	}
     
     @Override
     public String toString() {
-    	String s = "{ ";
+    	String s = "{\n\n";
     	if(expressions.size() == 0) {
     		s = s + "NULL";
     	}else {	
     		int j = 0;;
     		for(int i = 0; i < expressions.size(); i++) {  
     			if(normalized == null) {
-    				s = s + expressions.get(i).toString() + ",";
+    				s = s + "\t" +expressions.get(i).toString() + ",";
     			}
     			else {
-    				s = s + "Expression :" + expressions.get(i).toString() + ",";		   		
-	    			s = s + "\nNormal: " + normalized.getFromExpressionIndex(j).toString() + ",";
+    				s = s + "\tExpression :" + expressions.get(i).toString() + ",";		   		
+	    			s = s + "\n\tNormal: " + normalized.getFromExpressionIndex(j).toString() + ",";
 	    			if(expressions.get(i).root.operator == '=') {
 	    				j++;
-	    				s = s + "\nNormal: " + normalized.getFromExpressionIndex(j).toString() + ",";
+	    				s = s + "\n\tNormal: " + normalized.getFromExpressionIndex(j).toString() + ",";
 	    			}
 	    			j++;
 		   		}

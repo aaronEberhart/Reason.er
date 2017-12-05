@@ -1,8 +1,8 @@
-package reason.er.Functions;
+package reason.er.compositeObjects;
 
 import java.util.ArrayList;
 
-import reason.er.Objects.*;
+import reason.er.objects.*;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class KnowledgeBase<T extends Expression<T>, U extends Expression<U>> {
@@ -21,6 +21,10 @@ public class KnowledgeBase<T extends Expression<T>, U extends Expression<U>> {
 		abox = a;
 	}
 	
+	public KnowledgeBase() {
+		makeTestKnowledgeBase();
+	}
+	
 	public void normalize() {
 		tbox.normalizeExpressions();
 		abox.normalizeExpressions();
@@ -31,13 +35,13 @@ public class KnowledgeBase<T extends Expression<T>, U extends Expression<U>> {
 		return "K = ( ABox, TBox )\n\n" + abox.toString() + "\n\n" + tbox.toString() + "\n";
 	}
 	
-	public static <T extends Expression<T>,U extends Expression <U>> KnowledgeBase<T,U> makeTestKnowledgeBase() {
+	private void makeTestKnowledgeBase() {
     	
-		ABox<T> abox = new ABox(new ArrayList<T>());
+		abox = new ABox(new ArrayList<T>());
     	
     	abox.addManually(new ExpressionNode(new Role(false,(long)0,(long)1,(long)17)));
     	
-		TBox<U> tbox = new TBox(new ArrayList<U>());
+		tbox = new TBox(new ArrayList<U>());
     	
     	tbox.addManually(
     			(ExpressionNode)new ExpressionNode(new QuantifiedRole(false,true,1,Term.getVarIndex('x'),Term.getVarIndex('w'),Predicate.getLabelIndex('R'),Predicate.getLabelIndex('A'),Predicate.getLabelIndex('T')))
@@ -55,6 +59,5 @@ public class KnowledgeBase<T extends Expression<T>, U extends Expression<U>> {
     			//.negate()
     			.superClass(new Concept(false,Term.getVarIndex('y'),Predicate.getLabelIndex('C'))));
     	
-    	return new KnowledgeBase(abox,tbox);
     }
 }

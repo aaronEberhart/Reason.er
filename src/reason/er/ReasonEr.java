@@ -8,13 +8,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
-import reason.er.Functions.*;
-import reason.er.Objects.*;
+import reason.er.compositeObjects.*;
+import reason.er.objects.*;
 /**
  *
  * @author aaron
  */
-@SuppressWarnings({ "rawtypes", "unchecked" })
+@SuppressWarnings({ "rawtypes" })
 public class ReasonEr {
 	
 	public static final Exception expression = new Exception("Invalid expression: ");
@@ -23,7 +23,7 @@ public class ReasonEr {
 		
 		System.out.println("Making Expressions");
 		
-    	KnowledgeBase kb = new KnowledgeBase(50,50);//KnowledgeBase.makeTestKnowledgeBase();//
+    	KnowledgeBase kb = new KnowledgeBase(99,99);
     	
 //    	System.out.println(kb.toString());
     	toFile("knowledgeBase.txt",kb.toString());

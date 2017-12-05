@@ -2,18 +2,18 @@
  *
  *
  */
-package reason.er.Objects;
+package reason.er.objects;
 
 import java.util.ArrayList;
 
-import reason.er.Functions.*;
+import reason.er.compositeObjects.*;
 
 /**
  *
  * @author aaron
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class Concept<T> extends Predicate {
+public class Concept<T> extends Predicate<T> {
     
 	public Concept() {}
 	
@@ -57,7 +57,7 @@ public class Concept<T> extends Predicate {
     }
 
 	@Override
-	public Predicate clone(Expression e) {
-		return new Concept(e.negated, this.getTerm().getValue(), label);
+	public Predicate<T> clone(Expression e) {
+		return new Concept<T>(e.negated, this.getTerm().getValue(), label);
 	}
 }

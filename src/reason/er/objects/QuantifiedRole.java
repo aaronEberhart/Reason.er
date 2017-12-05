@@ -1,9 +1,9 @@
-package reason.er.Objects;
+package reason.er.objects;
 
 import java.util.ArrayList;
 
 import reason.er.ReasonEr;
-import reason.er.Functions.*;;
+import reason.er.compositeObjects.*;;
 
 @SuppressWarnings({"rawtypes","unchecked"})
 public class QuantifiedRole<T,U> extends Role {
@@ -45,7 +45,7 @@ public class QuantifiedRole<T,U> extends Role {
 		}
 	}
 
-	public QuantifiedRole(Quantifier q, Role<T,U> r, Concept<U> c, long name1, long name2, long name3) {
+	public QuantifiedRole(Quantifier q, Role<T,U> r, Concept<T> c, long name1, long name2, long name3) {
 		
 		if(canQuantify(q,r,c,null)){
 			this.terms = new ArrayList();
@@ -116,9 +116,10 @@ public class QuantifiedRole<T,U> extends Role {
 		return false;
 	}
 	
-	public Predicate clone(Expression e) {
+	@Override
+	public Predicate<T> clone(Expression e) {
 		if(this.isExpression()) {
-			return new ExpressionNode(new QuantifiedRole(new Quantifier(getQuantifier().getInteger()),(Role)terms.get(0),((ExpressionNode)e).getChild(0),label),(ExpressionNode)((ExpressionNode)e).getChild(0));
+			return new ExpressionNode(new QuantifiedRole<T,U>(new Quantifier(getQuantifier().getInteger()),(Role<T,U>)terms.get(0),((ExpressionNode)e).getChild(0),label),(ExpressionNode)((ExpressionNode)e).getChild(0));
 		}
 		QuantifiedRole qr = new QuantifiedRole(negated,getConcept().negated,this.getQuantifier().getInteger(),(T)((Role)terms.get(0)).getTerm(0).getValue(),(U)((Role)terms.get(0)).getTerm(1).getValue(),
 				((Role)terms.get(0)).label,((Concept)terms.get(1)).label,label);

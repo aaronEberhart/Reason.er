@@ -1,15 +1,15 @@
-package reason.er.Functions;
+package reason.er.compositeObjects;
 
 import java.util.ArrayList;
 
-import reason.er.Objects.*;
+import reason.er.objects.*;
 
-@SuppressWarnings({"unchecked","rawtypes","unused"})
-public class Normals <T extends Expression<T>>{
+@SuppressWarnings({"unchecked","rawtypes"})
+public class NormalizedBox <T extends Predicate<T>>{
 
 	protected ArrayList<Expression<T>> normals;
 	
-	public Normals(ArrayList<Expression<T>> expressions) {
+	public NormalizedBox(ArrayList<Expression<T>> expressions) {
 		normals = new ArrayList<Expression<T>>();
 		
 		for(Expression e : expressions) {
@@ -42,7 +42,7 @@ public class Normals <T extends Expression<T>>{
 	}
 
 	public ExpressionNode negateQuantifier(ExpressionNode here){
-		//TODO complex expressions
+		
 		here.negate();
 		((QuantifiedRole)here.leaf).getQuantifier().flipQuantifier();
 		((QuantifiedRole)here.leaf).getConcept().negate();
@@ -59,8 +59,8 @@ public class Normals <T extends Expression<T>>{
 			return e;
 		else {
 			Expression<T> ex = new Expression(normalizeTree(e.root));
-//			ex.setSize(ex.root.getSize());
-//			ex.setScope(ex.root.getScope());
+			ex.setSize(ex.root.getSize());
+			ex.setScope(ex.root.getScope());
 			return ex;
 		}
 	}
@@ -109,4 +109,7 @@ public class Normals <T extends Expression<T>>{
 		}
 	}
 	
+	public ArrayList<Expression<T>> getNormals(){
+		return normals;
+	}
 }

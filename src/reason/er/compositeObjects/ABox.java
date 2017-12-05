@@ -1,8 +1,9 @@
-package reason.er.Functions;
+package reason.er.compositeObjects;
 
 import java.util.ArrayList;
 import java.util.Random;
-import reason.er.Objects.*;
+
+import reason.er.objects.*;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class ABox<T extends Expression<T>> extends Box<T> {
@@ -73,12 +74,12 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 				expression = expression.negate();
 				break;
 			case 5:
-				expression = expression.dot(new Quantifier(1), (Role)newPredicate(2), counters[2] + universe);
-				constants = true;
+				constants = weightedBool(rand);
+				expression = expression.dot(new Quantifier(1), (Role)newPredicate(2), counters[2] + universe);				
 				break;
 			default:
-				expression = expression.dot(new Quantifier(2), (Role)newPredicate(2), counters[2] + universe);
-				constants = true;
+				constants = weightedBool(rand);
+				expression = expression.dot(new Quantifier(2), (Role)newPredicate(2), counters[2] + universe);				
 				break;
 			
 			
@@ -120,7 +121,8 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 				complete = true;
 			}
 		}
-		
+		expression.setSize(builder.getSize());
+		expression.setScope(builder.getScope());
 		//reset variable stuff
 		this.counters[0] = rand.nextInt(universe) % universe;
 		this.counters[1] = rand.nextInt(10000) % variables;
@@ -179,7 +181,7 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 			normals.add(e.deepCopy(e));			
 		}
 		
-		this.normalized = new Normals(normals);
+		this.normalized = new NormalizedBox(normals);
 		
 	}
 	
