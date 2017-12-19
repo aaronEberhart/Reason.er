@@ -23,7 +23,7 @@ public class ReasonEr {
 		
 		System.out.println("Making Expressions");
 		
-    	KnowledgeBase kb = new KnowledgeBase(99,99);
+    	KnowledgeBase kb = new KnowledgeBase(9,9);
     	
 //    	System.out.println(kb.toString());
     	toFile("knowledgeBase.txt",kb.toString());

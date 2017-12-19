@@ -14,7 +14,6 @@ public abstract class Box <T extends Predicate<T>> {
 	protected long counters[];
 	protected Random rand;
 	
-	
 	protected ArrayList<Expression<T>> expressions;
 	protected NormalizedBox<T> normalized;
 
