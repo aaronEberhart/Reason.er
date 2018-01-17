@@ -7,8 +7,6 @@ import reason.er.objects.*;
 
 public abstract class Box <T extends Predicate<T>> {
 	
-	//TODO enable adding duplicate concept/role names to expressions (not the head)
-	
 	protected long scope;
 	protected int universe, variables;
 	protected long counters[];
@@ -50,6 +48,10 @@ public abstract class Box <T extends Predicate<T>> {
     
     public ArrayList<Expression<T>> getNormals(){
 		return normalized.getNormals();
+	}
+    
+    public ArrayList<Expression<T>> copyNormals(){
+		return normalized.copyNormals();
 	}
     
     @Override

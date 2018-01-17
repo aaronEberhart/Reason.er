@@ -55,12 +55,13 @@ public class NormalizedBox <T extends Predicate<T>>{
 	}
 
 	public Expression<T> normalize(Expression e){
-		if(e.getSize() <= 2)
+		if(e.isNormal() || e.getSize() <= 2)
 			return e;
 		else {
 			Expression<T> ex = new Expression(normalizeTree(e.root));
 			ex.setSize(ex.root.getSize());
 			ex.setScope(ex.root.getScope());
+			ex.setNormal(true);
 			return ex;
 		}
 	}
@@ -112,4 +113,21 @@ public class NormalizedBox <T extends Predicate<T>>{
 	public ArrayList<Expression<T>> getNormals(){
 		return normals;
 	}
+
+	public ArrayList<Expression<T>> copyNormals(){
+		ArrayList<Expression<T>> list = new ArrayList();
+		
+		for(Expression<T> e : normals) {
+			list.add(e.deepCopy(e));
+		}
+		
+		return list;
+	}
+
+	public void appendExpressions(ArrayList<Expression<T>> expressions) {
+		for(Expression<T> ex : expressions) {
+			normals.add(normalize(ex));
+		}
+	}
+
 }

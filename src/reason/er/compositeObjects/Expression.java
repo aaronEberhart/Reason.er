@@ -7,7 +7,7 @@ import reason.er.objects.*;
 public class Expression<T extends Predicate<T>> extends Concept<T>{
 	
 	protected ExpressionNode<T> root;
-	protected boolean complete;
+	protected boolean complete, normalized;
 	
 	public Expression() {
 	}
@@ -17,15 +17,16 @@ public class Expression<T extends Predicate<T>> extends Concept<T>{
 		root = new ExpressionNode<T>(p);
 		negated = p.isNegated();
 		complete = false;
+		normalized = false;
 		size = p.getSize();
 	}
 	
 	public Expression(ExpressionNode<T> e){
 		scope = e.getScope();
-		
 		root = recursiveDeepCopy(e);	
 		negated = e.negated;
 		complete = true;
+		normalized = false;
 		size = e.getSize();
 	}
 
@@ -34,6 +35,7 @@ public class Expression<T extends Predicate<T>> extends Concept<T>{
 		scope = e.scope;
 		this.size = e.getSize();
 		complete = true;
+		normalized = false;
 	}
 	
 	public ExpressionNode<T> recursiveDeepCopy(ExpressionNode<T> e) {
@@ -151,6 +153,14 @@ public class Expression<T extends Predicate<T>> extends Concept<T>{
 
 	public void setScope(long t) {
 		scope = t;
+	}
+	
+	public void setNormal(boolean b) {
+		normalized = b;
+	}
+	
+	public boolean isNormal() {
+		return normalized;
 	}
 	
 	public String toString() {

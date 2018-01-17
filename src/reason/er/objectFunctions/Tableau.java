@@ -1,32 +1,34 @@
 package reason.er.objectFunctions;
 
 import java.util.ArrayList;
-
-import reason.er.compositeObjects.ABox;
-import reason.er.compositeObjects.Expression;
-import reason.er.compositeObjects.TBox;
+import reason.er.compositeObjects.*;
+import reason.er.objectFunctions.*;
 import reason.er.objects.*;
 
+@SuppressWarnings({ "rawtypes" , "unchecked" })
 public class Tableau <T extends Expression<T>> {
 	
+	NormalizedBox<T> expressions;
 	ArrayList<ArrayList<Predicate<T>>> model;
 	ArrayList<Term<T>> blocks;
 	
-	public Tableau(ABox<T> a, TBox<T> t) {
+	public Tableau(KnowledgeBase<T,T> kb) {
+		
+		expressions = unifyBoxes(kb.getABox(),kb.getTBox());
+		
 		model = new ArrayList<>();
 		blocks = new ArrayList<>();
 		
-		ArrayList<Expression<T>> kb = unifyBoxes(a,t);
-		
-		
 	}
 	
+	public boolean run() {
+		return true;
+	}
 	
-	
-	private ArrayList<Expression<T>> unifyBoxes(ABox<T> a, TBox<T> t){
-		ArrayList<Expression<T>> kb = a.getNormals();
-		kb.addAll(t.getNormals());
-		return kb;
+	private NormalizedBox<T> unifyBoxes(ABox<T> a, TBox<T> t){
+		ArrayList<Expression<T>> kb = a.copyNormals();
+		kb.addAll(t.copyNormals());
+		return new NormalizedBox<T>(kb);
 	}
 	
 	public String toString() {
@@ -38,4 +40,5 @@ public class Tableau <T extends Expression<T>> {
 		}
 		return s;
 	}
+
 }

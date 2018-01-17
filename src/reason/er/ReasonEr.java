@@ -8,13 +8,14 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
+import reason.er.objectFunctions.*;
 import reason.er.compositeObjects.*;
 import reason.er.objects.*;
 /**
  *
  * @author aaron
  */
-@SuppressWarnings({ "rawtypes" })
+@SuppressWarnings({ "rawtypes" , "unchecked" })
 public class ReasonEr {
 	
 	public static final Exception expression = new Exception("Invalid expression: ");
@@ -34,6 +35,12 @@ public class ReasonEr {
     	
 //    	System.out.println(kb.toString());
     	toFile("normalizedKnowledgeBase.txt",kb.toString());
+    	
+    	Tableau t = new Tableau(kb);
+    	t.run();
+    	
+//    	System.out.println(t.toString());
+    	toFile("tableau.txt",t.toString());
     	
     	System.out.println("\nDONE");
     }
