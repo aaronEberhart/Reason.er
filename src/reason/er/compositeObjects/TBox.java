@@ -5,6 +5,7 @@ import java.util.Random;
 
 import reason.er.compositeObjects.*;
 import reason.er.objects.*;
+import reason.er.util.*;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class TBox<T extends Expression<T>>  extends Box<T>{
@@ -39,7 +40,7 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 	
 	@Override
 	protected Expression<T> makeExpression() {
-		rand = new Random(System.currentTimeMillis());
+		rand = new RandomInteger();
 		Expression<T> expression = new Expression<T>(newPredicate(rand.nextInt(2)));
 		scope = expression.getScope();
 		
@@ -141,7 +142,7 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
     	return false;
     }
 	
-	public long endExpression(Random rand) {
+	public long endExpression(RandomInteger rand) {
 		long l = makeName(rand);
 		
 		if(names.size() >= universe) {

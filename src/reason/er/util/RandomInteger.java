@@ -41,6 +41,20 @@ public class RandomInteger {
 	    }
 	  }
 	  
+	  public int nextInt(int bound) {
+		  int val = (int)nextLong();
+		  val = val < 0 ? val *= -1 : val;
+		  return val % bound;
+	  }
+	  
+	  public boolean nextBoolean() {
+		  return nextInt(1)==0?true:false;
+	  }
+	  
+	  public boolean weightedBool(int upper, int lower) {
+			return nextInt(upper)>lower?true:false;
+		}
+	  
 	  protected int next(int bits) {
 	    return (int) (nextLong() >>> (64-bits));
 	  }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import reason.er.objects.*;
+import reason.er.util.*;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class ABox<T extends Expression<T>> extends Box<T> {
@@ -12,9 +13,9 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 	
 	public ABox(int size) {
 				
-		rand = new Random(System.currentTimeMillis());
+		rand = new RandomInteger();
 
-		constants = weightedBool(rand);
+		constants = rand.weightedBool(10000,1000);
 		complete = false;
 		
 		universe = Predicate.uppers.length / 2;
@@ -47,7 +48,7 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 			randInt = (randInt % 2) + 5;
 		}
 		else if(constants && !complete) {
-			expression.complete = weightedBool(rand);
+			expression.complete = rand.weightedBool(10000,1000);
 		}
 		
 		//just in case
@@ -74,11 +75,11 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 				expression = expression.negate();
 				break;
 			case 5:
-				constants = weightedBool(rand);
+				constants = rand.weightedBool(10000,1000);
 				expression = expression.dot(new Quantifier(1), (Role)newPredicate(2), counters[2] + universe);				
 				break;
 			default:
-				constants = weightedBool(rand);
+				constants = rand.weightedBool(10000,1000);
 				expression = expression.dot(new Quantifier(2), (Role)newPredicate(2), counters[2] + universe);				
 				break;
 			
@@ -96,7 +97,7 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 	protected Expression<T> makeExpression() {
 		
 		//initialize rand
-		rand = new Random(System.currentTimeMillis());
+		rand = new RandomInteger();
 				
 		int randInt = rand.nextInt(3);
 		if (randInt == 2) {//if it decided to make a Role
@@ -129,7 +130,7 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		this.counters[2] = (rand.nextInt(universe) + universe) % universe;
 		this.counters[3] = variables + 1;
 				
-		constants = weightedBool(rand);
+		constants = rand.weightedBool(10000,1000);
 		complete = false;
 		
 		return expression;
@@ -168,9 +169,7 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		return p;
 	}
 	
-	private boolean weightedBool(Random rand) {
-		return rand.nextInt(10000)>1000?true:false;
-	}
+	
 	
 	@Override
 	public void normalizeExpressions() {

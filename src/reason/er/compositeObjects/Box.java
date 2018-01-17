@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import reason.er.objects.*;
+import reason.er.util.*;
 
 public abstract class Box <T extends Predicate<T>> {
 	
 	protected long scope;
 	protected int universe, variables;
 	protected long counters[];
-	protected Random rand;
+	protected RandomInteger rand;
 	
 	protected ArrayList<Expression<T>> expressions;
 	protected NormalizedBox<T> normalized;
@@ -24,13 +25,6 @@ public abstract class Box <T extends Predicate<T>> {
 		expressions = new ArrayList<Expression<T>>();
 		while(expressions.size() < size) {
 			expressions.add(makeExpression());
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			rand.setSeed(System.currentTimeMillis());
-			
 		}
 	}
 
@@ -42,7 +36,7 @@ public abstract class Box <T extends Predicate<T>> {
 		return universe;
 	}
 	
-    protected long makeName(Random rand) {
+    protected long makeName(RandomInteger rand) {
     	return Math.abs(rand.nextLong()) % (universe);
     }
     
