@@ -40,6 +40,7 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 	
 	@Override
 	protected Expression<T> makeExpression() {
+		
 		rand = new RandomInteger();
 		Expression<T> expression = new Expression<T>(newPredicate(rand.nextInt(2)));
 		scope = expression.getScope();
@@ -54,12 +55,15 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 			if(builder.complete)
 				expression.complete = true;
 		}
+		
 		expression.setSize(builder.getSize());
 		expression.setScope(builder.getScope());
+		
 		names.clear();
 		scope = variables + 1;
 		counters[0] = (counters[0] + 1) % universe;
 		counters[1] = variables + 1;
+		
 		return expression;
 	}
 

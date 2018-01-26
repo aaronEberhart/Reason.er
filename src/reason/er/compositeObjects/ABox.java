@@ -100,6 +100,7 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		rand = new RandomInteger();
 				
 		int randInt = rand.nextInt(3);
+		
 		if (randInt == 2) {//if it decided to make a Role
 			randInt++;
 			constants = true;
@@ -124,6 +125,7 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		}
 		expression.setSize(builder.getSize());
 		expression.setScope(builder.getScope());
+		
 		//reset variable stuff
 		this.counters[0] = rand.nextInt(universe) % universe;
 		this.counters[1] = rand.nextInt(10000) % variables;
@@ -163,7 +165,6 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		}
 		else {			
 			p = new Role(negated,counters[1],(long)(rand.nextInt(10000) % variables),one + universe);
-			//complete = true;
 		}
 				
 		return p;

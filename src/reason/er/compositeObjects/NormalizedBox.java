@@ -46,15 +46,18 @@ public class NormalizedBox <T extends Predicate<T>>{
 		here.negate();
 		((QuantifiedRole)here.leaf).getQuantifier().flipQuantifier();
 		((QuantifiedRole)here.leaf).getConcept().negate();
+		
 		if(here.numChildren() <= 1 && here.children[0].leaf != null) {
 			here.children[0].negate();
 		}
 		here.children[0] = normalizeTree(here.children[0]);
+		
 		((QuantifiedRole)here.leaf).setSize(here.children[0].getSize() + 1);
 		return here;
 	}
 
 	public Expression<T> normalize(Expression e){
+		
 		if(e.isNormal() || e.getSize() <= 2)
 			return e;
 		else {
