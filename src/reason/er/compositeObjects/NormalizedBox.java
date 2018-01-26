@@ -50,6 +50,7 @@ public class NormalizedBox <T extends Predicate<T>>{
 		if(here.numChildren() <= 1 && here.children[0].leaf != null) {
 			here.children[0].negate();
 		}
+		
 		here.children[0] = normalizeTree(here.children[0]);
 		
 		((QuantifiedRole)here.leaf).setSize(here.children[0].getSize() + 1);

@@ -44,8 +44,7 @@ public class RandomInteger {
 	      x ^= x << 4;
 	      long ret = (x + v) ^ w;
 	      return ret;
-	    } finally {
-	    }
+	    } finally {}
 	  }
 
 	  //New
@@ -62,8 +61,8 @@ public class RandomInteger {
 	  
 	  //New
 	  public boolean weightedBool(int upper, int lower) {
-			return nextInt(upper)>lower?true:false;
-		}
+		  return nextInt(upper)>lower?true:false;
+	  }
 	  
 	  //Original
 	  protected int next(int bits) {
