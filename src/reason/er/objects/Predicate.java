@@ -52,6 +52,10 @@ public abstract class Predicate<T> {
 		return false;
 	}
     
+    public boolean isExpression() {
+    	return false;
+    }
+    
     public long getScope() {
     	return scope;
     }

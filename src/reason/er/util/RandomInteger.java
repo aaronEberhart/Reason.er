@@ -18,7 +18,7 @@ public class RandomInteger {
 
 	  //Original
 	  public RandomInteger() {
-	    this(System.nanoTime());
+		  this(System.nanoTime());
 	  }
 
 	  //Original
@@ -56,7 +56,7 @@ public class RandomInteger {
 	  
 	  //New
 	  public boolean nextBoolean() {
-		  return nextInt(1)==0?true:false;
+		  return nextInt(2)==0?true:false;
 	  }
 	  
 	  //New

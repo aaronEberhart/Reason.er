@@ -18,8 +18,9 @@ public abstract class Box <T extends Predicate<T>> {
 
 	protected abstract Expression<T> makeExpression();
 	protected abstract Predicate<T> newPredicate(int randInt);
-	
+	protected abstract ExpressionNode<T> transform(int randInt, ExpressionNode<T> expression);
 	public abstract void normalizeExpressions();
+	protected abstract long[] resetCounters();
 	
 	protected void makeBox(int size) {
 		expressions = new ArrayList<Expression<T>>();
@@ -37,7 +38,7 @@ public abstract class Box <T extends Predicate<T>> {
 	}
 	
     protected long makeName(RandomInteger rand) {
-    	return Math.abs(rand.nextLong()) % (universe);
+    	return Math.abs(rand.nextLong());
     }
     
     public ArrayList<Expression<T>> getNormals(){

@@ -12,7 +12,7 @@ public class QuantifiedRole<T,U> extends Role {
 	
 	public QuantifiedRole(boolean hasSign,boolean conceptNegated, int i, T t, U u, long name1, long name2, long name3) {
 		
-		this.terms = new ArrayList();
+		this.terms = new ArrayList(4);
 		
 		Quantifier q = new Quantifier(i);
 		Role<T,U> r = new Role<T,U>(false,t,u, name1);
@@ -33,7 +33,7 @@ public class QuantifiedRole<T,U> extends Role {
 	public QuantifiedRole(Quantifier q, Role<T,U> r, Expression c, long name) {
 		
 		if(canQuantify(q,r,null,c)) {
-			this.terms = new ArrayList();
+			this.terms = new ArrayList(4);
 			this.terms.add(r);
 			this.terms.add(new Concept<U>(c.negated,new Term(r.getTerm(1)), name));
 			this.terms.add(q);
@@ -48,7 +48,7 @@ public class QuantifiedRole<T,U> extends Role {
 	public QuantifiedRole(Quantifier q, Role<T,U> r, Concept<T> c, long name1, long name2, long name3) {
 		
 		if(canQuantify(q,r,c,null)){
-			this.terms = new ArrayList();
+			this.terms = new ArrayList(4);
 			r.setLabel(name1);
 			c.setLabel(name2);
 			

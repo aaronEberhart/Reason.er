@@ -4,7 +4,7 @@ import reason.er.ReasonEr;
 import reason.er.objects.*;
 
 @SuppressWarnings({ "unchecked"})
-public class Expression<T extends Predicate<T>> extends Concept<T>{
+public class Expression<T> extends Predicate<T>{
 	
 	protected ExpressionNode<T> root;
 	protected boolean complete, normalized;
@@ -176,4 +176,13 @@ public class Expression<T extends Predicate<T>> extends Concept<T>{
 		return this.root;
 	}
 
+	@Override
+	public Predicate<T> clone(Expression e) {
+		return recursiveDeepCopy(e.root);
+	}
+
+	@Override
+	public boolean isExpression() {
+    	return true;
+    }
 }

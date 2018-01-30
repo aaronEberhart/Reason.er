@@ -4,7 +4,7 @@ import reason.er.ReasonEr;
 import reason.er.objects.*;
 
 @SuppressWarnings({"unused","unchecked"})
-public class ExpressionNode<T extends Predicate<T>> extends Expression<T>{
+public class ExpressionNode<T> extends Expression<T>{
 	
 	protected char operator;	
 	protected Predicate<T> leaf;
@@ -92,10 +92,36 @@ public class ExpressionNode<T extends Predicate<T>> extends Expression<T>{
 		}
 		return this;
 	}
+	public ExpressionNode<T> and(ExpressionNode<T> p) {
+		if(canJoin(p)) {
+			return  new ExpressionNode<T>('^', p, this);
+		}else {
+			try {
+				throw ReasonEr.expression;
+			} catch (Exception e) {
+				System.out.println(e + p.toString() + " ^ " + this.toString());
+			}
+		}
+		return this;
+	}
 	public ExpressionNode<T> or(Predicate<T> p) {
 				
 		if(canJoin(p)) {
 			return new ExpressionNode<T>('v', this, new ExpressionNode<T>(p));
+		}
+		else {
+			try {
+				throw ReasonEr.expression;
+			} catch (Exception ex) {
+				System.out.println(ex + p.toString() + " v " + this.toString());
+			}
+		}
+		return this;
+	}
+	public ExpressionNode<T> or(ExpressionNode<T> p) {
+		
+		if(canJoin(p)) {
+			return new ExpressionNode<T>('v', this, p);
 		}
 		else {
 			try {
@@ -189,5 +215,8 @@ public class ExpressionNode<T extends Predicate<T>> extends Expression<T>{
 		this.children = children;
 	}
 
-	
+	@Override
+	public boolean isExpression() {
+    	return true;
+    }
 }
