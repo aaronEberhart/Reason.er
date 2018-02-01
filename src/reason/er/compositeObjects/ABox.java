@@ -19,9 +19,6 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		constants = rand.weightedBool(10000,1000);
 		complete = false;
 		
-		universe = Predicate.uppers.length / 2;
-		variables = Term.lowers.length / 2;
-		
 		this.counters = resetCounters();
 		mem = counters;
 		
@@ -33,8 +30,6 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 	}
 	
 	public ABox(ArrayList<Expression<T>> e) {
-		universe = Predicate.uppers.length / 2;
-		variables = Term.lowers.length / 2;
 		mem = null;
 		expressions = e;
 	}
@@ -184,20 +179,20 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 	protected Predicate newPredicate(int randInt) {
 		boolean negated = rand.nextBoolean();
 		Predicate p;
-		long one = (makeName(rand) % universe) * (rand.nextInt(3) + 1);
+		long one = (makeName(rand) % universe);
 		
 		if(randInt == 0) {
 			p = new Concept(negated,constants?counters[1]:counters[3],one);
 			counters[0] = (counters[0] + 1) % universe;
 		}
 		else if(randInt == 1) {
-			long two = ((makeName(rand) % universe) + universe) * (rand.nextInt(3) + 1);
-			p = new QuantifiedRole(negated,rand.nextBoolean(),rand.nextInt(2) + 1,constants?counters[1]:counters[3],constants?counters[3]:counters[3]-1,one,two,two);
+			long two = (makeName(rand) % universe);
+			p = new QuantifiedRole(negated,rand.nextBoolean(),rand.nextInt(2) + 1,constants?counters[1]:counters[3],constants?counters[3]:counters[3]-1,one*-1,two,two);
 			counters[0] = (counters[0] + 1) % universe;
 			counters[2] = (counters[2] + 1) % universe;
 		}
 		else if(randInt == 2) {
-			p = new Role(false,constants?counters[1]:counters[3]+1,counters[3],one);
+			p = new Role(false,constants?counters[1]:counters[3]+1,counters[3],one*-1);
 			counters[2] = (counters[2] + 1) % universe;
 			if(!constants) {
 				counters[3] = (counters[3] + 1) % Term.lowers.length;
@@ -206,7 +201,7 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 			}
 		}
 		else {			
-			p = new Role(negated,counters[1],(long)(rand.nextInt(10000) % variables),one + universe);
+			p = new Role(negated,counters[1],(long)(rand.nextInt(10000) % variables),-1*one);
 		}
 				
 		return p;

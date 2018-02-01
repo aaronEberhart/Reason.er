@@ -16,9 +16,6 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 
 		names = new ArrayList<>();
 		
-		universe = Predicate.uppers.length / 2;
-		variables = Term.lowers.length / 2;
-		
 		this.counters = resetCounters();
 		
 		scope = counters[1];
@@ -29,9 +26,6 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 	}
 	
 	public TBox(ArrayList<Expression<T>> e) {
-		universe = Predicate.uppers.length / 2;
-		variables = Term.lowers.length / 2;
-		
 		expressions = e;
 	}
 	
@@ -145,8 +139,8 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 	protected Predicate newPredicate(int randInt) {
 		boolean negated = rand.nextBoolean();
 		Predicate p;
-		long one = (makeName(rand) % universe) * (rand.nextInt(3) + 1);
-		long two = ((makeName(rand) % universe) + universe) * (rand.nextInt(3) + 1);
+		long one = (makeName(rand) % universe);
+		long two = -1 * (makeName(rand) % universe);
 		
 		if(randInt == 0) {
 			p = new Concept(negated,counters[1],one);
@@ -180,11 +174,9 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
     }
 	
 	public long endExpression(RandomInteger rand) {
-		long l = (makeName(rand) % universe) / 2;
+		long l = (makeName(rand) % universe);
 		
-		while(usedBefore(l)) {
-			l += (universe * 2);
-		}
+		while(usedBefore(l)) {l += 1;}
 		
 		return l;
 	}
@@ -231,14 +223,12 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 		return "TBox = " + super.toString();
 	}
 
-	
-
 	@Override
 	protected long[] resetCounters() {
 		long [] counters = new long[3];
-		counters[0] = 0;
+		counters[0] = 1;
 		counters[1] = variables + 1;
-		counters[2] = 0;
+		counters[2] = 1;
 		return counters;
 	}
 

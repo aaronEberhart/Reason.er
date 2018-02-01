@@ -73,14 +73,14 @@ public abstract class Predicate<T> {
     }
     
     protected String makeLabel(long count) {
-    	String s = "";
-    	
+    	String s = count < 0?"R":"C",t = "";
+    	count=count<0?count*-1:count;
     	do{
-    		s = Character.toString(uppers[(int)(count % uppers.length)]) + s;
+    		t = Character.toString(uppers[(int)(count % uppers.length)])+t;
     		count = count / uppers.length;
     	}while(count-- > 0);
     	
-    	return s;
+    	return s+t;
     }
 
     public static long getLabelIndex(char c) {

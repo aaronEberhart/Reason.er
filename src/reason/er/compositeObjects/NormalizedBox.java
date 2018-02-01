@@ -10,7 +10,7 @@ public class NormalizedBox <T extends Predicate<T>>{
 	protected ArrayList<Expression<T>> normals;
 	
 	public NormalizedBox(ArrayList<Expression<T>> expressions) {
-		normals = new ArrayList<Expression<T>>();
+		normals = new ArrayList<Expression<T>>(expressions.size());
 		
 		for(Expression e : expressions) {
 			normals.add(normalize(e));

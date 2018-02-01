@@ -9,9 +9,9 @@ import reason.er.util.*;
 public abstract class Box <T extends Predicate<T>> {
 	
 	protected long scope;
-	protected int universe, variables;
 	protected long counters[];
 	protected RandomInteger rand;
+	protected final int universe = Predicate.uppers.length,variables = Term.lowers.length / 2;;
 	
 	protected ArrayList<Expression<T>> expressions;
 	protected NormalizedBox<T> normalized;
@@ -23,7 +23,7 @@ public abstract class Box <T extends Predicate<T>> {
 	protected abstract long[] resetCounters();
 	
 	protected void makeBox(int size) {
-		expressions = new ArrayList<Expression<T>>();
+		expressions = new ArrayList<Expression<T>>(size);
 		while(expressions.size() < size) {
 			expressions.add(makeExpression());
 		}
