@@ -1,6 +1,3 @@
-/**
- * 
- */
 package reason.er;
 
 import java.io.BufferedWriter;
@@ -11,40 +8,61 @@ import java.util.ArrayList;
 import reason.er.objectFunctions.*;
 import reason.er.compositeObjects.*;
 import reason.er.objects.*;
+
 /**
- *
- * @author aaron
+ * @author Aaron Eberhart
  */
 @SuppressWarnings({ "rawtypes" , "unchecked" })
 public class ReasonEr {
 	
+	/**	
+	 * Exception message for expression errors.
+	 */
 	public static final Exception expression = new Exception("Invalid expression: ");
+	public static final int NUMTESTS = 1;
 	
+	/**
+	 * Main class for program.
+	 * 
+	 * @param args String
+	 */
 	public static void main(String[] args) {
 		
 		System.out.println("Making Expressions");
 		
-    	KnowledgeBase kb = new KnowledgeBase(9,9);
+    	KnowledgeBase kb;
     	
-//    	System.out.println(kb.toString());
-    	toFile("knowledgeBase.txt",kb.toString());
+    	for(int i = 0; i < NUMTESTS; i++) {
+    		
+    		kb = new KnowledgeBase(9999,9999);
     	
-    	System.out.println("Normalizing Expressions");
+//    		System.out.println(kb.toString());
+    		toFile("knowledgeBase["+i+"].txt",kb.toString());
     	
-    	kb.normalize();
+    		System.out.println("Normalizing Expressions");
     	
-//    	System.out.println(kb.toString());
-    	toFile("normalizedKnowledgeBase.txt",kb.toString());
+    		kb.normalize();
     	
-    	Tableau t = new Tableau(kb);
-    	t.run();
+//    		System.out.println(kb.toString());
+    		toFile("normalizedKnowledgeBase["+i+"].txt",kb.toString());
+//    	
+//    		Tableau t = new Tableau(kb);
+//    		t.run();
+//    	
+//    		System.out.println(t.toString());
+//    		toFile("tableau["+i+"].txt",t.toString());
     	
-//    	System.out.println(t.toString());
-    	toFile("tableau.txt",t.toString());
+    	}
     	
     	System.out.println("\nDONE");
     }
     
+	/**
+	 * Write text to a file.
+	 * 
+	 * @param filename String
+	 * @param text String
+	 */
     public static void toFile(String filename, String text) {
     	try{
     		BufferedWriter f = new BufferedWriter(new FileWriter(new File(filename)));

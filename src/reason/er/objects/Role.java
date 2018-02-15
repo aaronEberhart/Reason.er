@@ -1,6 +1,3 @@
-/**
- * 
- */
 package reason.er.objects;
 
 import java.util.ArrayList;
@@ -8,44 +5,61 @@ import java.util.ArrayList;
 import reason.er.compositeObjects.*;
 
 /**
+ * 
+ * @author Aaron Eberhart
  *
- * @author aaron
+ * @param T generic
+ * @param U generic
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class Role<T,U> extends Predicate {
+public class Role<T,U> extends Predicate<T,U> {
 
+	/**
+	 * Empty constructor.
+	 */
 	public Role() {
 	}
 	
-	public Role(boolean hasSign, T t, U u, long name){
+	/**
+	 * Manual Role constructor.
+	 * @param hasSign boolean
+	 * @param t generic
+	 * @param u generic
+	 * @param name long
+	 */
+	public Role(boolean hasSign, T t, T u, U name){
     	Term<T> s = new Term<T>(t);
-    	Term<U> r = new Term<U>(u);    	
-    	this.terms = new ArrayList();
+    	Term<T> r = new Term<T>(u);    	
+    	this.terms = new ArrayList(2);
     	this.terms.add(s);
     	this.terms.add(r);
     	this.label = name;
-    	this.scope = (long)s.getValue();
+    	this.scope = (T)s.getValue();
     	this.negated = hasSign;
     	this.size = 1;
     	if(negated)
     		size++;
     }
 	
+	/**
+	 * Returns true. This is a Role.
+	 */
 	@Override
 	public boolean isRole() {
 		return true;
 	}
 	
+	@Override
 	public String toString() {	
-		String s = makeLabel(this.label) + "(" + this.terms.get(0).toString() + "," + this.terms.get(1).toString() + ")";
+		String s = makeLabel() + "(" + this.terms.get(0).toString() + "," + this.terms.get(1).toString() + ")";
     	if(negated)
     		s = "--" + s;
     	return s;
     }
 
 	@Override
-	public Predicate<T> clone(Expression e) {
-		return new Role(e.negated,((Term)terms.get(0)).getValue(),((Term)terms.get(1)).getValue(),label);
+	public Predicate<T,U> clone(Expression<T,U> e) {
+		return new Role(e.negated,(T)((Term)terms.get(0)).getValue(),(U)((Term)terms.get(1)).getValue(),(long)label);
 	}
 	
 	

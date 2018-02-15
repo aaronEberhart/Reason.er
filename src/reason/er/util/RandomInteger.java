@@ -9,19 +9,24 @@ package reason.er.util;
  * @author Original Code : Neil Coffey : https://www.javamex.com/tutorials/random_numbers/numerical_recipes.shtml
  * @author New Code : Aaron Eberhart
  **/
-
 public class RandomInteger {
 
 	  private long u;
 	  private long v = 4101842887655102017L;
 	  private long w = 1;
 
-	  //Original
+	  /**
+	   * Original
+	   */
 	  public RandomInteger() {
 		  this(System.nanoTime());
 	  }
 
-	  //Original
+	  /**
+	   * Original
+	   * 
+	   * @param seed long
+	   */
 	  public RandomInteger(long seed) {
 	    u = seed ^ v;
 	    nextLong();
@@ -31,7 +36,10 @@ public class RandomInteger {
 	    nextLong();
 	  }
 
-	  //Original
+	  /**
+	   * Original
+	   * @return long
+	   */
 	  public long nextLong() {
 	    try {
 	      u = u * 2862933555777941757L + 7046029254386353087L;
@@ -47,24 +55,40 @@ public class RandomInteger {
 	    } finally {}
 	  }
 
-	  //New
+	  /**
+	   * New
+	   * @param bound integer
+	   * @return integer
+	   */
 	  public int nextInt(int bound) {
 		  int val = (int)nextLong();
 		  val = val < 0 ? val *= -1 : val;
 		  return val % bound;
 	  }
 	  
-	  //New
+	  /**
+	   * New
+	   * @return boolean 1:1
+	   */
 	  public boolean nextBoolean() {
 		  return nextInt(2)==0?true:false;
 	  }
 	  
-	  //New
+	  /**
+	   * New
+	   * @param upper integer
+	   * @param lower integer
+	   * @return boolean upper-lower:lower
+	   */
 	  public boolean weightedBool(int upper, int lower) {
 		  return nextInt(upper)>lower?true:false;
 	  }
 	  
-	  //Original
+	  /**
+	   * Original
+	   * @param bits integer
+	   * @return integer
+	   */
 	  protected int next(int bits) {
 	    return (int) (nextLong() >>> (64-bits));
 	  }

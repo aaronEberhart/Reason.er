@@ -6,47 +6,146 @@ import java.util.Random;
 import reason.er.objects.*;
 import reason.er.util.*;
 
-public abstract class Box <T extends Predicate<T>> {
+/**
+ * @author Aaron Eberhart
+ *
+ * @param T generic
+ */
+public abstract class Box<T,U>  {
 	
+	/**
+	 * long identifier for the scope of the entire expression
+	 */
 	protected long scope;
+	/**
+	 * long array for managing quantification depth.
+	 */
 	protected long counters[];
+	/**
+	 * RandomInteger generator.
+	 */
 	protected RandomInteger rand;
-	protected final int universe = Predicate.uppers.length,variables = Term.lowers.length / 2;;
+	/**
+	 * Maximum quantification depth.
+	 */
+	protected final int bound = 15;
+	/**
+	 * Maximum sub-Expressions allowed per Expression.
+	 */
+	protected final int maxSubExpansions = 5;
+	/**
+	 * Maximum size of all Expressions.
+	 */
+	protected final int maxSize = 10;
+	/**
+	 * integer for tracking the number of sub-Expressions.
+	 */
+	protected int numSubExpansions;	
+	/**
+	 * Integer for Predicate name restriction.
+	 */
+	protected final int universe = Predicate.uppers.length;
+	/**
+	 * Integer for variable use restriction.
+	 */
+	protected final int variables = Term.lowers.length / 2;
 	
-	protected ArrayList<Expression<T>> expressions;
-	protected NormalizedBox<T> normalized;
+	/**
+	 * Syntactically valid random Expressions
+	 */
+	protected ArrayList<Expression<T,U>> expressions;
+	/**
+	 * Normalized Expressions.
+	 */
+	protected NormalizedBox<T,U> normalized;
 
-	protected abstract Expression<T> makeExpression();
-	protected abstract Predicate<T> newPredicate(int randInt);
-	protected abstract ExpressionNode<T> transform(int randInt, ExpressionNode<T> expression);
-	public abstract void normalizeExpressions();
+	/**
+	 * Make an expression.
+	 * @return expression
+	 */
+	protected abstract Expression<T,U> makeExpression();
+	/**
+	 * Make a new predicate based on the int param.
+	 * @param randInt integer
+	 * @return Predicate
+	 */
+	protected abstract Predicate<T,U> newPredicate(int randInt);
+	/**
+	 * Changes the expression with logic operations.
+	 * @param randInt integer
+	 * @param expression ExpressionNode
+	 * @param fromSub boolean
+	 * @return ExpressionNode
+	 */
+	protected abstract Expression<T,U> transform(int randInt, ExpressionNode<T,U> expression, boolean fromSub);
+	/**
+	 * reset the counter array.
+	 * @return the counter array.
+	 */
 	protected abstract long[] resetCounters();
 	
+	/**
+	 * Normalize the expressions. Abstract.
+	 */
+	public abstract void normalizeExpressions();
+	
+	/**
+	 * Make a box with size elements.
+	 * 
+	 * @param size integer
+	 */
 	protected void makeBox(int size) {
-		expressions = new ArrayList<Expression<T>>(size);
+		expressions = new ArrayList<Expression<T,U>>(size);
 		while(expressions.size() < size) {
 			expressions.add(makeExpression());
 		}
 	}
 
-	public void addManually(ExpressionNode<T> e) {
-		expressions.add(new Expression<T>(e));
+	/**
+	 * Manually add an expression node to a box.
+	 * 
+	 * @param e ExpressionNode
+	 */
+	public void addManually(ExpressionNode<T,U> e) {
+		expressions.add(new Expression<T,U>(e));
 	}
 	
+	/**
+	 * Return the number of names in use.
+	 * @return universe
+	 */
     public int getNumVars() {
 		return universe;
 	}
 	
+    /**
+     * Makes a long int for naming a predicate.
+     * 
+     * @param rand RandomInteger
+     * @return long
+     */
     protected long makeName(RandomInteger rand) {
-    	return Math.abs(rand.nextLong());
+    	return rand.nextInt(universe);
     }
     
-    public ArrayList<Expression<T>> getNormals(){
-		return normalized.getNormals();
+    /**
+     * Return the normals.
+     * @return normals
+     */
+    public ArrayList<Expression<T,U>> getNormals(){
+    	if(normalized != null)
+    		return normalized.getNormals();
+    	return null;
 	}
     
-    public ArrayList<Expression<T>> copyNormals(){
-		return normalized.copyNormals();
+    /**
+     * Copy the normals.
+     * @return copy of normals
+     */
+    public ArrayList<Expression<T,U>> copyNormals(){
+		if(normalized != null)
+			return normalized.copyNormals();
+		return null;
 	}
     
     @Override

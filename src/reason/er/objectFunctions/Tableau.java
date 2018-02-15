@@ -6,11 +6,11 @@ import reason.er.objectFunctions.*;
 import reason.er.objects.*;
 
 @SuppressWarnings({ "rawtypes" , "unchecked" })
-public class Tableau <T extends Expression<T>> {
+public class Tableau<T,U> extends Expression<T,U> {
 	
-	NormalizedBox<T> expressions;
-	ArrayList<ArrayList<Predicate<T>>> model;
-	ArrayList<Term<T>> blocks;
+	NormalizedBox<T,U> expressions;
+	ArrayList<ArrayList<Predicate<T,U>>> model;
+	ArrayList<Term<U>> blocks;
 	
 	public Tableau(KnowledgeBase<T,T> kb) {
 		
@@ -25,16 +25,16 @@ public class Tableau <T extends Expression<T>> {
 		return true;
 	}
 	
-	private NormalizedBox<T> unifyBoxes(ABox<T> a, TBox<T> t){
-		ArrayList<Expression<T>> kb = a.copyNormals();
+	private NormalizedBox<T,U> unifyBoxes(ABox<T,U> a, TBox<T,U> t){
+		ArrayList<Expression<T,U>> kb = a.copyNormals();
 		kb.addAll(t.copyNormals());
-		return new NormalizedBox<T>(kb);
+		return new NormalizedBox<T,U>(kb);
 	}
 	
 	public String toString() {
 		String s = "\nModel:\n\n";
-		for(ArrayList<Predicate<T>> l : model) {
-			for(Predicate<T> p : l){
+		for(ArrayList<Predicate<T,U>> l : model) {
+			for(Predicate<T,U> p : l){
 				s = s + p.toString() + "\n";
 			}
 		}

@@ -7,10 +7,11 @@ import reason.er.objects.*;
 import reason.er.util.*;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class ABox<T extends Expression<T>> extends Box<T> {
+public class ABox<T,U> extends Box<T,U> {
 
 	private boolean constants,complete;
 	private final long[] mem;
+	private double time;
 	
 	public ABox(int size) {
 				
@@ -24,64 +25,73 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		
 		scope = counters[3];
 		
+		numSubExpansions = 0;
+		
 		makeBox(size);
 		
 		rand = null;
 	}
 	
-	public ABox(ArrayList<Expression<T>> e) {
+	public ABox(ArrayList<Expression<T,U>> e) {
+		numSubExpansions = 0;
 		mem = null;
 		expressions = e;
 	}
 	
-	protected ExpressionNode transform(int randInt, ExpressionNode expression) {
-
-		//juggle the booleans
-		if(constants && !complete && expression.getScope() <= variables) {
-			randInt = (randInt % 2) + 5;
-		}
-		else if(constants && !complete) {
-			expression.complete = rand.weightedBool(10000,1000);
-		}
-		
-		//just in case
-		if(scope == 25) {
-			complete = true;
-			constants = true;
-			randInt = (randInt % 2) + 5;
-		}
+	protected ExpressionNode transform(int randInt, ExpressionNode expression,boolean fromSub) {
 		
 		//I'll need this to see if it grew
 		int size = expression.getSize();
+		
+		//just in case
+		if(!fromSub && ((scope >= bound && scope > 0) || (scope <= (bound * -1) && scope < 0) || size + 6 >= maxSize)){
+				constants = true;
+				randInt = (randInt % 2) + 5;
+		}else if(constants && !complete) {
+				expression.complete = rand.weightedBool(10000,1);
+			
+		}
 		
 		//pick what to do
 		switch(randInt) {
 			case 0:
 			case 1:
-				Predicate p = newSubExpression(11);
-				if(p.isExpression())
-					expression = expression.and((ExpressionNode)p);
-				else
-					expression = expression.and(p);
+				if(numSubExpansions >= maxSubExpansions || size + 6 >= maxSize)
+					expression = expression.and(newPredicate(randInt));
+				else {
+					Predicate p = newSubExpression(11,false);
+					if(p.isExpression())
+						expression = expression.and((ExpressionNode)p);
+					else
+						expression = expression.and(p);
+					numSubExpansions++;
+				}
 				break;
 			case 2:
 			case 3:
-				Predicate q = newSubExpression(11);
-				if(q.isExpression())
-					expression = expression.or((ExpressionNode)q);
-				else
-					expression = expression.or(q);
+				if(numSubExpansions >= maxSubExpansions || size + 6 >= maxSize)
+					expression = expression.and(newPredicate(randInt % 2));
+				else {
+					Predicate q = newSubExpression(11,false);
+					if(q.isExpression())
+						expression = expression.or((ExpressionNode)q);
+					else
+						expression = expression.or(q);
+					numSubExpansions++;
+				}
 				break;
 			case 4:
 				expression = expression.negate();
 				break;
 			case 5:
-				constants = rand.weightedBool(10000,1000);
-				expression = expression.dot(new Quantifier(1), (Role)newPredicate(2), counters[2] + universe);	
+				if(!constants && !fromSub)
+					constants = rand.weightedBool(10000,1000);
+				expression = expression.dot(new Quantifier(1), (Role)newPredicate(2), -1 * (makeName(rand) % universe));//counters[2] + universe);	
 				break;
 			default:
-				constants = rand.weightedBool(10000,1000);
-				expression = expression.dot(new Quantifier(2), (Role)newPredicate(2), counters[2] + universe);
+				if(!constants && !fromSub)
+					constants = rand.weightedBool(10000,1000);
+				expression = expression.dot(new Quantifier(2), (Role)newPredicate(2), -1 * (makeName(rand) % universe));// counters[2] + universe);
 				break;
 			
 			
@@ -94,7 +104,7 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		return expression;
 	}
 	
-	protected Predicate<T> newSubExpression(int ran){
+	protected Predicate<T,U> newSubExpression(int ran,boolean fromSub){
 		
 		rand = new RandomInteger();
 		
@@ -108,20 +118,20 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		
 		boolean tmpConst = constants;
 		constants = false;
-		Predicate<T> p = newPredicate(rand.nextInt(2));
+		Predicate<T,U> p = newPredicate(rand.nextInt(2));
 		
-		if(p.getScope() == tmpScope)
+		if((long)p.getScope() == tmpScope)
 			return p;
 		
 		scope = counters[3];
-		ExpressionNode<T> builder = new ExpressionNode<T>(p);
+		ExpressionNode<T,U> builder = new ExpressionNode<T,U>(p);
 		
-		while(builder.getScope() < tmpScope && constants) {
-			builder = transform(rand.nextInt(ran), builder);
-			constants = (!tmpConst && constants) ? false : constants;
+		while((long)builder.getScope() < tmpScope && constants && !(((long)p.getScope()<0 && scope<0) || (long)p.getScope() == scope)) {
+			builder = transform(rand.nextInt(ran), builder,true);
+			constants = (!tmpConst&&constants) ? false : constants;
 		}
-		while(builder.getScope() != tmpScope && !constants) {
-			builder = transform(rand.nextInt(ran), builder);
+		while((long)builder.getScope() != tmpScope && !constants) {
+			builder = transform(rand.nextInt(ran), builder,true);
 		}
 		
 		this.counters = tmpCounters;
@@ -131,8 +141,8 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 	}
 	
 	@Override
-	protected Expression<T> makeExpression() {
-		
+	protected Expression<T,U> makeExpression() {
+				
 		//initialize rand
 		rand = new RandomInteger();
 				
@@ -145,32 +155,31 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 		}
 			
 		//make the first term
-		Expression<T> expression = new Expression<T>(newPredicate(randInt));
+		Expression<T,U> expression = new Expression<T,U>(newPredicate(randInt));
 		ExpressionNode builder = expression.root;
-		scope = expression.getScope();
+		scope = (long)expression.getScope();
 		
 		//loop until ground and complete
 		while(!complete && !constants) {
 			
-			builder = transform(rand.nextInt(7),builder);
+			builder = transform(rand.nextInt(7),builder,false);
 			expression.root = builder;
 			
 			if(builder.complete) {
 				expression.complete = true;
 				complete = true;
 			}
+			
 		}
 		expression.setSize(builder.getSize());
-		expression.setScope(builder.getScope());
+		expression.setScope((T)builder.getScope());
 		
 		//reset variable stuff
-		this.counters[0] = rand.nextInt(universe) % universe;
-		this.counters[1] = rand.nextInt(10000) % variables;
-		this.counters[2] = (rand.nextInt(universe) + universe) % universe;
-		this.counters[3] = variables + 1;
+		this.counters = resetCounters();
 				
 		constants = rand.weightedBool(10000,1000);
 		complete = false;
+		
 		
 		return expression;
 	}
@@ -179,29 +188,23 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 	protected Predicate newPredicate(int randInt) {
 		boolean negated = rand.nextBoolean();
 		Predicate p;
-		long one = (makeName(rand) % universe);
+		long one = makeName(rand);
 		
 		if(randInt == 0) {
 			p = new Concept(negated,constants?counters[1]:counters[3],one);
-			counters[0] = (counters[0] + 1) % universe;
 		}
 		else if(randInt == 1) {
-			long two = (makeName(rand) % universe);
+			long two = makeName(rand);
 			p = new QuantifiedRole(negated,rand.nextBoolean(),rand.nextInt(2) + 1,constants?counters[1]:counters[3],constants?counters[3]:counters[3]-1,one*-1,two,two);
-			counters[0] = (counters[0] + 1) % universe;
-			counters[2] = (counters[2] + 1) % universe;
 		}
 		else if(randInt == 2) {
 			p = new Role(false,constants?counters[1]:counters[3]+1,counters[3],one*-1);
-			counters[2] = (counters[2] + 1) % universe;
 			if(!constants) {
-				counters[3] = (counters[3] + 1) % Term.lowers.length;
-				if(counters[3]<variables)
-					counters[3]+=variables;
+				counters[3] = (counters[3] + 1);
 			}
 		}
 		else {			
-			p = new Role(negated,counters[1],(long)(rand.nextInt(10000) % variables),-1*one);
+			p = new Role(negated,counters[1],(long)(-1 * rand.nextInt(variables)) - 1,-1*one);
 		}
 				
 		return p;
@@ -210,9 +213,9 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 	@Override
 	public void normalizeExpressions() {
 		
-		ArrayList normals = new ArrayList<Expression<T>>();
+		ArrayList normals = new ArrayList<Expression<T,U>>();
 		
-		for(Expression<T> e : expressions) {
+		for(Expression<T,U> e : expressions) {
 			normals.add(e.deepCopy(e));			
 		}
 		
@@ -228,12 +231,14 @@ public class ABox<T extends Expression<T>> extends Box<T> {
 	@Override
 	protected long[] resetCounters() {
 		long counters[] = new long[4];
-		counters[0] = rand.nextInt(universe) % universe;
-		counters[1] = rand.nextInt(27);
-		counters[2] = (rand.nextInt(universe) + universe) % universe;
-		counters[3] = variables + 1;
+		//counters[0] = rand.nextInt(universe) - 1;
+		counters[1] = (-1 * rand.nextInt(variables)) - 1;
+		//counters[2] = (rand.nextInt(universe) + universe) % universe;
+		counters[3] = 2;
 		return counters;
 	}
+
+
 
 	
 }

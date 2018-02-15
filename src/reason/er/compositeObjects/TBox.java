@@ -7,11 +7,25 @@ import reason.er.compositeObjects.*;
 import reason.er.objects.*;
 import reason.er.util.*;
 
+/**
+ * 
+ * @author Aaron Eberhart
+ *
+ * @param T generic
+ */
 @SuppressWarnings({"unchecked", "rawtypes"})
-public class TBox<T extends Expression<T>>  extends Box<T>{
+public class TBox<T,U> extends Box<T,U>{
 
+	/**
+	 * Predicate name tracking for preventing doubles.
+	 */
 	protected ArrayList<Long> names;
 	
+	/**
+	 * Make a TBox of size elements.
+	 * 
+	 * @param size integer
+	 */
 	public TBox(int size) {
 
 		names = new ArrayList<>();
@@ -19,28 +33,41 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 		this.counters = resetCounters();
 		
 		scope = counters[1];
+		
+		numSubExpansions = 0;
 
 		makeBox(size);
 		
 		rand = null;
 	}
 	
-	public TBox(ArrayList<Expression<T>> e) {
+	/**
+	 * Make a TBox of the ArrayList e.
+	 * 
+	 * @param e ArrayList(Expression)
+	 */
+	public TBox(ArrayList<Expression<T,U>> e) {
+		numSubExpansions = 0;
 		expressions = e;
 	}
 	
+	/**
+	 * Make a TBox expression.
+	 * 
+	 * @return expression
+	 */
 	@Override
-	protected Expression<T> makeExpression() {
+	protected Expression<T,U> makeExpression() {
 		
 		rand = new RandomInteger();
-		Expression<T> expression = new Expression<T>(newPredicate(rand.nextInt(2)));
-		scope = expression.getScope();
+		Expression<T,U> expression = new Expression<T,U>(newPredicate(rand.nextInt(2)));
+		scope = (long)expression.getScope();
 		
 		ExpressionNode builder = expression.root;
 		
 		while(!expression.isComplete()) {
 			
-			builder = transform(rand.nextInt(11), builder);
+			builder = transform(rand.nextInt(11), builder, false);
 			expression.root = builder;
 			
 			if(builder.complete)
@@ -48,35 +75,40 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 		}
 		
 		expression.setSize(builder.getSize());
-		expression.setScope(builder.getScope());
+		expression.setScope((T)builder.getScope());
 		
 		names.clear();
-		scope = variables + 1;
-		counters[0] = (counters[0] + 1) % universe;
-		counters[1] = variables + 1;
+		counters[1] = 2;
 		
 		return expression;
 	}
 
-	protected Predicate<T> newSubExpression(int ran){
+	/**
+	 * Make a sub-expression.
+	 * 
+	 * @param ran integer
+	 * @param fromSub boolean
+	 * @return sub-expression Predicate
+	 */
+	protected Predicate<T,U> newSubExpression(int ran, boolean fromSub){
 		rand = new RandomInteger();
 		long[] tmpCounters = this.counters;
 		long tmpScope = scope;
 		this.counters = resetCounters();
 		
-		Predicate<T> p = newPredicate(rand.nextInt(2));
-		ExpressionNode<T> builder = new ExpressionNode<T>(p);
+		Predicate<T,U> p = newPredicate(rand.nextInt(2));
+		ExpressionNode<T,U> builder = new ExpressionNode<T,U>(p);
 		
-		if(p.getScope() == scope)
+		if((long)p.getScope() == scope)
 			return p;
 		
 		scope = counters[1];
 		
-		while(builder.getScope() < tmpScope) {
+		while((long)builder.getScope() < tmpScope) {
 			
 			int num = rand.nextBoolean() ? rand.nextInt(4) : (rand.nextInt(3) + 8);
 					
-			builder = transform(num, builder);
+			builder = transform(num, builder,true);
 		}
 		
 		this.counters = tmpCounters;
@@ -84,28 +116,45 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 		return builder;
 	}
 	
-	protected ExpressionNode transform(int randInt, ExpressionNode expression) {
+	/**
+	 * Add to or change the expression.
+	 */
+	protected ExpressionNode transform(int randInt, ExpressionNode expression,boolean fromSub) {
 
-		if(scope == 25)
-			randInt = rand.nextInt(4) + 4;
-		
 		int size = expression.getSize();
+		boolean done = false;
+		
+		if(size + 6 >= maxSize || (scope >= bound && scope > 0) || (scope <= (bound * -1) && scope < 0)) {
+			randInt = (randInt % 4) + 4;
+			done = true;
+		}
+		
 		switch(randInt) {
 			case 0:
 			case 1:
-				Predicate p = newSubExpression(11);
-				if(p.isExpression())
-					expression = expression.and((ExpressionNode)p);
-				else
-					expression = expression.and(p);
+				if(numSubExpansions >= maxSubExpansions)
+					expression = expression.and(newPredicate(randInt));
+				else {
+					Predicate p = newSubExpression(11,false);
+					if(p.isExpression())
+						expression = expression.and((ExpressionNode)p);
+					else
+						expression = expression.and(p);
+					numSubExpansions++;
+				}
 				break;
 			case 2:
 			case 3:
-				Predicate q = newSubExpression(11);
-				if(q.isExpression())
-					expression = expression.or((ExpressionNode)q);
-				else
-					expression = expression.or(q);
+				if(numSubExpansions >= maxSubExpansions)
+					expression = expression.and(newPredicate(randInt % 2));
+				else {
+					Predicate q = newSubExpression(11,false);
+					if(q.isExpression())
+						expression = expression.or((ExpressionNode)q);
+					else
+						expression = expression.or(q);
+					numSubExpansions++;
+				}
 				break;
 			case 4:
 			case 5:
@@ -116,11 +165,11 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 				expression = expression.equivalent(new Concept(false,expression.getScope(),endExpression(rand)));
 				break;
 			case 8:
-				expression = expression.dot(new Quantifier(1), (Role)newPredicate(randInt), counters[2] + universe);
+				expression = expression.dot(new Quantifier(1), (Role)newPredicate(randInt), -1 * (makeName(rand) % universe));
 				scope+=1;
 				break;
 			case 9:
-				expression = expression.dot(new Quantifier(2), (Role)newPredicate(randInt), counters[2] + universe);
+				expression = expression.dot(new Quantifier(2), (Role)newPredicate(randInt), -1 * (makeName(rand) % universe));
 				scope+=1;
 				break;
 			default:
@@ -131,40 +180,49 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 			scope = counters[1];
 			expression.setScope(scope);
 		}
+		
+		expression.complete = expression.complete || done ? true : false;
 
 		return expression;
 	}
 	
+	/**
+	 * Make a new Predicate.
+	 */
 	@Override
 	protected Predicate newPredicate(int randInt) {
 		boolean negated = rand.nextBoolean();
 		Predicate p;
-		long one = (makeName(rand) % universe);
-		long two = -1 * (makeName(rand) % universe);
+		long one = makeName(rand);
+		long two = -1 * makeName(rand);
 		
 		if(randInt == 0) {
 			p = new Concept(negated,counters[1],one);
-			names.add(one);
-			counters[0] = (counters[0] + 1) % universe;
+			if(!usedBefore(one))
+				names.add(one);
 		}
 		else if(randInt == 1) {
 			
 			p = new QuantifiedRole(negated,rand.nextBoolean(),rand.nextInt(2) + 1,counters[1],counters[1]-1,two,one,one);
-			names.add(one);
-			counters[0] = (counters[0] + 1) % universe;
-			counters[2] = (counters[2] + 1) % universe;
+			if(!usedBefore(one))
+				names.add(one);
+//			counters[2] = (counters[2] + 1);
 		}
 		else {
 			p = new Role(false,counters[1] + 1,counters[1],two);
-			counters[2] = (counters[2] + 1) % universe;
-			counters[1] = (counters[1] + 1) % Term.lowers.length;
-			if(counters[1]<variables)
-				counters[1]+=variables;
+//			counters[2] = (counters[2] + 1);
+			counters[1] = (counters[1] + 1);
 		}
 		
 		return p;
 	}
 
+	/**
+	 * Check if a predicate label has been used yet.
+	 * 
+	 * @param i long
+	 * @return boolean
+	 */
 	public boolean usedBefore(long i) {
     	for(Long l : names) {
     		if(l.longValue() == i)
@@ -173,19 +231,35 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
     	return false;
     }
 	
+	/**
+	 * Find a unique name for the left side of the expression.
+	 * 
+	 * @param rand RandomInteger
+	 * @return long
+	 */
 	public long endExpression(RandomInteger rand) {
-		long l = (makeName(rand) % universe);
-		
-		while(usedBefore(l)) {l += 1;}
+		long l = rand.nextInt(universe);
+		if(l == 0)
+			l++;
+		long initial = l;
+		while(usedBefore(l)) {
+			l = (l+1)%universe;
+			if(l==initial) {
+				return universe;
+			}
+		}
 		
 		return l;
 	}
 	
+	/**
+	 * Normalize the expressions.
+	 */
 	@Override
 	public void normalizeExpressions() {
-		ArrayList normals = new ArrayList<Expression<T>>();
+		ArrayList normals = new ArrayList<Expression<T,U>>();
 		
-		for(Expression<T> e : expressions) {
+		for(Expression<T,U> e : expressions) {
 			
 			Expression ex = e.deepCopy(e);
 			
@@ -213,6 +287,13 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 		this.normalized = new NormalizedBox(normals);
 	}
 	
+	/**
+	 * Helper for normalizing subset.
+	 * 
+	 * @param left ExpressionNode
+	 * @param right ExpressionNode
+	 * @return Expression
+	 */
 	public Expression normalizeSubset(ExpressionNode left, ExpressionNode right) {
 		left.negate();
 		return left.or(right);
@@ -223,14 +304,17 @@ public class TBox<T extends Expression<T>>  extends Box<T>{
 		return "TBox = " + super.toString();
 	}
 
+	/**
+	 * Reset counter array.
+	 */
 	@Override
 	protected long[] resetCounters() {
 		long [] counters = new long[3];
-		counters[0] = 1;
-		counters[1] = variables + 1;
-		counters[2] = 1;
+		counters[1] = 2;
 		return counters;
 	}
+
+	
 
 	
 }

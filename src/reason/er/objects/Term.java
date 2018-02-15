@@ -1,30 +1,47 @@
-/**
- *
- *
- */
 package reason.er.objects;
 
+
 /**
+ * @author Aaron Eberhart
  *
- * @author aaron
+ * @param T generic
  */
 public class Term<T> {
     
+	/**
+	 * Array of lower case letters for name generation.
+	 */
 	public static final char[] lowers = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+	/**
+	 * Generic variable in Term.
+	 */
 	protected T term;
 	
+	/**
+	 * Make a generic Term
+	 * @param t generic
+	 */
 	public Term(T t) {
 		this.term = t;
 	}
 
+	/**
+	 * Gets the Term value.
+	 * @return the value of the Term
+	 */
 	public T getValue() {
 		return term;
 	}
 	
+	/**
+	 * Set the value of the Term.
+	 * @param term generic
+	 */
 	public void setValue(T term) {
 		this.term = term;
 	}
 	
+	@Override
 	public String toString() {
 		if(isString(term))
 			return (String)term;
@@ -36,6 +53,11 @@ public class Term<T> {
 			return this.term.toString();
 	}
 	
+	/**
+	 * Check if a Term is of String type.
+	 * @param t Term
+	 * @return boolean
+	 */
 	private boolean isString(T t) {
 		try {
 			String s = (String)t;
@@ -45,6 +67,11 @@ public class Term<T> {
 		}
 	}
 
+	/**
+	 * Check if a Term is of long type.
+	 * @param t generic
+	 * @return boolean
+	 */
 	private boolean isLong(T t) {
 		try {
 			long s = (long)t;
@@ -54,6 +81,11 @@ public class Term<T> {
 		}
 	}
 	
+	/**
+	 * Check if a Term is of int type.
+	 * @param t generic
+	 * @return boolean
+	 */
 	private boolean isInt(T t) {
 		try {
 			int s = (int)t;
@@ -63,26 +95,44 @@ public class Term<T> {
 		}
 	}
 	
-	public void setValue(String makeVariable) {
-		this.term = (T) makeVariable;
-	}
-	
+	/**
+	 * Returns a string representation of a long type Term.
+	 * 
+	 * @param count long
+	 * @return string
+	 */
 	public static String makeVariable(long count) {
     	String s = "";
     	
-    	do{
-    		s = Character.toString(lowers[(((int)count + lowers.length) % lowers.length)]) + s;
-    		count = count / lowers.length;
-    	}while(count-- > 0);
-    	
+    	if(count<0) {
+    		count*=-1;
+    		count--;
+	    	do{
+	    		int index = (int)(count % (lowers.length / 2));
+	    		s = Character.toString(lowers[index]) + s;
+	    		count = count / (lowers.length / 2);
+	    	}while(count-- > 0);
+    	}else {
+    		count--;
+    		do{
+	    		int index = (int)(count % (lowers.length / 2)) + (lowers.length / 2);
+	    		s = Character.toString(lowers[index]) + s;
+	    		count = count / (lowers.length / 2);
+	    	}while(count-- > 0);
+    	}
     	return s;
     }
 	
+	/**
+	 * Returns the index of a char in the lower case array.
+	 * @param c character
+	 * @return index
+	 */
 	public static long getVarIndex(char c) {
     	int i = 0;
     	for(char x : lowers) {
     		if(x == c)
-    			return (long)i;
+    			return i<13?(long)-1*i:(long)(i - 13);
     		i++;
     	}
     	return -1;

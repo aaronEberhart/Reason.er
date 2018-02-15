@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import reason.er.objects.*;
 
 @SuppressWarnings({"unchecked","rawtypes"})
-public class NormalizedBox <T extends Predicate<T>>{
+public class NormalizedBox<T,U>{
 
-	protected ArrayList<Expression<T>> normals;
+	protected ArrayList<Expression<T,U>> normals;
 	
-	public NormalizedBox(ArrayList<Expression<T>> expressions) {
-		normals = new ArrayList<Expression<T>>(expressions.size());
+	public NormalizedBox(ArrayList<Expression<T,U>> expressions) {
+		normals = new ArrayList<Expression<T,U>>(expressions.size());
 		
 		for(Expression e : expressions) {
 			normals.add(normalize(e));
@@ -57,12 +57,12 @@ public class NormalizedBox <T extends Predicate<T>>{
 		return here;
 	}
 
-	public Expression<T> normalize(Expression e){
+	public Expression<T,U> normalize(Expression e){
 		
 		if(e.isNormal() || e.getSize() <= 2)
 			return e;
 		else {
-			Expression<T> ex = new Expression(normalizeTree(e.root));
+			Expression<T,U> ex = new Expression(normalizeTree(e.root));
 			ex.setSize(ex.root.getSize());
 			ex.setScope(ex.root.getScope());
 			ex.setNormal(true);
@@ -114,22 +114,22 @@ public class NormalizedBox <T extends Predicate<T>>{
 		}
 	}
 	
-	public ArrayList<Expression<T>> getNormals(){
+	public ArrayList<Expression<T,U>> getNormals(){
 		return normals;
 	}
 
-	public ArrayList<Expression<T>> copyNormals(){
-		ArrayList<Expression<T>> list = new ArrayList();
+	public ArrayList<Expression<T,U>> copyNormals(){
+		ArrayList<Expression<T,U>> list = new ArrayList();
 		
-		for(Expression<T> e : normals) {
+		for(Expression<T,U> e : normals) {
 			list.add(e.deepCopy(e));
 		}
 		
 		return list;
 	}
 
-	public void appendExpressions(ArrayList<Expression<T>> expressions) {
-		for(Expression<T> ex : expressions) {
+	public void appendExpressions(ArrayList<Expression<T,U>> expressions) {
+		for(Expression<T,U> ex : expressions) {
 			normals.add(normalize(ex));
 		}
 	}

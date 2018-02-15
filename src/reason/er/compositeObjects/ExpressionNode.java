@@ -4,16 +4,16 @@ import reason.er.ReasonEr;
 import reason.er.objects.*;
 
 @SuppressWarnings({"unused","unchecked"})
-public class ExpressionNode<T> extends Expression<T>{
+public class ExpressionNode<T,U> extends Expression<T,U>{
 	
 	protected char operator;	
-	protected Predicate<T> leaf;
-	protected ExpressionNode<T>[] children;
+	protected Predicate<T,U> leaf;
+	protected ExpressionNode<T,U>[] children;
 		
 	public ExpressionNode() {
 	}
 
-	public ExpressionNode(ExpressionNode<T> e) {
+	public ExpressionNode(ExpressionNode<T,U> e) {
 		if(e.leaf != null)
 			leaf = e.leaf;
 		if(e.getChildren() != null)
@@ -23,7 +23,7 @@ public class ExpressionNode<T> extends Expression<T>{
 		size = e.getSize();
 	}
 	
-	public ExpressionNode(Predicate<T> p) {
+	public ExpressionNode(Predicate<T,U> p) {
 		leaf = p;
 		setChildren(null);
 		scope = p.getScope();
@@ -31,16 +31,16 @@ public class ExpressionNode<T> extends Expression<T>{
 		size = p.getSize();
 	}
 	
-	public ExpressionNode(QuantifiedRole<T,T> qr, ExpressionNode<T> subTree) {
+	public ExpressionNode(QuantifiedRole<T,U> qr, ExpressionNode<T,U> subTree) {
 		leaf = qr;
 		negated = qr.isNegated();
-		scope = qr.getScope();
+		scope = (T)qr.getScope();
 		setChildren(new ExpressionNode[1]);
 		getChildren()[0] = subTree;
 		size = subTree.getSize() + 1;
 	}
 	
-	public ExpressionNode(char o, ExpressionNode<T> n1, ExpressionNode<T> n2) {
+	public ExpressionNode(char o, ExpressionNode<T,U> n1, ExpressionNode<T,U> n2) {
 		operator = o;
 		setChildren(new ExpressionNode[2]);
 		getChildren()[0] = n1;
@@ -59,12 +59,12 @@ public class ExpressionNode<T> extends Expression<T>{
 			return false;
 	}
 	
-	public Expression<T> getChild(int i){
+	public Expression<T,U> getChild(int i){
 		return getChildren()[i];
 	}
 	
 	@Override
-	public ExpressionNode<T> negate() {
+	public ExpressionNode<T,U> negate() {
 		negated = negated ? false : true;
 		size = negated ? size + 1 : size - 1;
 		if(this.leaf != null) {
@@ -80,9 +80,9 @@ public class ExpressionNode<T> extends Expression<T>{
 			return getChildren().length;
 	}
 	
-	public ExpressionNode<T> and(Predicate<T> p) {
+	public ExpressionNode<T,U> and(Predicate<T,U> p) {
 		if(canJoin(p)) {
-			return  new ExpressionNode<T>('^', new ExpressionNode<T>(p), this);
+			return  new ExpressionNode<T,U>('^', new ExpressionNode<T,U>(p), this);
 		}else {
 			try {
 				throw ReasonEr.expression;
@@ -92,9 +92,9 @@ public class ExpressionNode<T> extends Expression<T>{
 		}
 		return this;
 	}
-	public ExpressionNode<T> and(ExpressionNode<T> p) {
+	public ExpressionNode<T,U> and(ExpressionNode<T,U> p) {
 		if(canJoin(p)) {
-			return  new ExpressionNode<T>('^', p, this);
+			return  new ExpressionNode<T,U>('^', p, this);
 		}else {
 			try {
 				throw ReasonEr.expression;
@@ -104,10 +104,10 @@ public class ExpressionNode<T> extends Expression<T>{
 		}
 		return this;
 	}
-	public ExpressionNode<T> or(Predicate<T> p) {
+	public ExpressionNode<T,U> or(Predicate<T,U> p) {
 				
 		if(canJoin(p)) {
-			return new ExpressionNode<T>('v', this, new ExpressionNode<T>(p));
+			return new ExpressionNode<T,U>('v', this, new ExpressionNode<T,U>(p));
 		}
 		else {
 			try {
@@ -118,10 +118,10 @@ public class ExpressionNode<T> extends Expression<T>{
 		}
 		return this;
 	}
-	public ExpressionNode<T> or(ExpressionNode<T> p) {
+	public ExpressionNode<T,U> or(ExpressionNode<T,U> p) {
 		
 		if(canJoin(p)) {
-			return new ExpressionNode<T>('v', this, p);
+			return new ExpressionNode<T,U>('v', this, p);
 		}
 		else {
 			try {
@@ -132,9 +132,9 @@ public class ExpressionNode<T> extends Expression<T>{
 		}
 		return this;
 	}
-	public ExpressionNode<T> superClass(Predicate<T> p) {
+	public ExpressionNode<T,U> superClass(Predicate<T,U> p) {
 		if(!p.isNegated() && canJoin(p)) {
-			ExpressionNode<T> node = new ExpressionNode<T>('c', new ExpressionNode<T>(p), this);
+			ExpressionNode<T,U> node = new ExpressionNode<T,U>('c', new ExpressionNode<T,U>(p), this);
 			node.complete = true;
 			return node;
 		}else {
@@ -146,9 +146,9 @@ public class ExpressionNode<T> extends Expression<T>{
 		}
 		return this;
 	}
-	public ExpressionNode<T> subClass(Predicate<T> p) {
-		if(((ExpressionNode<T>)this).isLeaf() && canJoin(p)) {
-			ExpressionNode<T> node = new ExpressionNode<T>('c', (ExpressionNode<T>)this, new ExpressionNode<T>(p));
+	public ExpressionNode<T,U> subClass(Predicate<T,U> p) {
+		if(((ExpressionNode<T,U>)this).isLeaf() && canJoin(p)) {
+			ExpressionNode<T,U> node = new ExpressionNode<T,U>('c', (ExpressionNode<T,U>)this, new ExpressionNode<T,U>(p));
 			node.complete = true;
 			return node;
 		}else {
@@ -160,9 +160,9 @@ public class ExpressionNode<T> extends Expression<T>{
 		}
 		return this;
 	}
-	public ExpressionNode<T> equivalent(Predicate<T> p) {
+	public ExpressionNode<T,U> equivalent(Predicate<T,U> p) {
 		if(!p.isNegated() && canJoin(p)) {
-			ExpressionNode<T> node = new ExpressionNode<T>('=', new ExpressionNode<T>(p), (ExpressionNode<T>)this);
+			ExpressionNode<T,U> node = new ExpressionNode<T,U>('=', new ExpressionNode<T,U>(p), (ExpressionNode<T,U>)this);
 			node.complete = true;
 			return node;
 		}else {
@@ -174,9 +174,9 @@ public class ExpressionNode<T> extends Expression<T>{
 		}
 		return this;
 	}
-	public ExpressionNode<T> dot(Quantifier q, Role<T,T> r, long name) {		
+	public ExpressionNode<T,U> dot(Quantifier q, Role<T,U> r, U name) {		
 		if(QuantifiedRole.canQuantify(q, r, null, this)) {
-			ExpressionNode<T> node = new ExpressionNode<T>(new QuantifiedRole<T,T>(q,r,this,name),(ExpressionNode<T>)this);
+			ExpressionNode<T,U> node = new ExpressionNode<T,U>(new QuantifiedRole<T,U>(q,r,this,name),(ExpressionNode<T,U>)this);
 			node.size = node.getChildren()[0].size + 1;			
 			node.scope = r.getScope();
 			return node;
@@ -195,7 +195,7 @@ public class ExpressionNode<T> extends Expression<T>{
 		if(getChildren() == null) {
 			return leaf.toString();
 		}else if(getChildren().length == 1){
-			String s = ((QuantifiedRole<T,T>)leaf).getQuantifier().toString() + " " + ((QuantifiedRole<T,T>)leaf).getRole().toString() + "." + getChildren()[0].toString();
+			String s = ((QuantifiedRole<T,U>)leaf).getQuantifier().toString() + " " + ((QuantifiedRole<T,U>)leaf).getRole().toString() + "." + getChildren()[0].toString();
 			if(negated)
 				s = "--" + s;
 			return s;
@@ -207,11 +207,11 @@ public class ExpressionNode<T> extends Expression<T>{
 		}
 	}
 
-	public ExpressionNode<T>[] getChildren() {
+	public ExpressionNode<T,U>[] getChildren() {
 		return children;
 	}
 
-	public void setChildren(ExpressionNode<T>[] children) {
+	public void setChildren(ExpressionNode<T,U>[] children) {
 		this.children = children;
 	}
 

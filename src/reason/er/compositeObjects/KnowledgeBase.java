@@ -4,36 +4,73 @@ import java.util.ArrayList;
 
 import reason.er.objects.*;
 
+/**
+ * 
+ * @author Aaron Eberhart
+ *
+ * @param T generic
+ * @param U generic
+ */
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class KnowledgeBase<T extends Expression<T>, U extends Expression<U>> {
+public class KnowledgeBase<T,U> extends Expression<T,U>{
 	
-	private ABox<T> abox;
-	private TBox<U> tbox;
+	/**
+	 * ABox for the KnowledgeBase.
+	 */
+	private ABox<T,U> abox;
+	/**
+	 * TBox for the KnowledgeBase.
+	 */
+	private TBox<T,U> tbox;
 	
+	/**
+	 * Make a new randomized KnowledgeBase of the size specified.
+	 * @param aboxSize integer
+	 * @param tboxSize integer
+	 */
 	public KnowledgeBase(int aboxSize, int tboxSize) {
 		
-		tbox = new TBox<U>(tboxSize);
-		abox = new ABox<T>(aboxSize);
+		tbox = new TBox<T,U>(tboxSize);
+		abox = new ABox<T,U>(aboxSize);
 	}
 	
-	public KnowledgeBase(ABox<T> a, TBox<U> t) {
+	/**
+	 * Make a KnowledgeBase out of the ABox and TBox.
+	 * @param a ABox
+	 * @param t TBox
+	 */
+	public KnowledgeBase(ABox<T,U> a, TBox<T,U> t) {
 		tbox = t;
 		abox = a;
 	}
 	
+	/**
+	 * Make a hard-coded KnowledgeBase.
+	 */
 	public KnowledgeBase() {
 		makeTestKnowledgeBase();
 	}
 	
+	/**
+	 * Normalize the KnowledgeBase.
+	 */
 	public void normalize() {
 		tbox.normalizeExpressions();
 		abox.normalizeExpressions();
 	}
 	
+	/**
+	 * Getter for the TBox.
+	 * @return tbox
+	 */
 	public TBox getTBox() {
 		return tbox;
 	}
 	
+	/**
+	 * Getter for the ABox.
+	 * @return abox
+	 */
 	public ABox getABox() {
 		return abox;
 	}
@@ -43,6 +80,9 @@ public class KnowledgeBase<T extends Expression<T>, U extends Expression<U>> {
 		return "K = ( ABox, TBox )\n\n" + abox.toString() + "\n\n" + tbox.toString() + "\n";
 	}
 	
+	/**
+	 * Create a sample hard-coded KnowledgeBase.
+	 */
 	private void makeTestKnowledgeBase() {
     	
 		abox = new ABox(new ArrayList<T>());
