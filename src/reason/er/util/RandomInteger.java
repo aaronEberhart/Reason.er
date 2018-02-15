@@ -50,7 +50,7 @@ public class RandomInteger {
 	  //New
 	  public int nextInt(int bound) {
 		  int val = (int)nextLong();
-		  val = val < 0 ? val *= -1 : val;
+		  val = val < 0 ? val * -1 : val;
 		  return val % bound;
 	  }
 	  
