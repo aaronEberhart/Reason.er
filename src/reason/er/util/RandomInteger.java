@@ -2,7 +2,7 @@ package reason.er.util;
 
 /**
  * This class was adapted from an example I found online. 
- * Methods that are from the example are labeled	"Original"
+ * Methods that are from the example are labeled "Original"
  * Methods that I wrote are labeled "New"
  * 
  * 
