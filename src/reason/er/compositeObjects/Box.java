@@ -83,9 +83,8 @@ public abstract class Box<T,U>  {
 	 * @return the counter array.
 	 */
 	protected abstract long[] resetCounters();
-	
 	/**
-	 * Normalize the expressions. Abstract.
+	 * Normalize the expressions.
 	 */
 	public abstract void normalizeExpressions();
 	
