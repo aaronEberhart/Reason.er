@@ -224,12 +224,12 @@ public class TBox<T,U> extends Box<T,U>{
 	 * @return boolean
 	 */
 	public boolean usedBefore(long i) {
-    	for(Long l : names) {
-    		if(l.longValue() == i)
-    			return true;
-    	}
-    	return false;
-    }
+		for(Long l : names) {
+			if(l.longValue() == i)
+				return true;
+		}
+		return false;
+	}
 	
 	/**
 	 * Find a unique name for the left side of the expression.

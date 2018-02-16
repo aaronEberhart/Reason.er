@@ -114,64 +114,64 @@ public abstract class Box<T,U>  {
 	 * Return the number of names in use.
 	 * @return universe
 	 */
-    public int getNumVars() {
+	public int getNumVars() {
 		return universe;
 	}
 	
-    /**
-     * Makes a long int for naming a predicate.
-     * 
-     * @param rand RandomInteger
-     * @return long
-     */
-    protected long makeName(RandomInteger rand) {
-    	return rand.nextInt(universe);
-    }
-    
-    /**
-     * Return the normals.
-     * @return normals
-     */
-    public ArrayList<Expression<T,U>> getNormals(){
-    	if(normalized != null)
-    		return normalized.getNormals();
-    	return null;
+	/**
+	 * Makes a long int for naming a predicate.
+	 * 
+	 * @param rand RandomInteger
+	 * @return long
+	 */
+	protected long makeName(RandomInteger rand) {
+		return rand.nextInt(universe);
 	}
-    
-    /**
-     * Copy the normals.
-     * @return copy of normals
-     */
-    public ArrayList<Expression<T,U>> copyNormals(){
+	
+	/**
+	 * Return the normals.
+	 * @return normals
+	 */
+	public ArrayList<Expression<T,U>> getNormals(){
+		if(normalized != null)
+			return normalized.getNormals();
+		return null;
+	}
+	
+	/**
+	 * Copy the normals.
+	 * @return copy of normals
+	 */
+	public ArrayList<Expression<T,U>> copyNormals(){
 		if(normalized != null)
 			return normalized.copyNormals();
 		return null;
 	}
-    
-    @Override
-    public String toString() {
-    	String s = "{\n\n";
-    	if(expressions.size() == 0) {
-    		s = s + "NULL";
-    	}else {	
-    		int j = 0;;
-    		for(int i = 0; i < expressions.size(); i++) {  
-    			if(normalized == null) {
-    				s = s + "\t" +expressions.get(i).toString() + ",";
-    			}
-    			else {
-    				s = s + "\tExpression :" + expressions.get(i).toString() + ",";		   		
-	    			s = s + "\n\tNormal: " + normalized.getFromExpressionIndex(j).toString() + ",";
-	    			if(expressions.get(i).root.operator == '=') {
-	    				j++;
-	    				s = s + "\n\tNormal: " + normalized.getFromExpressionIndex(j).toString() + ",";
-	    			}
-	    			j++;
+	
+	@Override
+	public String toString() {
+		String s = "{\n\n";
+		if(expressions.size() == 0) {
+			s = s + "NULL";
+		}else {	
+			int j = 0;;
+			for(int i = 0; i < expressions.size(); i++) {  
+				if(normalized == null) {
+					s = s + "\t" +expressions.get(i).toString() + ",";
+				}
+				else {
+					s = s + "\tExpression :" + expressions.get(i).toString() + ",";		   		
+					s = s + "\n\tNormal: " + normalized.getFromExpressionIndex(j).toString() + ",";
+					if(expressions.get(i).root.operator == '=') {
+						j++;
+						s = s + "\n\tNormal: " + normalized.getFromExpressionIndex(j).toString() + ",";
+					}
+					j++;
 		   		}
 		   		s = s + "\n\n";
-    		}
-    	}
-    	return s + " }";
-    }
+			}
+		}
+		return s + " }";
+	}
 
 }

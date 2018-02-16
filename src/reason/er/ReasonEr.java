@@ -12,7 +12,7 @@ import reason.er.objects.*;
 /**
  * @author Aaron Eberhart
  */
-@SuppressWarnings({ "rawtypes" , "unchecked" })
+@SuppressWarnings({"rawtypes"})
 public class ReasonEr {
 	
 	/**	
@@ -30,48 +30,48 @@ public class ReasonEr {
 		
 		System.out.println("Making Expressions");
 		
-    	KnowledgeBase kb;
-    	
-    	for(int i = 0; i < NUMTESTS; i++) {
-    		
-    		kb = new KnowledgeBase(9999,9999);
-    	
-//    		System.out.println(kb.toString());
-    		toFile("knowledgeBase["+i+"].txt",kb.toString());
-    	
-    		System.out.println("Normalizing Expressions");
-    	
-    		kb.normalize();
-    	
-//    		System.out.println(kb.toString());
-    		toFile("normalizedKnowledgeBase["+i+"].txt",kb.toString());
-//    	
-//    		Tableau t = new Tableau(kb);
-//    		t.run();
-//    	
-//    		System.out.println(t.toString());
-//    		toFile("tableau["+i+"].txt",t.toString());
-    	
-    	}
-    	
-    	System.out.println("\nDONE");
-    }
-    
+		KnowledgeBase kb;
+		
+		for(int i = 0; i < NUMTESTS; i++) {
+			
+			kb = new KnowledgeBase(9999,9999);
+		
+//			System.out.println(kb.toString());
+			toFile("knowledgeBase["+i+"].txt",kb.toString());
+		
+			System.out.println("Normalizing Expressions");
+		
+			kb.normalize();
+		
+//			System.out.println(kb.toString());
+			toFile("normalizedKnowledgeBase["+i+"].txt",kb.toString());
+//		
+//			Tableau t = new Tableau(kb);
+//			t.run();
+//		
+//			System.out.println(t.toString());
+//			toFile("tableau["+i+"].txt",t.toString());
+		
+		}
+		
+		System.out.println("\nDONE");
+	}
+	
 	/**
 	 * Write text to a file.
 	 * 
 	 * @param filename String
 	 * @param text String
 	 */
-    public static void toFile(String filename, String text) {
-    	try{
-    		BufferedWriter f = new BufferedWriter(new FileWriter(new File(filename)));
-    		f.write(text);
-    		f.close();
-    	}catch(Exception e) {
-    		System.out.println(e);
-    	}
-    }
-        
-    
+	public static void toFile(String filename, String text) {
+		try{
+			BufferedWriter f = new BufferedWriter(new FileWriter(new File(filename)));
+			f.write(text);
+			f.close();
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+	}
+		
+	
 }

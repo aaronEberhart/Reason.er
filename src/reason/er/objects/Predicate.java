@@ -8,7 +8,6 @@ import reason.er.compositeObjects.*;
  *
  * @author Aaron Eberhart
  */
-@SuppressWarnings("rawtypes")
 public abstract class Predicate<T,U> {
 
 	/**
@@ -27,164 +26,164 @@ public abstract class Predicate<T,U> {
 	/**
 	 * The outermost Term scope of the Predicate.
 	 */
-    protected T scope;
-    /**
-     * The name of the Predicate.
-     */
-    protected U label;
-    /**
-     * Indicator of negation.
-     */
-    protected boolean negated;
-    
-    /**
-     * Make a unique copy of the Predicate in memory.
-     * @param e Expression
-     * @return Predicate
-     */
+	protected T scope;
+	/**
+	 * The name of the Predicate.
+	 */
+	protected U label;
+	/**
+	 * Indicator of negation.
+	 */
+	protected boolean negated;
+	
+	/**
+	 * Make a unique copy of the Predicate in memory.
+	 * @param e Expression
+	 * @return Predicate
+	 */
 	public abstract Predicate<T,U> clone(Expression<T,U> e);
-    
+	
 	/**
 	 * Indicates whether the Predicate is negated.
 	 * @return boolean negated?
 	 */
-    public boolean isNegated() {
-    	return negated;
-    }
-    
-    /**
-     * Negates the Predicate. Adjusts the size.
-     * @return self
-     */
-    public Predicate<T,U> negate() {
-    	if(negated) {
-    		negated = false;size--;
-    	}
-    	else {
-    		negated = true;size++;
-    	}
-    	return this;
-    }
-    
-    /**
-     * Returns Term[i] of the Predicate.
-     * @param i integer
-     * @return Term[i]
-     */
-    public Term<T> getTerm(int i) {
-    	return terms.get(i);
-    }
-    
-    /**
-     * Sets the name of the Predicate to s.
-     * @param s U
-     */
-    protected void setLabel(U s) {
-    	label = s;
-    }
+	public boolean isNegated() {
+		return negated;
+	}
+	
+	/**
+	 * Negates the Predicate. Adjusts the size.
+	 * @return self
+	 */
+	public Predicate<T,U> negate() {
+		if(negated) {
+			negated = false;size--;
+		}
+		else {
+			negated = true;size++;
+		}
+		return this;
+	}
+	
+	/**
+	 * Returns Term[i] of the Predicate.
+	 * @param i integer
+	 * @return Term[i]
+	 */
+	public Term<T> getTerm(int i) {
+		return terms.get(i);
+	}
+	
+	/**
+	 * Sets the name of the Predicate to s.
+	 * @param s U
+	 */
+	protected void setLabel(U s) {
+		label = s;
+	}
 
-    /**
-     * Returns the label of the Predicate.
-     * @return U
-     */
-    public U getLabel() {
-    	return label;
-    }
-    
-    /**
-     * Returns false
-     * @return false.
-     */
-    public boolean isRole() {
+	/**
+	 * Returns the label of the Predicate.
+	 * @return U
+	 */
+	public U getLabel() {
+		return label;
+	}
+	
+	/**
+	 * Returns false
+	 * @return false.
+	 */
+	public boolean isRole() {
 		return false;
 	}
-    
-    /**
-     * Returns false.
-     * @return false
-     */
-    public boolean isExpression() {
-    	return false;
-    }
-    
-    /**
-     * Gets the scope of the Predicate.
-     * @return scope
-     */
-    public T getScope() {
-    	return scope;
-    }
 	
-    /**
-     * Sets the scope of the Predicate.
-     * @param t long
-     */
-    public void setScope(T t) {
+	/**
+	 * Returns false.
+	 * @return false
+	 */
+	public boolean isExpression() {
+		return false;
+	}
+	
+	/**
+	 * Gets the scope of the Predicate.
+	 * @return scope
+	 */
+	public T getScope() {
+		return scope;
+	}
+	
+	/**
+	 * Sets the scope of the Predicate.
+	 * @param t long
+	 */
+	public void setScope(T t) {
 		scope = t;
 	}
 	
-    /**
-     * Gets the size of the Predicate.
-     * @return size
-     */
-    public int getSize() {
-    	return size;
-    }
-    
-    /**
-     * Sets the size of the Predicate.
-     * @param i int
-     */
-    public void setSize(int i) {
-    	size = i;
-    }
-    
-    /**
-     * Makes a string to represent the unique Predicate id.
-     * @return name
-     */
-    protected String makeLabel() {
-    	long count;
-    	
-    	try {
+	/**
+	 * Gets the size of the Predicate.
+	 * @return size
+	 */
+	public int getSize() {
+		return size;
+	}
+	
+	/**
+	 * Sets the size of the Predicate.
+	 * @param i int
+	 */
+	public void setSize(int i) {
+		size = i;
+	}
+	
+	/**
+	 * Makes a string to represent the unique Predicate id.
+	 * @return name
+	 */
+	protected String makeLabel() {
+		long count;
+		
+		try {
 			count = (long)label;
 		}catch(Exception e){
 			count = 0;
 		}
-    	String s  = "";
-    	
-    	if(count<0) {
-	    	count*=-1;
-	    	
-	    	do{
-	    		int index = (int)(count % (uppers.length / 2)) + (uppers.length / 2);
-	    		s = Character.toString(uppers[index])+s;
-	    		count = count / uppers.length;
-	    	}while(count-- > 0);
-    	}
-    	else {
-    		do{
-	    		int index = (int)(count % (uppers.length / 2));
-	    		s = Character.toString(uppers[index])+s;
-	    		count = count / uppers.length;
-	    	}while(count-- > 0);
-    	}
-    	return s;
-    }
+		String s  = "";
+		
+		if(count<0) {
+			count*=-1;
+			
+			do{
+				int index = (int)(count % (uppers.length / 2)) + (uppers.length / 2);
+				s = Character.toString(uppers[index])+s;
+				count = count / uppers.length;
+			}while(count-- > 0);
+		}
+		else {
+			do{
+				int index = (int)(count % (uppers.length / 2));
+				s = Character.toString(uppers[index])+s;
+				count = count / uppers.length;
+			}while(count-- > 0);
+		}
+		return s;
+	}
 
-    /**
-     * Returns the index of the character in the name array. Only works \
-     * for values -13 - x - 13.
-     * @param c char
-     * @return long index
-     */
-    public static long getLabelIndex(char c) {
-    	int i = 0;
-    	for(char x : uppers) {
-    		if(x == c)
-    			return (long)i;
-    		i++;
-    	}
-    	return -1;
-    }
+	/**
+	 * Returns the index of the character in the name array. Only works \
+	 * for values -13 - x - 13.
+	 * @param c char
+	 * @return long index
+	 */
+	public static long getLabelIndex(char c) {
+		int i = 0;
+		for(char x : uppers) {
+			if(x == c)
+				return (long)i;
+			i++;
+		}
+		return -1;
+	}
 }

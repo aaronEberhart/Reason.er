@@ -7,7 +7,7 @@ package reason.er.objects;
  * @param T generic
  */
 public class Term<T> {
-    
+	
 	/**
 	 * Array of lower case letters for name generation.
 	 */
@@ -102,26 +102,26 @@ public class Term<T> {
 	 * @return string
 	 */
 	public static String makeVariable(long count) {
-    	String s = "";
-    	
-    	if(count<0) {
-    		count*=-1;
-    		count--;
-	    	do{
-	    		int index = (int)(count % (lowers.length / 2));
-	    		s = Character.toString(lowers[index]) + s;
-	    		count = count / (lowers.length / 2);
-	    	}while(count-- > 0);
-    	}else {
-    		count--;
-    		do{
-	    		int index = (int)(count % (lowers.length / 2)) + (lowers.length / 2);
-	    		s = Character.toString(lowers[index]) + s;
-	    		count = count / (lowers.length / 2);
-	    	}while(count-- > 0);
-    	}
-    	return s;
-    }
+		String s = "";
+		
+		if(count<0) {
+			count*=-1;
+			count--;
+			do{
+				int index = (int)(count % (lowers.length / 2));
+				s = Character.toString(lowers[index]) + s;
+				count = count / (lowers.length / 2);
+			}while(count-- > 0);
+		}else {
+			count--;
+			do{
+				int index = (int)(count % (lowers.length / 2)) + (lowers.length / 2);
+				s = Character.toString(lowers[index]) + s;
+				count = count / (lowers.length / 2);
+			}while(count-- > 0);
+		}
+		return s;
+	}
 	
 	/**
 	 * Returns the index of a char in the lower case array.
@@ -129,12 +129,12 @@ public class Term<T> {
 	 * @return index
 	 */
 	public static long getVarIndex(char c) {
-    	int i = 0;
-    	for(char x : lowers) {
-    		if(x == c)
-    			return i<13?(long)-1*i:(long)(i - 13);
-    		i++;
-    	}
-    	return -1;
-    }
+		int i = 0;
+		for(char x : lowers) {
+			if(x == c)
+				return i<13?(long)-1*i:(long)(i - 13);
+			i++;
+		}
+		return -1;
+	}
 }

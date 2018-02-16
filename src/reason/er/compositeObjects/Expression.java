@@ -141,7 +141,7 @@ public class Expression<T,U> extends Predicate<T,U>{
 	public boolean isComplete() {
 		return complete;
 	}
-    
+	
 	public char getOperator() {
 		if(complete)
 			return root.operator;
@@ -180,7 +180,7 @@ public class Expression<T,U> extends Predicate<T,U>{
 
 	@Override
 	public boolean isExpression() {
-    	return true;
-    }
+		return true;
+	}
 
 }

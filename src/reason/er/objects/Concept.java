@@ -14,7 +14,7 @@ import reason.er.compositeObjects.*;
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class Concept<T,U> extends Predicate<T,U> {
-    
+	
 	/**
 	 * Empty constructor.
 	 */
@@ -30,15 +30,15 @@ public class Concept<T,U> extends Predicate<T,U> {
 		
 		this.terms = new ArrayList(1);
 		Term<T> s = new Term<T>(t);
-    	this.terms.add(s);
-    	
-    	this.label = name;
-    	this.scope = s.getValue();
-    	this.negated = hasSign;
-    	this.size = 1;
-    	if(negated)
-    		size++;
-    }
+		this.terms.add(s);
+		
+		this.label = name;
+		this.scope = s.getValue();
+		this.negated = hasSign;
+		this.size = 1;
+		if(negated)
+			size++;
+	}
 	
 	/**
 	 * Partial Concept constructor.
@@ -49,15 +49,15 @@ public class Concept<T,U> extends Predicate<T,U> {
 	public Concept(boolean hasSign, Term<T> t, U name){
 		
 		this.terms = new ArrayList(1);
-    	this.terms.add(t);
-    	
-    	this.label = name;
-    	this.scope = (T)t.getValue();
-    	this.negated = hasSign;
-    	this.size = 1;
-    	if(negated)
-    		size++;
-    }
+		this.terms.add(t);
+		
+		this.label = name;
+		this.scope = (T)t.getValue();
+		this.negated = hasSign;
+		this.size = 1;
+		if(negated)
+			size++;
+	}
 
 	/**
 	 * Gets the Term.
@@ -68,12 +68,12 @@ public class Concept<T,U> extends Predicate<T,U> {
 	}
 	
 	@Override
-    public String toString() {
-    	String s = "";
-    	if(negated)
-    		s += "--";
-    	return s + makeLabel() + "(" + this.getTerm().toString() + ")";
-    }
+	public String toString() {
+		String s = "";
+		if(negated)
+			s += "--";
+		return s + makeLabel() + "(" + this.getTerm().toString() + ")";
+	}
 
 	@Override
 	public Predicate<T,U> clone(Expression<T,U> e) {

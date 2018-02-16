@@ -39,17 +39,17 @@ public class QuantifiedRole<T,U> extends Role {
 		Quantifier q = new Quantifier(i);
 		Role<T,U> r = new Role<T,U>(false,t,u, name1);
 		Concept<T,U> s = new Concept<T,U>(conceptNegated,u, name2);
-    	
+		
 		this.terms.add(r);
 		this.terms.add(s);
 		this.terms.add(q);
 		
 		this.label = name3;
-    	this.scope = r.getScope();
-    	this.negated = hasSign;
-    	this.size = s.size + 1;
-    	if(negated)
-    		size++;
+		this.scope = r.getScope();
+		this.negated = hasSign;
+		this.size = s.size + 1;
+		if(negated)
+			size++;
 	}
 	
 	/**
@@ -135,8 +135,8 @@ public class QuantifiedRole<T,U> extends Role {
 	@Override
 	public String toString() {
 		String s = "";
-    	if(negated)
-    		s += "--";
+		if(negated)
+			s += "--";
 		return s + this.terms.get(2).toString() + " "  + this.terms.get(0).toString() + "." + this.terms.get(1).toString();
 	}
 

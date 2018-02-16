@@ -5,7 +5,7 @@ package reason.er.objects;
  * @author Aaron Eberhart
  */
 public class Quantifier {
-    
+	
 	/**
 	 * Integer id.
 	 */
