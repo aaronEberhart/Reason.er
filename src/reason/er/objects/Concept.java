@@ -9,8 +9,8 @@ import reason.er.compositeObjects.*;
  * 
  * @author Aaron Eberhart
  *
- * @param T generic
- * @param U generic
+ * @param <T> generic
+ * @param <U> generic
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class Concept<T,U> extends Predicate<T,U> {
@@ -23,8 +23,8 @@ public class Concept<T,U> extends Predicate<T,U> {
 	/**
 	 * Manual Concept constructor.
 	 * @param hasSign boolean
-	 * @param t T
-	 * @param name U
+	 * @param t &lt;T&gt;
+	 * @param name &lt;U&gt;
 	 */
 	public Concept(boolean hasSign, T t, U name){
 		
@@ -43,8 +43,8 @@ public class Concept<T,U> extends Predicate<T,U> {
 	/**
 	 * Partial Concept constructor.
 	 * @param hasSign boolean
-	 * @param t Term
-	 * @param name U
+	 * @param t Term&lt;T&gt;
+	 * @param name &lt;U&gt;
 	 */
 	public Concept(boolean hasSign, Term<T> t, U name){
 		
@@ -61,7 +61,7 @@ public class Concept<T,U> extends Predicate<T,U> {
 
 	/**
 	 * Gets the Term.
-	 * @return Term
+	 * @return Term&lt;T&gt;
 	 */
 	public Term<T> getTerm() {
 		return (Term<T>) this.terms.get(0);

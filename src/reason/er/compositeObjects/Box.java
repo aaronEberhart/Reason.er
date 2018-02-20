@@ -9,7 +9,7 @@ import reason.er.util.*;
 /**
  * @author Aaron Eberhart
  *
- * @param T generic
+ * @param <T> generic
  */
 public abstract class Box<T,U>  {
 	
@@ -28,15 +28,15 @@ public abstract class Box<T,U>  {
 	/**
 	 * Maximum quantification depth.
 	 */
-	protected final int bound = 15;
+	protected final int bound = 50;
 	/**
 	 * Maximum sub-Expressions allowed per Expression.
 	 */
-	protected final int maxSubExpansions = 5;
+	protected final int maxSubExpansions = 10;
 	/**
 	 * Maximum size of all Expressions.
 	 */
-	protected final int maxSize = 10;
+	protected final int maxSize = 20;
 	/**
 	 * integer for tracking the number of sub-Expressions.
 	 */
@@ -66,13 +66,13 @@ public abstract class Box<T,U>  {
 	protected abstract Expression<T,U> makeExpression();
 	/**
 	 * Make a new predicate based on the int param.
-	 * @param randInt integer
+	 * @param randInt int
 	 * @return Predicate
 	 */
 	protected abstract Predicate<T,U> newPredicate(int randInt);
 	/**
 	 * Changes the expression with logic operations.
-	 * @param randInt integer
+	 * @param randInt int
 	 * @param expression ExpressionNode
 	 * @param fromSub boolean
 	 * @return ExpressionNode
@@ -87,7 +87,13 @@ public abstract class Box<T,U>  {
 	 * Normalize the expressions.
 	 */
 	public abstract void normalizeExpressions();
-	
+	/**
+	 * Makes a new sub-expression that is treated like a predicate by the expression tree.
+	 * @param ran int
+	 * @param fromSub boolean
+	 * @return Predicate&lt;T,U&gt;
+	 */
+	protected abstract Predicate<T,U> newSubExpression(int ran,boolean fromSub);
 	/**
 	 * Make a box with size elements.
 	 * 

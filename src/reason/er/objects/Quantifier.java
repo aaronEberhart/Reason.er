@@ -13,7 +13,7 @@ public class Quantifier {
 	
 	/**
 	 * Set the quantifier.
-	 * @param i integer
+	 * @param i int
 	 */
 	public Quantifier(int i) {
 		quantifier = i;
@@ -21,7 +21,7 @@ public class Quantifier {
 	
 	/**
 	 * Set the quantifier.
-	 * @param i integer
+	 * @param i int
 	 */
 	public void setQuantifier(int i) {
 		quantifier = i;
@@ -29,7 +29,7 @@ public class Quantifier {
 	
 	/**
 	 * Returns the value of the id.
-	 * @return integer
+	 * @return int
 	 */
 	public int getInteger() {
 		return quantifier;

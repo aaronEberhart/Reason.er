@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import reason.er.compositeObjects.*;
 
 /**
- *
+ * 
  * @author Aaron Eberhart
+ *
+ * @param <T> generic
+ * @param <U> generic
  */
 public abstract class Predicate<T,U> {
 
@@ -38,14 +41,14 @@ public abstract class Predicate<T,U> {
 	
 	/**
 	 * Make a unique copy of the Predicate in memory.
-	 * @param e Expression
-	 * @return Predicate
+	 * @param e Expression&lt;T,U&lt;
+	 * @return Predicate&lt;T,U&lt;
 	 */
 	public abstract Predicate<T,U> clone(Expression<T,U> e);
 	
 	/**
 	 * Indicates whether the Predicate is negated.
-	 * @return boolean negated?
+	 * @return negated? boolean
 	 */
 	public boolean isNegated() {
 		return negated;
@@ -67,8 +70,8 @@ public abstract class Predicate<T,U> {
 	
 	/**
 	 * Returns Term[i] of the Predicate.
-	 * @param i integer
-	 * @return Term[i]
+	 * @param i int
+	 * @return Term&lt;T&lt;[i]
 	 */
 	public Term<T> getTerm(int i) {
 		return terms.get(i);
@@ -76,7 +79,7 @@ public abstract class Predicate<T,U> {
 	
 	/**
 	 * Sets the name of the Predicate to s.
-	 * @param s U
+	 * @param s &lt;U&lt;
 	 */
 	protected void setLabel(U s) {
 		label = s;
@@ -84,7 +87,7 @@ public abstract class Predicate<T,U> {
 
 	/**
 	 * Returns the label of the Predicate.
-	 * @return U
+	 * @return label &lt;U&lt;
 	 */
 	public U getLabel() {
 		return label;
@@ -108,7 +111,7 @@ public abstract class Predicate<T,U> {
 	
 	/**
 	 * Gets the scope of the Predicate.
-	 * @return scope
+	 * @return scope &lt;T&lt;
 	 */
 	public T getScope() {
 		return scope;
@@ -116,7 +119,7 @@ public abstract class Predicate<T,U> {
 	
 	/**
 	 * Sets the scope of the Predicate.
-	 * @param t long
+	 * @param t &lt;T&lt;
 	 */
 	public void setScope(T t) {
 		scope = t;
@@ -124,7 +127,7 @@ public abstract class Predicate<T,U> {
 	
 	/**
 	 * Gets the size of the Predicate.
-	 * @return size
+	 * @return size int
 	 */
 	public int getSize() {
 		return size;
@@ -140,7 +143,7 @@ public abstract class Predicate<T,U> {
 	
 	/**
 	 * Makes a string to represent the unique Predicate id.
-	 * @return name
+	 * @return name String
 	 */
 	protected String makeLabel() {
 		long count;
@@ -174,8 +177,8 @@ public abstract class Predicate<T,U> {
 	/**
 	 * Returns the index of the character in the name array. Only works \
 	 * for values -13 - x - 13.
-	 * @param c char
-	 * @return long index
+	 * @param c char 
+	 * @return index long
 	 */
 	public static long getLabelIndex(char c) {
 		int i = 0;

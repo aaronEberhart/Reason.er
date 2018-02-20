@@ -8,8 +8,8 @@ import reason.er.compositeObjects.*;
  * 
  * @author Aaron Eberhart
  *
- * @param T generic
- * @param U generic
+ * @param <T> generic
+ * @param <U> generic
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class Role<T,U> extends Predicate<T,U> {
@@ -23,8 +23,8 @@ public class Role<T,U> extends Predicate<T,U> {
 	/**
 	 * Manual Role constructor.
 	 * @param hasSign boolean
-	 * @param t generic
-	 * @param u generic
+	 * @param t &lt;T&gt;
+	 * @param u &lt;U&gt;
 	 * @param name long
 	 */
 	public Role(boolean hasSign, T t, T u, U name){

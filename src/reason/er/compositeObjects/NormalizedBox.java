@@ -4,11 +4,25 @@ import java.util.ArrayList;
 
 import reason.er.objects.*;
 
+/**
+ * 
+ * @author Aaron Eberhart
+ *
+ * @param <T> generic
+ * @param <U> generic
+ */
 @SuppressWarnings({"unchecked","rawtypes"})
 public class NormalizedBox<T,U>{
 
+	/**
+	 * List of normalized Expressions.
+	 */
 	protected ArrayList<Expression<T,U>> normals;
 	
+	/**
+	 * Adds the list of expressions then normalizes them.
+	 * @param expressions ArrayList&lt;Expression&lt;T,U&gt;&gt;
+	 */
 	public NormalizedBox(ArrayList<Expression<T,U>> expressions) {
 		normals = new ArrayList<Expression<T,U>>(expressions.size());
 		
@@ -17,11 +31,21 @@ public class NormalizedBox<T,U>{
 		}
 	}
 
-	public Object getFromExpressionIndex(int i) {
+	/**
+	 * Gets an expression from the list
+	 * @param i int
+	 * @return Expression&lt;T,U&gt;
+	 */
+	public Expression<T,U> getFromExpressionIndex(int i) {
 		return normals.get(i);
 	}
 
-	public ExpressionNode deMorgan(ExpressionNode here){
+	/**
+	 * Performs DeMorgan operation on the node
+	 * @param here ExpressionNode&lt;T,U&gt;
+	 * @return ExpressionNode&lt;T,U&gt;
+	 */
+	public ExpressionNode<T,U> deMorgan(ExpressionNode<T,U> here){
 		
 		here.children[0].negate();
 		here.children[1].negate();
@@ -41,7 +65,15 @@ public class NormalizedBox<T,U>{
 		return here;
 	}
 
-	public ExpressionNode negateQuantifier(ExpressionNode here){
+	/**
+	 * Push the negation through the quantifier.
+	 * @param here ExpressionNode&lt;T,U&gt;
+	 * @return ExpressionNode&lt;T,U&gt;
+	 */
+	public ExpressionNode<T,U> negateQuantifier(ExpressionNode<T,U> here){
+		
+		if(!here.isNegated())
+			return here;
 		
 		here.negate();
 		((QuantifiedRole)here.leaf).getQuantifier().flipQuantifier();
@@ -57,7 +89,12 @@ public class NormalizedBox<T,U>{
 		return here;
 	}
 
-	public Expression<T,U> normalize(Expression e){
+	/**
+	 * Normalizes an expression, if it needs to be.
+	 * @param e Expression&lt;T,U&gt;
+	 * @return Expression&lt;T,U&gt;
+	 */
+	public Expression<T,U> normalize(Expression<T,U> e){
 		
 		if(e.isNormal() || e.getSize() <= 2)
 			return e;
@@ -70,7 +107,12 @@ public class NormalizedBox<T,U>{
 		}
 	}
 	
-	public ExpressionNode normalizeTree(ExpressionNode here) {
+	/**
+	 * Normalizes the expression tree node passed to it.
+	 * @param here ExpressionNode&lt;T,U&gt;
+	 * @return ExpressionNode&lt;T,U&gt;
+	 */
+	public ExpressionNode<T,U> normalizeTree(ExpressionNode<T,U> here) {
 		
 		if(here.numChildren() == 1 && here.children[0].numChildren() == 2 && here.isNegated()) {
 			here.negate();
@@ -114,10 +156,18 @@ public class NormalizedBox<T,U>{
 		}
 	}
 	
+	/**
+	 * Returns the normals.
+	 * @return ArrayList&lt;Expression&lt;T,U&gt;&gt;
+	 */
 	public ArrayList<Expression<T,U>> getNormals(){
 		return normals;
 	}
 
+	/**
+	 * Returns a copy of the normals.
+	 * @return ArrayList&lt;Expression&lt;T,U&gt;&gt;
+	 */
 	public ArrayList<Expression<T,U>> copyNormals(){
 		ArrayList<Expression<T,U>> list = new ArrayList();
 		
@@ -128,6 +178,10 @@ public class NormalizedBox<T,U>{
 		return list;
 	}
 
+	/**
+	 * Appends more expressions to the list after normalizing them.
+	 * @param expressions ArrayList&lt;Expression&lt;T,U&gt;&gt;
+	 */
 	public void appendExpressions(ArrayList<Expression<T,U>> expressions) {
 		for(Expression<T,U> ex : expressions) {
 			normals.add(normalize(ex));

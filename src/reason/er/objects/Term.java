@@ -4,7 +4,7 @@ package reason.er.objects;
 /**
  * @author Aaron Eberhart
  *
- * @param T generic
+ * @param <T> generic
  */
 public class Term<T> {
 	
@@ -19,7 +19,7 @@ public class Term<T> {
 	
 	/**
 	 * Make a generic Term
-	 * @param t generic
+	 * @param t &lt;T&gt;
 	 */
 	public Term(T t) {
 		this.term = t;
@@ -35,7 +35,7 @@ public class Term<T> {
 	
 	/**
 	 * Set the value of the Term.
-	 * @param term generic
+	 * @param term &lt;T&gt;
 	 */
 	public void setValue(T term) {
 		this.term = term;
@@ -55,7 +55,7 @@ public class Term<T> {
 	
 	/**
 	 * Check if a Term is of String type.
-	 * @param t Term
+	 * @param t &lt;T&gt;
 	 * @return boolean
 	 */
 	private boolean isString(T t) {
@@ -69,7 +69,7 @@ public class Term<T> {
 
 	/**
 	 * Check if a Term is of long type.
-	 * @param t generic
+	 * @param t &lt;T&gt;
 	 * @return boolean
 	 */
 	private boolean isLong(T t) {
@@ -83,7 +83,7 @@ public class Term<T> {
 	
 	/**
 	 * Check if a Term is of int type.
-	 * @param t generic
+	 * @param t &lt;T&gt;
 	 * @return boolean
 	 */
 	private boolean isInt(T t) {

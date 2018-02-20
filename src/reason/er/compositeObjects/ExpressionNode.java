@@ -3,16 +3,38 @@ package reason.er.compositeObjects;
 import reason.er.ReasonEr;
 import reason.er.objects.*;
 
+/**
+ * 
+ * @author Aaron Eberhart
+ *
+ * @param <T> generic
+ * @param <U> generic
+ */
 @SuppressWarnings({"unused","unchecked"})
 public class ExpressionNode<T,U> extends Expression<T,U>{
 	
-	protected char operator;	
+	/**
+	 * The logical operator, if it is binary.
+	 */
+	protected char operator;
+	/**
+	 * The Predicate at the node, if it is a leaf.
+	 */
 	protected Predicate<T,U> leaf;
+	/**
+	 * the children of an internal node.
+	 */
 	protected ExpressionNode<T,U>[] children;
-		
-	public ExpressionNode() {
-	}
+	
+	/**
+	 * Empty constructor.
+	 */
+	public ExpressionNode() {}
 
+	/**
+	 * Make an ExpressionNode from another.
+	 * @param e ExpressionNode&lt;T,U&gt;
+	 */
 	public ExpressionNode(ExpressionNode<T,U> e) {
 		if(e.leaf != null)
 			leaf = e.leaf;
@@ -23,6 +45,10 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 		size = e.getSize();
 	}
 	
+	/**
+	 * Make an ExpressionNode from a Predicate.
+	 * @param p Predicate&lt;T,U&gt;
+	 */
 	public ExpressionNode(Predicate<T,U> p) {
 		leaf = p;
 		setChildren(null);
@@ -31,6 +57,11 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 		size = p.getSize();
 	}
 	
+	/**
+	 * Make a special QuantifiedRole node subtree.
+	 * @param qr QuantifiedRole&lt;T,U&gt;
+	 * @param subTree ExpressionNode&lt;T,U&gt;
+	 */
 	public ExpressionNode(QuantifiedRole<T,U> qr, ExpressionNode<T,U> subTree) {
 		leaf = qr;
 		negated = qr.isNegated();
@@ -40,6 +71,12 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 		size = subTree.getSize() + 1;
 	}
 	
+	/**
+	 * Make a binary node.
+	 * @param o char
+	 * @param n1 ExpressionNode&lt;T,U&gt;
+	 * @param n2 ExpressionNode&lt;T,U&gt;
+	 */
 	public ExpressionNode(char o, ExpressionNode<T,U> n1, ExpressionNode<T,U> n2) {
 		operator = o;
 		setChildren(new ExpressionNode[2]);
@@ -52,6 +89,10 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 			size = n2.getSize() + 1;
 	}
 
+	/**
+	 * Checks whether a node is a leaf.
+	 * @return boolean
+	 */
 	public boolean isLeaf() {
 		if(getChildren() == null)
 			return true;
@@ -59,11 +100,19 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 			return false;
 	}
 	
+	/**
+	 * Gets the i'th child of the node.
+	 * @return Expression&lt;T,U&gt;
+	 */
 	public Expression<T,U> getChild(int i){
+		if(children == null)
+			return null;
 		return getChildren()[i];
 	}
 	
-	@Override
+	/**
+	 * Negates the ExpressionNode.
+	 */
 	public ExpressionNode<T,U> negate() {
 		negated = negated ? false : true;
 		size = negated ? size + 1 : size - 1;
@@ -73,6 +122,10 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 		return this;
 	}
 	
+	/**
+	 * Gets the number of children.
+	 * @return int
+	 */
 	public int numChildren() {
 		if(getChildren() == null)
 			return 0;
@@ -80,6 +133,11 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 			return getChildren().length;
 	}
 	
+	/**
+	 * Performs conjunction.
+	 * @param p Predicate&lt;T,U&gt;
+	 * @return ExpressionNode&lt;T,U&gt;
+	 */
 	public ExpressionNode<T,U> and(Predicate<T,U> p) {
 		if(canJoin(p)) {
 			return  new ExpressionNode<T,U>('^', new ExpressionNode<T,U>(p), this);
@@ -92,6 +150,11 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 		}
 		return this;
 	}
+	/**
+	 * Performs conjunction.
+	 * @param p ExpressionNode&lt;T,U&gt;
+	 * @return ExpressionNode&lt;T,U&gt;
+	 */
 	public ExpressionNode<T,U> and(ExpressionNode<T,U> p) {
 		if(canJoin(p)) {
 			return  new ExpressionNode<T,U>('^', p, this);
@@ -104,6 +167,11 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 		}
 		return this;
 	}
+	/**
+	 * Performs disjunction.
+	 * @param p Predicate&lt;T,U&gt;
+	 * @return ExpressionNode&lt;T,U&gt;
+	 */
 	public ExpressionNode<T,U> or(Predicate<T,U> p) {
 				
 		if(canJoin(p)) {
@@ -118,6 +186,11 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 		}
 		return this;
 	}
+	/**
+	 * performs disjunction.
+	 * @param p ExpressionNode&lt;T,U&gt;
+	 * @return ExpressionNode&lt;T,U&gt;
+	 */
 	public ExpressionNode<T,U> or(ExpressionNode<T,U> p) {
 		
 		if(canJoin(p)) {
@@ -132,6 +205,11 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 		}
 		return this;
 	}
+	/**
+	 * Creates a superclass Expression.
+	 * @param p Predicate&lt;T,U&gt;
+	 * @return ExpressionNode&lt;T,U&gt;
+	 */
 	public ExpressionNode<T,U> superClass(Predicate<T,U> p) {
 		if(!p.isNegated() && canJoin(p)) {
 			ExpressionNode<T,U> node = new ExpressionNode<T,U>('c', new ExpressionNode<T,U>(p), this);
@@ -146,6 +224,11 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 		}
 		return this;
 	}
+	/**
+	 * Creates a subclass expression.
+	 * @param p Predicate&lt;T,U&gt;
+	 * @return ExpressionNode&lt;T,U&gt;
+	 */
 	public ExpressionNode<T,U> subClass(Predicate<T,U> p) {
 		if(((ExpressionNode<T,U>)this).isLeaf() && canJoin(p)) {
 			ExpressionNode<T,U> node = new ExpressionNode<T,U>('c', (ExpressionNode<T,U>)this, new ExpressionNode<T,U>(p));
@@ -160,6 +243,11 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 		}
 		return this;
 	}
+	/**
+	 * Creates an equivalence.
+	 * @param p Predicate&lt;T,U&gt;
+	 * @return ExpressionNode&lt;T,U&gt;
+	 */
 	public ExpressionNode<T,U> equivalent(Predicate<T,U> p) {
 		if(!p.isNegated() && canJoin(p)) {
 			ExpressionNode<T,U> node = new ExpressionNode<T,U>('=', new ExpressionNode<T,U>(p), (ExpressionNode<T,U>)this);
@@ -174,6 +262,13 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 		}
 		return this;
 	}
+	/**
+	 * Quantifies the Expression with a Role.
+	 * @param q Quantifier
+	 * @param r Role
+	 * @param name &lt;U&gt;
+	 * @return ExpressionNode&lt;T,U&gt;
+	 */
 	public ExpressionNode<T,U> dot(Quantifier q, Role<T,U> r, U name) {		
 		if(QuantifiedRole.canQuantify(q, r, null, this)) {
 			ExpressionNode<T,U> node = new ExpressionNode<T,U>(new QuantifiedRole<T,U>(q,r,this,name),(ExpressionNode<T,U>)this);
@@ -207,14 +302,27 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 		}
 	}
 
+	/**
+	 * Gets the children
+	 * @return ExpressionNode&lt;T,U&gt;[]
+	 */
 	public ExpressionNode<T,U>[] getChildren() {
+		if(children == null)
+			return null;
 		return children;
 	}
 
+	/**
+	 * Sets the children.
+	 * @param children ExpressionNode&lt;T,U&gt;[]
+	 */
 	public void setChildren(ExpressionNode<T,U>[] children) {
 		this.children = children;
 	}
 
+	/**
+	 * Returns true.
+	 */
 	@Override
 	public boolean isExpression() {
 		return true;

@@ -1,17 +1,35 @@
 package reason.er.compositeObjects;
 
-import reason.er.ReasonEr;
 import reason.er.objects.*;
 
+/**
+ * 
+ * @author Aaron Eberhart
+ *
+ * @param <T> generic
+ * @param <U> generic
+ */
 @SuppressWarnings({ "unchecked"})
 public class Expression<T,U> extends Predicate<T,U>{
 
+	/**
+	 * The root of the Expression tree.
+	 */
 	protected ExpressionNode<T,U> root;
+	/**
+	 * Booleans to track the status of an altered Expression.
+	 */
 	protected boolean complete, normalized;
 	
-	public Expression() {
-	}
+	/**
+	 * Empty constructor.
+	 */
+	public Expression() {}
 	
+	/**
+	 * Makes an expression from a Predicate.
+	 * @param p Predicate&lt;T,U&gt;
+	 */
 	public Expression(Predicate<T,U> p) {
 		scope = p.getScope();
 		root = new ExpressionNode<T,U>(p);
@@ -21,6 +39,10 @@ public class Expression<T,U> extends Predicate<T,U>{
 		size = p.getSize();
 	}
 	
+	/**
+	 * Makes an Expression from an ExpressionNode,
+	 * @param e ExpressionNode&lt;T,U&gt;
+	 */
 	public Expression(ExpressionNode<T,U> e){
 		scope = e.getScope();
 		root = recursiveDeepCopy(e);	
@@ -30,6 +52,10 @@ public class Expression<T,U> extends Predicate<T,U>{
 		size = e.getSize();
 	}
 
+	/**
+	 * Makes an Expression from another expression.
+	 * @param e Expression&lt;T,U&gt;
+	 */
 	public Expression(Expression<T,U> e) {
 		root = (ExpressionNode<T,U>)e;
 		scope = e.scope;
@@ -38,6 +64,11 @@ public class Expression<T,U> extends Predicate<T,U>{
 		normalized = false;
 	}
 	
+	/**
+	 * Makes a copy of the ExpressionNode in memory.
+	 * @param e ExpressionNode&lt;T,U&gt;
+	 * @return ExpressionNode&lt;T,U&gt;
+	 */
 	public ExpressionNode<T,U> recursiveDeepCopy(ExpressionNode<T,U> e) {
 		try{
 			ExpressionNode<T,U> ex;
@@ -67,6 +98,11 @@ public class Expression<T,U> extends Predicate<T,U>{
 
 	}
 	
+	/**
+	 * Makes a copy of the Expression in memory.
+	 * @param e Expression&lt;T,U&gt;
+	 * @return Expression&lt;T,U&gt;
+	 */
 	public Expression<T,U> deepCopy(Expression<T,U> e) {
 		if(root == null) {
 			try {
@@ -79,96 +115,85 @@ public class Expression<T,U> extends Predicate<T,U>{
 		exp.size = exp.root.size;
 		return exp;
 	}
-	
-	public Expression<T,U> negate() {
-		if(complete) {
-			try {
-				throw ReasonEr.expression;
-			} catch (Exception e) {
-				System.out.println(e + "--" +  this.toString());
-			}
-		}
-		else if(root == null && ((ExpressionNode<T,U>)this).getChildren() == null) {
-			System.out.println(1);
-			if(this.negated)
-				size--;
-			else
-				size++;
-			((ExpressionNode<T,U>)this).leaf.negate();
-			negated = ((ExpressionNode<T,U>)this).leaf.isNegated();
-		}
-		else if(root == null && ((ExpressionNode<T,U>)this).getChildren().length == 1) {
-			System.out.println(2);
-			if(this.negated)
-				size--;
-			else
-				size++;
-			((ExpressionNode<T,U>)this).leaf.negate();
-			(((ExpressionNode<T,U>)this).getChildren()[0]).negate();
-			this.negated = this.negated?false:true;
-		}
-		else if(root != null && root.negated) {
-			System.out.println(3);
-			root.negated = false;
-			if(root.isLeaf())
-				root.leaf.negate();
-			root.size = root.size - 1;
-			size = size - 1;
-		}else if (root != null) {
-			System.out.println(4);
-			root.negated = true;
-			if(root.isLeaf())
-				root.leaf.negate();
-			root.size += 1;
-			size+=1;
-		}
-		else {
-			System.out.println(5);
-			if(this.negated)
-				size--;
-			else
-				size++;
-			negated = negated?false:true;
-		}
-		
-		return this;
-	}
-	
+
+	/**
+	 * Verifies that a Predicate is allowed to join the Expression.
+	 * @param p Predicate&lt;T,U&gt;
+	 * @return boolean
+	 */
 	public boolean canJoin(Predicate<T,U> p) {
 		return !p.isRole() && !complete && (((long)p.getScope()<0 && (long)scope<0) || p.getScope().equals(scope));
 	}
 	
+	/**
+	 * Checks whether the Expression is complete or not.
+	 * @return boolean
+	 */
 	public boolean isComplete() {
 		return complete;
 	}
 	
+	/**
+	 * Returns the operator at the root of the Expression.
+	 * @return char
+	 */
 	public char getOperator() {
 		if(complete)
 			return root.operator;
 		else return 0;
 	}
 	
+	/**
+	 * Sets the operator.
+	 * @param c char
+	 */
 	public void setOperator(char c) {
 		root.operator = c;
 	}
 	
+	/**
+	 * Sets whether the Expression has been normalized.
+	 * @param b boolean
+	 */
 	public void setNormal(boolean b) {
 		normalized = b;
 	}
 	
+	/**
+	 * Checks if the Expression has been normalized.
+	 * @return boolean
+	 */
 	public boolean isNormal() {
 		return normalized;
 	}
 	
 	public String toString() {
-		//String s = root.toString();
 		return root.toString() + " Size: " + this.getSize() + "\tScope: " + Term.makeVariable((long)scope);
 	}
 
+	/**
+	 * Negates an Expression
+	 */
+	public Expression<T,U> negate() {
+		root.negate();
+		return this;
+	}
+	
+	/**
+	 * Returns child[i] of the Expression.
+	 * @param i int
+	 * @return Expression&lt;T,U&gt;
+	 */
 	public Expression<T,U> getChild(int i){
+		if(root.getChildren() == null)
+			return null;
 		return root.getChildren()[i];
 	}
 	
+	/**
+	 * Gets the root.
+	 * @return ExpressionNode&lt;T,U&gt;
+	 */
 	public ExpressionNode<T,U> getRoot() {
 		return this.root;
 	}
@@ -178,6 +203,9 @@ public class Expression<T,U> extends Predicate<T,U>{
 		return recursiveDeepCopy(e.root);
 	}
 
+	/**
+	 * Returns true.
+	 */
 	@Override
 	public boolean isExpression() {
 		return true;

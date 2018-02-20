@@ -19,7 +19,9 @@ public class ReasonEr {
 	 * Exception message for expression errors.
 	 */
 	public static final Exception expression = new Exception("Invalid expression: ");
-	public static final int NUMTESTS = 1;
+	public static final int NUMTESTS = 100;
+	public static final int ABOXSIZE = 99;
+	public static final int TBOXSIZE = 99;
 	
 	/**
 	 * Main class for program.
@@ -28,33 +30,33 @@ public class ReasonEr {
 	 */
 	public static void main(String[] args) {
 		
-		System.out.println("Making Expressions");
+		
+		
+		prepDirs();
 		
 		KnowledgeBase kb;
-		
-		for(int i = 0; i < NUMTESTS; i++) {
+		int i = 0;
+		for(; i < NUMTESTS; i++) {
 			
-			kb = new KnowledgeBase(9999,9999);
+			System.out.println("Making Expressions " + i);
+			
+			kb = new KnowledgeBase(ABOXSIZE,TBOXSIZE);
 		
-//			System.out.println(kb.toString());
-			toFile("knowledgeBase["+i+"].txt",kb.toString());
-		
-			System.out.println("Normalizing Expressions");
+			toFile("output\\knowledgeBases\\knowledgeBase["+i+"].txt",kb.toString());
+			System.out.println("Normalizing Expressions "+i+"\n");
 		
 			kb.normalize();
 		
-//			System.out.println(kb.toString());
-			toFile("normalizedKnowledgeBase["+i+"].txt",kb.toString());
-//		
+			toFile("output\\normalizedKnowledgeBase["+i+"].txt",kb.toString());
+			
 //			Tableau t = new Tableau(kb);
 //			t.run();
 //		
-//			System.out.println(t.toString());
-//			toFile("tableau["+i+"].txt",t.toString());
+//			toFile("output\\tableaux\\tableau["+i+"].txt",t.toString());
 		
 		}
 		
-		System.out.println("\nDONE");
+		System.out.println("\n\n"+i+" TESTS DONE");
 	}
 	
 	/**
@@ -73,5 +75,25 @@ public class ReasonEr {
 		}
 	}
 		
+	/**
+	 * Make sure the output directories exist.
+	 */
+	public static void prepDirs() {
+		File f1 = new File("output");
+		if(!f1.exists())
+			f1.mkdir();
+		
+		File f2 = new File("output\\knowledgeBases");
+		if(!f2.exists())
+			f2.mkdir();
+		
+		File f3 = new File("output\\normalizedKnowledgeBases");
+		if(!f3.exists())
+			f3.mkdir();
+		
+		File f4 = new File("output\\tableaux");
+		if(!f4.exists())
+			f4.mkdir();
+	}
 	
 }

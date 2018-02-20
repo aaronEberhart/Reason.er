@@ -11,7 +11,7 @@ import reason.er.util.*;
  * 
  * @author Aaron Eberhart
  *
- * @param T generic
+ * @param <T> generic
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class TBox<T,U> extends Box<T,U>{
@@ -24,7 +24,7 @@ public class TBox<T,U> extends Box<T,U>{
 	/**
 	 * Make a TBox of size elements.
 	 * 
-	 * @param size integer
+	 * @param size int
 	 */
 	public TBox(int size) {
 
@@ -32,7 +32,7 @@ public class TBox<T,U> extends Box<T,U>{
 		
 		this.counters = resetCounters();
 		
-		scope = counters[1];
+		scope = counters[0];
 		
 		numSubExpansions = 0;
 
@@ -44,7 +44,7 @@ public class TBox<T,U> extends Box<T,U>{
 	/**
 	 * Make a TBox of the ArrayList e.
 	 * 
-	 * @param e ArrayList(Expression)
+	 * @param e ArrayList&lt;Expression&lt;T,U&gt;&gt;
 	 */
 	public TBox(ArrayList<Expression<T,U>> e) {
 		numSubExpansions = 0;
@@ -66,30 +66,30 @@ public class TBox<T,U> extends Box<T,U>{
 		ExpressionNode builder = expression.root;
 		
 		while(!expression.isComplete()) {
-			
+//			System.out.println(builder);
 			builder = transform(rand.nextInt(11), builder, false);
+//			System.out.println(builder+"\n");
 			expression.root = builder;
 			
 			if(builder.complete)
 				expression.complete = true;
+			
+			
 		}
 		
 		expression.setSize(builder.getSize());
 		expression.setScope((T)builder.getScope());
 		
 		names.clear();
-		counters[1] = 2;
+		counters[0] = 2;
 		
 		return expression;
 	}
 
 	/**
 	 * Make a sub-expression.
-	 * 
-	 * @param ran integer
-	 * @param fromSub boolean
-	 * @return sub-expression Predicate
 	 */
+	@Override
 	protected Predicate<T,U> newSubExpression(int ran, boolean fromSub){
 		rand = new RandomInteger();
 		long[] tmpCounters = this.counters;
@@ -102,7 +102,7 @@ public class TBox<T,U> extends Box<T,U>{
 		if((long)p.getScope() == scope)
 			return p;
 		
-		scope = counters[1];
+		scope = counters[0];
 		
 		while((long)builder.getScope() < tmpScope) {
 			
@@ -122,11 +122,9 @@ public class TBox<T,U> extends Box<T,U>{
 	protected ExpressionNode transform(int randInt, ExpressionNode expression,boolean fromSub) {
 
 		int size = expression.getSize();
-		boolean done = false;
 		
-		if(size + 6 >= maxSize || (scope >= bound && scope > 0) || (scope <= (bound * -1) && scope < 0)) {
-			randInt = (randInt % 4) + 4;
-			done = true;
+		if(size + 15 >= maxSize || (scope >= bound && scope > 0) || (scope <= (bound * -1) && scope < 0)){
+			randInt = fromSub ? (randInt % 2) + 8 : (randInt % 4) + 4;
 		}
 		
 		switch(randInt) {
@@ -177,11 +175,10 @@ public class TBox<T,U> extends Box<T,U>{
 				break;
 		}
 		if(randInt > 3 && randInt < 10 && expression.getSize() > size) {
-			scope = counters[1];
+			scope = counters[0];
 			expression.setScope(scope);
 		}
 		
-		expression.complete = expression.complete || done ? true : false;
 
 		return expression;
 	}
@@ -197,21 +194,19 @@ public class TBox<T,U> extends Box<T,U>{
 		long two = -1 * makeName(rand);
 		
 		if(randInt == 0) {
-			p = new Concept(negated,counters[1],one);
+			p = new Concept(negated,counters[0],one);
 			if(!usedBefore(one))
 				names.add(one);
 		}
 		else if(randInt == 1) {
 			
-			p = new QuantifiedRole(negated,rand.nextBoolean(),rand.nextInt(2) + 1,counters[1],counters[1]-1,two,one,one);
+			p = new QuantifiedRole(negated,rand.nextBoolean(),rand.nextInt(2) + 1,counters[0],counters[0]-1,two,one,one);
 			if(!usedBefore(one))
 				names.add(one);
-//			counters[2] = (counters[2] + 1);
 		}
 		else {
-			p = new Role(false,counters[1] + 1,counters[1],two);
-//			counters[2] = (counters[2] + 1);
-			counters[1] = (counters[1] + 1);
+			p = new Role(false,counters[0] + 1,counters[0],two);
+			counters[0] = (counters[0] + 1);
 		}
 		
 		return p;
@@ -309,12 +304,9 @@ public class TBox<T,U> extends Box<T,U>{
 	 */
 	@Override
 	protected long[] resetCounters() {
-		long [] counters = new long[3];
-		counters[1] = 2;
+		long [] counters = new long[1];
+		counters[0] = 2;
 		return counters;
 	}
-
-	
-
 	
 }

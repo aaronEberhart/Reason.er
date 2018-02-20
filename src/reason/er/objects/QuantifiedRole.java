@@ -9,8 +9,8 @@ import reason.er.compositeObjects.*;;
  * 
  * @author Aaron Eberhart
  *
- * @param T generic
- * @param U generic
+ * @param <T> generic
+ * @param <U> generic
  */
 @SuppressWarnings({"rawtypes","unchecked"})
 public class QuantifiedRole<T,U> extends Role {
@@ -25,12 +25,12 @@ public class QuantifiedRole<T,U> extends Role {
 	 * 
 	 * @param hasSign boolean
 	 * @param conceptNegated boolean
-	 * @param i integer
-	 * @param t T
-	 * @param u T
-	 * @param name1 U
-	 * @param name2 U
-	 * @param name3 U
+	 * @param i int
+	 * @param t &lt;T&gt;
+	 * @param u &lt;T&gt;
+	 * @param name1 &lt;U&gt;
+	 * @param name2 &lt;U&gt;
+	 * @param name3 &lt;U&gt;
 	 */
 	public QuantifiedRole(boolean hasSign,boolean conceptNegated, int i, T t, T u, U name1, U name2, U name3) {
 		
@@ -57,7 +57,7 @@ public class QuantifiedRole<T,U> extends Role {
 	 * @param q Quantifier
 	 * @param r Role
 	 * @param c Expression
-	 * @param name U
+	 * @param name &lt;U&gt;
 	 */
 	public QuantifiedRole(Quantifier q, Role<T,U> r, Expression<T,U> c, U name) {
 		
@@ -79,9 +79,9 @@ public class QuantifiedRole<T,U> extends Role {
 	 * @param q Quantifier
 	 * @param r Role
 	 * @param c Concept
-	 * @param name1 U
-	 * @param name2 U
-	 * @param name3 U
+	 * @param name1 &lt;U&gt;
+	 * @param name2 &lt;U&gt;
+	 * @param name3 &lt;U&gt;
 	 */
 	public QuantifiedRole(Quantifier q, Role<T,U> r, Concept<T,U> c, U name1, U name2, U name3) {
 		

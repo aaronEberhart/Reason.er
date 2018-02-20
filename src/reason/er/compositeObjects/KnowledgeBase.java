@@ -8,8 +8,8 @@ import reason.er.objects.*;
  * 
  * @author Aaron Eberhart
  *
- * @param T generic
- * @param U generic
+ * @param <T> generic
+ * @param <U> generic
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class KnowledgeBase<T,U> extends Expression<T,U>{
