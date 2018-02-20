@@ -1,7 +1,7 @@
 package reason.er.objects;
 
 /**
- *
+ * The quantifier is simply an integer ID with a toString translation.
  * @author Aaron Eberhart
  */
 public class Quantifier {

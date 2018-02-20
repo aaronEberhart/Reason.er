@@ -4,7 +4,8 @@ import reason.er.ReasonEr;
 import reason.er.objects.*;
 
 /**
- * 
+ * A node in an Expression tree. It can either be a leaf, a node with
+ * a unary quantified Role, or a binary node witth two subtrees.
  * @author Aaron Eberhart
  *
  * @param <T> generic

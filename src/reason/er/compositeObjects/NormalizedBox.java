@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import reason.er.objects.*;
 
 /**
- * 
+ * A specialized type of Box analog that is separate because it lacks the generator variables and methods
+ * but has methods necessary to normalize expressions.
  * @author Aaron Eberhart
  *
  * @param <T> generic

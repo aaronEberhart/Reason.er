@@ -7,6 +7,9 @@ import reason.er.objects.*;
 import reason.er.util.*;
 
 /**
+ * Abstract class for Expression building code that constructs Boxes.
+ * Contains static variables that can control the types of Expressions that 
+ * it produces. Boxes can normalize themselves.
  * @author Aaron Eberhart
  *
  * @param <T> generic
@@ -14,7 +17,7 @@ import reason.er.util.*;
 public abstract class Box<T,U>  {
 	
 	/**
-	 * long identifier for the scope of the entire expression
+	 * T identifier for the scope of the entire expression
 	 */
 	protected long scope;
 	/**
@@ -36,7 +39,7 @@ public abstract class Box<T,U>  {
 	/**
 	 * Maximum size of all Expressions.
 	 */
-	protected final int maxSize = 20;
+	protected final int maxSize = 50;
 	/**
 	 * integer for tracking the number of sub-Expressions.
 	 */

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import reason.er.objects.*;
 
 /**
- * 
+ * Container for an ABox and a TBox. Has methods that initialize or normalize both.
  * @author Aaron Eberhart
  *
  * @param <T> generic

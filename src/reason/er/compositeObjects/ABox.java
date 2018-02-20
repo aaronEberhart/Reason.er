@@ -7,7 +7,7 @@ import reason.er.objects.*;
 import reason.er.util.*;
 
 /**
- * 
+ * ABox expression generator.
  * @author Aaron Eberhart
  *
  * @param <T> generic

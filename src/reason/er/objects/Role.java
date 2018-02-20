@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import reason.er.compositeObjects.*;
 
 /**
- * 
+ * The Role class , unless ground instantiated, is not
+ * sufficient for use in Expression building. This class is 
+ * designed for use in ABox statements or complex Role quantification.
  * @author Aaron Eberhart
  *
  * @param <T> generic

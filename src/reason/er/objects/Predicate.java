@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import reason.er.compositeObjects.*;
 
 /**
- * 
+ * Abstract class that describes all Predicate Objects. Predicates 
+ * have a label, terms, a scope, a size, and can be negated.
  * @author Aaron Eberhart
  *
  * @param <T> generic

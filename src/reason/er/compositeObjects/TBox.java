@@ -8,10 +8,11 @@ import reason.er.objects.*;
 import reason.er.util.*;
 
 /**
- * 
+ * TBox expression generator.
  * @author Aaron Eberhart
  *
  * @param <T> generic
+ * @param <U> generic
  */
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class TBox<T,U> extends Box<T,U>{

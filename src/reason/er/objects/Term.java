@@ -2,6 +2,11 @@ package reason.er.objects;
 
 
 /**
+ * This class is an attempt to allow different datatypes into the variable binding
+ * scheme. Currently the long type has been developed the most as it is used 
+ * in the other classes. Adding functionality to this should be straightforward 
+ * if it was necessary.
+ * 
  * @author Aaron Eberhart
  *
  * @param <T> generic

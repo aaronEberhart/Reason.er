@@ -6,14 +6,17 @@ import reason.er.ReasonEr;
 import reason.er.compositeObjects.*;;
 
 /**
- * 
+ * The QuantifiedRole is a representation of a role that is quantified over only 
+ * one Concept. This structure can be treated atomically as if it were itself a 
+ * Concept. Technically an equivalent structure can be formed from an Expression,
+ * but this is often more convenient.
  * @author Aaron Eberhart
  *
  * @param <T> generic
  * @param <U> generic
  */
 @SuppressWarnings({"rawtypes","unchecked"})
-public class QuantifiedRole<T,U> extends Role {
+public class QuantifiedRole<T,U> extends Concept {
 
 	/**
 	 * Empty constructor.
@@ -139,17 +142,6 @@ public class QuantifiedRole<T,U> extends Role {
 			s += "--";
 		return s + this.terms.get(2).toString() + " "  + this.terms.get(0).toString() + "." + this.terms.get(1).toString();
 	}
-
-	/**
-	 * Returns true.
-	 * 
-	 * @return true
-	 */
-	public boolean isExpression() {
-		if(this.terms.get(1) == null)
-			return true;
-		return false;
-	}
 	
 	/**
 	 * Gets the Role of the QuantifiedRole
@@ -175,15 +167,6 @@ public class QuantifiedRole<T,U> extends Role {
 		return ((Quantifier)this.terms.get(2));
 	}
 
-	/**
-	 * Overrides superclass Role.
-	 * @return false
-	 */
-	@Override
-	public boolean isRole() {
-		return false;
-	}
-	
 	@Override
 	public Predicate<T,U> clone(Expression e) {
 		if(this.isExpression()) {

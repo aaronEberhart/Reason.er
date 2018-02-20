@@ -3,14 +3,16 @@ package reason.er.compositeObjects;
 import reason.er.objects.*;
 
 /**
- * 
+ * The Expression is a handle for grasping a tree of ExpressionNodes.
+ * It has a root and booleans to track whether it is complete or
+ * normalized.
  * @author Aaron Eberhart
  *
  * @param <T> generic
  * @param <U> generic
  */
 @SuppressWarnings({ "unchecked"})
-public class Expression<T,U> extends Predicate<T,U>{
+public class Expression<T,U> extends Concept<T,U>{
 
 	/**
 	 * The root of the Expression tree.

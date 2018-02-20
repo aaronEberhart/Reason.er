@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import reason.er.compositeObjects.*;
 
 /**
- * 
+ * The Concept class is intended to model the behavior of ALC Concepts. It is
+ * the most basic Predicate and as such has only one Term, which is identical 
+ * with its scope.
  * @author Aaron Eberhart
  *
  * @param <T> generic

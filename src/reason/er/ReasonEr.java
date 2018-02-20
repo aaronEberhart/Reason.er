@@ -10,6 +10,7 @@ import reason.er.compositeObjects.*;
 import reason.er.objects.*;
 
 /**
+ * Test class for program.
  * @author Aaron Eberhart
  */
 @SuppressWarnings({"rawtypes"})
@@ -19,22 +20,30 @@ public class ReasonEr {
 	 * Exception message for expression errors.
 	 */
 	public static final Exception expression = new Exception("Invalid expression: ");
+	/**
+	 * Number of tests to run.
+	 */
 	public static final int NUMTESTS = 100;
+	/**
+	 * Size of each ABox to make.
+	 */
 	public static final int ABOXSIZE = 99;
+	/**
+	 * Size of each TBox to make.
+	 */
 	public static final int TBOXSIZE = 99;
 	
 	/**
-	 * Main class for program.
+	 * Main method for program.
 	 * 
 	 * @param args String
 	 */
 	public static void main(String[] args) {
 		
-		
-		
 		prepDirs();
 		
 		KnowledgeBase kb;
+		
 		int i = 0;
 		for(; i < NUMTESTS; i++) {
 			
@@ -43,16 +52,21 @@ public class ReasonEr {
 			kb = new KnowledgeBase(ABOXSIZE,TBOXSIZE);
 		
 			toFile("output\\knowledgeBases\\knowledgeBase["+i+"].txt",kb.toString());
+			
 			System.out.println("Normalizing Expressions "+i+"\n");
 		
 			kb.normalize();
 		
-			toFile("output\\normalizedKnowledgeBase["+i+"].txt",kb.toString());
+			toFile("output\\normalizedKnowledgeBases\\normalizedKnowledgeBase["+i+"].txt",kb.toString());
 			
 //			Tableau t = new Tableau(kb);
+//			
+//			System.out.println("Running Tableau "+i+"\n");
+//			
 //			t.run();
 //		
 //			toFile("output\\tableaux\\tableau["+i+"].txt",t.toString());
+			
 		
 		}
 		
