@@ -1,3 +1,3 @@
-I'm trying this stuff out for the first time.
+How does this go again?
 
-Let's see how it goes.
+Javadoc: https://aaroneberhart.github.io/Reason.er/Javadoc/
