@@ -1,4 +1,3 @@
 How does this go again?
 
-
-[Javadoc](https://aaroneberhart.github.io/Reason.er/Javadoc/ "Javadoc"){:target="_blank"}.
+<a href="https://aaroneberhart.github.io/Reason.er/Javadoc/" target="_blank">Javadoc</a>
