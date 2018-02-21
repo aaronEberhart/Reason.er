@@ -80,7 +80,7 @@ public abstract class Predicate<T,U> {
 	
 	/**
 	 * Sets the name of the Predicate to s.
-	 * @param s &lt;U&lt;
+	 * @param s &lt;U&gt;
 	 */
 	protected void setLabel(U s) {
 		label = s;
@@ -112,7 +112,7 @@ public abstract class Predicate<T,U> {
 	
 	/**
 	 * Gets the scope of the Predicate.
-	 * @return &lt;T&lt;
+	 * @return &lt;T&gt;
 	 */
 	public T getScope() {
 		return scope;
