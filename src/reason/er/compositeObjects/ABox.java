@@ -69,7 +69,7 @@ public class ABox<T,U> extends Box<T,U> {
 		}
 		//is it time to stop?
 		if(constants && !complete) {
-			expression.complete = rand.weightedBool(100,75);
+			expression.complete = rand.weightedBool(100,25);
 		}
 		
 		//we're done
@@ -179,7 +179,7 @@ public class ABox<T,U> extends Box<T,U> {
 	}
 	
 	/**
-	 * Make an expression.
+	 * Make an ABox expression.
 	 */
 	@Override
 	protected Expression<T,U> makeExpression() {

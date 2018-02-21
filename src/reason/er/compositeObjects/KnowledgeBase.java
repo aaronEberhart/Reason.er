@@ -25,8 +25,8 @@ public class KnowledgeBase<T,U> extends Expression<T,U>{
 	
 	/**
 	 * Make a new randomized KnowledgeBase of the size specified.
-	 * @param aboxSize integer
-	 * @param tboxSize integer
+	 * @param aboxSize int
+	 * @param tboxSize int
 	 */
 	public KnowledgeBase(int aboxSize, int tboxSize) {
 		
@@ -36,8 +36,8 @@ public class KnowledgeBase<T,U> extends Expression<T,U>{
 	
 	/**
 	 * Make a KnowledgeBase out of the ABox and TBox.
-	 * @param a ABox
-	 * @param t TBox
+	 * @param a ABox&lt;T,U&gt;
+	 * @param t TBox&lt;T,U&gt;
 	 */
 	public KnowledgeBase(ABox<T,U> a, TBox<T,U> t) {
 		tbox = t;
@@ -61,7 +61,7 @@ public class KnowledgeBase<T,U> extends Expression<T,U>{
 	
 	/**
 	 * Getter for the TBox.
-	 * @return tbox
+	 * @return TBox&lt;T,U&gt;
 	 */
 	public TBox getTBox() {
 		return tbox;
@@ -69,7 +69,7 @@ public class KnowledgeBase<T,U> extends Expression<T,U>{
 	
 	/**
 	 * Getter for the ABox.
-	 * @return abox
+	 * @return ABox&lt;T,U&gt;
 	 */
 	public ABox getABox() {
 		return abox;

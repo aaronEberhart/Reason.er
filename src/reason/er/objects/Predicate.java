@@ -42,14 +42,14 @@ public abstract class Predicate<T,U> {
 	
 	/**
 	 * Make a unique copy of the Predicate in memory.
-	 * @param e Expression&lt;T,U&lt;
-	 * @return Predicate&lt;T,U&lt;
+	 * @param e Expression&lt;T,U&gt;
+	 * @return Predicate&lt;T,U&gt;
 	 */
 	public abstract Predicate<T,U> clone(Expression<T,U> e);
 	
 	/**
 	 * Indicates whether the Predicate is negated.
-	 * @return negated? boolean
+	 * @return boolean
 	 */
 	public boolean isNegated() {
 		return negated;
@@ -72,7 +72,7 @@ public abstract class Predicate<T,U> {
 	/**
 	 * Returns Term[i] of the Predicate.
 	 * @param i int
-	 * @return Term&lt;T&lt;[i]
+	 * @return Term&lt;T&gt;[i]
 	 */
 	public Term<T> getTerm(int i) {
 		return terms.get(i);
@@ -88,7 +88,7 @@ public abstract class Predicate<T,U> {
 
 	/**
 	 * Returns the label of the Predicate.
-	 * @return label &lt;U&lt;
+	 * @return &lt;U&gt;
 	 */
 	public U getLabel() {
 		return label;
@@ -112,7 +112,7 @@ public abstract class Predicate<T,U> {
 	
 	/**
 	 * Gets the scope of the Predicate.
-	 * @return scope &lt;T&lt;
+	 * @return &lt;T&lt;
 	 */
 	public T getScope() {
 		return scope;
@@ -120,7 +120,7 @@ public abstract class Predicate<T,U> {
 	
 	/**
 	 * Sets the scope of the Predicate.
-	 * @param t &lt;T&lt;
+	 * @param t &lt;T&gt;
 	 */
 	public void setScope(T t) {
 		scope = t;
@@ -128,7 +128,7 @@ public abstract class Predicate<T,U> {
 	
 	/**
 	 * Gets the size of the Predicate.
-	 * @return size int
+	 * @return int
 	 */
 	public int getSize() {
 		return size;
@@ -144,7 +144,7 @@ public abstract class Predicate<T,U> {
 	
 	/**
 	 * Makes a string to represent the unique Predicate id.
-	 * @return name String
+	 * @return String
 	 */
 	protected String makeLabel() {
 		long count;
@@ -179,7 +179,7 @@ public abstract class Predicate<T,U> {
 	 * Returns the index of the character in the name array. Only works \
 	 * for values -13 - x - 13.
 	 * @param c char 
-	 * @return index long
+	 * @return long
 	 */
 	public static long getLabelIndex(char c) {
 		int i = 0;

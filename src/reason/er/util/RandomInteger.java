@@ -2,12 +2,12 @@ package reason.er.util;
 
 /**
  * This class was adapted from an example I found online. 
- * Methods that are from the example are labeled "Original"
- * Methods that I wrote are labeled "New"
+ * Methods that are from the example are labeled "Original".
+ * Methods that I wrote are labeled "New".
  * 
  * 
  * @author Original Code : Neil Coffey : https://www.javamex.com/tutorials/random_numbers/numerical_recipes.shtml
- * @author New Code : Aaron Eberhart
+ * @author <br>New Code : Aaron Eberhart
  **/
 public class RandomInteger {
 
@@ -57,8 +57,9 @@ public class RandomInteger {
 
 		/**
 		 * New
-		 * @param bound integer
-		 * @return integer
+		 * Returns a positive integer in the range [0,bound)
+		 * @param bound int
+		 * @return int
 		 */
 		public int nextInt(int bound) {
 			int val = (int)nextLong();
@@ -68,6 +69,8 @@ public class RandomInteger {
 		
 		/**
 		 * New
+		 * Generates a random integer in the range [0,2).
+		 * Returns true if 0, false if 1.
 		 * @return boolean 1:1
 		 */
 		public boolean nextBoolean() {
@@ -75,19 +78,24 @@ public class RandomInteger {
 		}
 		
 		/**
-		 * New
-		 * @param upper integer
-		 * @param lower integer
-		 * @return boolean upper-lower:lower
+		 * New<br>
+		 * Generates a random integer in the range [0,upper).
+		 * If the integer is greater than lower return true, false otherwise.<br>
+		 * The odds of true should be approximately: 1 - (upper / lower)<br>
+		 * If lower is greater than or equal to upper, this method will ALWAYS
+		 * return false.
+		 * @param upper int
+		 * @param lower int
+		 * @return boolean 
 		 */
 		public boolean weightedBool(int upper, int lower) {
-			return nextInt(upper)>lower?true:false;
+			return nextInt(upper)>=lower?true:false;
 		}
 		
 		/**
 		 * Original
-		 * @param bits integer
-		 * @return integer
+		 * @param bits int
+		 * @return int
 		 */
 		protected int next(int bits) {
 			return (int) (nextLong() >>> (64-bits));

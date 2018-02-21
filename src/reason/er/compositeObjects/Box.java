@@ -41,20 +41,20 @@ public abstract class Box<T,U>  {
 	 */
 	protected final int maxSize = 50;
 	/**
-	 * integer for tracking the number of sub-Expressions.
+	 * int for tracking the number of sub-Expressions.
 	 */
 	protected int numSubExpansions;	
 	/**
-	 * Integer for Predicate name restriction.
+	 * int for Predicate name restriction.
 	 */
 	protected final int universe = Predicate.uppers.length;
 	/**
-	 * Integer for variable use restriction.
+	 * int for variable use restriction.
 	 */
 	protected final int variables = Term.lowers.length / 2;
 	
 	/**
-	 * Syntactically valid random Expressions
+	 * List of random Expressions
 	 */
 	protected ArrayList<Expression<T,U>> expressions;
 	/**
@@ -64,26 +64,26 @@ public abstract class Box<T,U>  {
 
 	/**
 	 * Make an expression.
-	 * @return expression
+	 * @return Expression&lt;T,U&gt;
 	 */
 	protected abstract Expression<T,U> makeExpression();
 	/**
-	 * Make a new predicate based on the int param.
+	 * Make a new predicate based on the int parameter.
 	 * @param randInt int
-	 * @return Predicate
+	 * @return Predicate&lt;T,U&gt;
 	 */
 	protected abstract Predicate<T,U> newPredicate(int randInt);
 	/**
 	 * Changes the expression with logic operations.
 	 * @param randInt int
-	 * @param expression ExpressionNode
+	 * @param expression ExpressionNode&lt;T,U&gt;
 	 * @param fromSub boolean
-	 * @return ExpressionNode
+	 * @return ExpressionNode&lt;T,U&gt;
 	 */
 	protected abstract Expression<T,U> transform(int randInt, ExpressionNode<T,U> expression, boolean fromSub);
 	/**
-	 * reset the counter array.
-	 * @return the counter array.
+	 * Reset the counter array.
+	 * @return long[] 
 	 */
 	protected abstract long[] resetCounters();
 	/**
@@ -100,7 +100,7 @@ public abstract class Box<T,U>  {
 	/**
 	 * Make a box with size elements.
 	 * 
-	 * @param size integer
+	 * @param size int
 	 */
 	protected void makeBox(int size) {
 		expressions = new ArrayList<Expression<T,U>>(size);
@@ -112,7 +112,7 @@ public abstract class Box<T,U>  {
 	/**
 	 * Manually add an expression node to a box.
 	 * 
-	 * @param e ExpressionNode
+	 * @param e ExpressionNode&lt;T,U&gt;
 	 */
 	public void addManually(ExpressionNode<T,U> e) {
 		expressions.add(new Expression<T,U>(e));
@@ -120,7 +120,7 @@ public abstract class Box<T,U>  {
 	
 	/**
 	 * Return the number of names in use.
-	 * @return universe
+	 * @return int
 	 */
 	public int getNumVars() {
 		return universe;
@@ -138,7 +138,7 @@ public abstract class Box<T,U>  {
 	
 	/**
 	 * Return the normals.
-	 * @return normals
+	 * @return ArrayList&lt;Expression&lt;T,U&gt;&gt;
 	 */
 	public ArrayList<Expression<T,U>> getNormals(){
 		if(normalized != null)
@@ -148,7 +148,7 @@ public abstract class Box<T,U>  {
 	
 	/**
 	 * Copy the normals.
-	 * @return copy of normals
+	 * @return ArrayList&lt;Expression&lt;T,U&gt;&gt;
 	 */
 	public ArrayList<Expression<T,U>> copyNormals(){
 		if(normalized != null)

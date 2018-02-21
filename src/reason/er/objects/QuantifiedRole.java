@@ -10,6 +10,9 @@ import reason.er.compositeObjects.*;;
  * one Concept. This structure can be treated atomically as if it were itself a 
  * Concept. Technically an equivalent structure can be formed from an Expression,
  * but this is often more convenient.
+ * 
+ * (Some methods of this class bend the interpretations of the generic types for convenience)
+ * 
  * @author Aaron Eberhart
  *
  * @param <T> generic
@@ -58,8 +61,8 @@ public class QuantifiedRole<T,U> extends Concept {
 	/**
 	 * Partial QuantifiedRole constructor.
 	 * @param q Quantifier
-	 * @param r Role
-	 * @param c Expression
+	 * @param r Role&lt;T,U&gt;
+	 * @param c Expression&lt;T,U&gt;
 	 * @param name &lt;U&gt;
 	 */
 	public QuantifiedRole(Quantifier q, Role<T,U> r, Expression<T,U> c, U name) {
@@ -67,7 +70,7 @@ public class QuantifiedRole<T,U> extends Concept {
 		if(canQuantify(q,r,null,c)) {
 			this.terms = new ArrayList(3);
 			this.terms.add(r);
-			this.terms.add(new Concept<T,U>(c.negated,new Term(r.getTerm(1)), name));
+			this.terms.add(new Concept<T,U>(c.negated,r.getTerm(1), name));
 			this.terms.add(q);
 			
 			this.label = name;
@@ -80,8 +83,8 @@ public class QuantifiedRole<T,U> extends Concept {
 	/**
 	 * Partial QuantifiedRole constructor.
 	 * @param q Quantifier
-	 * @param r Role
-	 * @param c Concept
+	 * @param r Role&lt;T,U&gt;
+	 * @param c Concept&lt;T,U&gt;
 	 * @param name1 &lt;U&gt;
 	 * @param name2 &lt;U&gt;
 	 * @param name3 &lt;U&gt;

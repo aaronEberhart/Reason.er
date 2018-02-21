@@ -45,6 +45,7 @@ public class Role<T,U> extends Predicate<T,U> {
 	
 	/**
 	 * Returns true. This is a Role.
+	 * @return true
 	 */
 	@Override
 	public boolean isRole() {

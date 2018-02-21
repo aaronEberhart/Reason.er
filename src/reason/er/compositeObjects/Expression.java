@@ -207,6 +207,7 @@ public class Expression<T,U> extends Concept<T,U>{
 
 	/**
 	 * Returns true.
+	 * @return true
 	 */
 	@Override
 	public boolean isExpression() {

@@ -266,7 +266,7 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 	/**
 	 * Quantifies the Expression with a Role.
 	 * @param q Quantifier
-	 * @param r Role
+	 * @param r Role&lt;T,U&gt;
 	 * @param name &lt;U&gt;
 	 * @return ExpressionNode&lt;T,U&gt;
 	 */

@@ -32,7 +32,7 @@ public class Term<T> {
 
 	/**
 	 * Gets the Term value.
-	 * @return the value of the Term
+	 * @return t&lt;T&gt;
 	 */
 	public T getValue() {
 		return term;
@@ -104,7 +104,7 @@ public class Term<T> {
 	 * Returns a string representation of a long type Term.
 	 * 
 	 * @param count long
-	 * @return string
+	 * @return String
 	 */
 	public static String makeVariable(long count) {
 		String s = "";
@@ -130,8 +130,8 @@ public class Term<T> {
 	
 	/**
 	 * Returns the index of a char in the lower case array.
-	 * @param c character
-	 * @return index
+	 * @param c char
+	 * @return long
 	 */
 	public static long getVarIndex(char c) {
 		int i = 0;

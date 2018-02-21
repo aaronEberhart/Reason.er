@@ -18,7 +18,7 @@ import reason.er.util.*;
 public class TBox<T,U> extends Box<T,U>{
 
 	/**
-	 * Predicate name tracking for preventing doubles.
+	 * Predicate name tracking for preventing cycles.
 	 */
 	protected ArrayList<Long> names;
 	
@@ -55,7 +55,7 @@ public class TBox<T,U> extends Box<T,U>{
 	/**
 	 * Make a TBox expression.
 	 * 
-	 * @return expression
+	 * @return Expression&lt;T,U&gt;
 	 */
 	@Override
 	protected Expression<T,U> makeExpression() {
