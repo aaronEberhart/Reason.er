@@ -56,7 +56,7 @@ public class ABox<T,U> extends Box<T,U> {
 	/**
 	 * Mutate the ABox.
 	 */
-	protected ExpressionNode transform(int randInt, ExpressionNode expression,boolean fromSub) {
+	protected ExpressionNode transform(int randInt, ExpressionNode expression,boolean fromSub,int depth) {
 		
 		//I'll need this to see if it grew
 		int size = expression.getSize();
@@ -86,7 +86,7 @@ public class ABox<T,U> extends Box<T,U> {
 				if(constants || numSubExpansions >= maxSubExpansions || size + 15 >= maxSize)
 					expression = expression.and(newPredicate(randInt));
 				else {
-					Predicate p = newSubExpression(11,false);
+					Predicate p = newSubExpression(11,false,depth);
 					if(p.isExpression())
 						expression = expression.and((ExpressionNode)p);
 					else
@@ -99,7 +99,7 @@ public class ABox<T,U> extends Box<T,U> {
 				if(constants || numSubExpansions >= maxSubExpansions || size + 15 >= maxSize)
 					expression = expression.and(newPredicate(randInt % 2));
 				else {
-					Predicate q = newSubExpression(11,false);
+					Predicate q = newSubExpression(11,false,depth);
 					if(q.isExpression())
 						expression = expression.or((ExpressionNode)q);
 					else
@@ -131,7 +131,7 @@ public class ABox<T,U> extends Box<T,U> {
 	 * Makes a new sub-expression.
 	 */
 	@Override
-	protected Predicate<T,U> newSubExpression(int ran,boolean fromSub){
+	protected Predicate<T,U> newSubExpression(int ran,boolean fromSub,int depth){
 		
 		rand = new RandomInteger();
 		
@@ -155,18 +155,18 @@ public class ABox<T,U> extends Box<T,U> {
 		ExpressionNode<T,U> builder = new ExpressionNode<T,U>(p);
 		
 		while((long)builder.getScope() < tmpScope && constants && !(((long)p.getScope()<0 && scope<0) || (long)p.getScope() == scope)) {
-			builder = transform(rand.nextInt(ran), builder,true);
+			builder = transform(rand.nextInt(ran), builder,true,depth);
 			constants = (!tmpConst&&constants) ? false : constants;
 		}
 		if(tmpConst) {
 			while((long)builder.getScope() < tmpScope && !constants) {
-				builder = transform(rand.nextInt(ran), builder,true);
+				builder = transform(rand.nextInt(ran), builder,true,depth);
 				constants = (!tmpConst&&constants) ? false : constants;
 			}
 		}
 		else {
 			while((long)builder.getScope() < tmpScope) {
-				builder = transform(rand.nextInt(ran), builder,true);
+				builder = transform(rand.nextInt(ran), builder,true,depth);
 				constants = false;
 			}
 		}
@@ -189,10 +189,9 @@ public class ABox<T,U> extends Box<T,U> {
 				
 		first = true;
 		
-		int randInt = rand.nextInt(3);
+		int randInt = rand.nextInt(2)==0?0:3;
 		
-		if (randInt == 2) {//if it decided to make a Role
-			randInt++;
+		if (randInt == 3 || randInt ==  0) {//if it decided to make a Role or a Constant
 			constants = true;
 			complete = true;
 		}
@@ -205,7 +204,7 @@ public class ABox<T,U> extends Box<T,U> {
 		//loop until ground and complete
 		while(!(complete && constants)){
 //			System.out.println(builder);
-			builder = transform(rand.nextInt(7),builder,false);
+			builder = transform(rand.nextInt(7),builder,false,0);
 //			System.out.println(builder+"\n");
 			expression.root = builder;
 			

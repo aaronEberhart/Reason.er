@@ -96,7 +96,7 @@ public abstract class Predicate<T,U> {
 	
 	/**
 	 * Returns false
-	 * @return false.
+	 * @return false
 	 */
 	public boolean isRole() {
 		return false;

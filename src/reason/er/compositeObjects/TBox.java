@@ -68,7 +68,7 @@ public class TBox<T,U> extends Box<T,U>{
 		
 		while(!expression.isComplete()) {
 //			System.out.println(builder);
-			builder = transform(rand.nextInt(11), builder, false);
+			builder = transform(rand.nextInt(11), builder, false,0);
 //			System.out.println(builder+"\n");
 			expression.root = builder;
 			
@@ -84,20 +84,23 @@ public class TBox<T,U> extends Box<T,U>{
 		names.clear();
 		counters[0] = 2;
 		
-		return expression;
+ 		return expression;
 	}
 
 	/**
 	 * Make a sub-expression.
 	 */
 	@Override
-	protected Predicate<T,U> newSubExpression(int ran, boolean fromSub){
+	protected Predicate<T,U> newSubExpression(int ran, boolean fromSub,int depth){
 		rand = new RandomInteger();
 		long[] tmpCounters = this.counters;
 		long tmpScope = scope;
 		this.counters = resetCounters();
 		
-		Predicate<T,U> p = newPredicate(rand.nextInt(2));
+		depth = (int)(tmpCounters[0] - counters[0]);
+		this.counters[0] = 2 + rand.nextInt(depth);
+		
+		Predicate<T,U> p = newPredicate(depth <= 0?rand.nextInt(1):rand.nextInt(2));
 		ExpressionNode<T,U> builder = new ExpressionNode<T,U>(p);
 		
 		if((long)p.getScope() == scope)
@@ -109,7 +112,7 @@ public class TBox<T,U> extends Box<T,U>{
 			
 			int num = rand.nextBoolean() ? rand.nextInt(4) : (rand.nextInt(3) + 8);
 					
-			builder = transform(num, builder,true);
+			builder = transform(num, builder,true,depth);
 		}
 		
 		this.counters = tmpCounters;
@@ -120,21 +123,28 @@ public class TBox<T,U> extends Box<T,U>{
 	/**
 	 * Add to or change the expression.
 	 */
-	protected ExpressionNode transform(int randInt, ExpressionNode expression,boolean fromSub) {
+	protected ExpressionNode transform(int randInt, ExpressionNode expression,boolean fromSub,int depth) {
 
-		int size = expression.getSize();
+		int size = fromSub?expression.getSize()+depth:expression.getSize();
+		boolean noSub = false;
 		
-		if(size + 15 >= maxSize || (scope >= bound && scope > 0) || (scope <= (bound * -1) && scope < 0)){
-			randInt = fromSub ? (randInt % 2) + 8 : (randInt % 4) + 4;
+		if(size >= maxSize / 3.0 || (scope + 2 >= bound && scope > 0) || (scope - 2 <= (bound * -1) && scope < 0)){
+			if(!fromSub && size + 4 >= maxSize)
+				randInt = (randInt % 4) + 4;
+			else if(!fromSub)
+				noSub = true;
+			else if(fromSub) {// && ((scope >= bound && scope > 0) || (scope <= (bound * -1) && scope < 0))){
+				randInt = (randInt % 2) + 8;
+			}
 		}
 		
 		switch(randInt) {
 			case 0:
 			case 1:
-				if(numSubExpansions >= maxSubExpansions)
+				if(noSub || numSubExpansions >= maxSubExpansions)
 					expression = expression.and(newPredicate(randInt));
 				else {
-					Predicate p = newSubExpression(11,false);
+					Predicate p = newSubExpression(11,false,depth);
 					if(p.isExpression())
 						expression = expression.and((ExpressionNode)p);
 					else
@@ -144,10 +154,10 @@ public class TBox<T,U> extends Box<T,U>{
 				break;
 			case 2:
 			case 3:
-				if(numSubExpansions >= maxSubExpansions)
+				if(noSub || numSubExpansions >= maxSubExpansions)
 					expression = expression.and(newPredicate(randInt % 2));
 				else {
-					Predicate q = newSubExpression(11,false);
+					Predicate q = newSubExpression(11,false,depth);
 					if(q.isExpression())
 						expression = expression.or((ExpressionNode)q);
 					else

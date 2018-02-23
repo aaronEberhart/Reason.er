@@ -24,7 +24,7 @@ public class ReasonEr {
 	/**
 	 * Number of tests to run.
 	 */
-	public static final int NUMTESTS = 10000000;
+	public static final int NUMTESTS = 100;
 	/**
 	 * Size of each ABox to make.
 	 */
@@ -44,26 +44,21 @@ public class ReasonEr {
 		prepDirs();
 		
 		KnowledgeBase kb;
-		RandomInteger r;
 		int i = 0;
-		int j = 0;
 		for(; i < NUMTESTS; i++) {
-			r = new RandomInteger();
-			if(r.weightedBool(1000,10))
-				j++;
 			
-//			System.out.println("Making Expressions " + i);
-//			
-//			kb = new KnowledgeBase(ABOXSIZE,TBOXSIZE);
-//		
-//			toFile("output\\knowledgeBases\\knowledgeBase["+i+"].txt",kb.toString());
-//			
-//			System.out.println("Normalizing Expressions "+i+"\n");
-//		
-//			kb.normalize();
-//		
-//			toFile("output\\normalizedKnowledgeBases\\normalizedKnowledgeBase["+i+"].txt",kb.toString());
-//			
+			System.out.println("Making Expressions " + i);
+			
+			kb = new KnowledgeBase(ABOXSIZE,TBOXSIZE);
+		
+			toFile("output\\knowledgeBases\\knowledgeBase["+i+"].txt",kb.toString());
+			
+			System.out.println("Normalizing Expressions "+i+"\n");
+		
+			kb.normalize();
+		
+			toFile("output\\normalizedKnowledgeBases\\normalizedKnowledgeBase["+i+"].txt",kb.toString());
+			
 //			Tableau t = new Tableau(kb);
 //			
 //			System.out.println("Running Tableau "+i+"\n");
@@ -75,7 +70,7 @@ public class ReasonEr {
 		
 		}
 		
-		System.out.println("\n\n"+i+" TESTS DONE\n"+(double)j/i);
+		System.out.println("\n\n"+i+" TESTS DONE\n");
 	}
 	
 	/**

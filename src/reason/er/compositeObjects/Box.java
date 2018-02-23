@@ -31,7 +31,7 @@ public abstract class Box<T,U>  {
 	/**
 	 * Maximum quantification depth.
 	 */
-	protected final int bound = 50;
+	protected final int bound = 10;
 	/**
 	 * Maximum sub-Expressions allowed per Expression.
 	 */
@@ -80,7 +80,7 @@ public abstract class Box<T,U>  {
 	 * @param fromSub boolean
 	 * @return ExpressionNode&lt;T,U&gt;
 	 */
-	protected abstract Expression<T,U> transform(int randInt, ExpressionNode<T,U> expression, boolean fromSub);
+	protected abstract Expression<T,U> transform(int randInt, ExpressionNode<T,U> expression, boolean fromSub,int depth);
 	/**
 	 * Reset the counter array.
 	 * @return long[] 
@@ -96,7 +96,7 @@ public abstract class Box<T,U>  {
 	 * @param fromSub boolean
 	 * @return Predicate&lt;T,U&gt;
 	 */
-	protected abstract Predicate<T,U> newSubExpression(int ran,boolean fromSub);
+	protected abstract Predicate<T,U> newSubExpression(int ran,boolean fromSub,int depth);
 	/**
 	 * Make a box with size elements.
 	 * 
@@ -104,9 +104,14 @@ public abstract class Box<T,U>  {
 	 */
 	protected void makeBox(int size) {
 		expressions = new ArrayList<Expression<T,U>>(size);
+		int maxSize = 0;
 		while(expressions.size() < size) {
-			expressions.add(makeExpression());
+			Expression<T,U> e = makeExpression();			
+			expressions.add(e);
+			if(e.getSize()> maxSize)
+				maxSize = e.getSize();
 		}
+		System.out.println("Max size: "+maxSize);
 	}
 
 	/**
