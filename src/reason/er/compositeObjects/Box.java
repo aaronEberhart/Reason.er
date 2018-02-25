@@ -74,14 +74,6 @@ public abstract class Box<T,U>  {
 	 */
 	protected abstract Predicate<T,U> newPredicate(int randInt);
 	/**
-	 * Changes the expression with logic operations.
-	 * @param randInt int
-	 * @param expression ExpressionNode&lt;T,U&gt;
-	 * @param fromSub boolean
-	 * @return ExpressionNode&lt;T,U&gt;
-	 */
-	protected abstract Expression<T,U> transform(int randInt, ExpressionNode<T,U> expression, boolean fromSub,int depth);
-	/**
 	 * Reset the counter array.
 	 * @return long[] 
 	 */
@@ -90,13 +82,6 @@ public abstract class Box<T,U>  {
 	 * Normalize the expressions.
 	 */
 	public abstract void normalizeExpressions();
-	/**
-	 * Makes a new sub-expression that is treated like a predicate by the expression tree.
-	 * @param ran int
-	 * @param fromSub boolean
-	 * @return Predicate&lt;T,U&gt;
-	 */
-	protected abstract Predicate<T,U> newSubExpression(int ran,boolean fromSub,int depth);
 	/**
 	 * Make a box with size elements.
 	 * 

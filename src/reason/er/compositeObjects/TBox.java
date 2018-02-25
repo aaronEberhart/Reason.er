@@ -89,8 +89,11 @@ public class TBox<T,U> extends Box<T,U>{
 
 	/**
 	 * Make a sub-expression.
+	 * @param ran int
+	 * @param fromSub boolean
+	 * @param depth int
+	 * @return Predicate&lt;T,U&gt;
 	 */
-	@Override
 	protected Predicate<T,U> newSubExpression(int ran, boolean fromSub,int depth){
 		rand = new RandomInteger();
 		long[] tmpCounters = this.counters;
@@ -122,6 +125,11 @@ public class TBox<T,U> extends Box<T,U>{
 	
 	/**
 	 * Add to or change the expression.
+	 * @param randInt int
+	 * @param expression ExpressionNode
+	 * @param fromSub boolean
+	 * @param depth int
+	 * @return ExpressionNode
 	 */
 	protected ExpressionNode transform(int randInt, ExpressionNode expression,boolean fromSub,int depth) {
 
