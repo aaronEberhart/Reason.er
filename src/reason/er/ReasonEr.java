@@ -24,7 +24,7 @@ public class ReasonEr {
 	/**
 	 * Number of tests to run.
 	 */
-	public static final int NUMTESTS = 100000;
+	public static final int NUMTESTS = 10000;
 	/**
 	 * Size of each ABox to make.
 	 */
@@ -42,10 +42,13 @@ public class ReasonEr {
 	public static void main(String[] args) {
 		
 		prepDirs();
-
+		
 		KnowledgeBase kb;
 		int i = 0, j = 0;
+		
 		for(; i < NUMTESTS; i++) {
+			
+//			j = testWeightedBoolean(100,10,j);
 			
 			System.out.println("Making Expressions " + i);
 			
@@ -70,7 +73,7 @@ public class ReasonEr {
 		
 		}
 		
-		System.out.println("\n\n"+i+" TESTS DONE\n"+(double)j/i);
+		System.out.println("\n\n"+i+" TESTS DONE\n");
 	}
 	
 	/**
@@ -110,4 +113,21 @@ public class ReasonEr {
 			f4.mkdir();
 	}
 	
+	/**
+	 * Method to test the odds of the weightedBoolean function.
+	 * 
+	 * @param upper int
+	 * @param lower int
+	 * @param j int
+	 * @return int
+	 */
+	public static int testWeightedBoolean(int upper, int lower, int j) {
+		RandomInteger rand;
+		for(int i = 0; i < NUMTESTS; i++) {
+			rand = new RandomInteger();
+			if(rand.weightedBool(upper, lower))
+				j++;
+		}
+		return j;
+	}
 }
