@@ -24,7 +24,7 @@ public class ReasonEr {
 	/**
 	 * Number of tests to run.
 	 */
-	public static final int NUMTESTS = 100;
+	public static final int NUMTESTS = 100000;
 	/**
 	 * Size of each ABox to make.
 	 */
@@ -42,9 +42,9 @@ public class ReasonEr {
 	public static void main(String[] args) {
 		
 		prepDirs();
-		
+
 		KnowledgeBase kb;
-		int i = 0;
+		int i = 0, j = 0;
 		for(; i < NUMTESTS; i++) {
 			
 			System.out.println("Making Expressions " + i);
@@ -70,7 +70,7 @@ public class ReasonEr {
 		
 		}
 		
-		System.out.println("\n\n"+i+" TESTS DONE\n");
+		System.out.println("\n\n"+i+" TESTS DONE\n"+(double)j/i);
 	}
 	
 	/**
