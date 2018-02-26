@@ -79,7 +79,7 @@ public class RandomInteger {
 		
 		/**
 		 * New<br>
-		 * The odds of true should be approximately: 1 - (upper / lower)
+		 * The odds of true should be approximately: 1 - (upper / lower)<br>
 		 * Generates a random integer in the range [0,upper).<br>
 		 * If the integer is greater than lower return true, false otherwise.<br>
 		 * If lower is greater than or equal to upper, this method will ALWAYS
