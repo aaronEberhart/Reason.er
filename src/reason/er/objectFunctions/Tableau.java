@@ -6,7 +6,7 @@ import reason.er.objectFunctions.*;
 import reason.er.objects.*;
 
 @SuppressWarnings({ "rawtypes" , "unchecked" })
-public class Tableau<T,U> extends Expression<T,U> {
+public class Tableau<T,U> {
 	
 	NormalizedBox<T,U> expressions;
 	ArrayList<ArrayList<Predicate<T,U>>> model;
