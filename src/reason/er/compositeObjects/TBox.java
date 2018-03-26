@@ -137,7 +137,7 @@ public class TBox<T,U> extends Box<T,U>{
 		boolean noSub = false;
 		
 		if(size >= maxSize / 3.0 || (scope + 2 >= bound && scope > 0) || (scope - 2 <= (bound * -1) && scope < 0)){
-			if(!fromSub && size + 4 >= maxSize)
+			if(!fromSub && size + 6 >= maxSize)
 				randInt = (randInt % 4) + 4;
 			else if(!fromSub)
 				noSub = true;

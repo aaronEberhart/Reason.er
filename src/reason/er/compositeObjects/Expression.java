@@ -124,7 +124,7 @@ public class Expression<T,U> extends Concept<T,U>{
 	 * @return boolean
 	 */
 	public boolean canJoin(Predicate<T,U> p) {
-		return !p.isRole() && !complete && (((long)p.getScope()<0 && (long)scope<0) || p.getScope().equals(scope));
+		return !p.isRole() && !complete && p.getScope().equals(scope);
 	}
 	
 	/**

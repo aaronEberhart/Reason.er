@@ -12,7 +12,7 @@ import reason.er.objects.*;
  * @param <U> generic
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class KnowledgeBase<T,U> extends Expression<T,U>{
+public class KnowledgeBase<T,U>{
 	
 	/**
 	 * ABox for the KnowledgeBase.

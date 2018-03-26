@@ -96,7 +96,7 @@ public abstract class Box<T,U>  {
 			if(e.getSize()> maxSize)
 				maxSize = e.getSize();
 		}
-		System.out.println("Max size: "+maxSize);
+		//System.out.println("Max size: "+maxSize);
 	}
 
 	/**
@@ -150,9 +150,9 @@ public abstract class Box<T,U>  {
 	public String toString() {
 		String s = "{\n\n";
 		if(expressions.size() == 0) {
-			s = s + "NULL";
+			s = s + "NULL\n";
 		}else {	
-			int j = 0;;
+			int j = 0;
 			for(int i = 0; i < expressions.size(); i++) {  
 				if(normalized == null) {
 					s = s + "\t" +expressions.get(i).toString() + ",";

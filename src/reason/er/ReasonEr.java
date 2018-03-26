@@ -24,15 +24,15 @@ public class ReasonEr {
 	/**
 	 * Number of tests to run.
 	 */
-	public static final int NUMTESTS = 10000;
+	public static final int NUMTESTS = 10;
 	/**
 	 * Size of each ABox to make.
 	 */
-	public static final int ABOXSIZE = 99;
+	public static final int ABOXSIZE = 5;
 	/**
 	 * Size of each TBox to make.
 	 */
-	public static final int TBOXSIZE = 99;
+	public static final int TBOXSIZE = 5;
 	
 	/**
 	 * Main method for program.
