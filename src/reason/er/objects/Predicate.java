@@ -172,7 +172,6 @@ public abstract class Predicate<T,U> {
 		
 		if(count<0) {
 			count*=-1;
-			
 			do{
 				int index = (int)(count % (uppers.length / 2)) + (uppers.length / 2);
 				s = Character.toString(uppers[index])+s;
@@ -189,6 +188,35 @@ public abstract class Predicate<T,U> {
 		return s;
 	}
 
+	public static String makeLabel(long label) {
+		long count;
+		
+		try {
+			count = (long)label;
+		}catch(Exception e){
+			count = 0;
+		}
+		String s  = "";
+		
+		if(count<0) {
+			count*=-1;
+			count--;
+			do{
+				int index = (int)(count % (uppers.length / 2)) + (uppers.length / 2);
+				s = Character.toString(uppers[index])+s;
+				count = count / (uppers.length/2);
+			}while(count-- > 0);
+		}
+		else {
+			do{
+				int index = (int)(count % (uppers.length / 2));
+				s = Character.toString(uppers[index])+s;
+				count = count / (uppers.length/2);
+			}while(count-- > 0);
+		}
+		return s;
+	}
+	
 	/**
 	 * Returns the index of the character in the name array. Only works \
 	 * for values -13 - x - 13.

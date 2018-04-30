@@ -238,14 +238,15 @@ public class ABox<T,U> extends Box<T,U> {
  	protected Predicate newPredicate(int randInt) {
  		boolean negated = rand.nextBoolean();
  		Predicate p;
- 		long one = makeName(rand);
+ 		long one = (makeName(rand)+1);
+ 		long two = -1 * (makeName(rand)+1);
  		
  		if(randInt == 0) {
  			p = new Concept(negated,constants?counters[0]:counters[1],one);
  		}
  		else if(randInt == 1) {
- 			long two = makeName(rand);
- 			p = new QuantifiedRole(negated,rand.nextBoolean(),rand.nextInt(2) + 1,constants?counters[0]:counters[1],constants?counters[1]:counters[1]-1,Math.abs(one)*-1,two,two);
+ 			
+ 			p = new QuantifiedRole(negated,rand.nextBoolean(),rand.nextInt(2) + 1,constants?counters[0]:counters[1],constants?counters[1]:counters[1]-1,two,one,one);
  		}
  		else if(randInt == 2) {
  			long num1 = constants?(-1 * rand.nextInt(variables)) - 1:scope+1;
@@ -256,7 +257,7 @@ public class ABox<T,U> extends Box<T,U> {
  				scope = num1;
  			}
  			
- 			p = new Role(false,num1,num2,Math.abs(one)*-1);
+ 			p = new Role(false,num1,num2,two);
  			if(!constants) {
  				counters[1] = (counters[1] + 1);
  			}else {
@@ -264,7 +265,7 @@ public class ABox<T,U> extends Box<T,U> {
  			}
  		}
  		else {			
- 			p = new Role(negated,counters[0],(long)(-1 * rand.nextInt(variables)) - 1,-1*one);
+ 			p = new Role(negated,counters[0],(long)(-1 * rand.nextInt(variables)) - 1,two);
  		}
  				
  		return p;
@@ -305,6 +306,13 @@ public class ABox<T,U> extends Box<T,U> {
 	@Override
 	public String toFSString(int tab) {
 		String s = "";
+		for(int i = -1; i > -1*variables - 1; i--) {
+			s = s + "Declaration( NamedIndividual( :" + Term.makeVariable(i) + " ) )\n";
+		}
+		for(int i = 0; i < universe + 1; i++) {
+			s = s + "Declaration( " + (i < universe / 2 + 1 ? "Class( :" + Predicate.makeLabel(i) : "ObjectProperty( :" + Predicate.makeLabel((universe / 2 - i)) )   + " )" + i + " )\n";
+		}
+		s=s+"\n";
 		if(normalized == null) {
 			for(int i = 0; i < expressions.size(); i++) {  
 				if(expressions.get(i).getSize() < 3 && ((Predicate)(expressions.get(i).root.leaf)).isRole()) {
@@ -319,7 +327,14 @@ public class ABox<T,U> extends Box<T,U> {
 		}
 		else {
 			for(int i = 0; i < normalized.normals.size(); i++) {
-				s = s + "\nClassAssertion( " + normalized.getFromExpressionIndex(i).toFSString(0) + " )";
+				if(expressions.get(i).getSize() < 3 && ((Predicate)(expressions.get(i).root.leaf)).isRole()) {
+					s = s + "ObjectPropertyAssertion(\n" + normalized.getFromExpressionIndex(i).toFSString(tab+1)
+							+ "\n\t:" + Term.makeVariable(((long)((Role)(normalized.getFromExpressionIndex(i).root.leaf)).getTerm(0).getValue())) 
+							+ "\n\t:" + Term.makeVariable(((long)((Role)(normalized.getFromExpressionIndex(i).root.leaf)).getTerm(1).getValue())) + "\n)\n";
+				}
+				else {
+					s = s + "ClassAssertion(\n" + normalized.getFromExpressionIndex(i).toFSString(tab+1) + "\n\t:" + Term.makeVariable(((long)((Predicate)(normalized.getFromExpressionIndex(i).root)).getScope())) + "\n)\n";
+				}
 			}
 		}
 		return s;

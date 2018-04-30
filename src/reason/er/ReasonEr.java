@@ -29,11 +29,11 @@ public class ReasonEr {
 	/**
 	 * Size of each ABox to make.
 	 */
-	public static final int ABOXSIZE = 25;
+	public static final int ABOXSIZE = 15;
 	/**
 	 * Size of each TBox to make.
 	 */
-	public static final int TBOXSIZE = 25;
+	public static final int TBOXSIZE = 15;
 	
 	/**
 	 * Main method for program.

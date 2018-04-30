@@ -47,7 +47,7 @@ public abstract class Box<T,U>  {
 	/**
 	 * int for Predicate name restriction.
 	 */
-	protected final int universe = Predicate.uppers.length;
+	public final static int universe = Predicate.uppers.length - 1;
 	/**
 	 * int for variable use restriction.
 	 */
@@ -174,6 +174,7 @@ public abstract class Box<T,U>  {
 	
 	public String toFSString(int tab) {
 		String s = "";
+		
 		if(normalized == null) {
 			for(int i = 0; i < expressions.size(); i++) {  
 				s = s + "\n" + expressions.get(i).toFSString(0);
@@ -181,8 +182,7 @@ public abstract class Box<T,U>  {
 		}
 		else {
 			for(int i = 0; i < normalized.normals.size(); i++) {
-				s = s + "\n" + normalized.getFromExpressionIndex(i).toFSString(0);
-				tab = 0;
+				s = s + "\n" + normalized.getFromExpressionIndex(i).toFSString(0) + "\n)";
 			}
 		}
 		return s;

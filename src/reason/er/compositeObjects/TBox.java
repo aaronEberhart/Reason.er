@@ -209,8 +209,8 @@ public class TBox<T,U> extends Box<T,U>{
 	protected Predicate newPredicate(int randInt) {
 		boolean negated = rand.nextBoolean();
 		Predicate p;
-		long one = makeName(rand);
-		long two = -1 * Math.abs(makeName(rand));
+		long one = (makeName(rand)+1);
+		long two = -1 * (makeName(rand)+1);
 		
 		if(randInt == 0) {
 			p = new Concept(negated,counters[0],one);
