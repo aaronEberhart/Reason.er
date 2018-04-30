@@ -199,12 +199,11 @@ public abstract class Box<T,U>  {
 				if(normalized == null) {
 					s = s + "\t" + expressions.get(i).toDLString();
 				}
-				else {
-					s = s + "\tExpression :" + expressions.get(i).toDLString();		   		
-					s = s + "\n\tNormal: " + normalized.getFromExpressionIndex(j).toDLString();
+				else {	   		
+					s = s + "\t" + normalized.getFromExpressionIndex(j).toDLString();
 					if(expressions.get(i).root.operator == '=') {
 						j++;
-						s = s + "\n\tNormal: " + normalized.getFromExpressionIndex(j).toDLString();
+						s = s + "\n\t" + normalized.getFromExpressionIndex(j).toDLString();
 					}
 					j++;
 		   		}

@@ -238,7 +238,7 @@ public class ABox<T,U> extends Box<T,U> {
  	protected Predicate newPredicate(int randInt) {
  		boolean negated = rand.nextBoolean();
  		Predicate p;
- 		long one = (makeName(rand)+1);
+ 		long one = (makeName(rand));
  		long two = -1 * (makeName(rand)+1);
  		
  		if(randInt == 0) {
@@ -295,10 +295,19 @@ public class ABox<T,U> extends Box<T,U> {
 	@Override
 	public String toDLString() {
 		String s = "ABox = {\n\n";
-		for(Expression e : expressions) {
-			s = s + "\t" + String.format("%s%-3s\t%s", 
-					(e.getSize() > 2 ? Term.makeVariable((long)e.getScope()) : e.toString().split("\\(")[1].split("\\)")[0])
-					,":", (e.getSize() > 2 ? e.toDLString() : e.toString().split("\\(")[0] )) + "\n";
+		if(normalized == null) {
+			for(Expression e : expressions) {
+				s = s + "\t" + String.format("%7s%s\t%s", 
+						(e.getSize() > 2 ? Term.makeVariable((long)e.getScope()) : e.toString().split("\\(")[1].split("\\)")[0])
+						,":", (e.getSize() > 2 ? e.toDLString() : e.toString().split("\\(")[0] )) + "\n";
+			}
+		}
+		else {
+			for(Expression e : normalized.normals) {
+				s = s + "\t" + String.format("%s%-3s\t%s", 
+						(e.getSize() > 2 ? Term.makeVariable((long)e.getScope()) : e.toString().split("\\(")[1].split("\\)")[0])
+						,":", (e.getSize() > 2 ? e.toDLString() : e.toString().split("\\(")[0] )) + "\n";
+			}
 		}
 		return s;
 	}
@@ -309,8 +318,8 @@ public class ABox<T,U> extends Box<T,U> {
 		for(int i = -1; i > -1*variables - 1; i--) {
 			s = s + "Declaration( NamedIndividual( :" + Term.makeVariable(i) + " ) )\n";
 		}
-		for(int i = 0; i < universe + 1; i++) {
-			s = s + "Declaration( " + (i < universe / 2 + 1 ? "Class( :" + Predicate.makeLabel(i) : "ObjectProperty( :" + Predicate.makeLabel((universe / 2 - i)) )   + " ) )\n";
+		for(int i = 0; i < (universe * 2); i++) {
+			s = s + "Declaration( " + (i < universe ? "Class( :" + Predicate.makeLabel(i) : "ObjectProperty( :" + Predicate.makeLabel((universe - 1 - i)) )   + " ) )\n";
 		}
 		s=s+"\n";
 		if(normalized == null) {

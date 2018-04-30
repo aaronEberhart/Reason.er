@@ -56,7 +56,7 @@ public class RandomInteger {
 		}
 
 		/**
-		 * New
+		 * New</br>
 		 * Returns a positive integer in the range [0,bound)
 		 * @param bound int
 		 * @return int
@@ -68,7 +68,7 @@ public class RandomInteger {
 		}
 		
 		/**
-		 * New
+		 * New</br>
 		 * Generates a random integer in the range [0,2).
 		 * Returns true if 0, false if 1.
 		 * @return boolean 1:1

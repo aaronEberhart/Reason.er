@@ -173,17 +173,18 @@ public abstract class Predicate<T,U> {
 		
 		if(count<0) {
 			count*=-1;
+			count--;
 			do{
 				int index = (int)(count % (uppers.length / 2)) + (uppers.length / 2);
 				s = Character.toString(uppers[index])+s;
-				count = count / uppers.length;
+				count = count / (uppers.length/2);
 			}while(count-- > 0);
 		}
 		else {
 			do{
 				int index = (int)(count % (uppers.length / 2));
 				s = Character.toString(uppers[index])+s;
-				count = count / uppers.length;
+				count = count / (uppers.length/2);
 			}while(count-- > 0);
 		}
 		return s;
@@ -200,6 +201,7 @@ public abstract class Predicate<T,U> {
 		String s  = "";
 		
 		if(count<0) {
+			//count--;
 			count*=-1;
 			count--;
 			do{

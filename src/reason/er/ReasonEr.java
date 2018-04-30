@@ -25,15 +25,15 @@ public class ReasonEr {
 	/**
 	 * Number of tests to run.
 	 */
-	public static final int NUMTESTS = 10;
+	public static final int NUMTESTS = 1;
 	/**
 	 * Size of each ABox to make.
 	 */
-	public static final int ABOXSIZE = 15;
+	public static final int ABOXSIZE = 999;
 	/**
 	 * Size of each TBox to make.
 	 */
-	public static final int TBOXSIZE = 15;
+	public static final int TBOXSIZE = 999;
 	/* 
 	* Maximum quantification depth.
 	 */
@@ -49,7 +49,7 @@ public class ReasonEr {
 	/**
 	 * int for Predicate name restriction.
 	 */
-	public final static int universe = Predicate.uppers.length - 1;
+	public final static int universe = Predicate.uppers.length / 2;
 	/**
 	 * int for variable use restriction.
 	 */
@@ -69,6 +69,10 @@ public class ReasonEr {
 		
 		for(; i < NUMTESTS; i++) {
 			
+//			RandomInteger r = new RandomInteger();
+//			long name = (long)r.nextInt(universe);
+//			Concept c = new Concept(false,r.nextInt(individuals),name);
+//			System.out.println(c);
 			
 //			j = testWeightedBoolean(100,10,j);
 			
@@ -87,8 +91,8 @@ public class ReasonEr {
 			toFile("output\\normalizedKnowledgeBases\\debug\\debugNormalizedKnowledgeBase["+i+"].txt",kb.toString());
 			toFile("output\\normalizedKnowledgeBases\\descriptionLogic\\dlNormalizedKnowledgeBase["+i+"].txt",kb.toDLString());
 			toFile("output\\normalizedKnowledgeBases\\functionalSyntax\\fsNormalizedKnowledgeBase["+i+"].txt",kb.toFSString());
-			
-//			exportToOWL(kb,"test");
+//			
+//			
 //			
 //			Tableau t = new Tableau(kb);
 //			
@@ -182,10 +186,6 @@ public class ReasonEr {
 				j++;
 		}
 		return j;
-	}
-
-	public static void exportToOWL(KnowledgeBase kb, String filename) {
-		
 	}
 	
 }

@@ -78,7 +78,21 @@ public class KnowledgeBase<T,U>{
 	
 	@Override
 	public String toString() {
-		return "K = ( ABox, TBox )\n\n" + abox.toString() + "\n\n" + tbox.toString() + "\n";
+		String s = "Individuals:\t";
+		for(int i = -1; i > -1*ReasonEr.individuals - 1; i--) {
+			s = s + Term.makeVariable(i);
+			if(i != -1*ReasonEr.individuals)
+				s = s + ", ";
+		}
+		s = s + "\nClass Names:\t";
+		for(int i = 0; i < (ReasonEr.universe * 2); i++) {
+			s = s + (i < ReasonEr.universe ? Predicate.makeLabel(i) : Predicate.makeLabel((ReasonEr.universe - 1 - i)) );
+			if(i == ReasonEr.universe - 1)
+				s=s+"\nRole Names: \t";
+			else if(i != ReasonEr.universe * 2 - 1)
+				s = s + ", ";
+		}
+		return s + "\n\nK = ( ABox, TBox )\n\n" + abox.toString() + "\n\n" + tbox.toString() + "\n";
 	}
 	
 	public String toFSString() {
@@ -93,11 +107,11 @@ public class KnowledgeBase<T,U>{
 				s = s + ", ";
 		}
 		s = s + "\nClass Names:\t";
-		for(int i = 0; i < ReasonEr.universe + 1; i++) {
-			s = s + (i < ReasonEr.universe / 2  + 1 ? Predicate.makeLabel(i) : Predicate.makeLabel((ReasonEr.universe / 2 - i)) );
-			if(i == ReasonEr.universe / 2)
+		for(int i = 0; i < (ReasonEr.universe * 2); i++) {
+			s = s + (i < ReasonEr.universe ? Predicate.makeLabel(i) : Predicate.makeLabel((ReasonEr.universe - 1 - i)) );
+			if(i == ReasonEr.universe - 1)
 				s=s+"\nRole Names: \t";
-			else if(i != ReasonEr.universe)
+			else if(i != ReasonEr.universe * 2 - 1)
 				s = s + ", ";
 		}
 		return s + "\n\nK = ( ABox, TBox )\n\n" + abox.toDLString() + "\n\n" + tbox.toDLString() + "\n";
