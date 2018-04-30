@@ -1,0 +1,58 @@
+Individuals:	a, b, c, d, e, f, g, h, i, j, k, l, m
+Class Names:	A, B, C, D, E, F, G, H, I, J, K, L, M
+Role Names: 	N, O, P, Q, R, S, T, U, V, W, X, Y, Z
+
+K = ( ABox, TBox )
+
+ABox = {
+
+	c:  	B ^ --All O.--H
+	a,k:  	Q
+	h:  	--F
+	k:  	K
+	h:  	E
+	l:  	All X.--B
+	g:  	--All R.D ^ --Exs P.D
+	b:  	--All R.B ^ ( --A ^ ( --All N.--F ^ All R.--D ) )
+	f:  	--B
+	e,l:  	W
+	c,k:  	X
+	k:  	--All Q.D
+	j,m:  	R
+	f:  	--Exs X.B
+	c:  	--F
+
+
+TBox = {
+
+	D = All Z.( D ^ ( --D ^ ( ( ( G ^ --K ) v D ) v I ) ) )
+
+	M = --( --G v --E )
+
+	I = ( ( ( --C v D ) v F ) v --J )
+
+	C = All R.--All X.--C
+
+	G c --( All X.--M ^ All R.( --Exs T.--K v I ) )
+
+	K c Exs Q.--E
+
+	D c M
+
+	F c --Exs N.I
+
+	C = ( All O.I ^ ( --Exs T.K ^ ( M ^ All R.--C ) ) )
+
+	K c All O.( --Exs O.G ^ ( --I ^ --J ) )
+
+	F c ( --E ^ Exs Y.--B )
+
+	B c Exs O.( --F ^ ( Exs T.K ^ ( --C ^ --L ) ) )
+
+	F = L
+
+	K = --Exs Q.--M
+
+	M c --G
+
+ }
