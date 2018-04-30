@@ -50,19 +50,19 @@ public class Quantifier {
 	@Override
 	public String toString() {
 		if(quantifier == 1) {
-			return "EXISTS";
+			return "EXISTS ";
 		}else if(quantifier == 2) {
-			return "FORALL";
+			return "FORALL ";
 		}else {
-			return "NONE";
+			return "NONE ";
 		}
 	}
 
 	public String toDLString() {
 		if(quantifier == 1) {
-			return "EX ";
+			return "Exs ";
 		}else if(quantifier == 2) {
-			return "ALL ";
+			return "All ";
 		}else {
 			return "";
 		}

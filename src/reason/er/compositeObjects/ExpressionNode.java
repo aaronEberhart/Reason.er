@@ -291,7 +291,7 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 		if(getChildren() == null) {
 			return leaf.toString();
 		}else if(getChildren().length == 1){
-			String s = ((QuantifiedRole<T,U>)leaf).getQuantifier().toString() + " " + ((QuantifiedRole<T,U>)leaf).getRole().toString() + "." + getChildren()[0].toString();
+			String s = ((QuantifiedRole<T,U>)leaf).getQuantifier().toString() + ((QuantifiedRole<T,U>)leaf).getRole().toString() + "." + getChildren()[0].toString();
 			if(negated)
 				s = "--" + s;
 			return s;
@@ -308,7 +308,7 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 			return leaf.toDLString();
 		}else if(getChildren().length == 1){
 			String s = ((QuantifiedRole<T,U>)leaf).getQuantifier().toDLString() + 
-					" " + ((QuantifiedRole<T,U>)leaf).getRole().toDLString() +
+				    ((QuantifiedRole<T,U>)leaf).getRole().toDLString() +
 					"." + 
 					getChildren()[0].toDLString();
 			if(negated)

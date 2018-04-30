@@ -174,12 +174,9 @@ public class Expression<T,U> extends Concept<T,U>{
 	}
 	
 	public String toDLString() {
-		if(size <= 2) {
-			return "TEST";
-		}
 		if(root != null)
 			return root.toDLString(true);
-		return ((ExpressionNode)this).toDLString(true);
+		return ((ExpressionNode)this).toDLString(false);
 	}
 	
 	public String toFSString(int tab) {

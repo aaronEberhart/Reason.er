@@ -3,6 +3,7 @@ package reason.er;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 import reason.er.objectFunctions.*;

@@ -143,7 +143,7 @@ public class QuantifiedRole<T,U> extends Concept {
 		String s = "";
 		if(negated)
 			s += "--";
-		return s + this.terms.get(2).toString() + " "  + this.terms.get(0).toString() + "." + this.terms.get(1).toString();
+		return s + this.terms.get(2).toString() + this.terms.get(0).toString() + "." + this.terms.get(1).toString();
 	}
 	
 	@Override
