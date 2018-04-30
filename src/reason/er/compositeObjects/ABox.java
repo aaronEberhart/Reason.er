@@ -111,10 +111,10 @@ public class ABox<T,U> extends Box<T,U> {
 		int size = expression.getSize();
 		
 		//just in case it's getting out of hand
-		if(((scope + 2 >= bound && scope > 0) || (scope - 2 <= (bound * -1) && scope < 0) || size >= maxSize / 3.0)){
+		if(((scope + 2 >= quantificationDepth && scope > 0) || (scope - 2 <= (quantificationDepth * -1) && scope < 0) || size >= maxSize / 3.0)){
 			constants = fromSub?constants:true;
 			randInt = (randInt % 2) + 5;
-			complete = ((scope >= bound && scope > 0) || (scope <= (bound * -1) && scope < 0) || size + 5 >= maxSize)?true:complete;
+			complete = ((scope >= quantificationDepth && scope > 0) || (scope <= (quantificationDepth * -1) && scope < 0) || size + 5 >= maxSize)?true:complete;
 		}
 		//is it time to stop?
 		if(constants) {
@@ -133,7 +133,7 @@ public class ABox<T,U> extends Box<T,U> {
 		switch(randInt) {
 			case 0:
 			case 1:
-				if(constants || numSubExpansions >= maxSubExpansions || size + 15 >= maxSize)
+				if(constants || numSubExpansions >= maxSubExpressions || size + 15 >= maxSize)
 					expression = expression.and(newPredicate(randInt));
 				else {
 					Predicate p = newSubExpression(11,false,depth);
@@ -146,7 +146,7 @@ public class ABox<T,U> extends Box<T,U> {
 				break;
 			case 2:
 			case 3:
-				if(constants || numSubExpansions >= maxSubExpansions || size + 15 >= maxSize)
+				if(constants || numSubExpansions >= maxSubExpressions || size + 15 >= maxSize)
 					expression = expression.and(newPredicate(randInt % 2));
 				else {
 					Predicate q = newSubExpression(11,false,depth);

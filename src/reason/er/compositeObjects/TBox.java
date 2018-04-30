@@ -136,7 +136,7 @@ public class TBox<T,U> extends Box<T,U>{
 		int size = fromSub?expression.getSize()+depth:expression.getSize();
 		boolean noSub = false;
 		
-		if(size >= maxSize / 3.0 || (scope + 2 >= bound && scope > 0) || (scope - 2 <= (bound * -1) && scope < 0)){
+		if(size >= maxSize / 3.0 || (scope + 2 >= quantificationDepth && scope > 0) || (scope - 2 <= (quantificationDepth * -1) && scope < 0)){
 			if(!fromSub && size + 6 >= maxSize)
 				randInt = (randInt % 4) + 4;
 			else if(!fromSub)
@@ -149,7 +149,7 @@ public class TBox<T,U> extends Box<T,U>{
 		switch(randInt) {
 			case 0:
 			case 1:
-				if(noSub || numSubExpansions >= maxSubExpansions)
+				if(noSub || numSubExpansions >= maxSubExpressions)
 					expression = expression.and(newPredicate(randInt));
 				else {
 					Predicate p = newSubExpression(11,false,depth);
@@ -162,7 +162,7 @@ public class TBox<T,U> extends Box<T,U>{
 				break;
 			case 2:
 			case 3:
-				if(noSub || numSubExpansions >= maxSubExpansions)
+				if(noSub || numSubExpansions >= maxSubExpressions)
 					expression = expression.and(newPredicate(randInt % 2));
 				else {
 					Predicate q = newSubExpression(11,false,depth);

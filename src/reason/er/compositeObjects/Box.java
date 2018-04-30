@@ -32,11 +32,11 @@ public abstract class Box<T,U>  {
 	/**
 	 * Maximum quantification depth.
 	 */
-	protected final int bound = ReasonEr.quantificationDepth;
+	protected final int quantificationDepth = ReasonEr.quantificationDepth;
 	/**
 	 * Maximum sub-Expressions allowed per Expression.
 	 */
-	protected final int maxSubExpansions = ReasonEr.maxSubExpressions;
+	protected final int maxSubExpressions = ReasonEr.maxSubExpressions;
 	/**
 	 * Maximum size of all Expressions.
 	 */
