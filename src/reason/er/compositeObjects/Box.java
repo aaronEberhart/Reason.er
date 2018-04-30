@@ -171,5 +171,46 @@ public abstract class Box<T,U>  {
 		}
 		return s + " }";
 	}
+	
+	public String toFSString(int tab) {
+		String s = "";
+		if(normalized == null) {
+			for(int i = 0; i < expressions.size(); i++) {  
+				s = s + "\n" + expressions.get(i).toFSString(0);
+			}
+		}
+		else {
+			for(int i = 0; i < normalized.normals.size(); i++) {
+				s = s + "\n" + normalized.getFromExpressionIndex(i).toFSString(0);
+				tab = 0;
+			}
+		}
+		return s;
+	}
+	
+	public String toDLString() {
+		String s = "{\n\n";
+		if(expressions.size() == 0) {
+			s = s + "NULL\n";
+		}else {	
+			int j = 0;
+			for(int i = 0; i < expressions.size(); i++) {  
+				if(normalized == null) {
+					s = s + "\t" + expressions.get(i).toDLString();
+				}
+				else {
+					s = s + "\tExpression :" + expressions.get(i).toDLString();		   		
+					s = s + "\n\tNormal: " + normalized.getFromExpressionIndex(j).toDLString();
+					if(expressions.get(i).root.operator == '=') {
+						j++;
+						s = s + "\n\tNormal: " + normalized.getFromExpressionIndex(j).toDLString();
+					}
+					j++;
+		   		}
+		   		s = s + "\n\n";
+			}
+		}
+		return s + " }";
 
+	}
 }

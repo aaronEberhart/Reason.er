@@ -53,16 +53,30 @@ public class Role<T,U> extends Predicate<T,U> {
 	}
 	
 	@Override
+	public Predicate<T,U> clone(Expression<T,U> e) {
+		return new Role(e.negated,(T)((Term)terms.get(0)).getValue(),(U)((Term)terms.get(1)).getValue(),(long)label);
+	}
+
+	@Override
 	public String toString() {	
 		String s = makeLabel() + "(" + this.terms.get(0).toString() + "," + this.terms.get(1).toString() + ")";
 		if(negated)
 			s = "--" + s;
 		return s;
 	}
+	
+	@Override
+	public String toDLString() {
+		String s = negated ? "--" : "";
+		return s + makeLabel();
+	}
 
 	@Override
-	public Predicate<T,U> clone(Expression<T,U> e) {
-		return new Role(e.negated,(T)((Term)terms.get(0)).getValue(),(U)((Term)terms.get(1)).getValue(),(long)label);
+	public String toFSString(int tab) {
+		String indent = new String(new char[tab]).replace("\0", "\t");
+		return indent + ":" + makeLabel();
+//		return indent + (negated ? "NegativeObjectPropertyAssertion( :" + makeLabel() + " :" + this.terms.get(0).toString() + " :" + this.terms.get(1).toString() + " )"
+//					   : "ObjectPropertyAssertion( :" + makeLabel() + " :" + this.terms.get(0).toString() + " :" +  this.terms.get(1).toString() + " )");
 	}
 	
 	

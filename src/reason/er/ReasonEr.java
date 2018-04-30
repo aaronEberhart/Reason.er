@@ -14,7 +14,7 @@ import reason.er.util.RandomInteger;
  * Test class for program.
  * @author Aaron Eberhart
  */
-@SuppressWarnings({"rawtypes"})
+@SuppressWarnings({"rawtypes","unchecked"})
 public class ReasonEr {
 	
 	/**	
@@ -28,11 +28,11 @@ public class ReasonEr {
 	/**
 	 * Size of each ABox to make.
 	 */
-	public static final int ABOXSIZE = 5;
+	public static final int ABOXSIZE = 25;
 	/**
 	 * Size of each TBox to make.
 	 */
-	public static final int TBOXSIZE = 5;
+	public static final int TBOXSIZE = 25;
 	
 	/**
 	 * Main method for program.
@@ -42,11 +42,12 @@ public class ReasonEr {
 	public static void main(String[] args) {
 		
 		prepDirs();
-		
+	
 		KnowledgeBase kb;
 		int i = 0, j = 0;
 		
 		for(; i < NUMTESTS; i++) {
+			
 			
 //			j = testWeightedBoolean(100,10,j);
 			
@@ -54,14 +55,20 @@ public class ReasonEr {
 			
 			kb = new KnowledgeBase(ABOXSIZE,TBOXSIZE);
 		
-			toFile("output\\knowledgeBases\\knowledgeBase["+i+"].txt",kb.toString());
+			toFile("output\\knowledgeBases\\debugKnowledgeBase["+i+"].txt",kb.toString());
+			toFile("output\\knowledgeBases\\dlKnowledgeBase["+i+"].txt",kb.toDLString());
+			toFile("output\\knowledgeBases\\fsKnowledgeBase["+i+"].txt",kb.toFSString());
 			
 			System.out.println("Normalizing Expressions "+i+"\n");
 		
 			kb.normalize();
 		
-			toFile("output\\normalizedKnowledgeBases\\normalizedKnowledgeBase["+i+"].txt",kb.toString());
+			toFile("output\\normalizedKnowledgeBases\\debugNormalizedKnowledgeBase["+i+"].txt",kb.toString());
+			toFile("output\\normalizedKnowledgeBases\\dlNormalizedKnowledgeBase["+i+"].txt",kb.toDLString());
+			toFile("output\\normalizedKnowledgeBases\\fsNormalizedKnowledgeBase["+i+"].txt",kb.toFSString());
 			
+//			exportToOWL(kb,"test");
+//			
 //			Tableau t = new Tableau(kb);
 //			
 //			System.out.println("Running Tableau "+i+"\n");
@@ -111,6 +118,10 @@ public class ReasonEr {
 		File f4 = new File("output\\tableaux");
 		if(!f4.exists())
 			f4.mkdir();
+		
+		File f5 = new File("output\\owl");
+		if(!f5.exists())
+			f5.mkdir();
 	}
 	
 	/**
@@ -130,4 +141,10 @@ public class ReasonEr {
 		}
 		return j;
 	}
+
+	public static void exportToOWL(KnowledgeBase kb, String filename) {
+		
+	}
+	
 }
+

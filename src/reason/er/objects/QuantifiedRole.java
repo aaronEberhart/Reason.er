@@ -146,6 +146,19 @@ public class QuantifiedRole<T,U> extends Concept {
 		return s + this.terms.get(2).toString() + " "  + this.terms.get(0).toString() + "." + this.terms.get(1).toString();
 	}
 	
+	@Override
+	public String toDLString() {
+		String s = negated ? "--" : "";
+		return s + ((Quantifier)(this.terms.get(2))).toDLString() + ((Role)(this.terms.get(0))).toDLString() + "." + ((Concept)(this.terms.get(1))).toDLString();
+	}
+
+	@Override
+	public String toFSString(int tab) {
+		String indent = new String(new char[tab]).replace("\0", "\t");
+		return  indent + (negated ? "ObjectComplementOf( " + ((Quantifier)(this.terms.get(2))).toFSString() + " ( \n" + ((Role)(this.terms.get(0))).toFSString(tab+1) + " \n" + ((Concept)(this.terms.get(1))).toFSString(tab+1) + " ) )"
+					   : ((Quantifier)(this.terms.get(2))).toFSString() + "( \n" + ((Role)(this.terms.get(0))).toFSString(tab+1) + " \n" + ((Concept)(this.terms.get(1))).toFSString(tab+1) + " )");
+	}	
+	
 	/**
 	 * Gets the Role of the QuantifiedRole
 	 * @return Role

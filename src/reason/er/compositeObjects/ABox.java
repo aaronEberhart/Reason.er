@@ -179,7 +179,6 @@ public class ABox<T,U> extends Box<T,U> {
 		return expression;
 	}
 	
-	
 	/**
 	 * Makes a new sub-expression.
 	 * @param ran int
@@ -246,7 +245,7 @@ public class ABox<T,U> extends Box<T,U> {
  		}
  		else if(randInt == 1) {
  			long two = makeName(rand);
- 			p = new QuantifiedRole(negated,rand.nextBoolean(),rand.nextInt(2) + 1,constants?counters[0]:counters[1],constants?counters[1]:counters[1]-1,one*-1,two,two);
+ 			p = new QuantifiedRole(negated,rand.nextBoolean(),rand.nextInt(2) + 1,constants?counters[0]:counters[1],constants?counters[1]:counters[1]-1,Math.abs(one)*-1,two,two);
  		}
  		else if(randInt == 2) {
  			long num1 = constants?(-1 * rand.nextInt(variables)) - 1:scope+1;
@@ -257,7 +256,7 @@ public class ABox<T,U> extends Box<T,U> {
  				scope = num1;
  			}
  			
- 			p = new Role(false,num1,num2,one*-1);
+ 			p = new Role(false,num1,num2,Math.abs(one)*-1);
  			if(!constants) {
  				counters[1] = (counters[1] + 1);
  			}else {
@@ -292,6 +291,40 @@ public class ABox<T,U> extends Box<T,U> {
 		return "ABox = " + super.toString();
 	}
 
+	@Override
+	public String toDLString() {
+		String s = "ABox = {\n\n";
+		for(Expression e : expressions) {
+			s = s + "\t" + String.format("%s%-3s\t%s", 
+					(e.getSize() > 2 ? Term.makeVariable((long)e.getScope()) : e.toString().split("\\(")[1].split("\\)")[0])
+					,":", (e.getSize() > 2 ? e.toDLString() : e.toString().split("\\(")[0] )) + "\n";
+		}
+		return s;
+	}
+
+	@Override
+	public String toFSString(int tab) {
+		String s = "";
+		if(normalized == null) {
+			for(int i = 0; i < expressions.size(); i++) {  
+				if(expressions.get(i).getSize() < 3 && ((Predicate)(expressions.get(i).root.leaf)).isRole()) {
+					s = s + "ObjectPropertyAssertion(\n" + expressions.get(i).toFSString(tab+1)
+							+ "\n\t:" + Term.makeVariable(((long)((Role)(expressions.get(i).root.leaf)).getTerm(0).getValue())) 
+							+ "\n\t:" + Term.makeVariable(((long)((Role)(expressions.get(i).root.leaf)).getTerm(1).getValue())) + "\n)\n";
+				}
+				else {
+					s = s + "ClassAssertion(\n" + expressions.get(i).toFSString(tab+1) + "\n\t:" + Term.makeVariable(((long)((Predicate)(expressions.get(i).root)).getScope())) + "\n)\n";
+				}
+			}
+		}
+		else {
+			for(int i = 0; i < normalized.normals.size(); i++) {
+				s = s + "\nClassAssertion( " + normalized.getFromExpressionIndex(i).toFSString(0) + " )";
+			}
+		}
+		return s;
+	}
+	
 	@Override
 	protected long[] resetCounters() {
 		long counters[] = new long[2];

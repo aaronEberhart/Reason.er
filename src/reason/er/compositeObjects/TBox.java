@@ -210,7 +210,7 @@ public class TBox<T,U> extends Box<T,U>{
 		boolean negated = rand.nextBoolean();
 		Predicate p;
 		long one = makeName(rand);
-		long two = -1 * makeName(rand);
+		long two = -1 * Math.abs(makeName(rand));
 		
 		if(randInt == 0) {
 			p = new Concept(negated,counters[0],one);
@@ -316,6 +316,11 @@ public class TBox<T,U> extends Box<T,U>{
 	@Override
 	public String toString() {
 		return "TBox = " + super.toString();
+	}
+	
+	@Override
+	public String toDLString() {
+		return "TBox = " + super.toDLString();
 	}
 
 	/**

@@ -303,6 +303,57 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 		}
 	}
 
+	public String toDLString(boolean top) {
+		if(getChildren() == null) {
+			return leaf.toDLString();
+		}else if(getChildren().length == 1){
+			String s = ((QuantifiedRole<T,U>)leaf).getQuantifier().toDLString() + 
+					" " + ((QuantifiedRole<T,U>)leaf).getRole().toDLString() +
+					"." + 
+					getChildren()[0].toDLString();
+			if(negated)
+				s = "--" + s;
+			return s;
+		}else {
+			String s = getChildren()[0].toDLString(false) + " " + operator + " " + getChildren()[1].toDLString(false);
+			if(!top)
+				s = "( " + s + " )";
+			else
+				top = false;
+			if(negated)
+				s = "--" + s;
+			return s;
+		}
+	}
+	
+	public String toFSString(int tab) {
+		if(getChildren() == null) {
+			return leaf.toFSString(tab);
+		}else if(getChildren().length == 1){
+			String indent = new String(new char[tab]).replace("\0", "\t");
+			String s = indent + ((QuantifiedRole<T,U>)leaf).getQuantifier().toFSString() + "(\n" + ((QuantifiedRole<T,U>)leaf).getRole().toFSString(tab+1) + "\n" + getChildren()[0].toFSString(tab+1);
+			if(negated)
+				s = "--" + s;
+			return s;
+		}else {
+			String indent = new String(new char[tab]).replace("\0", "\t");
+			String s = "\n" + getChildren()[0].toFSString(tab+1) + "\n" + getChildren()[1].toFSString(tab+1);
+			
+			if(operator == '^')
+				s=(negated?"":indent)+"ObjectIntersectionOf( "+s+" )";
+			else if(operator == 'v')
+				s=(negated?"":indent)+"ObjectUnionOf( "+s+" )";
+			else if(operator == '=')
+				s="EquivalentClasses( "+s+"\n)";
+			else
+				s="SubClassOf( "+s+"\n)";
+			
+			if(negated)
+				s =indent+"ObjectComplementOf( " + s + ")";
+			return s;
+		}
+	}
+	
 	/**
 	 * Gets the children
 	 * @return ExpressionNode&lt;T,U&gt;[]

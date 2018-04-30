@@ -170,7 +170,25 @@ public class Expression<T,U> extends Concept<T,U>{
 	}
 	
 	public String toString() {
-		return root.toString() + " Size: " + this.getSize() + "\tScope: " + Term.makeVariable((long)scope);
+		return root.toString() + "\tSize: " + this.getSize() + "\tScope: " + Term.makeVariable((long)scope);
+	}
+	
+	public String toDLString() {
+		if(size <= 2) {
+			return "TEST";
+		}
+		if(root != null)
+			return root.toDLString(true);
+		return ((ExpressionNode)this).toDLString(true);
+	}
+	
+	public String toFSString(int tab) {
+		if(size <= 2 && !((Predicate)(root.leaf)).isExpression()) {
+			String s = ":" + ((Predicate)(root.leaf)).makeLabel();
+			s = negated?"\tObjectComplementOf( "+s+" )":"\t"+s;
+			return s;
+		}
+		return root.toFSString(tab);
 	}
 
 	/**

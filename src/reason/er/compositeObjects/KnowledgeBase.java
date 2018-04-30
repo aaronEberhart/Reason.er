@@ -80,6 +80,14 @@ public class KnowledgeBase<T,U>{
 		return "K = ( ABox, TBox )\n\n" + abox.toString() + "\n\n" + tbox.toString() + "\n";
 	}
 	
+	public String toFSString() {
+		return abox.toFSString(0) + "\n" + tbox.toFSString(0);
+	}
+	
+	public String toDLString() {
+		return "K = ( ABox, TBox )\n\n" + abox.toDLString() + "\n\n" + tbox.toDLString() + "\n";
+	}
+	
 	/**
 	 * Create a sample hard-coded KnowledgeBase.
 	 */

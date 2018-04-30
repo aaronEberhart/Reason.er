@@ -58,4 +58,23 @@ public class Quantifier {
 		}
 	}
 
+	public String toDLString() {
+		if(quantifier == 1) {
+			return "EX ";
+		}else if(quantifier == 2) {
+			return "ALL ";
+		}else {
+			return "";
+		}
+	}
+	
+	public String toFSString() {
+		if(quantifier == 1) {
+			return "ObjectSomeValuesFrom";
+		}else if(quantifier == 2) {
+			return "ObjectAllValuesFrom";
+		}else {
+			return "";
+		}
+	}
 }

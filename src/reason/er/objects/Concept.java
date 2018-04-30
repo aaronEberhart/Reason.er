@@ -71,14 +71,26 @@ public class Concept<T,U> extends Predicate<T,U> {
 	
 	@Override
 	public String toString() {
-		String s = "";
-		if(negated)
-			s += "--";
+		String s = negated ? "--" : "";
 		return s + makeLabel() + "(" + this.getTerm().toString() + ")";
 	}
+	
+	@Override
+	public String toDLString() {
+		String s = negated ? "--" : "";
+		return s + makeLabel();
+	}
 
+	@Override
+	public String toFSString(int tab) {
+		String indent = new String(new char[tab]).replace("\0", "\t");
+		//System.out.println(indent+"*");
+		return indent + (negated ? "ObjectComplementOf( :" + makeLabel() + " )": ":" + makeLabel() );
+	}
+	
 	@Override
 	public Predicate<T,U> clone(Expression<T,U> e) {
 		return new Concept<T,U>(e.negated, this.getTerm().getValue(), label);
 	}
+
 }

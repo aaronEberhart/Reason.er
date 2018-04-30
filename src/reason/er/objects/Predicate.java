@@ -48,6 +48,20 @@ public abstract class Predicate<T,U> {
 	public abstract Predicate<T,U> clone(Expression<T,U> e);
 	
 	/**
+	 * Returns a String representation of the Description
+	 * Logic object.
+	 * @return  String
+	 */
+	public abstract String toDLString();
+
+	/**
+	 * Returns a String representation of the Functional
+	 * Syntax object.
+	 * @return  String
+	 */
+	public abstract String toFSString(int tab);
+
+	/**
 	 * Indicates whether the Predicate is negated.
 	 * @return boolean
 	 */
@@ -146,7 +160,7 @@ public abstract class Predicate<T,U> {
 	 * Makes a string to represent the unique Predicate id.
 	 * @return String
 	 */
-	protected String makeLabel() {
+	public String makeLabel() {
 		long count;
 		
 		try {
@@ -190,4 +204,6 @@ public abstract class Predicate<T,U> {
 		}
 		return -1;
 	}
+
+	
 }
