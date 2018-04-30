@@ -2,6 +2,7 @@ package reason.er.compositeObjects;
 
 import java.util.ArrayList;
 
+import reason.er.ReasonEr;
 import reason.er.objects.*;
 
 /**
@@ -85,7 +86,21 @@ public class KnowledgeBase<T,U>{
 	}
 	
 	public String toDLString() {
-		return "K = ( ABox, TBox )\n\n" + abox.toDLString() + "\n\n" + tbox.toDLString() + "\n";
+		String s = "Individuals:\t";
+		for(int i = -1; i > -1*ReasonEr.variables - 1; i--) {
+			s = s + Term.makeVariable(i);
+			if(i != -1*ReasonEr.variables)
+				s = s + ", ";
+		}
+		s = s + "\nClass Names:\t";
+		for(int i = 0; i < ReasonEr.universe + 1; i++) {
+			s = s + (i < ReasonEr.universe / 2  + 1 ? Predicate.makeLabel(i) : Predicate.makeLabel((ReasonEr.universe / 2 - i)) );
+			if(i == ReasonEr.universe / 2)
+				s=s+"\nRole Names: \t";
+			else if(i != ReasonEr.universe)
+				s = s + ", ";
+		}
+		return s + "\n\nK = ( ABox, TBox )\n\n" + abox.toDLString() + "\n\n" + tbox.toDLString() + "\n";
 	}
 	
 	/**

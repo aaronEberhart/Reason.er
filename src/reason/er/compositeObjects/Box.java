@@ -3,6 +3,7 @@ package reason.er.compositeObjects;
 import java.util.ArrayList;
 import java.util.Random;
 
+import reason.er.ReasonEr;
 import reason.er.objects.*;
 import reason.er.util.*;
 
@@ -31,15 +32,15 @@ public abstract class Box<T,U>  {
 	/**
 	 * Maximum quantification depth.
 	 */
-	protected final int bound = 10;
+	protected final int bound = ReasonEr.quantificationDepth;
 	/**
 	 * Maximum sub-Expressions allowed per Expression.
 	 */
-	protected final int maxSubExpansions = 10;
+	protected final int maxSubExpansions = ReasonEr.maxSubExpressions;
 	/**
 	 * Maximum size of all Expressions.
 	 */
-	protected final int maxSize = 50;
+	protected final int maxSize = ReasonEr.maxSize;
 	/**
 	 * int for tracking the number of sub-Expressions.
 	 */
@@ -47,11 +48,11 @@ public abstract class Box<T,U>  {
 	/**
 	 * int for Predicate name restriction.
 	 */
-	public final static int universe = Predicate.uppers.length - 1;
+	protected final int universe = ReasonEr.universe;
 	/**
 	 * int for variable use restriction.
 	 */
-	protected final int variables = Term.lowers.length / 2;
+	protected final int variables = ReasonEr.individuals;
 	
 	/**
 	 * List of random Expressions

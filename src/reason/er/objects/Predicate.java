@@ -58,6 +58,7 @@ public abstract class Predicate<T,U> {
 	 * Returns a String representation of the Functional
 	 * Syntax object.
 	 * @return  String
+	 * @param tab int
 	 */
 	public abstract String toFSString(int tab);
 

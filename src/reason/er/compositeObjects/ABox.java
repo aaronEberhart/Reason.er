@@ -310,7 +310,7 @@ public class ABox<T,U> extends Box<T,U> {
 			s = s + "Declaration( NamedIndividual( :" + Term.makeVariable(i) + " ) )\n";
 		}
 		for(int i = 0; i < universe + 1; i++) {
-			s = s + "Declaration( " + (i < universe / 2 + 1 ? "Class( :" + Predicate.makeLabel(i) : "ObjectProperty( :" + Predicate.makeLabel((universe / 2 - i)) )   + " )" + i + " )\n";
+			s = s + "Declaration( " + (i < universe / 2 + 1 ? "Class( :" + Predicate.makeLabel(i) : "ObjectProperty( :" + Predicate.makeLabel((universe / 2 - i)) )   + " ) )\n";
 		}
 		s=s+"\n";
 		if(normalized == null) {

@@ -34,6 +34,26 @@ public class ReasonEr {
 	 * Size of each TBox to make.
 	 */
 	public static final int TBOXSIZE = 15;
+	/* 
+	* Maximum quantification depth.
+	 */
+	public final static int quantificationDepth = 10;
+	/**
+	 * Maximum sub-Expressions allowed per Expression.
+	 */
+	public final static int maxSubExpressions = 10;
+	/**
+	 * Maximum size of all Expressions.
+	 */
+	public final static  int maxSize = 50;
+	/**
+	 * int for Predicate name restriction.
+	 */
+	public final static int universe = Predicate.uppers.length - 1;
+	/**
+	 * int for variable use restriction.
+	 */
+	public final static int individuals = Term.lowers.length / 2;
 	
 	/**
 	 * Main method for program.
@@ -56,17 +76,17 @@ public class ReasonEr {
 			
 			kb = new KnowledgeBase(ABOXSIZE,TBOXSIZE);
 		
-			toFile("output\\knowledgeBases\\debugKnowledgeBase["+i+"].txt",kb.toString());
-			toFile("output\\knowledgeBases\\dlKnowledgeBase["+i+"].txt",kb.toDLString());
-			toFile("output\\knowledgeBases\\fsKnowledgeBase["+i+"].txt",kb.toFSString());
+			toFile("output\\knowledgeBases\\debug\\debugKnowledgeBase["+i+"].txt",kb.toString());
+			toFile("output\\knowledgeBases\\descriptionLogic\\dlKnowledgeBase["+i+"].txt",kb.toDLString());
+			toFile("output\\knowledgeBases\\functionalSyntax\\fsKnowledgeBase["+i+"].txt",kb.toFSString());
 			
 			System.out.println("Normalizing Expressions "+i+"\n");
 		
 			kb.normalize();
 		
-			toFile("output\\normalizedKnowledgeBases\\debugNormalizedKnowledgeBase["+i+"].txt",kb.toString());
-			toFile("output\\normalizedKnowledgeBases\\dlNormalizedKnowledgeBase["+i+"].txt",kb.toDLString());
-			toFile("output\\normalizedKnowledgeBases\\fsNormalizedKnowledgeBase["+i+"].txt",kb.toFSString());
+			toFile("output\\normalizedKnowledgeBases\\debug\\debugNormalizedKnowledgeBase["+i+"].txt",kb.toString());
+			toFile("output\\normalizedKnowledgeBases\\descriptionLogic\\dlNormalizedKnowledgeBase["+i+"].txt",kb.toDLString());
+			toFile("output\\normalizedKnowledgeBases\\functionalSyntax\\fsNormalizedKnowledgeBase["+i+"].txt",kb.toFSString());
 			
 //			exportToOWL(kb,"test");
 //			
@@ -120,9 +140,30 @@ public class ReasonEr {
 		if(!f4.exists())
 			f4.mkdir();
 		
-		File f5 = new File("output\\owl");
+		File f5 = new File("output\\knowledgeBases\\functionalSyntax");
 		if(!f5.exists())
 			f5.mkdir();
+		
+		File f6 = new File("output\\normalizedKnowledgeBases\\functionalSyntax");
+		if(!f6.exists())
+			f6.mkdir();
+		
+		File f7 = new File("output\\knowledgeBases\\descriptionLogic");
+		if(!f7.exists())
+			f7.mkdir();
+		
+		File f8 = new File("output\\normalizedKnowledgeBases\\descriptionLogic");
+		if(!f8.exists())
+			f8.mkdir();
+		
+
+		File f9 = new File("output\\knowledgeBases\\debug");
+		if(!f9.exists())
+			f9.mkdir();
+		
+		File f10 = new File("output\\normalizedKnowledgeBases\\debug");
+		if(!f10.exists())
+			f10.mkdir();
 	}
 	
 	/**
