@@ -87,9 +87,9 @@ public class KnowledgeBase<T,U>{
 	
 	public String toDLString() {
 		String s = "Individuals:\t";
-		for(int i = -1; i > -1*ReasonEr.variables - 1; i--) {
+		for(int i = -1; i > -1*ReasonEr.individuals - 1; i--) {
 			s = s + Term.makeVariable(i);
-			if(i != -1*ReasonEr.variables)
+			if(i != -1*ReasonEr.individuals)
 				s = s + ", ";
 		}
 		s = s + "\nClass Names:\t";
