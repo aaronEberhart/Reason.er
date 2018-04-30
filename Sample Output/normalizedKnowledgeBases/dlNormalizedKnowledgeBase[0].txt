@@ -1,0 +1,67 @@
+Individuals:	a, b, c, d, e, f, g, h, i, j, k, l, m
+Class Names:	A, B, C, D, E, F, G, H, I, J, K, L, M
+Role Names: 	N, O, P, Q, R, S, T, U, V, W, X, Y, Z
+
+K = ( ABox, TBox )
+
+ABox = {
+
+	l,j:  	P
+	g,h:  	O
+	i:  	--F
+	m:  	All Z.--I
+	i:  	--H
+	m:  	G
+	c:  	I
+	i:  	A
+	f:  	B
+	j,d:  	Y
+	f,a:  	Z
+	h:  	All Y.J ^ ( D ^ Exs W.E )
+	h:  	--H
+	a,k:  	W
+	i:  	All T.--L ^ All T.--L
+
+
+TBox = {
+
+	--D v C
+	--C v D
+
+	--D v --F
+	F v D
+
+	--J v ( B ^ All T.( All V.( --F ^ ( ( --D ^ ( ( --A v G ) v F ) ) v --D ) ) ^ ( All Z.L ^ All U.G ) ) )
+	( --B v Exs T.( Exs V.( F v ( ( D v ( ( A ^ --G ) ^ --F ) ) ^ D ) ) v ( Exs Z.--L v Exs U.--G ) ) ) v J
+
+	--G v D
+	--D v G
+
+	--F v ( --J ^ All V.E )
+	( J v Exs V.--E ) v F
+
+	--B v ( F ^ ( E ^ ( ( All X.M ^ All Y.Exs T.--I ) v Exs W.All T.K ) ) )
+
+	--B v ( C ^ ( All S.--H ^ All P.( L ^ ( H ^ F ) ) ) )
+
+	--D v ( M ^ ( G ^ ( All S.--M ^ ( All W.--G ^ ( --C v ( --C v Exs W.( G v Exs V.--B ) ) ) ) ) ) )
+
+	--K v Exs Z.( All O.--M ^ ( All X.J ^ ( Exs Y.--C ^ All V.H ) ) )
+	All Z.( Exs O.M v ( Exs X.--J v ( All Y.C v Exs V.--H ) ) ) v K
+
+	--F v ( All O.H ^ Exs T.--J )
+
+	--J v ( --A ^ ( All V.D ^ Exs Q.--M ) )
+	( A v ( Exs V.--D v All Q.M ) ) v J
+
+	--M v ( All S.L ^ All N.--G )
+	( Exs S.--L v Exs N.G ) v M
+
+	--A v --E
+	E v A
+
+	--K v ( Exs Z.--M ^ B )
+
+	--D v --L
+
+ }
