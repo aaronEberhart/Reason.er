@@ -326,13 +326,13 @@ public class ABox<T,U> extends Box<T,U> {
 			for(int i = 0; i < expressions.size(); i++) {  
 				if(expressions.get(i).getSize() < 3 && ((Predicate)(expressions.get(i).root.leaf)).isRole() && ((long)((Role)(expressions.get(i).root.leaf)).getTerm(1).getValue()) < 0) {
 					s = s + (((Role)(expressions.get(i).root.leaf)).isNegated() ? "Negative" : "") 
-							+ "ObjectPropertyAssertion(\n" 
+							+ "ObjectPropertyAssertion( \n" 
 							+ (((Predicate)(expressions.get(i).root.leaf)).isNegated() ? (expressions.get(i)).clone(expressions.get(i)).negate().toFSString(tab+1): expressions.get(i).root.toFSString(tab+1))
 							+ "\n\t:" + Term.makeVariable(((long)((Role)(expressions.get(i).root.leaf)).getTerm(0).getValue())) 
-							+ "\n\t:" + Term.makeVariable(((long)((Role)(expressions.get(i).root.leaf)).getTerm(1).getValue())) + "\n)\n";
+							+ "\n\t:" + Term.makeVariable(((long)((Role)(expressions.get(i).root.leaf)).getTerm(1).getValue())) + "\n )\n";
 				}
 				else {
-					s = s + "ClassAssertion(\n" + expressions.get(i).root.toFSString(tab+1) + "\n\t:" + Term.makeVariable(((long)((Predicate)(expressions.get(i).root)).getScope())) + "\n)\n";
+					s = s + "ClassAssertion( \n" + expressions.get(i).root.toFSString(tab+1) + "\n\t:" + Term.makeVariable(((long)((Predicate)(expressions.get(i).root)).getScope())) + "\n )\n";
 				}
 			}
 		}
@@ -341,13 +341,13 @@ public class ABox<T,U> extends Box<T,U> {
 				if(normalized.normals.get(i).getSize() < 3 && ((Predicate)(normalized.normals.get(i).root.leaf)).isRole()&&((long)((Role)(normalized.normals.get(i).root.leaf)).getTerm(1).getValue()) < 0) {
 					s = s + 
 							(((Role)(normalized.normals.get(i).root.leaf)).isNegated() ? "Negative" : "")
-							+ "ObjectPropertyAssertion(\n" 
+							+ "ObjectPropertyAssertion( \n" 
 							+ ((normalized.normals.get(i).root.leaf).isNegated() ? ((normalized.normals.get(i)).clone(normalized.normals.get(i)).negate()).toFSString(tab+1): normalized.normals.get(i).root.toFSString(tab+1))
 							+ "\n\t:" + Term.makeVariable(((long)((Role)(normalized.normals.get(i).root.leaf)).getTerm(0).getValue())) 
-							+ "\n\t:" + Term.makeVariable(((long)((Role)(normalized.normals.get(i).root.leaf)).getTerm(1).getValue())) + "\n)\n";
+							+ "\n\t:" + Term.makeVariable(((long)((Role)(normalized.normals.get(i).root.leaf)).getTerm(1).getValue())) + "\n )\n";
 				}
 				else {
-					s = s + "ClassAssertion(\n" + normalized.normals.get(i).root.toFSString(tab+1) + "\n\t:" + Term.makeVariable(((long)((Predicate)(normalized.normals.get(i).root)).getScope())) + "\n)\n";
+					s = s + "ClassAssertion( \n" + normalized.normals.get(i).root.toFSString(tab+1) + "\n\t:" + Term.makeVariable(((long)((Predicate)(normalized.normals.get(i).root)).getScope())) + "\n )\n";
 				}
 			}
 		}

@@ -331,9 +331,9 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 			return leaf.toFSString(tab);
 		}else if(getChildren().length == 1){
 			String indent = new String(new char[tab]).replace("\0", "\t");
-			String s = indent + ((QuantifiedRole<T,U>)leaf).getQuantifier().toFSString() + "(\n" + ((QuantifiedRole<T,U>)leaf).getRole().toFSString(tab+1) + "\n" + getChildren()[0].toFSString(tab+1) + "\n" + indent + ")";
+			String s = (negated?"":indent) + ((QuantifiedRole<T,U>)leaf).getQuantifier().toFSString() + "(\n" + ((QuantifiedRole<T,U>)leaf).getRole().toFSString(tab+1) + "\n" + getChildren()[0].toFSString(tab+1) + (negated?"":"\n"+indent) +" )";
 			if(negated)
-				s =indent+"ObjectComplementOf( " + s + ")";
+				s =indent+"ObjectComplementOf( " + s + " )";
 			return s;
 		}else {
 			String indent = new String(new char[tab]).replace("\0", "\t");
@@ -344,12 +344,12 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 			else if(operator == 'v')
 				s=(negated?"":indent)+"ObjectUnionOf( "+s+" )";
 			else if(operator == '=')
-				s="EquivalentClasses( "+s+"\n)";
+				s="EquivalentClasses( "+s+"\n )";
 			else
-				s="SubClassOf( "+s+"\n)";
+				s="SubClassOf( "+s+"\n )";
 			
 			if(negated)
-				s =indent+"ObjectComplementOf( " + s + ")";
+				s =indent+"ObjectComplementOf( " + s + " )";
 			return s;
 		}
 	}

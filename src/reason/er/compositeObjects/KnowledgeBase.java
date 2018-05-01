@@ -95,8 +95,8 @@ public class KnowledgeBase<T,U>{
 		return s + "\n\nK = ( ABox, TBox )\n\n" + abox.toString() + "\n\n" + tbox.toString() + "\n";
 	}
 	
-	public String toFSString() {
-		return "Prefix(:=<http://www.randomOntology.com/not/a/real/IRI/>)\nPrefix(owl:=<http://www.w3.org/2002/07/owl#>)\nOntology(<http://www.randomOntology.com/not/a/real/IRI/>\n\n" + abox.toFSString(0) + "\n" + tbox.toFSString(0) + "\n\n)";
+	public String toFSString(String IRI) {
+		return "Prefix(:="+IRI+")\nPrefix(owl:=<http://www.w3.org/2002/07/owl#>)\nOntology( "+IRI+"\n\n" + abox.toFSString(0) + "\n" + tbox.toFSString(0) + "\n\n )";
 	}
 	
 	public String toDLString() {
