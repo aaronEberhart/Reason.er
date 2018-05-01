@@ -6,59 +6,63 @@ K = ( ABox, TBox )
 
 ABox = {
 
-	      d:	--A
-	    k,f:	--Q
-	    k,f:	--P
-	      g:	K
-	      i:	--K ^ ( --L ^ ( K ^ All N.( All R.--G ^ --D ) ) )
-	      a:	--A
-	      l:	--F
-	      b:	--K ^ ( Exs Y.F ^ All V.--F )
-	    j,k:	Z
-	    b,g:	R
-	      b:	L
-	      b:	--M
-	      e:	--K
-	      a:	D ^ ( --B ^ ( J ^ ( All X.--A ^ ( --C ^ All U.--D ) ) ) )
-	      k:	All Y.E
+	      h:	All V.B ^ Exs Z.--J
+	      c:	Exs R.--B
+	      b:	K v ( Exs X.E v ( All T.L v Exs W.--J ) )
+	      e:	--I ^ ( All S.--C v ( A v ( Exs O.F v Exs T.Exs O.B ) ) )
+	      l:	--M
+	    e,h:	--U
+	      e:	Exs Q.--I
+	      f:	Exs X.L
+	      k:	Exs O.( Exs V.--F v Exs O.L )
+	      g:	B
+	      e:	Exs X.J
+	      m:	I
+	    d,b:	--N
+	    j,c:	V
+	      h:	--H ^ ( All P.K ^ Exs Q.D )
 
 
 TBox = {
 
-	--J v Exs O.( --D v M )
+	--F v ( M ^ All S.E )
 
-	--J v Exs P.--I
-	All P.I v J
+	--M v All S.--C
+	Exs S.C v M
 
-	--E v ( All Q.--J v --D )
+	--H v All S.--E
+	Exs S.E v H
 
-	--G v ( Exs X.--D ^ ( Exs R.D v Exs V.( --M ^ ( D ^ ( --E ^ --H ) ) ) ) )
-	( All X.D v ( All R.--D ^ All V.( M v ( --D v ( E v H ) ) ) ) ) v G
+	--C v ( Exs X.--G ^ Exs O.( --M ^ ( Exs O.( --J ^ All V.--M ) ^ ( All Z.All P.--I v Exs W.( D ^ ( B ^ ( --K ^ L ) ) ) ) ) ) )
+	( All X.G v All O.( M v ( All O.( J v Exs V.M ) v ( Exs Z.Exs P.I ^ All W.( --D v ( --B v ( K v --L ) ) ) ) ) ) ) v C
 
-	--L v ( M ^ --M )
+	--F v M
+	--M v F
 
-	--A v Exs W.--M
-	All W.M v A
+	--C v ( J ^ All N.--A )
 
-	--F v All Q.( --H ^ --E )
-	Exs Q.( H v E ) v F
+	--C v All V.All U.D
+	Exs V.Exs U.--D v C
 
-	--F v C
+	--M v ( Exs X.L v E )
+	( All X.--L ^ --E ) v M
 
-	--B v Exs N.C
+	--G v All W.K
+	Exs W.--K v G
 
-	--K v --E
+	--A v Exs Y.M
 
-	--C v ( J ^ ( All R.--A ^ ( --B ^ Exs S.--D ) ) )
+	--M v --C
+	C v M
 
-	--H v All Q.--L
-	Exs Q.L v H
+	--J v ( I v L )
+	( --I ^ --L ) v J
 
-	--B v M
+	--I v G
 
-	--E v Exs Z.I
+	--F v ( All R.--E ^ ( L ^ All T.Exs Z.--K ) )
+	( Exs R.E v ( --L v Exs T.All Z.K ) ) v F
 
-	--D v All O.--C
-	Exs O.C v D
+	--M v ( All X.--L ^ Exs N.E )
 
  }
