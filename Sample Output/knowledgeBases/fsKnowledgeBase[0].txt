@@ -41,225 +41,270 @@ Declaration( ObjectProperty( :Y ) )
 Declaration( ObjectProperty( :Z ) )
 
 ClassAssertion(
-	ObjectSomeValuesFrom( 
-		:U 
-		ObjectComplementOf( :D ) )
-	:g
-)
-ObjectPropertyAssertion(
-	ObjectComplementOf( :U )
-	:e
-	:d
-)
-ClassAssertion(
-	:C
-	:c
-)
-ClassAssertion(
-	:H
-	:j
-)
-ObjectPropertyAssertion(
-	ObjectComplementOf( :Y )
-	:c
-	:l
-)
-ClassAssertion(
-	ObjectIntersectionOf( 
-		ObjectComplementOf( ObjectAllValuesFrom ( 
-			:X 
-			ObjectComplementOf( :J ) ) )
-		ObjectSomeValuesFrom(
-			:Z
-			ObjectIntersectionOf( 
-				ObjectComplementOf( :L )
-				ObjectComplementOf( ObjectAllValuesFrom ( 
-					:T 
-					ObjectComplementOf( :I ) ) ) ) )
+	ObjectComplementOf( :E )
 	:f
 )
-ObjectPropertyAssertion(
-	ObjectComplementOf( :S )
-	:h
-	:a
+ClassAssertion(
+	ObjectAllValuesFrom( 
+		:T 
+		:J )
+	:b
 )
 ClassAssertion(
-	ObjectComplementOf( :D )
+	:J
 	:g
 )
-ClassAssertion(
-	ObjectIntersectionOf( 
-		ObjectComplementOf( :G )
-		ObjectComplementOf( ObjectSomeValuesFrom ( 
-			:R 
-			:A ) ) )
-	:c
-)
-ObjectPropertyAssertion(
-	:W
+NegativeObjectPropertyAssertion(
+	:U
 	:j
-	:a
-)
-ObjectPropertyAssertion(
-	:P
-	:c
-	:c
-)
-ClassAssertion(
-	:G
-	:g
+	:i
 )
 ObjectPropertyAssertion(
 	:U
-	:k
-	:j
+	:m
+	:g
 )
-ObjectPropertyAssertion(
-	:R
-	:f
-	:l
+ClassAssertion(
+	ObjectComplementOf( :E )
+	:e
+)
+ClassAssertion(
+	ObjectSomeValuesFrom(
+		:Q
+		ObjectUnionOf( 
+			ObjectIntersectionOf( 
+				:L
+				ObjectComplementOf( ObjectSomeValuesFrom ( 
+					:R 
+					ObjectComplementOf( :K ) ) ) )
+			ObjectComplementOf( ObjectSomeValuesFrom ( 
+				:Z 
+				ObjectComplementOf( :J ) ) ) )
+	:j
 )
 ClassAssertion(
 	ObjectComplementOf( ObjectSomeValuesFrom ( 
-		:O 
-		ObjectComplementOf( :B ) ) )
+		:R 
+		:K ) )
+	:f
+)
+ClassAssertion(
+	ObjectSomeValuesFrom( 
+		:R 
+		:F )
+	:i
+)
+ClassAssertion(
+	ObjectComplementOf( ObjectSomeValuesFrom ( 
+		:U 
+		ObjectComplementOf( :K ) ) )
+	:j
+)
+ClassAssertion(
+	ObjectAllValuesFrom( 
+		:S 
+		:C )
+	:m
+)
+ClassAssertion(
+	ObjectSomeValuesFrom( 
+		:W 
+		:K )
+	:f
+)
+ClassAssertion(
+	:H
 	:k
 )
-
-
-EquivalentClasses( 
-	:H
-	:K
-)
-SubClassOf( 
-	:A
-	ObjectIntersectionOf( 
-		:M
-		ObjectSomeValuesFrom( 
-			:V 
-			:I ) )
-)
-SubClassOf( 
-	:L
-	:K
-)
-SubClassOf( 
-	:H
-	ObjectSomeValuesFrom(
-		:Q
-		ObjectComplementOf( :M )
-)
-SubClassOf( 
-	:J
-	ObjectComplementOf( ObjectAllValuesFrom ( 
-		:R 
-		:I ) )
-)
-SubClassOf( 
-	:D
-	ObjectComplementOf( ObjectAllValuesFrom ( 
-		:Z 
-		:F ) )
-)
-SubClassOf( 
-	:F
+ClassAssertion(
 	ObjectAllValuesFrom(
-		:W
-		ObjectSomeValuesFrom(
-			:S
-			ObjectComplementOf( ObjectAllValuesFrom ( 
-				:Y 
-				:A ) )
-)
-EquivalentClasses( 
-	:K
-	ObjectComplementOf( :L )
-)
-SubClassOf( 
-	:A
-	ObjectIntersectionOf( 
-		ObjectComplementOf( :M )
-		ObjectComplementOf( ObjectSomeValuesFrom ( 
-			:N 
-			ObjectComplementOf( :F ) ) ) )
-)
-SubClassOf( 
-	:I
-	ObjectUnionOf( 
+		:P
 		ObjectUnionOf( 
 			ObjectUnionOf( 
 				ObjectComplementOf( ObjectSomeValuesFrom ( 
-					:Y 
-					ObjectComplementOf( :J ) ) )
-				ObjectComplementOf( :F ) )
-			:M )
-		:D )
+					:W 
+					:F ) )
+				ObjectSomeValuesFrom( 
+					:R 
+					ObjectComplementOf( :E ) ) )
+			ObjectComplementOf( :M ) )
+	:d
+)
+ClassAssertion(
+	ObjectIntersectionOf( 
+		:B
+		ObjectAllValuesFrom(
+			:V
+			ObjectComplementOf( ObjectAllValuesFrom ( 
+				:Q 
+				ObjectComplementOf( :A ) ) ) )
+	:e
+)
+
+
+SubClassOf( 
+	:C
+	ObjectComplementOf( :I )
+)
+SubClassOf( 
+	:B
+	ObjectIntersectionOf( 
+		:I
+		ObjectIntersectionOf( 
+			ObjectComplementOf( ObjectAllValuesFrom ( 
+				:P 
+				ObjectComplementOf( :H ) ) )
+			ObjectIntersectionOf( 
+				ObjectComplementOf( :M )
+				ObjectIntersectionOf( 
+					ObjectAllValuesFrom(
+						:Z
+						ObjectUnionOf( 
+							ObjectIntersectionOf( 
+								:F
+								ObjectComplementOf( ObjectSomeValuesFrom ( 
+									:P 
+									ObjectComplementOf( :F ) ) ) )
+							:D )
+					ObjectIntersectionOf( 
+						ObjectAllValuesFrom(
+							:W
+							ObjectIntersectionOf( 
+								ObjectComplementOf( :J )
+								ObjectIntersectionOf( 
+									:I
+									ObjectIntersectionOf( 
+										:I
+										ObjectComplementOf( :F ) ) ) )
+						ObjectSomeValuesFrom(
+							:O
+							ObjectAllValuesFrom( 
+								:R 
+								:M ) ) ) ) ) )
+)
+EquivalentClasses( 
+	:J
+	ObjectComplementOf( :I )
+)
+EquivalentClasses( 
+	:B
+	ObjectComplementOf( ObjectSomeValuesFrom ( 
+		:P 
+		ObjectComplementOf( :F ) ) )
+)
+SubClassOf( 
+	:F
+	ObjectUnionOf( 
+		ObjectUnionOf( 
+			ObjectComplementOf( :M )
+			ObjectComplementOf( :L ) )
+		:E )
+)
+SubClassOf( 
+	:D
+	:F
+)
+EquivalentClasses( 
+	:C
+	ObjectComplementOf( ObjectSomeValuesFrom ( 
+		:S 
+		ObjectComplementOf( :D ) ) )
 )
 SubClassOf( 
 	:J
-	ObjectComplementOf( ObjectAllValuesFrom ( 
-		:N 
-		:F ) )
-)
-SubClassOf( 
-	:M
-	ObjectSomeValuesFrom( 
-		:P 
-		ObjectComplementOf( :L ) )
+	ObjectComplementOf( :H )
 )
 EquivalentClasses( 
 	:F
 	ObjectIntersectionOf( 
-		:E
+		:L
 		ObjectIntersectionOf( 
+			ObjectComplementOf( :M )
+			ObjectAllValuesFrom(
+				:T
+				ObjectUnionOf( 
+					:M
+					ObjectComplementOf( :K ) ) ) )
+)
+EquivalentClasses( 
+	:L
+	ObjectIntersectionOf( 
+		ObjectComplementOf( ObjectSomeValuesFrom ( 
+			:X 
+			ObjectComplementOf( :F ) ) )
+		ObjectIntersectionOf( 
+			ObjectComplementOf( ObjectSomeValuesFrom ( 
+				:O 
+				:A ) )
+			ObjectAllValuesFrom(
+				:T
+				ObjectIntersectionOf( 
+					ObjectAllValuesFrom( 
+						:P 
+						ObjectComplementOf( :C ) )
+					ObjectComplementOf( ObjectSomeValuesFrom ( 
+						:N 
+						:H ) ) ) ) )
+)
+SubClassOf( 
+	:H
+	ObjectIntersectionOf( 
+		ObjectComplementOf( ObjectSomeValuesFrom ( 
+			:P 
+			:D ) )
+		ObjectIntersectionOf( 
+			:A
 			ObjectSomeValuesFrom( 
 				:O 
-				:D )
-			ObjectComplementOf( ObjectIntersectionOf( 
-				ObjectComplementOf( :I )
-				ObjectUnionOf( 
-					ObjectUnionOf( 
-						ObjectIntersectionOf( 
-							ObjectComplementOf( :A )
-							ObjectComplementOf( ObjectUnionOf( 
-								ObjectComplementOf( ObjectAllValuesFrom ( 
-									:V 
-									:A ) )
-								ObjectComplementOf( :E ) )) )
-						ObjectComplementOf( :I ) )
-					:E ) )) ) )
+				:E ) ) )
+)
+SubClassOf( 
+	:G
+	ObjectIntersectionOf( 
+		ObjectComplementOf( ObjectSomeValuesFrom ( 
+			:Y 
+			ObjectComplementOf( :J ) ) )
+		ObjectIntersectionOf( 
+			:B
+			ObjectComplementOf( ObjectSomeValuesFrom ( 
+				:V 
+				:F ) ) ) )
+)
+SubClassOf( 
+	:I
+	ObjectAllValuesFrom(
+		:Z
+		ObjectSomeValuesFrom(
+			:Z
+			ObjectSomeValuesFrom(
+				:P
+				ObjectIntersectionOf( 
+					ObjectAllValuesFrom( 
+						:O 
+						:B )
+					ObjectSomeValuesFrom(
+						:S
+						ObjectSomeValuesFrom( 
+							:P 
+							:D ) )
 )
 EquivalentClasses( 
 	:J
-	ObjectIntersectionOf( 
-		:L
-		ObjectComplementOf( :I ) )
+	ObjectComplementOf( :I )
 )
-SubClassOf( 
-	:E
+EquivalentClasses( 
+	:F
 	ObjectIntersectionOf( 
-		ObjectAllValuesFrom( 
-			:Y 
-			:M )
-		ObjectIntersectionOf( 
-			ObjectAllValuesFrom( 
-				:S 
-				ObjectComplementOf( :M ) )
+		ObjectComplementOf( :M )
+		ObjectAllValuesFrom(
+			:P
 			ObjectSomeValuesFrom(
-				:R
+				:N
 				ObjectAllValuesFrom(
-					:V
-					ObjectIntersectionOf( 
-						ObjectSomeValuesFrom( 
-							:X 
-							ObjectComplementOf( :L ) )
-						ObjectIntersectionOf( 
-							ObjectAllValuesFrom( 
-								:T 
-								ObjectComplementOf( :F ) )
-							ObjectAllValuesFrom( 
-								:W 
-								ObjectComplementOf( :K ) ) ) ) ) )
+					:P
+					ObjectComplementOf( ObjectSomeValuesFrom ( 
+						:R 
+						:G ) ) )
 )
 
 )

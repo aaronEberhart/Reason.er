@@ -6,53 +6,53 @@ K = ( ABox, TBox )
 
 ABox = {
 
-	      g:	Exs U.--D
-	    e,d:	--U
-	      c:	C
-	    j,o:	FORALL W
-	    c,l:	--Y
-	      f:	--All X.--J ^ Exs Z.( --L ^ --All T.--I )
-	    h,a:	--S
-	      g:	--D
-	      c:	--G ^ --Exs R.A
-	    j,a:	W
-	    c,c:	P
-	      g:	G
-	    k,j:	U
-	    f,l:	R
-	      k:	--Exs O.--B
+	      f:	--E
+	      b:	All T.J
+	      g:	J
+	    j,i:	--U
+	    m,g:	U
+	      e:	--E
+	      j:	Exs Q.( ( L ^ --Exs R.--K ) v --Exs Z.--J )
+	      f:	--Exs R.K
+	      i:	Exs R.F
+	      j:	--Exs U.--K
+	      m:	All S.C
+	      f:	Exs W.K
+	      k:	H
+	      d:	All P.( ( --Exs W.F v Exs R.--E ) v --M )
+	      e:	B ^ All V.--All Q.--A
 
 
 TBox = {
 
-	H = K
+	C c --I
 
-	A c ( M ^ Exs V.I )
+	B c ( I ^ ( --All P.--H ^ ( --M ^ ( All Z.( ( F ^ --Exs P.--F ) v D ) ^ ( All W.( --J ^ ( I ^ ( I ^ --F ) ) ) ^ Exs O.All R.M ) ) ) ) )
 
-	L c K
+	J = --I
 
-	H c Exs Q.--M
+	B = --Exs P.--F
 
-	J c --All R.I
+	F c ( ( --M v --L ) v E )
 
-	D c --All Z.F
+	D c F
 
-	F c All W.Exs S.--All Y.A
+	C = --Exs S.--D
 
-	K = --L
+	J c --H
 
-	A c ( --M ^ --Exs N.--F )
+	F = ( L ^ ( --M ^ All T.( M v --K ) ) )
 
-	I c ( ( ( --Exs Y.--J v --F ) v M ) v D )
+	L = ( --Exs X.--F ^ ( --Exs O.A ^ All T.( All P.--C ^ --Exs N.H ) ) )
 
-	J c --All N.F
+	H c ( --Exs P.D ^ ( A ^ Exs O.E ) )
 
-	M c Exs P.--L
+	G c ( --Exs Y.--J ^ ( B ^ --Exs V.F ) )
 
-	F = ( E ^ ( Exs O.D ^ --( --I ^ ( ( ( --A ^ --( --All V.A v --E ) ) v --I ) v E ) ) ) )
+	I c All Z.Exs Z.Exs P.( All O.B ^ Exs S.Exs P.D )
 
-	J = ( L ^ --I )
+	J = --I
 
-	E c ( All Y.M ^ ( All S.--M ^ Exs R.All V.( Exs X.--L ^ ( All T.--F ^ All W.--K ) ) ) )
+	F = ( --M ^ All P.Exs N.All P.--Exs R.G )
 
  }
