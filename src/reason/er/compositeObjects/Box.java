@@ -183,7 +183,7 @@ public abstract class Box<T,U>  {
 		}
 		else {
 			for(int i = 0; i < normalized.normals.size(); i++) {
-				s = s + "\n" + normalized.getFromExpressionIndex(i).toFSString(0) + "\n)";
+				s = s + "\nSubClassOf(\n\towl:Thing\n" + normalized.getFromExpressionIndex(i).toFSString(1) + "\n)";
 			}
 		}
 		return s;

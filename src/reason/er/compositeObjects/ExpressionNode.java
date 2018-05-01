@@ -331,7 +331,7 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 			return leaf.toFSString(tab);
 		}else if(getChildren().length == 1){
 			String indent = new String(new char[tab]).replace("\0", "\t");
-			String s = indent + ((QuantifiedRole<T,U>)leaf).getQuantifier().toFSString() + "(\n" + ((QuantifiedRole<T,U>)leaf).getRole().toFSString(tab+1) + "\n" + getChildren()[0].toFSString(tab+1) + "\n)";
+			String s = indent + ((QuantifiedRole<T,U>)leaf).getQuantifier().toFSString() + "(\n" + ((QuantifiedRole<T,U>)leaf).getRole().toFSString(tab+1) + "\n" + getChildren()[0].toFSString(tab+1) + "\n" + indent + ")";
 			if(negated)
 				s = "--" + s;
 			return s;
