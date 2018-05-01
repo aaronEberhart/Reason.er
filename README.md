@@ -2,9 +2,9 @@
 
 This is my ongoing project to develop an ALC tableau reasoner. 
 
-Currently the random syntax generator is functional and accessible through the main test class. To create a random KnowledgeBase you can either make a new KnowledgeBase() with the int sizes you want and it will build it for you, or you can make it from an ABox and TBox. There are also functions to manually input axioms if you want, though this is rather tedious and not the intent of the project. KnowledgeBases are, by default, not in normal form. You can add an NNF copy to a KnowledgeBase via the normalize() method.
+Currently the random syntax generator is functional and accessible through the main test class. To create a random KnowledgeBase you can either make a new KnowledgeBase() with the int sizes you want and it will build it for you, or you can make it from an ABox and TBox. There are also functions to manually input axioms if you want, though this is rather tedious and not the intent of the project. KnowledgeBases are by default not in normal form. You can add an NNF copy to a KnowledgeBase via the normalize() method.
 
-The default toString() method displays detailed information, but OWL functional syntax and Description Logic style output can be obtained from the toFSString() and toDLString() on a generated Knowledge Base. This is useful primarily when written to a text file. A method is included in in the main class that does this for you.
+The default toString() method displays detailed information, but OWL functional syntax and Description Logic style output can be obtained from the toFSString() and toDLString() methods on a generated Knowledge Base. This is useful primarily when written to a text file. A method is included in in the main class that does file writing for you.
 
 The <a href="https://aaroneberhart.github.io/Reason.er/Javadoc/" target="_blank">Javadoc</a> might be helpful if anything is unclear.
 
