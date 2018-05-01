@@ -10,7 +10,7 @@ The <a href="https://aaroneberhart.github.io/Reason.er/Javadoc/" target="_blank"
 
 Tips:<ol>
 <li>universe/individuals should be > 2 or it may behave erratically (why would you want a KB of just one class anyways?)</li>
-<li>quantificationDepth/maxSubExpressions will permit a dramatic increase in the size of your expressions with higher values</li>
+<li>quantificationDepth/maxSubExpressions will permit a dramatic increase in the size of expressions at higher values</li>
 <li>maxSize is still a little buggy but seems to have a more modest efect on the types expressions than the other two</li>
 <li>NUMTESTS is just for repeating the whole generator process if you want to test</li>
 <li>ABOXSIZE/TBOXSIZE determine the number of expressions created in each respectively</li>
