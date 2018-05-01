@@ -96,7 +96,7 @@ public class KnowledgeBase<T,U>{
 	}
 	
 	public String toFSString() {
-		return "Ontology(<http://www.randomOntology.com/not/a/real/IRI/>\n\n" + abox.toFSString(0) + "\n" + tbox.toFSString(0) + "\n\n)";
+		return "Prefix(:=<http://www.randomOntology.com/not/a/real/IRI/>)\nOntology(<http://www.randomOntology.com/not/a/real/IRI/>\n\n" + abox.toFSString(0) + "\n" + tbox.toFSString(0) + "\n\n)";
 	}
 	
 	public String toDLString() {

@@ -82,7 +82,7 @@ public class ReasonEr {
 		
 			toFile("output\\knowledgeBases\\debug\\debugKnowledgeBase["+i+"].txt",kb.toString());
 			toFile("output\\knowledgeBases\\descriptionLogic\\dlKnowledgeBase["+i+"].txt",kb.toDLString());
-			toFile("output\\knowledgeBases\\functionalSyntax\\fsKnowledgeBase["+i+"].txt",kb.toFSString());
+			toFile("output\\knowledgeBases\\functionalSyntax\\fsKnowledgeBase["+i+"].owl",kb.toFSString());
 			
 			System.out.println("Normalizing Expressions "+i+"\n");
 		
@@ -90,7 +90,7 @@ public class ReasonEr {
 		
 			toFile("output\\normalizedKnowledgeBases\\debug\\debugNormalizedKnowledgeBase["+i+"].txt",kb.toString());
 			toFile("output\\normalizedKnowledgeBases\\descriptionLogic\\dlNormalizedKnowledgeBase["+i+"].txt",kb.toDLString());
-			toFile("output\\normalizedKnowledgeBases\\functionalSyntax\\fsNormalizedKnowledgeBase["+i+"].txt",kb.toFSString());
+			toFile("output\\normalizedKnowledgeBases\\functionalSyntax\\fsNormalizedKnowledgeBase["+i+"].owl",kb.toFSString());
 //			
 //			
 //			

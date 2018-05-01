@@ -6,68 +6,68 @@ K = ( ABox, TBox )
 
 ABox = {
 
-	--E(f)	Size: 2	Scope: f,
+	--A(d)	Size: 2	Scope: d,
 
-	FORALL T(b,o).J(o)	Size: 2	Scope: b,
+	--Q(k,f)	Size: 2	Scope: k,
 
-	J(g)	Size: 1	Scope: g,
+	--P(k,f)	Size: 2	Scope: k,
 
-	--U(j,i)	Size: 2	Scope: j,
+	K(g)	Size: 1	Scope: g,
 
-	U(m,g)	Size: 1	Scope: m,
+	( --K(i) ^ ( --L(i) ^ ( K(i) ^ FORALL N(i,o).--( EXISTS R(o,n).G(n) v D(o) ) ) ) )	Size: 14	Scope: i,
 
-	--E(e)	Size: 2	Scope: e,
+	--A(a)	Size: 2	Scope: a,
 
-	EXISTS Q(j,o).( ( L(o) ^ --EXISTS R(o,n).--K(n) ) v --EXISTS Z(o,n).--J(n) )	Size: 12	Scope: j,
+	--F(l)	Size: 2	Scope: l,
 
-	--EXISTS R(f,o).K(o)	Size: 3	Scope: f,
+	( --K(b) ^ ( --FORALL Y(b,o).--F(o) ^ FORALL V(b,o).--F(o) ) )	Size: 11	Scope: b,
 
-	EXISTS R(i,o).F(o)	Size: 2	Scope: i,
+	Z(j,k)	Size: 1	Scope: j,
 
-	--EXISTS U(j,o).--K(o)	Size: 4	Scope: j,
+	R(b,g)	Size: 1	Scope: b,
 
-	FORALL S(m,o).C(o)	Size: 2	Scope: m,
+	L(b)	Size: 1	Scope: b,
 
-	EXISTS W(f,o).K(o)	Size: 2	Scope: f,
+	--M(b)	Size: 2	Scope: b,
 
-	H(k)	Size: 1	Scope: k,
+	--K(e)	Size: 2	Scope: e,
 
-	FORALL P(d,o).( ( --EXISTS W(o,n).F(n) v EXISTS R(o,n).--E(n) ) v --M(o) )	Size: 11	Scope: d,
+	( D(a) ^ ( --B(a) ^ ( J(a) ^ ( --EXISTS X(a,o).A(o) ^ ( --C(a) ^ FORALL U(a,o).--D(o) ) ) ) ) )	Size: 17	Scope: a,
 
-	( B(e) ^ FORALL V(e,o).--FORALL Q(o,n).--A(n) )	Size: 7	Scope: e,
+	--EXISTS Y(k,o).--E(o)	Size: 4	Scope: k,
 
  }
 
 TBox = {
 
-	( C(o) c --I(o) )	Size: 4	Scope: o,
+	( J(p) c EXISTS O(p,o).( --D(o) v M(o) ) )	Size: 7	Scope: p,
 
-	( B(p) c ( I(p) ^ ( --FORALL P(p,o).--H(o) ^ ( --M(p) ^ ( FORALL Z(p,o).( ( F(o) ^ --EXISTS P(o,n).--F(n) ) v D(o) ) ^ ( FORALL W(p,o).( --J(o) ^ ( I(o) ^ ( I(o) ^ --F(o) ) ) ) ^ EXISTS O(p,o).FORALL R(o,n).M(n) ) ) ) ) ) )	Size: 36	Scope: p,
+	( J(o) = --FORALL P(o,n).I(n) )	Size: 5	Scope: o,
 
-	( J(o) = --I(o) )	Size: 4	Scope: o,
+	( E(o) c ( --EXISTS Q(o,n).J(n) v --D(o) ) )	Size: 8	Scope: o,
 
-	( B(o) = --EXISTS P(o,n).--F(n) )	Size: 6	Scope: o,
+	( G(p) = ( EXISTS X(p,o).--D(o) ^ ( EXISTS R(p,o).D(o) v EXISTS V(p,o).( --M(o) ^ ( D(o) ^ ( --E(o) ^ --H(o) ) ) ) ) ) )	Size: 20	Scope: p,
 
-	( F(o) c ( ( --M(o) v --L(o) ) v E(o) ) )	Size: 9	Scope: o,
+	( L(o) c ( M(o) ^ --M(o) ) )	Size: 6	Scope: o,
 
-	( D(o) c F(o) )	Size: 3	Scope: o,
+	( A(o) = --FORALL W(o,n).M(n) )	Size: 5	Scope: o,
 
-	( C(o) = --EXISTS S(o,n).--D(n) )	Size: 6	Scope: o,
+	( F(p) = --EXISTS Q(p,o).( H(o) v E(o) ) )	Size: 7	Scope: p,
 
-	( J(o) c --H(o) )	Size: 4	Scope: o,
+	( F(o) c C(o) )	Size: 3	Scope: o,
 
-	( F(p) = ( L(p) ^ ( --M(p) ^ FORALL T(p,o).( M(o) v --K(o) ) ) ) )	Size: 12	Scope: p,
+	( B(o) c --FORALL N(o,n).--C(n) )	Size: 6	Scope: o,
 
-	( L(p) = ( --EXISTS X(p,o).--F(o) ^ ( --EXISTS O(p,o).A(o) ^ FORALL T(p,o).( FORALL P(o,n).--C(n) ^ --EXISTS N(o,n).H(n) ) ) ) )	Size: 19	Scope: p,
+	( K(o) c --E(o) )	Size: 4	Scope: o,
 
-	( H(o) c ( --EXISTS P(o,n).D(n) ^ ( A(o) ^ EXISTS O(o,n).E(n) ) ) )	Size: 10	Scope: o,
+	( C(o) c ( J(o) ^ ( FORALL R(o,n).--A(n) ^ ( --B(o) ^ EXISTS S(o,n).--D(n) ) ) ) )	Size: 14	Scope: o,
 
-	( G(o) c ( --EXISTS Y(o,n).--J(n) ^ ( B(o) ^ --EXISTS V(o,n).F(n) ) ) )	Size: 12	Scope: o,
+	( H(o) = FORALL Q(o,n).--L(n) )	Size: 5	Scope: o,
 
-	( I(s) c FORALL Z(s,r).EXISTS Z(r,q).EXISTS P(q,p).( FORALL O(p,o).B(o) ^ EXISTS S(p,o).EXISTS P(o,n).D(n) ) )	Size: 11	Scope: s,
+	( B(o) c M(o) )	Size: 3	Scope: o,
 
-	( J(o) = --I(o) )	Size: 4	Scope: o,
+	( E(p) c EXISTS Z(p,o).I(o) )	Size: 4	Scope: p,
 
-	( F(r) = ( --M(r) ^ FORALL P(r,q).EXISTS N(q,p).FORALL P(p,o).--EXISTS R(o,n).G(n) ) )	Size: 11	Scope: r,
+	( D(p) = FORALL O(p,o).--C(o) )	Size: 5	Scope: p,
 
  }

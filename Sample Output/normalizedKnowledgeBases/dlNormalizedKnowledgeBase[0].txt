@@ -6,60 +6,59 @@ K = ( ABox, TBox )
 
 ABox = {
 
-	      f:	--E
-	      b:	All T.J
-	      g:	J
-	    j,i:	--U
-	    m,g:	U
-	      e:	--E
-	      j:	Exs Q.( ( L ^ All R.K ) v All Z.J )
-	      f:	All R.--K
-	      i:	Exs R.F
-	      j:	All U.K
-	      m:	All S.C
-	      f:	Exs W.K
-	      k:	H
-	      d:	All P.( ( All W.--F v Exs R.--E ) v --M )
-	      e:	B ^ All V.Exs Q.A
+	      d:	--A
+	    k,f:	--Q
+	    k,f:	--P
+	      g:	K
+	      i:	--K ^ ( --L ^ ( K ^ All N.( All R.--G ^ --D ) ) )
+	      a:	--A
+	      l:	--F
+	      b:	--K ^ ( Exs Y.F ^ All V.--F )
+	    j,k:	Z
+	    b,g:	R
+	      b:	L
+	      b:	--M
+	      e:	--K
+	      a:	D ^ ( --B ^ ( J ^ ( All X.--A ^ ( --C ^ All U.--D ) ) ) )
+	      k:	All Y.E
 
 
 TBox = {
 
-	--C v --I
+	--J v Exs O.( --D v M )
 
-	--B v ( I ^ ( Exs P.H ^ ( --M ^ ( All Z.( ( F ^ All P.F ) v D ) ^ ( All W.( --J ^ ( I ^ ( I ^ --F ) ) ) ^ Exs O.All R.M ) ) ) ) )
+	--J v Exs P.--I
+	All P.I v J
 
-	--J v --I
-	I v J
+	--E v ( All Q.--J v --D )
 
-	--B v All P.F
-	Exs P.--F v B
+	--G v ( Exs X.--D ^ ( Exs R.D v Exs V.( --M ^ ( D ^ ( --E ^ --H ) ) ) ) )
+	( All X.D v ( All R.--D ^ All V.( M v ( --D v ( E v H ) ) ) ) ) v G
 
-	--F v ( ( --M v --L ) v E )
+	--L v ( M ^ --M )
 
-	--D v F
+	--A v Exs W.--M
+	All W.M v A
 
-	--C v All S.D
-	Exs S.--D v C
+	--F v All Q.( --H ^ --E )
+	Exs Q.( H v E ) v F
 
-	--J v --H
+	--F v C
 
-	--F v ( L ^ ( --M ^ All T.( M v --K ) ) )
-	( --L v ( M v Exs T.( --M ^ K ) ) ) v F
+	--B v Exs N.C
 
-	--L v ( All X.F ^ ( All O.--A ^ All T.( All P.--C ^ All N.--H ) ) )
-	( Exs X.--F v ( Exs O.A v Exs T.( Exs P.C v Exs N.H ) ) ) v L
+	--K v --E
 
-	--H v ( All P.--D ^ ( A ^ Exs O.E ) )
+	--C v ( J ^ ( All R.--A ^ ( --B ^ Exs S.--D ) ) )
 
-	--G v ( All Y.J ^ ( B ^ All V.--F ) )
+	--H v All Q.--L
+	Exs Q.L v H
 
-	--I v All Z.Exs Z.Exs P.( All O.B ^ Exs S.Exs P.D )
+	--B v M
 
-	--J v --I
-	I v J
+	--E v Exs Z.I
 
-	--F v ( --M ^ All P.Exs N.All P.All R.--G )
-	( M v Exs P.All N.Exs P.Exs R.G ) v F
+	--D v All O.--C
+	Exs O.C v D
 
  }
