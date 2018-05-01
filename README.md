@@ -10,7 +10,7 @@ The <a href="https://aaroneberhart.github.io/Reason.er/Javadoc/" target="_blank"
 
 Tips:<ol>
 <li>universe/individuals should be > 2 or it may behave erratically (why would you want a KB of just one class anyways?)</li>
-<li>quantificationDepth/maxSubExpressions will permit a dramatic increase in the size of your expressions as they increase</li>
+<li>quantificationDepth/maxSubExpressions will permit a dramatic increase in the size of your expressions with higher values</li>
 <li>maxSize is still a little buggy but seems to have a flatter efect on the types expressions than the other two</li>
 <li>NUMTESTS is just for repeating the whole generator process if you want to test</li>
 <li>ABOXSIZE/TBOXSIZE determine the number of expressions created in each respectively</li>
@@ -25,7 +25,7 @@ Settings Used to Produce Sample Output:<ul>
 <li>quantificationDepth = 10</li>
 <li>maxSubExpressions = 10</li>
 <li>maxSize = 50</li>
-<li>universe = Predicate.uppers.length - 1</li>
+<li>universe = Predicate.uppers.length / 2</li>
 <li>individuals = Term.lowers.length / 2</li>
 </ul>
 
