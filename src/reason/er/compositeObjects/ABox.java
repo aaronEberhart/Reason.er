@@ -318,8 +318,8 @@ public class ABox<T,U> extends Box<T,U> {
 		for(int i = -1; i > -1*variables - 1; i--) {
 			s = s + "Declaration( NamedIndividual( :" + Term.makeVariable(i) + " ) )\n";
 		}
-		for(int i = 0; i < (universe * 2); i++) {
-			s = s + "Declaration( " + (i < universe ? "Class( :" + Predicate.makeLabel(i) : "ObjectProperty( :" + Predicate.makeLabel((universe - 1 - i)) )   + " ) )\n";
+		for(int i = 0; i < (1 + universe * 2); i++) {
+			s = s + "Declaration( " + (i <= universe ? "Class( :" + Predicate.makeLabel(i) : "ObjectProperty( :" + Predicate.makeLabel((universe - i)) )   + " ) )\n";
 		}
 		s=s+"\n";
 		if(normalized == null) {
