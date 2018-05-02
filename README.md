@@ -24,7 +24,7 @@ Settings Used to Produce Sample Output:<ul>
 <li>TBOXSIZE = 15</li>
 <li>quantificationDepth = 10</li>
 <li>maxSubExpressions = 10</li>
-<li>maxSize = 50</li>
+<li>maxSize = 10</li>
 <li>universe = Predicate.uppers.length / 2</li>
 <li>individuals = Term.lowers.length / 2</li>
 </ul>
