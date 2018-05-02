@@ -34,8 +34,8 @@ public class ReasonEr {
 	 * Size of each TBox to make.
 	 */
 	public static final int TBOXSIZE = 15;
-	/* 
-	* Maximum quantification depth.
+	/**
+	 * Maximum quantification depth.
 	 */
 	public final static int quantificationDepth = 10;
 	/**
@@ -65,14 +65,9 @@ public class ReasonEr {
 		prepDirs();
 	
 		KnowledgeBase kb;
-		int i = 0, j = 0;
+		int i = 0;
 		
 		for(; i < NUMTESTS; i++) {
-			
-//			RandomInteger r = new RandomInteger();
-//			long name = (long)r.nextInt(universe);
-//			Concept c = new Concept(false,r.nextInt(individuals),name);
-//			System.out.println(c);
 			
 //			j = testWeightedBoolean(100,10,j);
 			
@@ -91,9 +86,9 @@ public class ReasonEr {
 			toFile("output\\normalizedKnowledgeBases\\debug\\debugNormalizedKnowledgeBase["+i+"].txt",kb.toString());
 			toFile("output\\normalizedKnowledgeBases\\descriptionLogic\\dlNormalizedKnowledgeBase["+i+"].txt",kb.toDLString());
 			toFile("output\\normalizedKnowledgeBases\\functionalSyntax\\fsNormalizedKnowledgeBase["+i+"].owl",kb.toFSString("<http://www.randomOntology.com/not/a/real/IRI/>"));
-//			
-//			
-//			
+			
+			
+			
 //			Tableau t = new Tableau(kb);
 //			
 //			System.out.println("Running Tableau "+i+"\n");

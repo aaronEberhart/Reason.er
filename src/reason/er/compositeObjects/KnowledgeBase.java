@@ -95,10 +95,19 @@ public class KnowledgeBase<T,U>{
 		return s + "\n\nK = ( ABox, TBox )\n\n" + abox.toString() + "\n\n" + tbox.toString() + "\n";
 	}
 	
+	/**
+	 * Returns a functional syntax string representation that can be written to a file.
+	 * @param IRI String
+	 * @return String
+	 */
 	public String toFSString(String IRI) {
 		return "Prefix(:="+IRI+")\nPrefix(owl:=<http://www.w3.org/2002/07/owl#>)\nOntology( "+IRI+"\n\n" + abox.toFSString(0) + "\n" + tbox.toFSString(0) + "\n\n )";
 	}
 	
+	/**
+	 * Returns a description logic string representation that can be written to a file.
+	 * @return String
+	 */
 	public String toDLString() {
 		String s = "Individuals:\t";
 		for(int i = -1; i > -1*ReasonEr.individuals - 1; i--) {
