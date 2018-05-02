@@ -74,7 +74,7 @@ public class ABox<T,U> extends Box<T,U> {
 		scope = (long)expression.getScope();
 		
 		//loop until ground and complete
-		while(!(complete && constants)){
+		while(!(complete && constants && scope < 0)){
 
 			builder = transform(rand.nextInt(7),builder,false,0);
 
@@ -318,8 +318,8 @@ public class ABox<T,U> extends Box<T,U> {
 		for(int i = -1; i > -1*variables - 1; i--) {
 			s = s + "Declaration( NamedIndividual( :" + Term.makeVariable(i) + " ) )\n";
 		}
-		for(int i = 0; i < (1 + universe * 2); i++) {
-			s = s + "Declaration( " + (i < universe - 1 ? "Class( :" +  Predicate.makeLabel(i) : "ObjectProperty( :" + Predicate.makeLabel((universe - i)) )   + " ) )\n";
+		for(int i = 0; i < (universe * 2) - 1; i++) {
+			s = s + "Declaration( " + (i < universe - 1 ? "Class( :" +  Predicate.makeLabel(i) : "ObjectProperty( :" + Predicate.makeLabel((universe - 2 - i)) )   + " ) )\n";
 		}
 		s=s+"\n";
 		if(normalized == null) {

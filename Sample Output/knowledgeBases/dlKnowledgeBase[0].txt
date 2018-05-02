@@ -1,58 +1,103 @@
-Individuals:	a, b, c, d, e, f, g, h, i, j, k, l, m
-Class Names:	A, B, C, D, E, F, G, H, I, J, K, L, TOP, BOTTOM
-Role Names: 	A, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
+Individuals:	a, b, c, d, e
+Class Names:	A, B, C, D, TOP, BOTTOM
+Role Names: 	N, O, P, Q, R
 
 K = ( ABox, TBox )
 
 ABox = {
 
-	      i:	J
-	    c,g:	N
-	      i:	H
-	      l:	--K
-	    b,f:	--P
-	      f:	--Exs U.K
-	      c:	--All U.A
-	    f,k:	P
-	    m,e:	--P
-	      c:	All U.--C ^ --All Q.--J
-	    b,e:	--S
-	      e:	F
-	      g:	K
-	      b:	G
-	      b:	--All X.K ^ --All Y.--G
+	      c:	BOTTOM
+	      a:	All Q.--D
+	      c:	All N.--B
+	    e,c:	O
+	      a:	All O.A
+	      e:	Exs N.D ^ --All Q.D
+	      b:	--All N.--C
+	      c:	C
+	      b:	A
+	      c:	--B
+	      a:	D
+	    d,d:	O
+	    b,b:	R
+	    a,b:	--O
+	      c:	--All O.--D
+	      e:	--B ^ All P.D
+	      e:	--Exs R.TOP
+	      d:	All O.A
+	      e:	All Q.C
+	      d:	--B
+	      e:	All R.--All P.--A
+	      a:	All Q.BOTTOM
+	    e,c:	--R
+	      e:	--C
+	      c:	--A
+	      b:	A
+	      c:	All P.BOTTOM
+	      c:	--D
+	      b:	B ^ --All Q.A
+	      d:	--Exs O.BOTTOM ^ Exs P.B
 
 
 TBox = {
 
-	F = ( H ^ ( G ^ H ) )
+	B = A
 
-	B c Exs P.All Q.G
+	TOP = ( All O.C v Exs Q.( --D v B ) )
 
-	H = --All U.--J
+	TOP = ( --B ^ --Exs Q.A )
 
-	K c ( Exs T.--All W.H ^ Exs V.--B )
+	C = B
 
-	J = --All V.--I
+	B = A
 
-	H c Exs P.J
+	D = ( C ^ ( TOP v A ) )
 
-	G = Exs R.I
+	D c --Exs O.A
 
-	J = --Exs V.--A
+	C = All O.Exs P.D
 
-	C c ( --B ^ --I )
+	TOP c All O.C
 
-	C = Exs T.( B v H )
+	C = --Exs P.A
 
-	K = ( Exs O.( --C v L ) ^ All N.All Z.D )
+	D c ( --B ^ --B )
 
-	TOP c --K
+	B = All P.--Exs R.D
 
-	F = --J
+	B c Exs O.--A
 
-	B = --G
+	D c ( C v --B )
 
-	L c ( --G v --K )
+	C = ( Exs O.All R.--B ^ Exs P.--A )
+
+	TOP = Exs Q.B
+
+	TOP c All P.B
+
+	C c ( All N.A v --A )
+
+	D = --All P.--C
+
+	C c ( All O.( BOTTOM v A ) ^ Exs Q.--B )
+
+	C = ( Exs P.--B ^ All P.B )
+
+	D = C
+
+	C c ( --A ^ D )
+
+	D = ( --All Q.C ^ BOTTOM )
+
+	B = --A
+
+	B c BOTTOM
+
+	B = ( All Q.BOTTOM ^ --A )
+
+	D c ( Exs R.BOTTOM ^ --B )
+
+	B = BOTTOM
+
+	TOP = --Exs R.--D
 
  }

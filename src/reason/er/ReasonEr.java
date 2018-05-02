@@ -29,11 +29,11 @@ public class ReasonEr {
 	/**
 	 * Size of each ABox to make.
 	 */
-	public static final int ABOXSIZE = 15;
+	public static final int ABOXSIZE = 30;
 	/**
 	 * Size of each TBox to make.
 	 */
-	public static final int TBOXSIZE = 15;
+	public static final int TBOXSIZE = 30;
 	/**
 	 * Maximum quantification depth.
 	 */
@@ -49,11 +49,11 @@ public class ReasonEr {
 	/**
 	 * int for Predicate name restriction.
 	 */
-	public final static int universe =  Predicate.uppers.length / 2;
+	public final static int universe =  5;//Predicate.uppers.length / 2;
 	/**
 	 * int for variable use restriction.
 	 */
-	public final static int individuals = Term.lowers.length / 2;
+	public final static int individuals = 5;//Term.lowers.length / 2;
 	
 	/**
 	 * Main method for program.

@@ -1,67 +1,122 @@
-Individuals:	a, b, c, d, e, f, g, h, i, j, k, l, m
-Class Names:	A, B, C, D, E, F, G, H, I, J, K, L, TOP, BOTTOM
-Role Names: 	A, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
+Individuals:	a, b, c, d, e
+Class Names:	A, B, C, D, TOP, BOTTOM
+Role Names: 	N, O, P, Q, R
 
 K = ( ABox, TBox )
 
 ABox = {
 
-	      i:	J
-	    c,g:	N
-	      i:	H
-	      l:	--K
-	    b,f:	--P
-	      f:	All U.--K
-	      c:	Exs U.--A
-	    f,k:	P
-	    m,e:	--P
-	      c:	All U.--C ^ Exs Q.J
-	    b,e:	--S
-	      e:	F
-	      g:	K
-	      b:	G
-	      b:	Exs X.--K ^ Exs Y.G
+	      c:	BOTTOM
+	      a:	All Q.--D
+	      c:	All N.--B
+	    e,c:	O
+	      a:	All O.A
+	      e:	Exs N.D ^ Exs Q.--D
+	      b:	Exs N.C
+	      c:	C
+	      b:	A
+	      c:	--B
+	      a:	D
+	    d,d:	O
+	    b,b:	R
+	    a,b:	--O
+	      c:	Exs O.D
+	      e:	--B ^ All P.D
+	      e:	All R.BOTTOM
+	      d:	All O.A
+	      e:	All Q.C
+	      d:	--B
+	      e:	All R.Exs P.A
+	      a:	All Q.BOTTOM
+	    e,c:	--R
+	      e:	--C
+	      c:	--A
+	      b:	A
+	      c:	All P.BOTTOM
+	      c:	--D
+	      b:	B ^ Exs Q.--A
+	      d:	All O.TOP ^ Exs P.B
 
 
 TBox = {
 
-	--F v ( H ^ ( G ^ H ) )
-	( --H v ( --G v --H ) ) v F
+	--B v A
+	--A v B
 
-	--B v Exs P.All Q.G
+	BOTTOM v ( All O.C v Exs Q.( --D v B ) )
+	( Exs O.--C ^ All Q.( D ^ --B ) ) v TOP
 
-	--H v Exs U.J
-	All U.--J v H
+	BOTTOM v ( --B ^ All Q.--A )
+	( B v Exs Q.A ) v TOP
 
-	--K v ( Exs T.Exs W.--H ^ Exs V.--B )
+	--C v B
+	--B v C
 
-	--J v Exs V.I
-	All V.--I v J
+	--B v A
+	--A v B
 
-	--H v Exs P.J
+	--D v ( C ^ ( TOP v A ) )
+	( --C v ( BOTTOM ^ --A ) ) v D
 
-	--G v Exs R.I
-	All R.--I v G
+	--D v All O.--A
 
-	--J v All V.A
-	Exs V.--A v J
+	--C v All O.Exs P.D
+	Exs O.All P.--D v C
 
-	--C v ( --B ^ --I )
+	BOTTOM v All O.C
 
-	--C v Exs T.( B v H )
-	All T.( --B ^ --H ) v C
+	--C v All P.--A
+	Exs P.A v C
 
-	--K v ( Exs O.( --C v L ) ^ All N.All Z.D )
-	( All O.( C ^ --L ) v Exs N.Exs Z.--D ) v K
+	--D v ( --B ^ --B )
 
-	BOTTOM v --K
+	--B v All P.All R.--D
+	Exs P.Exs R.D v B
 
-	--F v --J
-	J v F
+	--B v Exs O.--A
 
-	--B v --G
-	G v B
+	--D v ( C v --B )
 
-	--L v ( --G v --K )
+	--C v ( Exs O.All R.--B ^ Exs P.--A )
+	( All O.Exs R.B v All P.A ) v C
+
+	BOTTOM v Exs Q.B
+	All Q.--B v TOP
+
+	BOTTOM v All P.B
+
+	--C v ( All N.A v --A )
+
+	--D v Exs P.C
+	All P.--C v D
+
+	--C v ( All O.( BOTTOM v A ) ^ Exs Q.--B )
+
+	--C v ( Exs P.--B ^ All P.B )
+	( All P.B v Exs P.--B ) v C
+
+	--D v C
+	--C v D
+
+	--C v ( --A ^ D )
+
+	--D v ( Exs Q.--C ^ BOTTOM )
+	( All Q.C v TOP ) v D
+
+	--B v --A
+	A v B
+
+	--B v BOTTOM
+
+	--B v ( All Q.BOTTOM ^ --A )
+	( Exs Q.TOP v A ) v B
+
+	--D v ( Exs R.BOTTOM ^ --B )
+
+	--B v BOTTOM
+	TOP v B
+
+	BOTTOM v All R.D
+	Exs R.--D v TOP
 
  }

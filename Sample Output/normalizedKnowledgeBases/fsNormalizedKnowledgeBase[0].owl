@@ -7,290 +7,411 @@ Declaration( NamedIndividual( :b ) )
 Declaration( NamedIndividual( :c ) )
 Declaration( NamedIndividual( :d ) )
 Declaration( NamedIndividual( :e ) )
-Declaration( NamedIndividual( :f ) )
-Declaration( NamedIndividual( :g ) )
-Declaration( NamedIndividual( :h ) )
-Declaration( NamedIndividual( :i ) )
-Declaration( NamedIndividual( :j ) )
-Declaration( NamedIndividual( :k ) )
-Declaration( NamedIndividual( :l ) )
-Declaration( NamedIndividual( :m ) )
 Declaration( Class( :A ) )
 Declaration( Class( :B ) )
 Declaration( Class( :C ) )
 Declaration( Class( :D ) )
-Declaration( Class( :E ) )
-Declaration( Class( :F ) )
-Declaration( Class( :G ) )
-Declaration( Class( :H ) )
-Declaration( Class( :I ) )
-Declaration( Class( :J ) )
-Declaration( Class( :K ) )
-Declaration( Class( :L ) )
-Declaration( ObjectProperty( :B ) )
-Declaration( ObjectProperty( :A ) )
 Declaration( ObjectProperty( :N ) )
 Declaration( ObjectProperty( :O ) )
 Declaration( ObjectProperty( :P ) )
 Declaration( ObjectProperty( :Q ) )
 Declaration( ObjectProperty( :R ) )
-Declaration( ObjectProperty( :S ) )
-Declaration( ObjectProperty( :T ) )
-Declaration( ObjectProperty( :U ) )
-Declaration( ObjectProperty( :V ) )
-Declaration( ObjectProperty( :W ) )
-Declaration( ObjectProperty( :X ) )
-Declaration( ObjectProperty( :Y ) )
-Declaration( ObjectProperty( :Z ) )
 
 ClassAssertion( 
-	:J
-	:i
- )
-ObjectPropertyAssertion( 
-	:N
+	owl:Nothing
 	:c
-	:g
- )
-ClassAssertion( 
-	:H
-	:i
- )
-ClassAssertion( 
-	ObjectComplementOf( :K )
-	:l
- )
-NegativeObjectPropertyAssertion( 
-	:P
-	:b
-	:f
  )
 ClassAssertion( 
 	ObjectAllValuesFrom( 
-		:U 
-		ObjectComplementOf( :K ) )
-	:f
+		:Q 
+		ObjectComplementOf( :D ) )
+	:a
  )
 ClassAssertion( 
-	ObjectSomeValuesFrom( 
-		:U 
-		ObjectComplementOf( :A ) )
+	ObjectAllValuesFrom( 
+		:N 
+		ObjectComplementOf( :B ) )
 	:c
  )
 ObjectPropertyAssertion( 
-	:P
-	:f
-	:k
+	:O
+	:e
+	:c
+ )
+ClassAssertion( 
+	ObjectAllValuesFrom( 
+		:O 
+		:A )
+	:a
+ )
+ClassAssertion( 
+	ObjectIntersectionOf( 
+		ObjectSomeValuesFrom( 
+			:N 
+			:D )
+		ObjectSomeValuesFrom( 
+			:Q 
+			ObjectComplementOf( :D ) ) )
+	:e
+ )
+ClassAssertion( 
+	ObjectSomeValuesFrom( 
+		:N 
+		:C )
+	:b
+ )
+ClassAssertion( 
+	:C
+	:c
+ )
+ClassAssertion( 
+	:A
+	:b
+ )
+ClassAssertion( 
+	ObjectComplementOf( :B )
+	:c
+ )
+ClassAssertion( 
+	:D
+	:a
+ )
+ObjectPropertyAssertion( 
+	:O
+	:d
+	:d
+ )
+ObjectPropertyAssertion( 
+	:R
+	:b
+	:b
  )
 NegativeObjectPropertyAssertion( 
-	:P
-	:m
+	:O
+	:a
+	:b
+ )
+ClassAssertion( 
+	ObjectSomeValuesFrom( 
+		:O 
+		:D )
+	:c
+ )
+ClassAssertion( 
+	ObjectIntersectionOf( 
+		ObjectComplementOf( :B )
+		ObjectAllValuesFrom( 
+			:P 
+			:D ) )
 	:e
+ )
+ClassAssertion( 
+	ObjectAllValuesFrom( 
+		:R 
+		owl:Nothing )
+	:e
+ )
+ClassAssertion( 
+	ObjectAllValuesFrom( 
+		:O 
+		:A )
+	:d
+ )
+ClassAssertion( 
+	ObjectAllValuesFrom( 
+		:Q 
+		:C )
+	:e
+ )
+ClassAssertion( 
+	ObjectComplementOf( :B )
+	:d
+ )
+ClassAssertion( 
+	ObjectAllValuesFrom(
+		:R
+		ObjectSomeValuesFrom( 
+			:P 
+			:A )
+	 )
+	:e
+ )
+ClassAssertion( 
+	ObjectAllValuesFrom( 
+		:Q 
+		owl:Nothing )
+	:a
+ )
+NegativeObjectPropertyAssertion( 
+	:R
+	:e
+	:c
+ )
+ClassAssertion( 
+	ObjectComplementOf( :C )
+	:e
+ )
+ClassAssertion( 
+	ObjectComplementOf( :A )
+	:c
+ )
+ClassAssertion( 
+	:A
+	:b
+ )
+ClassAssertion( 
+	ObjectAllValuesFrom( 
+		:P 
+		owl:Nothing )
+	:c
+ )
+ClassAssertion( 
+	ObjectComplementOf( :D )
+	:c
+ )
+ClassAssertion( 
+	ObjectIntersectionOf( 
+		:B
+		ObjectSomeValuesFrom( 
+			:Q 
+			ObjectComplementOf( :A ) ) )
+	:b
  )
 ClassAssertion( 
 	ObjectIntersectionOf( 
 		ObjectAllValuesFrom( 
-			:U 
-			ObjectComplementOf( :C ) )
+			:O 
+			owl:Thing )
 		ObjectSomeValuesFrom( 
-			:Q 
-			:J ) )
-	:c
- )
-NegativeObjectPropertyAssertion( 
-	:S
-	:b
-	:e
- )
-ClassAssertion( 
-	:F
-	:e
- )
-ClassAssertion( 
-	:K
-	:g
- )
-ClassAssertion( 
-	:G
-	:b
- )
-ClassAssertion( 
-	ObjectIntersectionOf( 
-		ObjectSomeValuesFrom( 
-			:X 
-			ObjectComplementOf( :K ) )
-		ObjectSomeValuesFrom( 
-			:Y 
-			:G ) )
-	:b
+			:P 
+			:B ) )
+	:d
  )
 
 
-SubClassOf( 
-	owl:Thing
-	ObjectUnionOf( 
-		ObjectComplementOf( :F )
-		ObjectIntersectionOf( 
-			:H
-			ObjectIntersectionOf( 
-				:G
-				:H ) ) )
- )
-SubClassOf( 
-	owl:Thing
-	ObjectUnionOf( 
-		ObjectUnionOf( 
-			ObjectComplementOf( :H )
-			ObjectUnionOf( 
-				ObjectComplementOf( :G )
-				ObjectComplementOf( :H ) ) )
-		:F )
- )
 SubClassOf( 
 	owl:Thing
 	ObjectUnionOf( 
 		ObjectComplementOf( :B )
-		ObjectSomeValuesFrom(
-			:P
-			ObjectAllValuesFrom( 
-				:Q 
-				:G )
-		 ) )
+		:A )
  )
 SubClassOf( 
 	owl:Thing
 	ObjectUnionOf( 
-		ObjectComplementOf( :H )
-		ObjectSomeValuesFrom( 
-			:U 
-			:J ) )
+		ObjectComplementOf( :A )
+		:B )
  )
 SubClassOf( 
 	owl:Thing
 	ObjectUnionOf( 
-		ObjectAllValuesFrom( 
-			:U 
-			ObjectComplementOf( :J ) )
-		:H )
- )
-SubClassOf( 
-	owl:Thing
-	ObjectUnionOf( 
-		ObjectComplementOf( :K )
-		ObjectIntersectionOf( 
-			ObjectSomeValuesFrom(
-				:T
-				ObjectSomeValuesFrom( 
-					:W 
-					ObjectComplementOf( :H ) )
+		owl:Nothing
+		ObjectUnionOf( 
+			ObjectAllValuesFrom(
+				:O
+				:C
 			 )
 			ObjectSomeValuesFrom(
-				:V
-				ObjectComplementOf( :B )
+				:Q
+				ObjectUnionOf( 
+					ObjectComplementOf( :D )
+					:B )
 			 ) ) )
  )
 SubClassOf( 
 	owl:Thing
 	ObjectUnionOf( 
-		ObjectComplementOf( :J )
-		ObjectSomeValuesFrom( 
-			:V 
-			:I ) )
+		ObjectIntersectionOf( 
+			ObjectSomeValuesFrom(
+				:O
+				ObjectComplementOf( :C )
+			 )
+			ObjectAllValuesFrom(
+				:Q
+				ObjectIntersectionOf( 
+					:D
+					ObjectComplementOf( :B ) )
+			 ) )
+		owl:Thing )
  )
 SubClassOf( 
 	owl:Thing
 	ObjectUnionOf( 
-		ObjectAllValuesFrom( 
-			:V 
-			ObjectComplementOf( :I ) )
-		:J )
- )
-SubClassOf( 
-	owl:Thing
-	ObjectUnionOf( 
-		ObjectComplementOf( :H )
-		ObjectSomeValuesFrom( 
-			:P 
-			:J ) )
- )
-SubClassOf( 
-	owl:Thing
-	ObjectUnionOf( 
-		ObjectComplementOf( :G )
-		ObjectSomeValuesFrom( 
-			:R 
-			:I ) )
- )
-SubClassOf( 
-	owl:Thing
-	ObjectUnionOf( 
-		ObjectAllValuesFrom( 
-			:R 
-			ObjectComplementOf( :I ) )
-		:G )
- )
-SubClassOf( 
-	owl:Thing
-	ObjectUnionOf( 
-		ObjectComplementOf( :J )
-		ObjectAllValuesFrom( 
-			:V 
-			:A ) )
- )
-SubClassOf( 
-	owl:Thing
-	ObjectUnionOf( 
-		ObjectSomeValuesFrom( 
-			:V 
-			ObjectComplementOf( :A ) )
-		:J )
- )
-SubClassOf( 
-	owl:Thing
-	ObjectUnionOf( 
-		ObjectComplementOf( :C )
+		owl:Nothing
 		ObjectIntersectionOf( 
 			ObjectComplementOf( :B )
-			ObjectComplementOf( :I ) ) )
+			ObjectAllValuesFrom( 
+				:Q 
+				ObjectComplementOf( :A ) ) ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectUnionOf( 
+			:B
+			ObjectSomeValuesFrom( 
+				:Q 
+				:A ) )
+		owl:Thing )
  )
 SubClassOf( 
 	owl:Thing
 	ObjectUnionOf( 
 		ObjectComplementOf( :C )
-		ObjectSomeValuesFrom(
-			:T
+		:B )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :B )
+		:C )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :B )
+		:A )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :A )
+		:B )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :D )
+		ObjectIntersectionOf( 
+			:C
 			ObjectUnionOf( 
-				:B
-				:H )
+				owl:Thing
+				:A ) ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectUnionOf( 
+			ObjectComplementOf( :C )
+			ObjectIntersectionOf( 
+				owl:Nothing
+				ObjectComplementOf( :A ) ) )
+		:D )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :D )
+		ObjectAllValuesFrom( 
+			:O 
+			ObjectComplementOf( :A ) ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :C )
+		ObjectAllValuesFrom(
+			:O
+			ObjectSomeValuesFrom( 
+				:P 
+				:D )
 		 ) )
  )
 SubClassOf( 
 	owl:Thing
 	ObjectUnionOf( 
-		ObjectAllValuesFrom(
-			:T
-			ObjectIntersectionOf( 
-				ObjectComplementOf( :B )
-				ObjectComplementOf( :H ) )
+		ObjectSomeValuesFrom(
+			:O
+			ObjectAllValuesFrom( 
+				:P 
+				ObjectComplementOf( :D ) )
 		 )
 		:C )
  )
 SubClassOf( 
 	owl:Thing
 	ObjectUnionOf( 
-		ObjectComplementOf( :K )
+		owl:Nothing
+		ObjectAllValuesFrom(
+			:O
+			:C
+		 ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :C )
+		ObjectAllValuesFrom( 
+			:P 
+			ObjectComplementOf( :A ) ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectSomeValuesFrom( 
+			:P 
+			:A )
+		:C )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :D )
+		ObjectIntersectionOf( 
+			ObjectComplementOf( :B )
+			ObjectComplementOf( :B ) ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :B )
+		ObjectAllValuesFrom(
+			:P
+			ObjectAllValuesFrom( 
+				:R 
+				ObjectComplementOf( :D ) )
+		 ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectSomeValuesFrom(
+			:P
+			ObjectSomeValuesFrom( 
+				:R 
+				:D )
+		 )
+		:B )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :B )
+		ObjectSomeValuesFrom( 
+			:O 
+			ObjectComplementOf( :A ) ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :D )
+		ObjectUnionOf( 
+			:C
+			ObjectComplementOf( :B ) ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :C )
 		ObjectIntersectionOf( 
 			ObjectSomeValuesFrom(
 				:O
-				ObjectUnionOf( 
-					ObjectComplementOf( :C )
-					:L )
-			 )
-			ObjectAllValuesFrom(
-				:N
 				ObjectAllValuesFrom( 
-					:Z 
-					:D )
+					:R 
+					ObjectComplementOf( :B ) )
+			 )
+			ObjectSomeValuesFrom(
+				:P
+				ObjectComplementOf( :A )
 			 ) ) )
  )
 SubClassOf( 
@@ -299,55 +420,223 @@ SubClassOf(
 		ObjectUnionOf( 
 			ObjectAllValuesFrom(
 				:O
-				ObjectIntersectionOf( 
-					:C
-					ObjectComplementOf( :L ) )
-			 )
-			ObjectSomeValuesFrom(
-				:N
 				ObjectSomeValuesFrom( 
-					:Z 
-					ObjectComplementOf( :D ) )
+					:R 
+					:B )
+			 )
+			ObjectAllValuesFrom(
+				:P
+				:A
 			 ) )
-		:K )
+		:C )
  )
 SubClassOf( 
 	owl:Thing
 	ObjectUnionOf( 
 		owl:Nothing
-		ObjectComplementOf( :K ) )
+		ObjectSomeValuesFrom( 
+			:Q 
+			:B ) )
  )
 SubClassOf( 
 	owl:Thing
 	ObjectUnionOf( 
-		ObjectComplementOf( :F )
-		ObjectComplementOf( :J ) )
+		ObjectAllValuesFrom( 
+			:Q 
+			ObjectComplementOf( :B ) )
+		owl:Thing )
  )
 SubClassOf( 
 	owl:Thing
 	ObjectUnionOf( 
-		:J
-		:F )
+		owl:Nothing
+		ObjectAllValuesFrom( 
+			:P 
+			:B ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :C )
+		ObjectUnionOf( 
+			ObjectAllValuesFrom( 
+				:N 
+				:A )
+			ObjectComplementOf( :A ) ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :D )
+		ObjectSomeValuesFrom( 
+			:P 
+			:C ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectAllValuesFrom( 
+			:P 
+			ObjectComplementOf( :C ) )
+		:D )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :C )
+		ObjectIntersectionOf( 
+			ObjectAllValuesFrom(
+				:O
+				ObjectUnionOf( 
+					owl:Nothing
+					:A )
+			 )
+			ObjectSomeValuesFrom(
+				:Q
+				ObjectComplementOf( :B )
+			 ) ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :C )
+		ObjectIntersectionOf( 
+			ObjectSomeValuesFrom( 
+				:P 
+				ObjectComplementOf( :B ) )
+			ObjectAllValuesFrom(
+				:P
+				:B
+			 ) ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectUnionOf( 
+			ObjectAllValuesFrom( 
+				:P 
+				:B )
+			ObjectSomeValuesFrom(
+				:P
+				ObjectComplementOf( :B )
+			 ) )
+		:C )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :D )
+		:C )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :C )
+		:D )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :C )
+		ObjectIntersectionOf( 
+			ObjectComplementOf( :A )
+			:D ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :D )
+		ObjectIntersectionOf( 
+			ObjectSomeValuesFrom( 
+				:Q 
+				ObjectComplementOf( :C ) )
+			owl:Nothing ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectUnionOf( 
+			ObjectAllValuesFrom( 
+				:Q 
+				:C )
+			owl:Thing )
+		:D )
  )
 SubClassOf( 
 	owl:Thing
 	ObjectUnionOf( 
 		ObjectComplementOf( :B )
-		ObjectComplementOf( :G ) )
+		ObjectComplementOf( :A ) )
  )
 SubClassOf( 
 	owl:Thing
 	ObjectUnionOf( 
-		:G
+		:A
 		:B )
  )
 SubClassOf( 
 	owl:Thing
 	ObjectUnionOf( 
-		ObjectComplementOf( :L )
+		ObjectComplementOf( :B )
+		owl:Nothing )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :B )
+		ObjectIntersectionOf( 
+			ObjectAllValuesFrom( 
+				:Q 
+				owl:Nothing )
+			ObjectComplementOf( :A ) ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
 		ObjectUnionOf( 
-			ObjectComplementOf( :G )
-			ObjectComplementOf( :K ) ) )
+			ObjectSomeValuesFrom( 
+				:Q 
+				owl:Thing )
+			:A )
+		:B )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :D )
+		ObjectIntersectionOf( 
+			ObjectSomeValuesFrom( 
+				:R 
+				owl:Nothing )
+			ObjectComplementOf( :B ) ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :B )
+		owl:Nothing )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		owl:Thing
+		:B )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		owl:Nothing
+		ObjectAllValuesFrom( 
+			:R 
+			:D ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectSomeValuesFrom( 
+			:R 
+			ObjectComplementOf( :D ) )
+		owl:Thing )
  )
 
  )

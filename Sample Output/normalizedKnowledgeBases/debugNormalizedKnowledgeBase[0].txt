@@ -1,112 +1,212 @@
-Individuals:	a, b, c, d, e, f, g, h, i, j, k, l, m
-Class Names:	A, B, C, D, E, F, G, H, I, J, K, L, TOP, BOTTOM
-Role Names: 	A, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
+Individuals:	a, b, c, d, e
+Class Names:	A, B, C, D, TOP, BOTTOM
+Role Names: 	N, O, P, Q, R
 
 K = ( ABox, TBox )
 
 ABox = {
 
-	Expression :J(i)	Size: 1	Scope: i,
-	Normal: J(i)	Size: 1	Scope: i,
+	Expression :BOTTOM	Size: 2	Scope: c,
+	Normal: BOTTOM	Size: 2	Scope: c,
 
-	Expression :N(c,g)	Size: 1	Scope: c,
-	Normal: N(c,g)	Size: 1	Scope: c,
+	Expression :FORALL Q(a,o).--D(o)	Size: 3	Scope: a,
+	Normal: FORALL Q(a,o).--D(o)	Size: 3	Scope: a,
 
-	Expression :H(i)	Size: 1	Scope: i,
-	Normal: H(i)	Size: 1	Scope: i,
+	Expression :FORALL N(c,o).--B(o)	Size: 3	Scope: c,
+	Normal: FORALL N(c,o).--B(o)	Size: 3	Scope: c,
 
-	Expression :--K(l)	Size: 2	Scope: l,
-	Normal: --K(l)	Size: 2	Scope: l,
+	Expression :O(e,c)	Size: 1	Scope: e,
+	Normal: O(e,c)	Size: 1	Scope: e,
 
-	Expression :--P(b,f)	Size: 2	Scope: b,
-	Normal: --P(b,f)	Size: 2	Scope: b,
+	Expression :FORALL O(a,o).A(o)	Size: 2	Scope: a,
+	Normal: FORALL O(a,o).A(o)	Size: 2	Scope: a,
 
-	Expression :--EXISTS U(f,o).K(o)	Size: 3	Scope: f,
-	Normal: FORALL U(f,o).--K(o)	Size: 3	Scope: f,
+	Expression :( EXISTS N(e,o).D(o) ^ --FORALL Q(e,o).D(o) )	Size: 6	Scope: e,
+	Normal: ( EXISTS N(e,o).D(o) ^ EXISTS Q(e,o).--D(o) )	Size: 6	Scope: e,
 
-	Expression :--FORALL U(c,o).A(o)	Size: 3	Scope: c,
-	Normal: EXISTS U(c,o).--A(o)	Size: 3	Scope: c,
+	Expression :--FORALL N(b,o).--C(o)	Size: 4	Scope: b,
+	Normal: EXISTS N(b,o).C(o)	Size: 2	Scope: b,
 
-	Expression :P(f,k)	Size: 1	Scope: f,
-	Normal: P(f,k)	Size: 1	Scope: f,
+	Expression :C(c)	Size: 1	Scope: c,
+	Normal: C(c)	Size: 1	Scope: c,
 
-	Expression :--P(m,e)	Size: 2	Scope: m,
-	Normal: --P(m,e)	Size: 2	Scope: m,
+	Expression :A(b)	Size: 1	Scope: b,
+	Normal: A(b)	Size: 1	Scope: b,
 
-	Expression :( FORALL U(c,o).--C(o) ^ --FORALL Q(c,o).--J(o) )	Size: 8	Scope: c,
-	Normal: ( FORALL U(c,o).--C(o) ^ EXISTS Q(c,o).J(o) )	Size: 6	Scope: c,
+	Expression :--B(c)	Size: 2	Scope: c,
+	Normal: --B(c)	Size: 2	Scope: c,
 
-	Expression :--S(b,e)	Size: 2	Scope: b,
-	Normal: --S(b,e)	Size: 2	Scope: b,
+	Expression :D(a)	Size: 1	Scope: a,
+	Normal: D(a)	Size: 1	Scope: a,
 
-	Expression :F(e)	Size: 1	Scope: e,
-	Normal: F(e)	Size: 1	Scope: e,
+	Expression :O(d,d)	Size: 1	Scope: d,
+	Normal: O(d,d)	Size: 1	Scope: d,
 
-	Expression :K(g)	Size: 1	Scope: g,
-	Normal: K(g)	Size: 1	Scope: g,
+	Expression :R(b,b)	Size: 1	Scope: b,
+	Normal: R(b,b)	Size: 1	Scope: b,
 
-	Expression :G(b)	Size: 1	Scope: b,
-	Normal: G(b)	Size: 1	Scope: b,
+	Expression :--O(a,b)	Size: 2	Scope: a,
+	Normal: --O(a,b)	Size: 2	Scope: a,
 
-	Expression :( --FORALL X(b,o).K(o) ^ --FORALL Y(b,o).--G(o) )	Size: 8	Scope: b,
-	Normal: ( EXISTS X(b,o).--K(o) ^ EXISTS Y(b,o).G(o) )	Size: 6	Scope: b,
+	Expression :--FORALL O(c,o).--D(o)	Size: 4	Scope: c,
+	Normal: EXISTS O(c,o).D(o)	Size: 2	Scope: c,
+
+	Expression :( --B(e) ^ FORALL P(e,o).D(o) )	Size: 5	Scope: e,
+	Normal: ( --B(e) ^ FORALL P(e,o).D(o) )	Size: 5	Scope: e,
+
+	Expression :--EXISTS R(e,o).TOP	Size: 3	Scope: e,
+	Normal: FORALL R(e,o).BOTTOM	Size: 3	Scope: e,
+
+	Expression :FORALL O(d,o).A(o)	Size: 2	Scope: d,
+	Normal: FORALL O(d,o).A(o)	Size: 2	Scope: d,
+
+	Expression :FORALL Q(e,o).C(o)	Size: 2	Scope: e,
+	Normal: FORALL Q(e,o).C(o)	Size: 2	Scope: e,
+
+	Expression :--B(d)	Size: 2	Scope: d,
+	Normal: --B(d)	Size: 2	Scope: d,
+
+	Expression :FORALL R(e,o).--FORALL P(o,n).--A(n)	Size: 5	Scope: e,
+	Normal: FORALL R(e,o).EXISTS P(o,n).A(n)	Size: 3	Scope: e,
+
+	Expression :FORALL Q(a,o).BOTTOM	Size: 3	Scope: a,
+	Normal: FORALL Q(a,o).BOTTOM	Size: 3	Scope: a,
+
+	Expression :--R(e,c)	Size: 2	Scope: e,
+	Normal: --R(e,c)	Size: 2	Scope: e,
+
+	Expression :--C(e)	Size: 2	Scope: e,
+	Normal: --C(e)	Size: 2	Scope: e,
+
+	Expression :--A(c)	Size: 2	Scope: c,
+	Normal: --A(c)	Size: 2	Scope: c,
+
+	Expression :A(b)	Size: 1	Scope: b,
+	Normal: A(b)	Size: 1	Scope: b,
+
+	Expression :FORALL P(c,o).BOTTOM	Size: 3	Scope: c,
+	Normal: FORALL P(c,o).BOTTOM	Size: 3	Scope: c,
+
+	Expression :--D(c)	Size: 2	Scope: c,
+	Normal: --D(c)	Size: 2	Scope: c,
+
+	Expression :( B(b) ^ --FORALL Q(b,o).A(o) )	Size: 5	Scope: b,
+	Normal: ( B(b) ^ EXISTS Q(b,o).--A(o) )	Size: 5	Scope: b,
+
+	Expression :( --EXISTS O(d,o).BOTTOM ^ EXISTS P(d,o).B(o) )	Size: 7	Scope: d,
+	Normal: ( FORALL O(d,o).TOP ^ EXISTS P(d,o).B(o) )	Size: 5	Scope: d,
 
  }
 
 TBox = {
 
-	Expression :( F(o) = ( H(o) ^ ( G(o) ^ H(o) ) ) )	Size: 7	Scope: o,
-	Normal: ( --F(o) v ( H(o) ^ ( G(o) ^ H(o) ) ) )	Size: 8	Scope: o,
-	Normal: ( ( --H(o) v ( --G(o) v --H(o) ) ) v F(o) )	Size: 10	Scope: o,
+	Expression :( B(o) = A(o) )	Size: 3	Scope: o,
+	Normal: ( --B(o) v A(o) )	Size: 4	Scope: o,
+	Normal: ( --A(o) v B(o) )	Size: 4	Scope: o,
 
-	Expression :( B(p) c EXISTS P(p,o).FORALL Q(o,n).G(n) )	Size: 5	Scope: p,
-	Normal: ( --B(p) v EXISTS P(p,o).FORALL Q(o,n).G(n) )	Size: 6	Scope: p,
+	Expression :( TOP = ( FORALL O(p,o).C(o) v EXISTS Q(p,o).( --D(o) v B(o) ) ) )	Size: 10	Scope: p,
+	Normal: ( BOTTOM v ( FORALL O(p,o).C(o) v EXISTS Q(p,o).( --D(o) v B(o) ) ) )	Size: 11	Scope: p,
+	Normal: ( ( EXISTS O(p,o).--C(o) ^ FORALL Q(p,o).( D(o) ^ --B(o) ) ) v TOP )	Size: 11	Scope: p,
 
-	Expression :( H(o) = --FORALL U(o,n).--J(n) )	Size: 6	Scope: o,
-	Normal: ( --H(o) v EXISTS U(o,n).J(n) )	Size: 5	Scope: o,
-	Normal: ( FORALL U(o,n).--J(n) v H(o) )	Size: 5	Scope: o,
+	Expression :( TOP = ( --B(o) ^ --EXISTS Q(o,n).A(n) ) )	Size: 8	Scope: o,
+	Normal: ( BOTTOM v ( --B(o) ^ FORALL Q(o,n).--A(n) ) )	Size: 9	Scope: o,
+	Normal: ( ( B(o) v EXISTS Q(o,n).A(n) ) v TOP )	Size: 6	Scope: o,
 
-	Expression :( K(p) c ( EXISTS T(p,o).--FORALL W(o,n).H(n) ^ EXISTS V(p,o).--B(o) ) )	Size: 10	Scope: p,
-	Normal: ( --K(p) v ( EXISTS T(p,o).EXISTS W(o,n).--H(n) ^ EXISTS V(p,o).--B(o) ) )	Size: 11	Scope: p,
+	Expression :( C(o) = B(o) )	Size: 3	Scope: o,
+	Normal: ( --C(o) v B(o) )	Size: 4	Scope: o,
+	Normal: ( --B(o) v C(o) )	Size: 4	Scope: o,
 
-	Expression :( J(o) = --FORALL V(o,n).--I(n) )	Size: 6	Scope: o,
-	Normal: ( --J(o) v EXISTS V(o,n).I(n) )	Size: 5	Scope: o,
-	Normal: ( FORALL V(o,n).--I(n) v J(o) )	Size: 5	Scope: o,
+	Expression :( B(o) = A(o) )	Size: 3	Scope: o,
+	Normal: ( --B(o) v A(o) )	Size: 4	Scope: o,
+	Normal: ( --A(o) v B(o) )	Size: 4	Scope: o,
 
-	Expression :( H(o) c EXISTS P(o,n).J(n) )	Size: 4	Scope: o,
-	Normal: ( --H(o) v EXISTS P(o,n).J(n) )	Size: 5	Scope: o,
+	Expression :( D(o) = ( C(o) ^ ( TOP v A(o) ) ) )	Size: 7	Scope: o,
+	Normal: ( --D(o) v ( C(o) ^ ( TOP v A(o) ) ) )	Size: 8	Scope: o,
+	Normal: ( ( --C(o) v ( BOTTOM ^ --A(o) ) ) v D(o) )	Size: 10	Scope: o,
 
-	Expression :( G(o) = EXISTS R(o,n).I(n) )	Size: 4	Scope: o,
-	Normal: ( --G(o) v EXISTS R(o,n).I(n) )	Size: 5	Scope: o,
-	Normal: ( FORALL R(o,n).--I(n) v G(o) )	Size: 5	Scope: o,
+	Expression :( D(o) c --EXISTS O(o,n).A(n) )	Size: 5	Scope: o,
+	Normal: ( --D(o) v FORALL O(o,n).--A(n) )	Size: 6	Scope: o,
 
-	Expression :( J(o) = --EXISTS V(o,n).--A(n) )	Size: 6	Scope: o,
-	Normal: ( --J(o) v FORALL V(o,n).A(n) )	Size: 5	Scope: o,
-	Normal: ( EXISTS V(o,n).--A(n) v J(o) )	Size: 5	Scope: o,
+	Expression :( C(p) = FORALL O(p,o).EXISTS P(o,n).D(n) )	Size: 5	Scope: p,
+	Normal: ( --C(p) v FORALL O(p,o).EXISTS P(o,n).D(n) )	Size: 6	Scope: p,
+	Normal: ( EXISTS O(p,o).FORALL P(o,n).--D(n) v C(p) )	Size: 6	Scope: p,
 
-	Expression :( C(o) c ( --B(o) ^ --I(o) ) )	Size: 7	Scope: o,
-	Normal: ( --C(o) v ( --B(o) ^ --I(o) ) )	Size: 8	Scope: o,
+	Expression :( TOP c FORALL O(p,o).C(o) )	Size: 4	Scope: p,
+	Normal: ( BOTTOM v FORALL O(p,o).C(o) )	Size: 5	Scope: p,
 
-	Expression :( C(p) = EXISTS T(p,o).( B(o) v H(o) ) )	Size: 6	Scope: p,
-	Normal: ( --C(p) v EXISTS T(p,o).( B(o) v H(o) ) )	Size: 7	Scope: p,
-	Normal: ( FORALL T(p,o).( --B(o) ^ --H(o) ) v C(p) )	Size: 8	Scope: p,
+	Expression :( C(o) = --EXISTS P(o,n).A(n) )	Size: 5	Scope: o,
+	Normal: ( --C(o) v FORALL P(o,n).--A(n) )	Size: 6	Scope: o,
+	Normal: ( EXISTS P(o,n).A(n) v C(o) )	Size: 4	Scope: o,
 
-	Expression :( K(p) = ( EXISTS O(p,o).( --C(o) v L(o) ) ^ FORALL N(p,o).FORALL Z(o,n).D(n) ) )	Size: 11	Scope: p,
-	Normal: ( --K(p) v ( EXISTS O(p,o).( --C(o) v L(o) ) ^ FORALL N(p,o).FORALL Z(o,n).D(n) ) )	Size: 12	Scope: p,
-	Normal: ( ( FORALL O(p,o).( C(o) ^ --L(o) ) v EXISTS N(p,o).EXISTS Z(o,n).--D(n) ) v K(p) )	Size: 12	Scope: p,
+	Expression :( D(o) c ( --B(o) ^ --B(o) ) )	Size: 7	Scope: o,
+	Normal: ( --D(o) v ( --B(o) ^ --B(o) ) )	Size: 8	Scope: o,
 
-	Expression :( TOP c --K(o) )	Size: 4	Scope: o,
-	Normal: ( BOTTOM v --K(o) )	Size: 5	Scope: o,
+	Expression :( B(p) = FORALL P(p,o).--EXISTS R(o,n).D(n) )	Size: 6	Scope: p,
+	Normal: ( --B(p) v FORALL P(p,o).FORALL R(o,n).--D(n) )	Size: 7	Scope: p,
+	Normal: ( EXISTS P(p,o).EXISTS R(o,n).D(n) v B(p) )	Size: 5	Scope: p,
 
-	Expression :( F(o) = --J(o) )	Size: 4	Scope: o,
-	Normal: ( --F(o) v --J(o) )	Size: 5	Scope: o,
-	Normal: ( J(o) v F(o) )	Size: 3	Scope: o,
+	Expression :( B(o) c EXISTS O(o,n).--A(n) )	Size: 5	Scope: o,
+	Normal: ( --B(o) v EXISTS O(o,n).--A(n) )	Size: 6	Scope: o,
 
-	Expression :( B(o) = --G(o) )	Size: 4	Scope: o,
-	Normal: ( --B(o) v --G(o) )	Size: 5	Scope: o,
-	Normal: ( G(o) v B(o) )	Size: 3	Scope: o,
+	Expression :( D(o) c ( C(o) v --B(o) ) )	Size: 6	Scope: o,
+	Normal: ( --D(o) v ( C(o) v --B(o) ) )	Size: 7	Scope: o,
 
-	Expression :( L(o) c ( --G(o) v --K(o) ) )	Size: 7	Scope: o,
-	Normal: ( --L(o) v ( --G(o) v --K(o) ) )	Size: 8	Scope: o,
+	Expression :( C(p) = ( EXISTS O(p,o).FORALL R(o,n).--B(n) ^ EXISTS P(p,o).--A(o) ) )	Size: 10	Scope: p,
+	Normal: ( --C(p) v ( EXISTS O(p,o).FORALL R(o,n).--B(n) ^ EXISTS P(p,o).--A(o) ) )	Size: 11	Scope: p,
+	Normal: ( ( FORALL O(p,o).EXISTS R(o,n).B(n) v FORALL P(p,o).A(o) ) v C(p) )	Size: 8	Scope: p,
+
+	Expression :( TOP = EXISTS Q(o,n).B(n) )	Size: 4	Scope: o,
+	Normal: ( BOTTOM v EXISTS Q(o,n).B(n) )	Size: 5	Scope: o,
+	Normal: ( FORALL Q(o,n).--B(n) v TOP )	Size: 5	Scope: o,
+
+	Expression :( TOP c FORALL P(o,n).B(n) )	Size: 4	Scope: o,
+	Normal: ( BOTTOM v FORALL P(o,n).B(n) )	Size: 5	Scope: o,
+
+	Expression :( C(o) c ( FORALL N(o,n).A(n) v --A(o) ) )	Size: 7	Scope: o,
+	Normal: ( --C(o) v ( FORALL N(o,n).A(n) v --A(o) ) )	Size: 8	Scope: o,
+
+	Expression :( D(o) = --FORALL P(o,n).--C(n) )	Size: 6	Scope: o,
+	Normal: ( --D(o) v EXISTS P(o,n).C(n) )	Size: 5	Scope: o,
+	Normal: ( FORALL P(o,n).--C(n) v D(o) )	Size: 5	Scope: o,
+
+	Expression :( C(p) c ( FORALL O(p,o).( BOTTOM v A(o) ) ^ EXISTS Q(p,o).--B(o) ) )	Size: 11	Scope: p,
+	Normal: ( --C(p) v ( FORALL O(p,o).( BOTTOM v A(o) ) ^ EXISTS Q(p,o).--B(o) ) )	Size: 12	Scope: p,
+
+	Expression :( C(p) = ( EXISTS P(p,o).--B(o) ^ FORALL P(p,o).B(o) ) )	Size: 8	Scope: p,
+	Normal: ( --C(p) v ( EXISTS P(p,o).--B(o) ^ FORALL P(p,o).B(o) ) )	Size: 9	Scope: p,
+	Normal: ( ( FORALL P(p,o).B(o) v EXISTS P(p,o).--B(o) ) v C(p) )	Size: 8	Scope: p,
+
+	Expression :( D(o) = C(o) )	Size: 3	Scope: o,
+	Normal: ( --D(o) v C(o) )	Size: 4	Scope: o,
+	Normal: ( --C(o) v D(o) )	Size: 4	Scope: o,
+
+	Expression :( C(o) c ( --A(o) ^ D(o) ) )	Size: 6	Scope: o,
+	Normal: ( --C(o) v ( --A(o) ^ D(o) ) )	Size: 7	Scope: o,
+
+	Expression :( D(o) = ( --FORALL Q(o,n).C(n) ^ BOTTOM ) )	Size: 8	Scope: o,
+	Normal: ( --D(o) v ( EXISTS Q(o,n).--C(n) ^ BOTTOM ) )	Size: 9	Scope: o,
+	Normal: ( ( FORALL Q(o,n).C(n) v TOP ) v D(o) )	Size: 6	Scope: o,
+
+	Expression :( B(o) = --A(o) )	Size: 4	Scope: o,
+	Normal: ( --B(o) v --A(o) )	Size: 5	Scope: o,
+	Normal: ( A(o) v B(o) )	Size: 3	Scope: o,
+
+	Expression :( B(o) c BOTTOM )	Size: 4	Scope: o,
+	Normal: ( --B(o) v BOTTOM )	Size: 5	Scope: o,
+
+	Expression :( B(o) = ( FORALL Q(o,n).BOTTOM ^ --A(o) ) )	Size: 8	Scope: o,
+	Normal: ( --B(o) v ( FORALL Q(o,n).BOTTOM ^ --A(o) ) )	Size: 9	Scope: o,
+	Normal: ( ( EXISTS Q(o,n).TOP v A(o) ) v B(o) )	Size: 6	Scope: o,
+
+	Expression :( D(o) c ( EXISTS R(o,n).BOTTOM ^ --B(o) ) )	Size: 8	Scope: o,
+	Normal: ( --D(o) v ( EXISTS R(o,n).BOTTOM ^ --B(o) ) )	Size: 9	Scope: o,
+
+	Expression :( B(o) = BOTTOM )	Size: 4	Scope: o,
+	Normal: ( --B(o) v BOTTOM )	Size: 5	Scope: o,
+	Normal: ( TOP v B(o) )	Size: 3	Scope: o,
+
+	Expression :( TOP = --EXISTS R(o,n).--D(n) )	Size: 6	Scope: o,
+	Normal: ( BOTTOM v FORALL R(o,n).D(n) )	Size: 5	Scope: o,
+	Normal: ( EXISTS R(o,n).--D(n) v TOP )	Size: 5	Scope: o,
 
  }
