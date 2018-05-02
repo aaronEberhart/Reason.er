@@ -3,6 +3,7 @@ package reason.er.objects;
 
 import java.util.ArrayList;
 
+import reason.er.ReasonEr;
 import reason.er.compositeObjects.*;
 
 /**
@@ -72,20 +73,20 @@ public class Concept<T,U> extends Predicate<T,U> {
 	@Override
 	public String toString() {
 		String s = negated ? "--" : "";
-		return s + makeLabel() + "(" + this.getTerm().toString() + ")";
+		return ((long)label == ReasonEr.universe - 1 ? (negated?"BOTTOM":"TOP") : s + makeLabel() + "(" + this.getTerm().toString() + ")");
 	}
 	
 	@Override
 	public String toDLString() {
 		String s = negated ? "--" : "";
-		return s + makeLabel();
+		return ((long)label == ReasonEr.universe - 1 ? (negated?"BOTTOM":"TOP") : s + makeLabel());
 	}
 
 	@Override
 	public String toFSString(int tab) {
 		String indent = new String(new char[tab]).replace("\0", "\t");
 		//System.out.println(indent+"*");
-		return indent + (negated ? "ObjectComplementOf( :" + makeLabel() + " )": ":" + makeLabel() );
+		return indent + ((long)label == ReasonEr.universe - 1 ? (negated?"owl:Nothing":"owl:Thing") :(negated ? "ObjectComplementOf( :" + makeLabel() + " )": ":" + makeLabel() ));
 	}
 	
 	@Override

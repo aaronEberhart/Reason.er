@@ -45,11 +45,11 @@ public class ReasonEr {
 	/**
 	 * Maximum size of all Expressions.
 	 */
-	public final static  int maxSize = 50;
+	public final static  int maxSize = 10;
 	/**
 	 * int for Predicate name restriction.
 	 */
-	public final static int universe = Predicate.uppers.length / 2;
+	public final static int universe =  Predicate.uppers.length / 2;
 	/**
 	 * int for variable use restriction.
 	 */

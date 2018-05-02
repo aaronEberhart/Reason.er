@@ -1,67 +1,67 @@
 Individuals:	a, b, c, d, e, f, g, h, i, j, k, l, m
-Class Names:	A, B, C, D, E, F, G, H, I, J, K, L, M, AA
-Role Names: 	N, O, P, Q, R, S, T, U, V, W, X, Y, Z
+Class Names:	A, B, C, D, E, F, G, H, I, J, K, L, TOP, BOTTOM
+Role Names: 	A, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
 
 K = ( ABox, TBox )
 
 ABox = {
 
-	    d,e:	X
-	      k:	--D
-	      k:	Exs T.--L
-	    f,j:	--Z
-	      d:	--L
-	      i:	Exs N.--C
-	      l:	F
-	      e:	Exs X.--D
-	      l:	B
-	      l:	--C
-	    i,k:	S
-	    c,c:	O
-	    h,l:	--P
-	      l:	H
-	      e:	L
+	      i:	J
+	    c,g:	N
+	      i:	H
+	      l:	--K
+	    b,f:	--P
+	      f:	All U.--K
+	      c:	Exs U.--A
+	    f,k:	P
+	    m,e:	--P
+	      c:	All U.--C ^ Exs Q.J
+	    b,e:	--S
+	      e:	F
+	      g:	K
+	      b:	G
+	      b:	Exs X.--K ^ Exs Y.G
 
 
 TBox = {
 
-	--C v ( ( --B ^ ( --J ^ Exs V.H ) ) v A )
-	( ( B v ( J v All V.--H ) ) ^ --A ) v C
+	--F v ( H ^ ( G ^ H ) )
+	( --H v ( --G v --H ) ) v F
 
-	--B v --I
+	--B v Exs P.All Q.G
 
-	--H v ( --A ^ Exs N.M )
+	--H v Exs U.J
+	All U.--J v H
 
-	--K v ( H v --G )
-	( --H ^ G ) v K
+	--K v ( Exs T.Exs W.--H ^ Exs V.--B )
 
-	--K v --J
-	J v K
+	--J v Exs V.I
+	All V.--I v J
 
-	--H v ( ( All S.J v Exs P.Exs S.--C ) v All U.( --G ^ --K ) )
-	( ( Exs S.--J ^ All P.All S.C ) ^ Exs U.( G v K ) ) v H
+	--H v Exs P.J
 
-	--K v All X.--D
-	Exs X.D v K
+	--G v Exs R.I
+	All R.--I v G
 
-	--K v ( C v --A )
-	( --C ^ A ) v K
+	--J v All V.A
+	Exs V.--A v J
 
-	--G v ( --J v B )
-	( J ^ --B ) v G
+	--C v ( --B ^ --I )
 
-	--C v ( All Y.L ^ All W.G )
+	--C v Exs T.( B v H )
+	All T.( --B ^ --H ) v C
 
-	--I v C
+	--K v ( Exs O.( --C v L ) ^ All N.All Z.D )
+	( All O.( C ^ --L ) v Exs N.Exs Z.--D ) v K
 
-	--E v All Q.All Q.All X.( Exs Z.--D ^ ( K ^ Exs N.( All R.H ^ ( --M ^ ( D ^ L ) ) ) ) )
-	Exs Q.Exs Q.Exs X.( All Z.D v ( --K v All N.( Exs R.--H v ( M v ( --D v --L ) ) ) ) ) v E
+	BOTTOM v --K
 
-	--F v J
+	--F v --J
+	J v F
 
-	--E v Exs P.--I
+	--B v --G
+	G v B
 
-	--M v All S.--G
-	Exs S.G v M
+	--L v ( --G v --K )
 
  }
