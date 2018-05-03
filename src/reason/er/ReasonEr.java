@@ -25,15 +25,15 @@ public class ReasonEr {
 	/**
 	 * Number of tests to run.
 	 */
-	public static final int NUMTESTS = 1;
+	public static final int NUMTESTS = 10;
 	/**
 	 * Size of each ABox to make.
 	 */
-	public static final int ABOXSIZE = 30;
+	public static final int ABOXSIZE = 15;
 	/**
 	 * Size of each TBox to make.
 	 */
-	public static final int TBOXSIZE = 30;
+	public static final int TBOXSIZE = 15;
 	/**
 	 * Maximum quantification depth.
 	 */
@@ -45,11 +45,11 @@ public class ReasonEr {
 	/**
 	 * Maximum size of all Expressions.
 	 */
-	public final static  int maxSize = 10;
+	public final static  int maxSize = 5;
 	/**
 	 * int for Predicate name restriction.
 	 */
-	public final static int universe =  5;//Predicate.uppers.length / 2;
+	public final static int universe = 5;//Predicate.uppers.length / 2;
 	/**
 	 * int for variable use restriction.
 	 */

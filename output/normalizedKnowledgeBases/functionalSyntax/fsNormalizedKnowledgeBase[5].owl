@@ -1,0 +1,245 @@
+Prefix(:=<http://www.randomOntology.com/not/a/real/IRI/>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Ontology( <http://www.randomOntology.com/not/a/real/IRI/>
+
+Declaration( NamedIndividual( :a ) )
+Declaration( NamedIndividual( :b ) )
+Declaration( NamedIndividual( :c ) )
+Declaration( NamedIndividual( :d ) )
+Declaration( NamedIndividual( :e ) )
+Declaration( Class( :A ) )
+Declaration( Class( :B ) )
+Declaration( Class( :C ) )
+Declaration( Class( :D ) )
+Declaration( ObjectProperty( :N ) )
+Declaration( ObjectProperty( :O ) )
+Declaration( ObjectProperty( :P ) )
+Declaration( ObjectProperty( :Q ) )
+Declaration( ObjectProperty( :R ) )
+
+ClassAssertion( 
+	owl:Nothing
+	:b
+ )
+ClassAssertion( 
+	:E
+	:c
+ )
+ClassAssertion( 
+	:E
+	:c
+ )
+ClassAssertion( 
+	:B
+	:b
+ )
+ClassAssertion( 
+	ObjectComplementOf( :B )
+	:a
+ )
+ClassAssertion( 
+	ObjectSomeValuesFrom( 
+		:O 
+		ObjectComplementOf( :E ) )
+	:e
+ )
+ClassAssertion( 
+	:D
+	:a
+ )
+ClassAssertion( 
+	:A
+	:a
+ )
+ClassAssertion( 
+	ObjectSomeValuesFrom( 
+		:O 
+		owl:Nothing )
+	:b
+ )
+ClassAssertion( 
+	ObjectSomeValuesFrom( 
+		:N 
+		ObjectComplementOf( :E ) )
+	:e
+ )
+ClassAssertion( 
+	ObjectAllValuesFrom( 
+		:R 
+		owl:Nothing )
+	:c
+ )
+ClassAssertion( 
+	:A
+	:c
+ )
+ClassAssertion( 
+	ObjectSomeValuesFrom( 
+		:P 
+		ObjectComplementOf( :D ) )
+	:b
+ )
+ObjectPropertyAssertion( 
+	:P
+	:e
+	:e
+ )
+ClassAssertion( 
+	ObjectSomeValuesFrom( 
+		:P 
+		ObjectComplementOf( :C ) )
+	:d
+ )
+
+
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :B )
+		ObjectComplementOf( :A ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :C )
+		ObjectComplementOf( :B ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		:B
+		:C )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :D )
+		ObjectAllValuesFrom(
+			:R
+			:B
+		 ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :D )
+		ObjectSomeValuesFrom( 
+			:R 
+			ObjectComplementOf( :C ) ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectAllValuesFrom( 
+			:R 
+			:C )
+		:D )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :B )
+		:A )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :C )
+		ObjectIntersectionOf( 
+			ObjectComplementOf( :B )
+			:B ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :D )
+		ObjectAllValuesFrom( 
+			:N 
+			:C ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectSomeValuesFrom( 
+			:N 
+			ObjectComplementOf( :C ) )
+		:D )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :E )
+		ObjectAllValuesFrom( 
+			:R 
+			:A ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :B )
+		ObjectSomeValuesFrom( 
+			:Q 
+			:D ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :B )
+		ObjectAllValuesFrom( 
+			:N 
+			owl:Thing ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :D )
+		ObjectAllValuesFrom( 
+			:O 
+			ObjectComplementOf( :A ) ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :D )
+		ObjectComplementOf( :E ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		:E
+		:D )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :C )
+		ObjectUnionOf( 
+			:B
+			:B ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :B )
+		ObjectComplementOf( :E ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		:E
+		:B )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		ObjectComplementOf( :C )
+		ObjectComplementOf( :A ) )
+ )
+SubClassOf( 
+	owl:Thing
+	ObjectUnionOf( 
+		:A
+		:C )
+ )
+
+ )

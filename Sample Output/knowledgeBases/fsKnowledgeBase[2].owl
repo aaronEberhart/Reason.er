@@ -1,0 +1,181 @@
+Prefix(:=<http://www.randomOntology.com/not/a/real/IRI/>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Ontology( <http://www.randomOntology.com/not/a/real/IRI/>
+
+Declaration( NamedIndividual( :a ) )
+Declaration( NamedIndividual( :b ) )
+Declaration( NamedIndividual( :c ) )
+Declaration( NamedIndividual( :d ) )
+Declaration( NamedIndividual( :e ) )
+Declaration( Class( :A ) )
+Declaration( Class( :B ) )
+Declaration( Class( :C ) )
+Declaration( Class( :D ) )
+Declaration( ObjectProperty( :N ) )
+Declaration( ObjectProperty( :O ) )
+Declaration( ObjectProperty( :P ) )
+Declaration( ObjectProperty( :Q ) )
+Declaration( ObjectProperty( :R ) )
+
+ObjectPropertyAssertion( 
+	:P
+	:e
+	:b
+ )
+NegativeObjectPropertyAssertion( 
+	:P
+	:c
+	:a
+ )
+ClassAssertion( 
+	ObjectComplementOf( ObjectAllValuesFrom ( 
+		:P 
+		ObjectComplementOf( :B ) ) )
+	:a
+ )
+ClassAssertion( 
+	ObjectComplementOf( :B )
+	:e
+ )
+ClassAssertion( 
+	:C
+	:b
+ )
+ClassAssertion( 
+	ObjectComplementOf( ObjectSomeValuesFrom ( 
+		:N 
+		:E ) )
+	:c
+ )
+ObjectPropertyAssertion( 
+	:O
+	:d
+	:a
+ )
+ObjectPropertyAssertion( 
+	:P
+	:a
+	:a
+ )
+ClassAssertion( 
+	ObjectComplementOf( :C )
+	:c
+ )
+ObjectPropertyAssertion( 
+	:R
+	:a
+	:e
+ )
+ClassAssertion( 
+	ObjectSomeValuesFrom(
+		:Q
+		ObjectComplementOf( ObjectSomeValuesFrom ( 
+			:R 
+			:B ) )
+	 )
+	:b
+ )
+ClassAssertion( 
+	ObjectSomeValuesFrom( 
+		:N 
+		:A )
+	:a
+ )
+ClassAssertion( 
+	:C
+	:d
+ )
+ClassAssertion( 
+	:B
+	:a
+ )
+NegativeObjectPropertyAssertion( 
+	:N
+	:c
+	:d
+ )
+
+
+SubClassOf( 
+	:B
+	ObjectComplementOf( :D )
+ )
+SubClassOf( 
+	:E
+	ObjectAllValuesFrom( 
+		:P 
+		ObjectComplementOf( :C ) )
+ )
+SubClassOf( 
+	:D
+	ObjectComplementOf( ObjectAllValuesFrom ( 
+		:O 
+		:B ) )
+ )
+SubClassOf( 
+	:B
+	ObjectComplementOf( ObjectAllValuesFrom ( 
+		:Q 
+		ObjectComplementOf( :A ) ) )
+ )
+SubClassOf( 
+	:E
+	ObjectAllValuesFrom( 
+		:N 
+		ObjectComplementOf( :D ) )
+ )
+SubClassOf( 
+	:E
+	ObjectComplementOf( ObjectAllValuesFrom ( 
+		:P 
+		ObjectComplementOf( :C ) ) )
+ )
+SubClassOf( 
+	:D
+	ObjectComplementOf( :C )
+ )
+EquivalentClasses( 
+	:C
+	ObjectComplementOf( ObjectAllValuesFrom ( 
+		:O 
+		:B ) )
+ )
+EquivalentClasses( 
+	:A
+	ObjectComplementOf( :E )
+ )
+SubClassOf( 
+	:B
+	ObjectAllValuesFrom( 
+		:Q 
+		ObjectComplementOf( :C ) )
+ )
+SubClassOf( 
+	:B
+	ObjectComplementOf( :D )
+ )
+SubClassOf( 
+	:D
+	ObjectComplementOf( ObjectAllValuesFrom ( 
+		:N 
+		ObjectComplementOf( :C ) ) )
+ )
+EquivalentClasses( 
+	:D
+	ObjectUnionOf( 
+		:A
+		:B )
+ )
+SubClassOf( 
+	:B
+	ObjectSomeValuesFrom(
+		:N
+		:E
+	 )
+ )
+SubClassOf( 
+	:C
+	ObjectComplementOf( :D )
+ )
+
+ )

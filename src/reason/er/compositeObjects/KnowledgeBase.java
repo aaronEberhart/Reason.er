@@ -85,11 +85,11 @@ public class KnowledgeBase<T,U>{
 				s = s + ", ";
 		}
 		s = s + "\nClass Names:\t";
-		for(int i = 0; i < (ReasonEr.universe * 2); i++) {
-			s = s + (i < ReasonEr.universe - 1 ? Predicate.makeLabel(i) : (i == ReasonEr.universe - 1 ? "TOP, BOTTOM" : Predicate.makeLabel((ReasonEr.universe - 1 - i)) ));
-			if(i == ReasonEr.universe - 1)
+		for(int i = 0; i < (ReasonEr.universe * 2) + 1; i++) {
+			s = s + (i < ReasonEr.universe ? Predicate.makeLabel(i) : (i == ReasonEr.universe ? "TOP / BOTTOM" : Predicate.makeLabel((ReasonEr.universe - i)) ));
+			if(i == ReasonEr.universe)
 				s=s+"\nRole Names: \t";
-			else if(i != (ReasonEr.universe * 2) -1 )
+			else if(i != (ReasonEr.universe * 2))
 				s = s + ", ";
 		}
 		return s + "\n\nK = ( ABox, TBox )\n\n" + abox.toString() + "\n\n" + tbox.toString() + "\n";
@@ -116,11 +116,11 @@ public class KnowledgeBase<T,U>{
 				s = s + ", ";
 		}
 		s = s + "\nClass Names:\t";
-		for(int i = 0; i < (ReasonEr.universe * 2); i++) {
-			s = s + (i < ReasonEr.universe - 1? Predicate.makeLabel(i) : (i == ReasonEr.universe - 1 ? "TOP, BOTTOM" : Predicate.makeLabel((ReasonEr.universe -1 - i)) ));
-			if(i == ReasonEr.universe - 1)
+		for(int i = 0; i < (ReasonEr.universe * 2) + 1; i++) {
+			s = s + (i < ReasonEr.universe ? Predicate.makeLabel(i) : (i == ReasonEr.universe ? "TOP / BOTTOM" : Predicate.makeLabel((ReasonEr.universe - i)) ));
+			if(i == ReasonEr.universe )
 				s=s+"\nRole Names: \t";
-			else if(i != ReasonEr.universe * 2 - 1)
+			else if(i != ReasonEr.universe * 2 )
 				s = s + ", ";
 		}
 		return s + "\n\nK = ( ABox, TBox )\n\n" + abox.toDLString() + "\n\n" + tbox.toDLString() + "\n";

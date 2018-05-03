@@ -3,6 +3,7 @@ package reason.er.compositeObjects;
 import java.util.ArrayList;
 import java.util.Random;
 
+import reason.er.ReasonEr;
 import reason.er.compositeObjects.*;
 import reason.er.objects.*;
 import reason.er.util.*;
@@ -209,7 +210,9 @@ public class TBox<T,U> extends Box<T,U>{
 	protected Predicate newPredicate(int randInt) {
 		boolean negated = rand.nextBoolean();
 		Predicate p;
-		long one = (makeName(rand));
+		long one = rand.nextInt(universe+1);
+		while(one == ReasonEr.universe && rand.weightedBool(1000, 900))//90% of all Top and Bottom are re-picked
+			one = makeName(rand);
 		long two = -1 * (makeName(rand)+1);
 		
 		if(randInt == 0) {
@@ -257,7 +260,7 @@ public class TBox<T,U> extends Box<T,U>{
 			l++;
 		long initial = l;
 		while(usedBefore(l)) {
-			l = (l+1)%universe;
+			l = (l+1)%(universe);
 			if(l==initial) {
 				return universe;
 			}
