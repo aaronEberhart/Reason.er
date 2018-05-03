@@ -46,9 +46,13 @@ public abstract class Box<T,U>  {
 	 */
 	protected int numSubExpansions;	
 	/**
-	 * int for Predicate name restriction.
+	 * int for Concept name restriction.
 	 */
-	protected final int universe = ReasonEr.universe;
+	protected final int conceptNames = ReasonEr.conceptNames;
+	/**
+	 * int for Role name restriction.
+	 */
+	protected final int roleNames = ReasonEr.roleNames;
 	/**
 	 * int for variable use restriction.
 	 */
@@ -84,6 +88,18 @@ public abstract class Box<T,U>  {
 	 */
 	public abstract void normalizeExpressions();
 	/**
+	 * Returns a description logic string representation of the object
+	 * @return String
+	 */
+	public abstract String toDLString();
+	/**
+	 * Returns a functional syntax string representation of the object
+	 * @param tab int
+	 * @return String
+	 */
+	public abstract String toFSString(int tab);
+	
+	/**
 	 * Make a box with size elements.
 	 * 
 	 * @param size int
@@ -114,17 +130,30 @@ public abstract class Box<T,U>  {
 	 * @return int
 	 */
 	public int getNumVars() {
-		return universe;
+		return conceptNames;
 	}
 	
 	/**
-	 * Makes a long int for naming a predicate.
+	 * Makes a long int for naming a Concept.
 	 * 
 	 * @param rand RandomInteger
 	 * @return long
 	 */
-	protected long makeName(RandomInteger rand) {
-		return rand.nextInt(universe);
+	protected long makeConceptName(RandomInteger rand) {
+		long name =  rand.nextInt(conceptNames+1);
+		if(name == conceptNames && rand.weightedBool(10000, 9000/conceptNames))//90% of all Top and Bottom are re-picked
+			return makeConceptName(rand);													//scaled to adjust some for smaller kbs
+		return name;
+	}
+	
+	/**
+	 * Makes a long int for naming a Role.
+	 * 
+	 * @param rand RandomInteger
+	 * @return long
+	 */
+	protected long makeRoleName(RandomInteger rand) {
+		return -1 * (rand.nextInt(roleNames) + 1);
 	}
 	
 	/**
@@ -172,45 +201,5 @@ public abstract class Box<T,U>  {
 		}
 		return s + " }";
 	}
-	
-	public String toFSString(int tab) {
-		String s = "";
-		
-		if(normalized == null) {
-			for(int i = 0; i < expressions.size(); i++) {  
-				s = s + "\n" + expressions.get(i).toFSString(0);
-			}
-		}
-		else {
-			for(int i = 0; i < normalized.normals.size(); i++) {
-				s = s + "\nSubClassOf( \n\towl:Thing\n" + normalized.getFromExpressionIndex(i).toFSString(1) + "\n )";
-			}
-		}
-		return s;
-	}
-	
-	public String toDLString() {
-		String s = "{\n\n";
-		if(expressions.size() == 0) {
-			s = s + "NULL\n";
-		}else {	
-			int j = 0;
-			for(int i = 0; i < expressions.size(); i++) {  
-				if(normalized == null) {
-					s = s + "\t" + expressions.get(i).toDLString();
-				}
-				else {	   		
-					s = s + "\t" + normalized.getFromExpressionIndex(j).toDLString();
-					if(expressions.get(i).root.operator == '=') {
-						j++;
-						s = s + "\n\t" + normalized.getFromExpressionIndex(j).toDLString();
-					}
-					j++;
-		   		}
-		   		s = s + "\n\n";
-			}
-		}
-		return s + " }";
 
-	}
 }

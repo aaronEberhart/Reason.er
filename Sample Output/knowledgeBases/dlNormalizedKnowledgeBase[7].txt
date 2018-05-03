@@ -1,0 +1,65 @@
+Individuals:	a, b, c, d, e
+Class Names:	A, B, C, D, E, F, G, TOP / BOTTOM
+Role Names: 	N, O, P, Q, R, S, T
+
+K = ( ABox, TBox )
+
+ABox = {
+
+	      d:	F
+	      a:	TOP
+	      d:	B
+	      a:	--C
+	      a:	--D
+	      d:	All P.--E
+	      b:	All O.D
+	    e,a:	S
+	      c:	G
+	      e:	Exs R.B
+	    a,d:	N
+	      e:	F
+	    a,b:	--R
+	      c:	G
+	      d:	All O.C
+
+
+TBox = {
+
+	--D v C
+
+	--C v --F
+	F v C
+
+	--E v --F
+
+	--G v Exs O.TOP
+
+	--G v ( E ^ E )
+	( --E v --E ) v G
+
+	--B v Exs R.--G
+
+	--D v Exs Q.--B
+	All Q.B v D
+
+	--E v ( G ^ D )
+	( --G v --D ) v E
+
+	--C v ( G v --D )
+	( --G ^ D ) v C
+
+	--B v ( D ^ C )
+	( --D v --C ) v B
+
+	--D v All Q.--E
+
+	--D v Exs R.--B
+	All R.B v D
+
+	--D v Exs T.B
+
+	--D v --C
+
+	--C v Exs O.B
+
+ }

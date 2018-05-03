@@ -183,11 +183,11 @@ public class TBox<T,U> extends Box<T,U>{
 				expression = expression.equivalent(new Concept(false,expression.getScope(),endExpression(rand)));
 				break;
 			case 8:
-				expression = expression.dot(new Quantifier(1), (Role)newPredicate(randInt), -1 * (makeName(rand) % universe));
+				expression = expression.dot(new Quantifier(1), (Role)newPredicate(randInt), -1 * (makeConceptName(rand) % conceptNames));
 				scope+=1;
 				break;
 			case 9:
-				expression = expression.dot(new Quantifier(2), (Role)newPredicate(randInt), -1 * (makeName(rand) % universe));
+				expression = expression.dot(new Quantifier(2), (Role)newPredicate(randInt), -1 * (makeConceptName(rand) % conceptNames));
 				scope+=1;
 				break;
 			default:
@@ -210,10 +210,8 @@ public class TBox<T,U> extends Box<T,U>{
 	protected Predicate newPredicate(int randInt) {
 		boolean negated = rand.nextBoolean();
 		Predicate p;
-		long one = rand.nextInt(universe+1);
-		while(one == ReasonEr.universe && rand.weightedBool(1000, 900))//90% of all Top and Bottom are re-picked
-			one = makeName(rand);
-		long two = -1 * (makeName(rand)+1);
+		long one = makeConceptName(rand);
+		long two = makeRoleName(rand);
 		
 		if(randInt == 0) {
 			p = new Concept(negated,counters[0],one);
@@ -255,14 +253,14 @@ public class TBox<T,U> extends Box<T,U>{
 	 * @return long
 	 */
 	public long endExpression(RandomInteger rand) {
-		long l = rand.nextInt(universe);
+		long l = rand.nextInt(conceptNames);
 		if(l == 0)
 			l++;
 		long initial = l;
 		while(usedBefore(l)) {
-			l = (l+1)%(universe);
+			l = (l+1)%(conceptNames);
 			if(l==initial) {
-				return universe;
+				return conceptNames;
 			}
 		}
 		
@@ -317,23 +315,57 @@ public class TBox<T,U> extends Box<T,U>{
 	}
 	
 	@Override
-	public String toString() {
-		return "TBox = " + super.toString();
-	}
-	
-	@Override
-	public String toDLString() {
-		return "TBox = " + super.toDLString();
-	}
-
-	/**
-	 * Reset counter array.
-	 */
-	@Override
 	protected long[] resetCounters() {
 		long [] counters = new long[1];
 		counters[0] = 2;
 		return counters;
 	}
 	
+	@Override
+	public String toString() {
+		return "TBox = " + super.toString();
+	}
+	
+	@Override
+	public String toDLString() {
+		String s = "TBox = {\n\n";
+		if(expressions.size() == 0) {
+			s = s + "NULL\n";
+		}else {	
+			int j = 0;
+			for(int i = 0; i < expressions.size(); i++) {  
+				if(normalized == null) {
+					s = s + "\t" + expressions.get(i).toDLString();
+				}
+				else {	   		
+					s = s + "\t" + normalized.getFromExpressionIndex(j).toDLString();
+					if(expressions.get(i).root.operator == '=') {
+						j++;
+						s = s + "\n\t" + normalized.getFromExpressionIndex(j).toDLString();
+					}
+					j++;
+		   		}
+		   		s = s + "\n\n";
+			}
+		}
+		return s + " }";
+	}
+
+	@Override
+	public String toFSString(int tab) {
+		String s = "";
+		
+		if(normalized == null) {
+			for(int i = 0; i < expressions.size(); i++) {  
+				s = s + "\n" + expressions.get(i).toFSString(0);
+			}
+		}
+		else {
+			for(int i = 0; i < normalized.normals.size(); i++) {
+				s = s + "\nSubClassOf( \n\towl:Thing\n" + normalized.getFromExpressionIndex(i).toFSString(1) + "\n )";
+			}
+		}
+		return s;
+	}
+
 }

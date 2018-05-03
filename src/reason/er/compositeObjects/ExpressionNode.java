@@ -286,7 +286,34 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 		}
 		return this;
 	}
-	
+
+	/**
+	 * Gets the children
+	 * @return ExpressionNode&lt;T,U&gt;[]
+	 */
+	public ExpressionNode<T,U>[] getChildren() {
+		if(children == null)
+			return null;
+		return children;
+	}
+
+	/**
+	 * Sets the children.
+	 * @param children ExpressionNode&lt;T,U&gt;[]
+	 */
+	public void setChildren(ExpressionNode<T,U>[] children) {
+		this.children = children;
+	}
+
+	/**
+	 * Returns true.
+	 */
+	@Override
+	public boolean isExpression() {
+		return true;
+	}
+
+	@Override
 	public String toString() {
 		if(getChildren() == null) {
 			return leaf.toString();
@@ -326,6 +353,7 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 		}
 	}
 	
+	@Override
 	public String toFSString(int tab) {
 		if(getChildren() == null) {
 			return leaf.toFSString(tab);
@@ -354,29 +382,4 @@ public class ExpressionNode<T,U> extends Expression<T,U>{
 		}
 	}
 	
-	/**
-	 * Gets the children
-	 * @return ExpressionNode&lt;T,U&gt;[]
-	 */
-	public ExpressionNode<T,U>[] getChildren() {
-		if(children == null)
-			return null;
-		return children;
-	}
-
-	/**
-	 * Sets the children.
-	 * @param children ExpressionNode&lt;T,U&gt;[]
-	 */
-	public void setChildren(ExpressionNode<T,U>[] children) {
-		this.children = children;
-	}
-
-	/**
-	 * Returns true.
-	 */
-	@Override
-	public boolean isExpression() {
-		return true;
-	}
 }

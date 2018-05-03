@@ -85,12 +85,12 @@ public class KnowledgeBase<T,U>{
 				s = s + ", ";
 		}
 		s = s + "\nClass Names:\t";
-		for(int i = 0; i < (ReasonEr.universe * 2) + 1; i++) {
-			s = s + (i < ReasonEr.universe ? Predicate.makeLabel(i) : (i == ReasonEr.universe ? "TOP / BOTTOM" : Predicate.makeLabel((ReasonEr.universe - i)) ));
-			if(i == ReasonEr.universe)
-				s=s+"\nRole Names: \t";
-			else if(i != (ReasonEr.universe * 2))
-				s = s + ", ";
+		for(int i = 0; i < ReasonEr.conceptNames + 1; i++) {
+			s = s + (i < ReasonEr.conceptNames ? Predicate.makeLabel(i) + ", " :  "TOP / BOTTOM" );
+		}
+		s = s + "\nRole Names: \t";
+		for(int i = -1; i >= -1 * ReasonEr.roleNames; i--) {
+			s = s + Predicate.makeLabel(i) + (i == -1 * ReasonEr.roleNames  ? "" : ", ");
 		}
 		return s + "\n\nK = ( ABox, TBox )\n\n" + abox.toString() + "\n\n" + tbox.toString() + "\n";
 	}
@@ -101,7 +101,18 @@ public class KnowledgeBase<T,U>{
 	 * @return String
 	 */
 	public String toFSString(String IRI) {
-		return "Prefix(:="+IRI+")\nPrefix(owl:=<http://www.w3.org/2002/07/owl#>)\nOntology( "+IRI+"\n\n" + abox.toFSString(0) + "\n" + tbox.toFSString(0) + "\n\n )";
+		String s = "Prefix(:="+IRI+")\nPrefix(owl:=<http://www.w3.org/2002/07/owl#>)\nOntology( "+IRI+"\n\n";
+		for(int i = -1; i > -1*ReasonEr.individuals - 1; i--) {
+			s = s + "Declaration( NamedIndividual( :" + Term.makeVariable(i) + " ) )\n";
+		}
+		for(int i = 0; i < ReasonEr.conceptNames; i++) {
+			s = s + "Declaration( Class( :" +  Predicate.makeLabel(i) + " ) )\n";
+		}
+		for(int i = -1; i >= -1 * ReasonEr.roleNames; i--) {
+			s = s + "Declaration( ObjectProperty( :" + Predicate.makeLabel(i)   + " ) )\n";
+		}
+		s=s+"\n";
+		return s + abox.toFSString(0) + "\n" + tbox.toFSString(0) + "\n\n )";
 	}
 	
 	/**
@@ -116,12 +127,12 @@ public class KnowledgeBase<T,U>{
 				s = s + ", ";
 		}
 		s = s + "\nClass Names:\t";
-		for(int i = 0; i < (ReasonEr.universe * 2) + 1; i++) {
-			s = s + (i < ReasonEr.universe ? Predicate.makeLabel(i) : (i == ReasonEr.universe ? "TOP / BOTTOM" : Predicate.makeLabel((ReasonEr.universe - i)) ));
-			if(i == ReasonEr.universe )
-				s=s+"\nRole Names: \t";
-			else if(i != ReasonEr.universe * 2 )
-				s = s + ", ";
+		for(int i = 0; i < ReasonEr.conceptNames + 1; i++) {
+			s = s + (i < ReasonEr.conceptNames ? Predicate.makeLabel(i) + ", " :  "TOP / BOTTOM" );
+		}
+		s = s + "\nRole Names: \t";
+		for(int i = -1; i >= -1 * ReasonEr.roleNames; i--) {
+			s = s + Predicate.makeLabel(i) + (i == -1 * ReasonEr.roleNames  ? "" : ", ");
 		}
 		return s + "\n\nK = ( ABox, TBox )\n\n" + abox.toDLString() + "\n\n" + tbox.toDLString() + "\n";
 	}

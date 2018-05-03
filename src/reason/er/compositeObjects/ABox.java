@@ -164,12 +164,12 @@ public class ABox<T,U> extends Box<T,U> {
 			case 5:
 				if(!constants && !fromSub)
 					constants = rand.weightedBool(10000,1000);
-				expression = expression.dot(new Quantifier(1), (Role)newPredicate(2), -1 * (makeName(rand) % universe));	
+				expression = expression.dot(new Quantifier(1), (Role)newPredicate(2), -1 * (makeConceptName(rand) % conceptNames));	
 				break;
 			default:
 				if(!constants && !fromSub)
 					constants = rand.weightedBool(10000,1000);				
-				expression = expression.dot(new Quantifier(2), (Role)newPredicate(2), -1 * (makeName(rand) % universe));
+				expression = expression.dot(new Quantifier(2), (Role)newPredicate(2), -1 * (makeConceptName(rand) % conceptNames));
 				break;
 			
 			
@@ -239,17 +239,15 @@ public class ABox<T,U> extends Box<T,U> {
  	protected Predicate newPredicate(int randInt) {
  		boolean negated = rand.nextBoolean();
  		Predicate p;
- 		long one = rand.nextInt(universe+1);
- 		while(one == ReasonEr.universe && rand.weightedBool(1000, 900))//90% of all Top and Bottom are re-picked
-			one = makeName(rand);
- 		long two = -1 * (makeName(rand)+1);
+ 		long conceptName = makeConceptName(rand);
+ 		long roleName = makeRoleName(rand);
  		
  		if(randInt == 0) {
- 			p = new Concept(negated,constants?counters[0]:counters[1],one);
+ 			p = new Concept(negated,constants?counters[0]:counters[1],conceptName);
  		}
  		else if(randInt == 1) {
  			
- 			p = new QuantifiedRole(negated,rand.nextBoolean(),rand.nextInt(2) + 1,constants?counters[0]:counters[1],constants?counters[1]:counters[1]-1,two,one,one);
+ 			p = new QuantifiedRole(negated,rand.nextBoolean(),rand.nextInt(2) + 1,constants?counters[0]:counters[1],constants?counters[1]:counters[1]-1,roleName,conceptName,conceptName);
  		}
  		else if(randInt == 2) {
  			long num1 = constants?(-1 * rand.nextInt(variables)) - 1:scope+1;
@@ -260,7 +258,7 @@ public class ABox<T,U> extends Box<T,U> {
  				scope = num1;
  			}
  			
- 			p = new Role(false,num1,num2,two);
+ 			p = new Role(false,num1,num2,roleName);
  			if(!constants) {
  				counters[1] = (counters[1] + 1);
  			}else {
@@ -268,7 +266,7 @@ public class ABox<T,U> extends Box<T,U> {
  			}
  		}
  		else {			
- 			p = new Role(negated,counters[0],(long)(-1 * rand.nextInt(variables)) - 1,two);
+ 			p = new Role(negated,counters[0],(long)(-1 * rand.nextInt(variables)) - 1,roleName);
  		}
  				
  		return p;
@@ -288,6 +286,14 @@ public class ABox<T,U> extends Box<T,U> {
 		
 		this.normalized = new NormalizedBox(normals);
 		
+	}
+	
+	@Override
+	protected long[] resetCounters() {
+		long counters[] = new long[2];
+		counters[0] = (-1 * rand.nextInt(variables)) - 1;
+		counters[1] = 2;
+		return counters;
 	}
 	
 	@Override
@@ -318,13 +324,6 @@ public class ABox<T,U> extends Box<T,U> {
 	@Override
 	public String toFSString(int tab) {
 		String s = "";
-		for(int i = -1; i > -1*variables - 1; i--) {
-			s = s + "Declaration( NamedIndividual( :" + Term.makeVariable(i) + " ) )\n";
-		}
-		for(int i = 0; i < (universe * 2) - 1; i++) {
-			s = s + "Declaration( " + (i < universe - 1 ? "Class( :" +  Predicate.makeLabel(i) : "ObjectProperty( :" + Predicate.makeLabel((universe - 2 - i)) )   + " ) )\n";
-		}
-		s=s+"\n";
 		if(normalized == null) {
 			for(int i = 0; i < expressions.size(); i++) {  
 				if(expressions.get(i).getSize() < 3 && ((Predicate)(expressions.get(i).root.leaf)).isRole() && ((long)((Role)(expressions.get(i).root.leaf)).getTerm(1).getValue()) < 0) {
@@ -355,14 +354,6 @@ public class ABox<T,U> extends Box<T,U> {
 			}
 		}
 		return s;
-	}
-	
-	@Override
-	protected long[] resetCounters() {
-		long counters[] = new long[2];
-		counters[0] = (-1 * rand.nextInt(variables)) - 1;
-		counters[1] = 2;
-		return counters;
 	}
 
 }

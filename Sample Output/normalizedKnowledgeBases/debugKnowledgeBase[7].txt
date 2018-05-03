@@ -1,0 +1,73 @@
+Individuals:	a, b, c, d, e
+Class Names:	A, B, C, D, E, F, G, TOP / BOTTOM
+Role Names: 	N, O, P, Q, R, S, T
+
+K = ( ABox, TBox )
+
+ABox = {
+
+	F(d)	Size: 1	Scope: d,
+
+	TOP	Size: 1	Scope: a,
+
+	B(d)	Size: 1	Scope: d,
+
+	--C(a)	Size: 2	Scope: a,
+
+	--D(a)	Size: 2	Scope: a,
+
+	--EXISTS P(d,o).E(o)	Size: 3	Scope: d,
+
+	--EXISTS O(b,o).--D(o)	Size: 4	Scope: b,
+
+	S(e,a)	Size: 1	Scope: e,
+
+	G(c)	Size: 1	Scope: c,
+
+	--FORALL R(e,o).--B(o)	Size: 4	Scope: e,
+
+	N(a,d)	Size: 1	Scope: a,
+
+	F(e)	Size: 1	Scope: e,
+
+	--R(a,b)	Size: 2	Scope: a,
+
+	G(c)	Size: 1	Scope: c,
+
+	--EXISTS O(d,o).--C(o)	Size: 4	Scope: d,
+
+ }
+
+TBox = {
+
+	( D(o) c C(o) )	Size: 3	Scope: o,
+
+	( C(o) = --F(o) )	Size: 4	Scope: o,
+
+	( E(o) c --F(o) )	Size: 4	Scope: o,
+
+	( G(o) c EXISTS O(o,n).TOP )	Size: 4	Scope: o,
+
+	( G(o) = ( E(o) ^ E(o) ) )	Size: 5	Scope: o,
+
+	( B(o) c --FORALL R(o,n).G(n) )	Size: 5	Scope: o,
+
+	( D(o) = --FORALL Q(o,n).B(n) )	Size: 5	Scope: o,
+
+	( E(o) = ( G(o) ^ D(o) ) )	Size: 5	Scope: o,
+
+	( C(o) = ( G(o) v --D(o) ) )	Size: 6	Scope: o,
+
+	( B(o) = ( D(o) ^ C(o) ) )	Size: 5	Scope: o,
+
+	( D(o) c FORALL Q(o,n).--E(n) )	Size: 5	Scope: o,
+
+	( D(o) = EXISTS R(o,n).--B(n) )	Size: 5	Scope: o,
+
+	( D(o) c EXISTS T(o,n).B(n) )	Size: 4	Scope: o,
+
+	( D(o) c --C(o) )	Size: 4	Scope: o,
+
+	( C(o) c EXISTS O(o,n).B(n) )	Size: 4	Scope: o,
+
+ }

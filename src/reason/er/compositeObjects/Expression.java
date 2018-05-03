@@ -11,7 +11,7 @@ import reason.er.objects.*;
  * @param <T> generic
  * @param <U> generic
  */
-@SuppressWarnings({ "unchecked"})
+@SuppressWarnings({ "unchecked","rawtypes"})
 public class Expression<T,U> extends Concept<T,U>{
 
 	/**
@@ -168,25 +168,6 @@ public class Expression<T,U> extends Concept<T,U>{
 	public boolean isNormal() {
 		return normalized;
 	}
-	
-	public String toString() {
-		return root.toString() + "\tSize: " + this.getSize() + "\tScope: " + Term.makeVariable((long)scope);
-	}
-	
-	public String toDLString() {
-		if(root != null)
-			return root.toDLString(true);
-		return ((ExpressionNode)this).toDLString(false);
-	}
-	
-	public String toFSString(int tab) {
-		if(size <= 2 && !((Predicate)(root.leaf)).isExpression()) {
-			String s = ":" + ((Predicate)(root.leaf)).makeLabel();
-			s = negated?"\tObjectComplementOf( "+s+" )":"\t"+s;
-			return s;
-		}
-		return root.toFSString(tab);
-	}
 
 	/**
 	 * Negates an Expression
@@ -215,11 +196,6 @@ public class Expression<T,U> extends Concept<T,U>{
 		return this.root;
 	}
 
-	@Override
-	public Predicate<T,U> clone(Expression<T,U> e) {
-		return recursiveDeepCopy(e.root);
-	}
-
 	/**
 	 * Returns true.
 	 * @return true
@@ -227,6 +203,33 @@ public class Expression<T,U> extends Concept<T,U>{
 	@Override
 	public boolean isExpression() {
 		return true;
+	}
+
+	@Override
+	public Predicate<T,U> clone(Expression<T,U> e) {
+		return recursiveDeepCopy(e.root);
+	}
+
+	@Override
+	public String toString() {
+		return root.toString() + "\tSize: " + this.getSize() + "\tScope: " + Term.makeVariable((long)scope);
+	}
+	
+	@Override
+	public String toDLString() {
+		if(root != null)
+			return root.toDLString(true);
+		return ((ExpressionNode)this).toDLString(false);
+	}
+	
+	@Override
+	public String toFSString(int tab) {
+		if(size <= 2 && !((Predicate)(root.leaf)).isExpression()) {
+			String s = ":" + ((Predicate)(root.leaf)).makeLabel();
+			s = negated?"\tObjectComplementOf( "+s+" )":"\t"+s;
+			return s;
+		}
+		return root.toFSString(tab);
 	}
 
 }
